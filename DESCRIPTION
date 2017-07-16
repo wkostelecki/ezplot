@@ -2,9 +2,10 @@ Package: ezplot
 Type: Package
 Title: Creates common plots.
 Version: 0.1.01
-Date: 2017-07-17
 Author: Wojtek Kostelecki
-Maintainer: Wojtek Kostelecki
+Maintainer: Wojtek Kostelecki <w@w.com>
 Description: Creates common plots.
 License: TBA
-LazyData: TRUE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
