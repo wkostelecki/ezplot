@@ -23,7 +23,8 @@ fruit = fruit %>%
            case_when(Size == "Small" ~ 0.75,
                      Size == "Large" ~ 1.25) *
            case_when(Store == "Grocery" ~ 0.8,
-                     Store == "Variety" ~ 1))
+                     Store == "Variety" ~ 1)) %>%
+  ungroup
 
 
 
