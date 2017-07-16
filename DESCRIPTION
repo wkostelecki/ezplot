@@ -1,8 +1,8 @@
-Package: dbplot
+Package: ezplot
 Type: Package
 Title: Creates common plots.
 Version: 0.1.01
-Date: 2015-07-29
+Date: 2017-07-17
 Author: Wojtek Kostelecki
 Maintainer: Wojtek Kostelecki
 Description: Creates common plots.
