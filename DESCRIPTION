@@ -8,4 +8,7 @@ Description: Creates common plots.
 License: TBA
 Encoding: UTF-8
 LazyData: true
+Imports:
+  dplyr
 RoxygenNote: 6.0.1
+Suggests: testthat
