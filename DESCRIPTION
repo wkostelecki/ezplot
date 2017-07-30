@@ -1,6 +1,6 @@
 Package: ezplot
 Type: Package
-Title: Creates common plots.
+Title: Creates common plots
 Version: 0.1.01
 Author: Wojtek Kostelecki
 Maintainer: Wojtek Kostelecki <w@w.com>
@@ -9,6 +9,7 @@ License: TBA
 Encoding: UTF-8
 LazyData: true
 Imports:
-  dplyr
+  dplyr,
+  ggplot2
 RoxygenNote: 6.0.1
 Suggests: testthat
