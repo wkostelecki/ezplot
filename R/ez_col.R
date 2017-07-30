@@ -1,0 +1,33 @@
+#' Color palette interpolation
+#'
+#' @param n number of colours
+#' @param palette palette to interpolate from
+#'
+#' @return rgb
+#' @export
+#'
+#' @examples
+#' ez_col(15)
+#' ez_col(2, c("blue", "red"))
+#' ez_col(3, c("blue", "red"))
+ez_col = function(n = 50, palette = NULL){
+  if (is.null(palette)){
+    palette = c("dodgerblue4",
+                "olivedrab3",
+                "mediumorchid4",
+                "tomato2",
+                "darkgoldenrod1",
+                "forestgreen",
+                "steelblue2",
+                "brown3")
+  }
+  len_p = length(palette)
+  if (n <= length(palette)){
+    return(palette[1:n])
+  }
+  freq = c(rep(floor((n - 1) / (len_p - 1)), len_p - 1), 1) +
+    c(rep(1, (n - 1) %% (len_p - 1)), rep(0, len_p - (n - 1) %% (len_p - 1)))
+  palette = c(palette, tail(palette, 1))
+  unlist(lapply(1:len_p, function(x) colorRampPalette(palette[x + c(0:1)])(freq[x] + 1)[1:freq[x]]))
+
+}
