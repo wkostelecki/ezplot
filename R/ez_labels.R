@@ -22,14 +22,20 @@ ez_labels = function(x,
   unit = data.frame(order = 0:8,
                     unit = c("", "k", "m", "b", "t", "qd", "qn", "sx", "sp"),
                     stringsAsFactors = FALSE)
+
+  # browser()
   df = data_frame(x = x) %>%
     mutate(round_x = signif(round(x, round), signif),
            sign = sign(x),
            absx = abs(round_x),
-           order = floor(log10(absx) / 3)) %>%
+           tens = floor(log10(absx)),
+           order = floor(tens / 3)) %>%
     left_join(unit, "order") %>%
     mutate(label = ifelse(is.na(unit),
-                          as.character(absx),
+                          ifelse(tens < 0,
+                                 paste0(absx / 10 ^ tens, "\u00D710\u207B",
+                                       superscript(abs(tens))),
+                                 as.character(absx)),
                           paste0(absx / 10 ^ (3 * order), unit)),
            label = ifelse(is.na(label), "", paste0(prepend, label, append)),
            label = ifelse(sign > -1 | is.na(sign), label, paste0("-", label)))
@@ -37,5 +43,15 @@ ez_labels = function(x,
     df = mutate(df, label = factor(label, unique(label[order(x)])))
   }
   df[["label"]]
+}
+
+superscript = function(x){
+  unicode = c("\u2070", "\u00B9", "\u00B2", "\u00B3", "\u2074",
+              "\u2075", "\u2076", "\u2077", "\u2078", "\u2079")
+  sapply(strsplit(as.character(x), ""),
+         function(x){
+           paste(unicode[as.numeric(x) + 1], collapse = "")
+         })
+
 }
 

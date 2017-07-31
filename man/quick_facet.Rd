@@ -6,3 +6,8 @@
 \usage{
 quick_facet(g, ...)
 }
+\arguments{
+\item{g}{A ggplot object.}
+
+\item{...}{Arguments to pass to \code{facet_grid} or \code{facet_wrap}}
+}

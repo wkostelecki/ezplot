@@ -4,7 +4,9 @@
 \alias{line_plot}
 \title{line_plot}
 \usage{
-line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL)
+line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
+  linesize = 1, size = 20, palette = ez_col, ylabels = ez_labels,
+  use_theme = theme_ez)
 }
 \arguments{
 \item{data}{data.frame}
@@ -18,13 +20,25 @@ line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL)
 \item{facet_x}{value}
 
 \item{facet_y}{value}
+
+\item{linesize}{width of line for \code{geom_line()}. Default is 1.}
+
+\item{size}{theme size for \code{use_theme()}. Default is 20.}
+
+\item{palette}{colour function}
+
+\item{ylabels}{label formatting function}
+
+\item{use_theme}{ggplot theme function}
 }
 \description{
 Creates line plots.
 }
 \examples{
 line_plot(fruit, "OBS", "Units")
+line_plot(fruit, "OBS", c("Weekly Units Sold" = "Units"))
 line_plot(fruit, "OBS", "Units", "Product")
 line_plot(fruit, "OBS", "Units", "Product", "Size")
 line_plot(fruit, "OBS", "Units", "Product", "Size", "Store")
+line_plot(fruit, "OBS", "Units", use_theme = ggplot2::theme_bw)
 }

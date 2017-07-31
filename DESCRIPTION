@@ -8,9 +8,11 @@ Description: Creates common plots.
 License: TBA
 Encoding: UTF-8
 LazyData: true
+Depends:
+  R (>= 2.10)
 Imports:
   dplyr,
-  ggplot2
+  ggplot2,
   rlang
 RoxygenNote: 6.0.1
 Suggests: testthat
