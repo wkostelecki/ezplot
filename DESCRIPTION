@@ -11,5 +11,6 @@ LazyData: true
 Imports:
   dplyr,
   ggplot2
+  rlang
 RoxygenNote: 6.0.1
 Suggests: testthat
