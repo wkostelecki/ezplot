@@ -1,5 +1,6 @@
 
 #' @title Quick facet
+#' @description Applies faceting to ggplot objects when necessary.
 #' @param g A ggplot object.
 #' @param ... Arguments to pass to \code{facet_grid} or \code{facet_wrap}
 quick_facet = function(g, ...){
@@ -18,7 +19,7 @@ quick_facet = function(g, ...){
 
 
 #' no_null
-#' @description converts "NULL" to NULL
+#' @description Converts "NULL" to NULL.
 #' @param x A character vector.
 #'
 #' @return y
@@ -33,7 +34,7 @@ no_null = function(x){
 }
 
 #' not_numeric
-#' @description returns names of non-numeric columns
+#' @description Returns names of non-numeric columns.
 #' @param x A data.frame.
 #'
 #' @return A character vector.
@@ -45,7 +46,7 @@ not_numeric = function(x){
 
 
 #' nameifnot
-#' @description if not
+#' @description Names unnamed elements of a vector.
 #' @param x A character vector.
 #'
 #' @return A named vector.

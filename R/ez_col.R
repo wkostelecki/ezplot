@@ -6,6 +6,9 @@
 #' @return rgb
 #' @export
 #'
+#' @importFrom utils tail
+#' @importFrom grDevices colorRampPalette
+#'
 #' @examples
 #' ez_col(15)
 #' ez_col(2, c("blue", "red"))
@@ -31,3 +34,21 @@ ez_col = function(n = 50, palette = NULL){
   unlist(lapply(1:len_p, function(x) colorRampPalette(palette[x + c(0:1)])(freq[x] + 1)[1:freq[x]]))
 
 }
+
+#' text_contrast
+#'
+#' @param x Vector of colours.
+#'
+#' @return Vector indicating whether black or white should be used for text
+#'   overlayed on x.
+#' @export
+#'
+#' @importFrom grDevices col2rgb
+#'
+#' @examples
+#' text_contrast("#000000")
+#' text_contrast("black")
+text_contrast = function(x){
+  ifelse(apply(col2rgb(x), 2, mean) >= 128, '#000000', '#FFFFFF')
+}
+

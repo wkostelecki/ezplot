@@ -2,7 +2,8 @@
 #'
 #' @param data A data.frame.
 #' @param cols Named character vector.
-#'
+#' @param group_by A vector of column names.
+#' @param agg_fun Function to use for aggregating.
 #' @return An aggregated data.frame.
 #' @importFrom rlang syms
 #' @export
