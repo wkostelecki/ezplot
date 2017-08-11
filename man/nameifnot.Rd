@@ -13,5 +13,5 @@ nameifnot(x)
 A named vector.
 }
 \description{
-if not
+Names unnamed elements of a vector.
 }

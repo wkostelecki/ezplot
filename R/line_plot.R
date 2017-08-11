@@ -75,11 +75,12 @@ line_plot = function(data,
 #' lineplot
 #' @name lineplot
 #' @description see \code{line_plot}.
-#' @param x bare expression
-#' @param y bare expression
-#' @param group bare expression
-#' @param facet_x bare expression
-#' @param facet_y bare expression
+#' @param data A data.frame.
+#' @param x Bare expression.
+#' @param y Bare expression.
+#' @param group Bare expression.
+#' @param facet_x Bare expression.
+#' @param facet_y Bare expression.
 #' @param ... arguments to pass to \code{line_plot}
 #'
 #' @return ggplot

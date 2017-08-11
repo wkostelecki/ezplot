@@ -11,13 +11,19 @@ agg_data(data, cols = names(data), group_by = not_numeric(x),
 \item{data}{A data.frame.}
 
 \item{cols}{Named character vector.}
+
+\item{group_by}{A vector of column names.}
+
+\item{agg_fun}{Function to use for aggregating.}
 }
 \value{
-data.frame
+An aggregated data.frame.
 }
 \description{
 Aggregates data
 }
 \examples{
 agg_data(fruit, c(Product = "Product", y = "Units"))
+agg_data(fruit[, c("Product", "Units")])
+agg_data(fruit[, "Product"])
 }

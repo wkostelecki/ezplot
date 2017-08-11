@@ -13,7 +13,7 @@ no_null(x)
 y
 }
 \description{
-converts "NULL" to NULL
+Converts "NULL" to NULL.
 }
 \examples{
 no_null(NULL)

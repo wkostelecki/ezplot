@@ -13,5 +13,5 @@ not_numeric(x)
 A character vector.
 }
 \description{
-returns names of non-numeric columns
+Returns names of non-numeric columns.
 }

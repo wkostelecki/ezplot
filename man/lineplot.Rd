@@ -7,15 +7,17 @@
 lineplot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL, ...)
 }
 \arguments{
-\item{x}{bare expression}
+\item{data}{A data.frame.}
 
-\item{y}{bare expression}
+\item{x}{Bare expression.}
 
-\item{group}{bare expression}
+\item{y}{Bare expression.}
 
-\item{facet_x}{bare expression}
+\item{group}{Bare expression.}
 
-\item{facet_y}{bare expression}
+\item{facet_x}{Bare expression.}
+
+\item{facet_y}{Bare expression.}
 
 \item{...}{arguments to pass to \code{line_plot}}
 }

@@ -18,5 +18,6 @@ theme
 Default theme
 }
 \examples{
+library(ggplot2)
 ggplot(mtcars) + geom_point(aes(cyl, mpg)) + theme_ez()
 }
