@@ -1,10 +1,10 @@
 Package: ezplot
 Type: Package
-Title: Creates common plots
+Title: Plotting package for common chart types
 Version: 0.1.01
 Author: Wojtek Kostelecki
-Maintainer: Wojtek Kostelecki <w@w.com>
-Description: Creates common plots.
+Maintainer: Wojtek Kostelecki <wojtek.kostelecki@notrealdomain.com>
+Description: Creates common ggplot charts while aiming to reduce typing.
 License: TBA
 Encoding: UTF-8
 LazyData: true
@@ -12,6 +12,7 @@ Depends:
   R (>= 2.10)
 Imports:
   dplyr,
+  forcats,
   ggplot2,
   rlang
 RoxygenNote: 6.0.1

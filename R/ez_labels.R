@@ -13,6 +13,7 @@
 #' ez_labels(10^(0:10))
 #' ez_labels(2000, append = " apples")
 #' ez_labels(0:10, append = " apples", as_factor = TRUE)
+#' ez_labels(c(0, 0.01, 0.001, 0.0001))
 ez_labels = function(x,
                      prepend = "",
                      append = "",
@@ -32,7 +33,7 @@ ez_labels = function(x,
            order = floor(tens / 3)) %>%
     left_join(unit, "order") %>%
     mutate(label = ifelse(is.na(unit),
-                          ifelse(tens < 0,
+                          ifelse(tens < -2 & is.finite(tens),
                                  paste0(absx / 10 ^ tens, "\u00D710\u207B",
                                        superscript(abs(tens))),
                                  as.character(absx)),

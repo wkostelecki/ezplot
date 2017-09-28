@@ -12,5 +12,6 @@ quick_facet(g, ...)
 \item{...}{Arguments to pass to \code{facet_grid} or \code{facet_wrap}}
 }
 \description{
-Applies faceting to ggplot objects when necessary.
+Applies faceting to ggplot objects when g[["data"]] has a
+  \code{facet_x} or \code{facet_y} column.
 }

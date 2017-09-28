@@ -4,7 +4,7 @@
 \alias{nameifnot}
 \title{nameifnot}
 \usage{
-nameifnot(x)
+nameifnot(x, make.names = FALSE)
 }
 \arguments{
 \item{x}{A character vector.}
@@ -13,5 +13,5 @@ nameifnot(x)
 A named vector.
 }
 \description{
-Names unnamed elements of a vector.
+Names unnamed elements of a character vector.
 }
