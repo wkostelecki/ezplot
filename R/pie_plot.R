@@ -1,0 +1,83 @@
+#' pie_plot
+#'
+#' @param data A data.frame.
+#' @param x Value.
+#' @param y Value.
+#' @param facet_x Value.
+#' @param facet_y Value.
+#' @param ylabels Label formatting function.
+#' @param size Theme size for \code{use_theme()}. Default is 20.
+#' @param label_cutoff Label cutoff value.
+#' @param round Option for rounding label.
+#' @param signif Option for retaining significant figures in label.
+#' @param palette Colour function.
+#' @param label_x Position of label from centre of pie.
+#'
+#' @return ggplot object
+#' @export
+#'
+#' @importFrom forcats fct_reorder
+#'
+#' @examples
+#' pie_plot(fruit, "Product", "Units")
+#' pie_plot(fruit, "Product", "Units", "Store")
+#' pie_plot(fruit, "Product", "Units", "Store", "Size")
+pie_plot = function (data,
+                     x,
+                     y,
+                     facet_x = NULL,
+                     facet_y = NULL,
+                     ylabels = ez_labels,
+                     size = 20,
+                     label_cutoff = 0.04,
+                     round = Inf,
+                     signif = 3,
+                     palette = ez_col,
+                     label_x = 1.3){
+  cols = c(x = unname(x),
+           y = unname(y),
+           facet_x = unname(facet_x),
+           facet_y = unname(facet_y))
+
+  # browser()
+
+  gdata = agg_data(data,
+                   cols,
+                   intersect(c("x", "facet_x", "facet_y"), names(cols))) %>%
+    mutate(x = fct_reorder(x, y,
+                           function(x) sum(x, na.rm = TRUE))) %>%
+    arrange(desc(x)) %>%
+    group_by(!!!syms(intersect(names(cols), c("facet_x", "facet_y")))) %>%
+    mutate(share = y / sum(y, na.rm = TRUE),
+           share_label = ifelse(share > label_cutoff,
+                                ez_labels(share * 100, append = "%",
+                                          round = round, signif = signif),
+                                ""),
+           share_pos = cumsum(share) - share / 2) %>%
+    ungroup
+  fill_col = rev(palette(length(unique(gdata[["x"]]))))
+  g = ggplot(gdata) +
+    geom_col(aes(x = factor(1),
+                 y = share,
+                 fill = x),
+             width = 1) +
+    scale_fill_manual(NULL,
+                      values = fill_col,
+                      breaks = rev(levels(gdata[["x"]])),
+                      labels = function(x) paste0(x, "   ")) +
+    geom_text(aes(label_x,
+                  share_pos,
+                  label = share_label,
+                  colour = x),
+              size = size / 4) +
+    scale_colour_manual(values = text_contrast(fill_col),
+                        guide = "none") +
+    coord_polar(theta = "y") +
+    theme_ez(size) +
+    theme(axis.line.x = element_blank()) +
+    scale_y_continuous(breaks = NULL) +
+    scale_x_discrete(breaks = NULL) +
+    ylab(NULL) +
+    xlab(NULL)
+  quick_facet(g)
+}
