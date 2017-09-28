@@ -2,18 +2,19 @@
 #' @name line_plot
 #' @description Creates line plots.
 #'
-#' @param data data.frame
-#' @param x named value
-#' @param y named value
-#' @param group value
-#' @param facet_x value
-#' @param facet_y value
+#' @param data A data.frame.
+#' @param x A named character.
+#' @param y A named character.
+#' @param group character
+#' @param facet_x character
+#' @param facet_y character
 #' @param linesize width of line for \code{geom_line()}. Default is 1.
 #' @param size theme size for \code{use_theme()}. Default is 20.
 #' @param palette colour function
 #' @param ylabels label formatting function
 #' @param use_theme ggplot theme function
 #'
+#' @return A ggplot object.
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
@@ -51,7 +52,7 @@ line_plot = function(data,
                 size = linesize) +
       scale_colour_manual(NULL,
                           values = palette(length(unique(gdata[["group"]]))),
-                          labels = function(x) paste(x, "   "))
+                          labels = function(x) paste0(x, "   "))
   } else {
     g = g +
       geom_line(aes(x, y),

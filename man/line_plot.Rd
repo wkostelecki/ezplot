@@ -9,17 +9,17 @@ line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
   use_theme = theme_ez)
 }
 \arguments{
-\item{data}{data.frame}
+\item{data}{A data.frame.}
 
-\item{x}{named value}
+\item{x}{A named character.}
 
-\item{y}{named value}
+\item{y}{A named character.}
 
-\item{group}{value}
+\item{group}{character}
 
-\item{facet_x}{value}
+\item{facet_x}{character}
 
-\item{facet_y}{value}
+\item{facet_y}{character}
 
 \item{linesize}{width of line for \code{geom_line()}. Default is 1.}
 
@@ -30,6 +30,9 @@ line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 \item{ylabels}{label formatting function}
 
 \item{use_theme}{ggplot theme function}
+}
+\value{
+A ggplot object.
 }
 \description{
 Creates line plots.
