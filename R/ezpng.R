@@ -1,5 +1,3 @@
-
-
 #' save_png
 #'
 #' @param g A ggplot or ezplot object.
@@ -19,8 +17,6 @@ save_png = function (g, file, width, height, res, ...){
   print(g)
   invisible(NULL)
 }
-
-
 
 ez_png = function (g,
                    file,
@@ -55,6 +51,7 @@ ez_png = function (g,
 open_file = function(file){
   file = normalizePath(file, winslash = "/", mustWork = TRUE)
   system(sprintf("open \"%s\"", file))
+  invisible(NULL)
 }
 
 
