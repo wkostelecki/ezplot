@@ -25,7 +25,7 @@ line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 
 \item{size}{theme size for \code{use_theme()}. Default is 20.}
 
-\item{palette}{colour function}
+\item{palette}{Colour function.}
 
 \item{ylabels}{label formatting function}
 

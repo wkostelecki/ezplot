@@ -7,7 +7,7 @@
 #' @param facet_x character
 #' @param facet_y character
 #' @param size theme size for \code{use_theme()}. Default is 20.
-#' @param palette colour function
+#' @param palette Colour function.
 #' @param ylabels label formatting function
 #' @param use_theme ggplot theme function
 #'

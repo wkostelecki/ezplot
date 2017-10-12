@@ -8,6 +8,9 @@ nameifnot(x, make.names = FALSE)
 }
 \arguments{
 \item{x}{A character vector.}
+
+\item{make.names}{Logical. Whether to force names of x to be valid variablel
+names. Default is FALSE.}
 }
 \value{
 A named vector.

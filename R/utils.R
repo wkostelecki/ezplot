@@ -46,6 +46,8 @@ not_numeric = function(x){
 #' nameifnot
 #' @description Names unnamed elements of a character vector.
 #' @param x A character vector.
+#' @param make.names Logical. Whether to force names of x to be valid variablel
+#'   names. Default is FALSE.
 #'
 #' @return A named vector.
 #'
@@ -72,7 +74,7 @@ nameifnot = function(x, make.names = FALSE){
 #' @param x cols
 #'
 #' @return list
-#'
+#' @importFrom stats as.formula
 #' @examples
 #' unpack_cols("x")
 #' unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))

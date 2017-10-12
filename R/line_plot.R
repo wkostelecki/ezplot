@@ -10,7 +10,7 @@
 #' @param facet_y character
 #' @param linesize width of line for \code{geom_line()}. Default is 1.
 #' @param size theme size for \code{use_theme()}. Default is 20.
-#' @param palette colour function
+#' @param palette Colour function.
 #' @param ylabels label formatting function
 #' @param use_theme ggplot theme function
 #'
