@@ -73,7 +73,7 @@ model_plot = function(data,
                        values = c(NA, 16, 0)) +
     scale_size_manual(NULL,
                       labels = c('Actual  ', 'Fitted  ', 'Residual  '),
-                      values = point_size ^ c(1, 0.5, 1) * c(0.5, 2, 0.5)) +
+                      values = point_size ^ c(1, 0.5, 1) * c(0.75, 2, 0.75)) +
     scale_y_continuous(labels = ezplot::ez_labels) +
     ezplot::theme_ez(size) +
     theme(legend.position = 'top',
@@ -86,7 +86,8 @@ model_plot = function(data,
   if (!is.null(gdata[["id"]])) {
     g = g +
       scale_x_continuous(breaks = gdata[["ID"]],
-                         labels = gdata[["id"]]) +
+                         labels = gdata[["id"]],
+                         expand = c(0, 0.6)) +
       theme(axis.text.x = element_text(angle = 90,
                                        vjust = 0.38,
                                        hjust = 1))
