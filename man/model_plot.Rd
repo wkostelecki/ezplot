@@ -27,5 +27,8 @@ A ggplot object.
 model_plot
 }
 \examples{
-model_plot(data.frame(ID = 1:10, Actual = 1:10 + rnorm(10), Fitted = 1:10))
+y = rnorm(26)
+df = data.frame(ID = 1:26, Actual = y + rnorm(26), Fitted = y, id = letters)
+model_plot(df)
+model_plot(df, "id")
 }

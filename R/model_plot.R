@@ -37,29 +37,35 @@ model_plot = function(data,
   gdata[["Residual"]] = gdata[["Actual"]] - gdata[["Fitted"]]
 
   g = ggplot(gdata) +
-    suppressWarnings(geom_line(aes(ID, Actual,
-                                   color = 'Actual  ',
-                                   linetype = 'Actual  ',
-                                   shape = 'Actual  ',
-                                   size = 'Actual  '),
-                               na.rm = TRUE)) +
-    suppressWarnings(geom_point(aes(ID, Fitted,
-                                    color = 'Fitted  ',
-                                    linetype = 'Fitted  ',
-                                    shape = 'Fitted  ',
-                                    size = 'Fitted  '),
-                                na.rm = TRUE)) +
-    suppressWarnings(geom_segment(aes(ID,
-                                      Residual + min(c(Actual, Fitted), na.rm = TRUE) -
-                                        max(Residual, na.rm = TRUE),
-                                      xend = ID,
-                                      yend = min(c(Actual, Fitted), na.rm = TRUE) -
-                                        max(Residual, na.rm = TRUE),
-                                      color = 'Residual  ',
-                                      linetype = 'Residual  ',
-                                      shape = 'Residual  ',
-                                      size = 'Residual  '),
-                                  na.rm = TRUE)) +
+    suppressWarnings(geom_line(
+      aes(ID, Actual,
+          color = 'Actual  ',
+          linetype = 'Actual  ',
+          shape = 'Actual  ',
+          size = 'Actual  '),
+      na.rm = TRUE
+    )) +
+    suppressWarnings(geom_point(
+      aes(ID, Fitted,
+          color = 'Fitted  ',
+          linetype = 'Fitted  ',
+          shape = 'Fitted  ',
+          size = 'Fitted  '),
+      na.rm = TRUE
+    )) +
+    suppressWarnings(geom_segment(
+      aes(ID,
+          Residual + min(c(Actual, Fitted), na.rm = TRUE) -
+            max(Residual, na.rm = TRUE),
+          xend = ID,
+          yend = min(c(Actual, Fitted), na.rm = TRUE) -
+            max(Residual, na.rm = TRUE),
+          color = 'Residual  ',
+          linetype = 'Residual  ',
+          shape = 'Residual  ',
+          size = 'Residual  '),
+      na.rm = TRUE
+    )) +
     scale_colour_manual(NULL,
                         labels = c('Actual  ', 'Fitted  ', 'Residual  '),
                         values = c('dodgerblue4',
@@ -76,9 +82,11 @@ model_plot = function(data,
                       values = point_size ^ c(1, 0.5, 1) * c(0.75, 2, 0.75)) +
     scale_y_continuous(labels = ezplot::ez_labels) +
     ezplot::theme_ez(size) +
-    theme(legend.position = 'top',
-          panel.grid.major.x = element_line(colour = "grey85",
-                                            size = if (size > 16) 0.8 else 0.2)) +
+    theme(
+      legend.position = 'top',
+      panel.grid.major.x = element_line(colour = "grey85",
+                                        size = if (size > 16) 0.8 else 0.2)
+    ) +
     guides(shape = guide_legend(override.aes=list(shape = c(NA, 16, NA)))) +
     ylab(NULL) +
     xlab(NULL)
