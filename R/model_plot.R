@@ -13,7 +13,10 @@
 #' @export
 #'
 #' @examples
-#' model_plot(data.frame(ID = 1:40, Actual = 1:40 + rnorm(40), Fitted = 1:40))
+#' y = rnorm(26)
+#' df = data.frame(ID = 1:26, Actual = y + rnorm(26), Fitted = y, id = letters)
+#' model_plot(df)
+#' model_plot(df, "id")
 model_plot = function(data,
                       x = "ID",
                       actual = "Actual",
@@ -23,7 +26,13 @@ model_plot = function(data,
 
   gdata = data.frame(ID = eval(parse(text = x), data),
                      Actual = eval(parse(text = actual), data),
-                     Fitted = eval(parse(text = fitted), data))
+                     Fitted = eval(parse(text = fitted), data),
+                     stringsAsFactors = FALSE)
+
+  if (is.character(gdata[["ID"]]) | is.factor(gdata[["ID"]])) {
+    gdata[["id"]] = gdata[["ID"]]
+    gdata[["ID"]] = seq_len(nrow(gdata))
+  }
 
   gdata[["Residual"]] = gdata[["Actual"]] - gdata[["Fitted"]]
 
@@ -73,6 +82,15 @@ model_plot = function(data,
     guides(shape = guide_legend(override.aes=list(shape = c(NA, 16, NA)))) +
     ylab(NULL) +
     xlab(NULL)
+
+  if (!is.null(gdata[["id"]])) {
+    g = g +
+      scale_x_continuous(breaks = gdata[["ID"]],
+                         labels = gdata[["id"]]) +
+      theme(axis.text.x = element_text(angle = 90,
+                                       vjust = 0.38,
+                                       hjust = 1))
+  }
 
   g
 
