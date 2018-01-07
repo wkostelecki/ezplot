@@ -1,2 +1,3 @@
-# ezplot
-Package for generating common plots.
+## Overview
+ezplot provides high-level wrapper functions for common chart types.
+
