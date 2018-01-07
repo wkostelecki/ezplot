@@ -4,8 +4,8 @@
 \alias{agg_data}
 \title{Aggregates data}
 \usage{
-agg_data(data, cols = names(data), group_by = not_numeric(x),
-  agg_fun = function(x) sum(x, na.rm = TRUE))
+agg_data(data, cols = names(data), group_by = NULL, agg_fun = function(x)
+  sum(x, na.rm = TRUE), group_by2 = NULL)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -23,7 +23,11 @@ An aggregated data.frame.
 Aggregates data
 }
 \examples{
-agg_data(fruit, c(Product = "Product", y = "Units"))
-agg_data(fruit[, c("Product", "Units")])
-agg_data(fruit[, "Product"])
+library(ukbabynames)
+agg_data(ukbabynames, c(Sex = "sex", Total = "n"))
+agg_data(ukbabynames["sex"])
+agg_data(ukbabynames[c("sex", "n")])
+agg_data(ukbabynames, "n", "year")
+agg_data(ukbabynames, "n", c("sex", "year"))
+agg_data(ukbabynames, c(x = "year", y = "n"), c(x = "year"))
 }

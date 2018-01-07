@@ -52,3 +52,15 @@ text_contrast = function(x){
   ifelse(apply(col2rgb(x), 2, mean) >= 128, '#000000', '#FFFFFF')
 }
 
+
+#' ez_jet
+#' @export
+ez_jet = function(n = 100,
+                  palette = c("dodgerblue4",
+                              "steelblue2",
+                              "olivedrab3",
+                              "darkgoldenrod1",
+                              "brown")){
+  stopifnot(n >= 5)
+  colorRampPalette(colors = palette)(n)
+}

@@ -78,7 +78,7 @@ nameifnot = function(x, make.names = FALSE){
 #' @examples
 #' unpack_cols("x")
 #' unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
-unpack_cols = function(x){
+unpack_cols = function(x) {
 
   stopifnot(is.character(x))
   x = gsub("^ *| *$", "", x)
@@ -87,7 +87,8 @@ unpack_cols = function(x){
 
   list(x,
        x[!with_tilde],
-       lapply(x[with_tilde], function(x) all.vars(as.formula(x))))
+       lapply(x[with_tilde], function(x) all.vars(as.formula(x))),
+       setNames(sub(" *~ *", "", x[with_tilde]), x[with_tilde]))
 
 }
 
