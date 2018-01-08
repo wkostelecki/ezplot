@@ -5,8 +5,8 @@
 \title{area_plot}
 \usage{
 area_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  size = 20, palette = ez_col, ylabels = ez_labels,
-  use_theme = theme_ez)
+  size = 20, reorder = c("group", "facet_x", "facet_y"), palette = ez_col,
+  ylabels = ez_labels, use_theme = theme_ez)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -36,6 +36,10 @@ A ggplot object.
 area_plot
 }
 \examples{
+library(ukbabynames)
+area_plot(ukbabynames, "year", "n")
+area_plot(ukbabynames, "year", "n", "toupper(substring(name, 1, 1))")
+
 area_plot(fruit, "OBS", "Units")
 area_plot(fruit, "OBS", "Units", size = 14)
 area_plot(fruit, "OBS", c("Weekly Units Sold" = "Units"))

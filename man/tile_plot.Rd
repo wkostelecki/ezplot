@@ -6,7 +6,7 @@
 \usage{
 tile_plot(data, x, y, z, facet_x = NULL, facet_y = NULL, size = 20,
   ncol = NULL, labels_x = NULL, labels_y = NULL, labels_z = ez_labels,
-  palette = ebplot::eb_jet, reorder = c("facet_x", "facet_y", "x", "y"))
+  palette = ez_jet, reorder = c("facet_x", "facet_y", "x", "y"))
 }
 \description{
 tile_plot

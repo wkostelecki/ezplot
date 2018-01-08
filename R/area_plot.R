@@ -15,6 +15,10 @@
 #' @export
 #'
 #' @examples
+#' library(ukbabynames)
+#' area_plot(ukbabynames, "year", "n")
+#' area_plot(ukbabynames, "year", "n", "toupper(substring(name, 1, 1))")
+#'
 #' area_plot(fruit, "OBS", "Units")
 #' area_plot(fruit, "OBS", "Units", size = 14)
 #' area_plot(fruit, "OBS", c("Weekly Units Sold" = "Units"))
@@ -29,6 +33,7 @@ area_plot = function(data,
                      facet_x = NULL,
                      facet_y = NULL,
                      size = 20,
+                     reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
                      ylabels = ez_labels,
                      use_theme = theme_ez){
@@ -39,9 +44,16 @@ area_plot = function(data,
            facet_x = unname(facet_x),
            facet_y = unname(facet_y))
 
-  gdata = agg_data(data, cols)
+  gdata = agg_data(data,
+                   cols,
+                   group_by = cols[intersect(names(cols),
+                                             c("x", "group",
+                                               "facet_x", "facet_y"))])
 
-  gdata = reorder_levels(gdata)
+  gdata = reorder_levels(gdata, cols = reorder)
+  if ("group" %in% reorder && "group" %in% names(gdata)) {
+    gdata[["group"]] = forcats::fct_rev(gdata[["group"]])
+  }
 
   g = ggplot(gdata)
 

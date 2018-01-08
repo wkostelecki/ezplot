@@ -4,7 +4,7 @@
 \alias{ez_jet}
 \title{ez_jet}
 \usage{
-ez_jet(n = 5, palette = c("dodgerblue4", "steelblue2", "olivedrab3",
+ez_jet(n = 100, palette = c("dodgerblue4", "steelblue2", "olivedrab3",
   "darkgoldenrod1", "brown"))
 }
 \description{

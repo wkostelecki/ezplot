@@ -3,7 +3,7 @@
 
 
 reorder_levels = function(data,
-                          cols = c("group", "facet_x", "facet_x"),
+                          cols = c("group", "facet_x", "facet_y"),
                           y = "y"){
 
   reorder = forcats::fct_reorder
