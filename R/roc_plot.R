@@ -1,4 +1,4 @@
-
+#' roc_plot
 #' @examples
 #' actual = sample(c(0, 1), 100, replace = TRUE)
 #' fitted = runif(100)
