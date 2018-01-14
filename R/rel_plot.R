@@ -6,7 +6,8 @@
 #' rel_plot(fruit, "Product", "Value")
 #' @export
 rel_plot = function(data, x,  y, group = NULL,
-                    size = 20) {
+                    size = 20,
+                    point_size = 2.5) {
 
   cols = c(x = unname(x),
            y = unname(y),
@@ -23,9 +24,10 @@ rel_plot = function(data, x,  y, group = NULL,
 
   if (is.numeric(gdata[["x"]])) {
     g = ggplot(gdata) +
-      geom_point(aes(x, y, color = group)) +
+      geom_point(aes(x, y, color = group), size = point_size) +
       geom_smooth(aes(x, y, color = group), method = "lm") +
-      scale_color_manual(NULL, values = ez_col(n_group)) +
+      scale_color_manual(NULL, values = ez_col(n_group),
+                         labels = function(x) paste0(x, "   ")) +
       scale_x_continuous(labels = ez_labels) +
       scale_y_continuous(labels = ez_labels)
   } else {
@@ -46,6 +48,8 @@ rel_plot = function(data, x,  y, group = NULL,
                   legend.key.height = grid::unit(1.5, "lines"))
   }
 
-  g
+  g +
+    guides(color=guide_legend(override.aes=list(fill = NA)))
+
 
 }

@@ -4,7 +4,7 @@
 \alias{rel_plot}
 \title{rel_plot}
 \usage{
-rel_plot(data, x, y, group = NULL, size = 20)
+rel_plot(data, x, y, group = NULL, size = 20, point_size = 2.5)
 }
 \description{
 rel_plot
