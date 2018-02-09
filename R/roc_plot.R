@@ -1,13 +1,16 @@
 #' roc_plot
 #' @examples
-#' actual = sample(c(0, 1), 100, replace = TRUE)
-#' fitted = runif(100)
+#' n = 500
+#' actual = sample(c(FALSE, TRUE), n, replace = TRUE)
+#' roc_plot(actual, actual)
+#' roc_plot(actual, runif(n))
+#' fitted = runif(n) ^ ifelse(actual == 1, 0.5, 2)
 #' roc_plot(actual, fitted)
 #'
 #' @export
 roc_plot = function(actual, fitted, size = 20){
 
-  pred = ROCR::prediction(fitted, actual)
+  pred = ROCR::prediction(as.numeric(fitted), actual)
   perf = ROCR::performance(pred, "tpr", "fpr")
   auc = slot(ROCR::performance(pred, "auc"), "y.values")[[1]]
 
