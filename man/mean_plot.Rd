@@ -6,12 +6,22 @@
 \usage{
 mean_plot(data, x, y, size = 20, labels = ez_labels)
 }
+\arguments{
+\item{data}{data.frame}
+
+\item{x}{quoted expression (required)}
+
+\item{y}{quoted expression (required)}
+
+\item{size}{base_size for ggplot2 theme (default is 20)}
+
+\item{labels}{function for formatting labels (default is ez_labels)}
+}
 \description{
-mean_plot
+Chart to compare the means across groups using a bar chart.
 }
 \examples{
 library(dplyr)
-tibble::rownames_to_column(mtcars, "car") \%>\%
-  mean_plot("cyl", "hp > 110",
-            labels = function(x) ez_labels(100 * x, append = "\%"))
+mean_plot(mtcars, c("Number of Cylinders" = "factor(cyl)"), "hp > 110",
+          labels = function(x) ez_labels(100 * x, append = "\%"))
 }

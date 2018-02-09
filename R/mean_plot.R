@@ -1,12 +1,17 @@
 
 #' mean_plot
+#' @description Chart to compare the means across groups using a bar chart.
+#' @param data data.frame
+#' @param x quoted expression (required)
+#' @param y quoted expression (required)
+#' @param size base_size for ggplot2 theme (default is 20)
+#' @param labels function for formatting labels (default is ez_labels)
+#'
 #' @examples
 #' library(dplyr)
-#' tibble::rownames_to_column(mtcars, "car") %>%
-#'   mean_plot("cyl", "hp > 110",
-#'             labels = function(x) ez_labels(100 * x, append = "%"))
+#' mean_plot(mtcars, c("Number of Cylinders" = "factor(cyl)"), "hp > 110",
+#'           labels = function(x) ez_labels(100 * x, append = "%"))
 #' @export
-
 mean_plot = function(data, x, y,
                      size = 20,
                      labels = ez_labels) {
