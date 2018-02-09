@@ -18,12 +18,20 @@
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
-#' line_plot(fruit, "OBS", "Units")
-#' line_plot(fruit, "OBS", c("Weekly Units Sold" = "Units"))
-#' line_plot(fruit, "OBS", "Units", "Product")
-#' line_plot(fruit, "OBS", "Units", "Product", "Size")
-#' line_plot(fruit, "OBS", "Units", "Product", "Size", "Store")
-#' line_plot(fruit, "OBS", "Units", use_theme = ggplot2::theme_bw)
+#' library(ukbabynames)
+#' library(dplyr)
+#' df = ukbabynames %>%
+#'   filter(!grepl("^-", name)) %>%
+#'   mutate(first_letter = toupper(substring(name, 1, 1)),
+#'          vowel_start = first_letter %in% c("A", "E", "I", "O", "U"),
+#'          name_length = ifelse(nchar(name) > 5, "Long", "Short"))
+#' line_plot(df, "year", "n")
+#' line_plot(df, "year", c("Number of Babies" = "n"))
+#' line_plot(df, "year", c("Number of Babies" = "n"), "sex")
+#' line_plot(df, "year", "n", "sex", "first_letter")
+#' line_plot(df, "year", "n", "sex", "first_letter", facet_scales = "free_y")
+#' line_plot(df, "year", "n", "sex", "name_length", "vowel_start")
+#' line_plot(df, "year", "n", use_theme = ggplot2::theme_bw)
 line_plot = function(data,
                      x,
                      y,
@@ -34,7 +42,8 @@ line_plot = function(data,
                      size = 20,
                      palette = ez_col,
                      ylabels = ez_labels,
-                     use_theme = theme_ez){
+                     use_theme = theme_ez,
+                     facet_scales = "fixed"){
 
   cols = c(x = unname(x),
            y = unname(y),
@@ -42,7 +51,9 @@ line_plot = function(data,
            facet_x = unname(facet_x),
            facet_y = unname(facet_y))
 
-  gdata = agg_data(data, cols)
+  gdata = agg_data(data, cols,
+                   cols[intersect(names(cols),
+                                  c("x", "group", "facet_x", "facet_y"))])
 
   g = ggplot(gdata)
 
@@ -60,7 +71,7 @@ line_plot = function(data,
                 colour = palette(1))
   }
 
-  g = quick_facet(g)
+  g = quick_facet(g, scales = facet_scales)
 
   g +
     xlab(names(x)) +

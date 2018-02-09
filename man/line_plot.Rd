@@ -6,7 +6,7 @@
 \usage{
 line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
   linesize = 1, size = 20, palette = ez_col, ylabels = ez_labels,
-  use_theme = theme_ez)
+  use_theme = theme_ez, facet_scales = "fixed")
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -38,10 +38,18 @@ A ggplot object.
 Creates line plots.
 }
 \examples{
-line_plot(fruit, "OBS", "Units")
-line_plot(fruit, "OBS", c("Weekly Units Sold" = "Units"))
-line_plot(fruit, "OBS", "Units", "Product")
-line_plot(fruit, "OBS", "Units", "Product", "Size")
-line_plot(fruit, "OBS", "Units", "Product", "Size", "Store")
-line_plot(fruit, "OBS", "Units", use_theme = ggplot2::theme_bw)
+library(ukbabynames)
+library(dplyr)
+df = ukbabynames \%>\%
+  filter(!grepl("^-", name)) \%>\%
+  mutate(first_letter = toupper(substring(name, 1, 1)),
+         vowel_start = first_letter \%in\% c("A", "E", "I", "O", "U"),
+         name_length = ifelse(nchar(name) > 5, "Long", "Short"))
+line_plot(df, "year", "n")
+line_plot(df, "year", c("Number of Babies" = "n"))
+line_plot(df, "year", c("Number of Babies" = "n"), "sex")
+line_plot(df, "year", "n", "sex", "first_letter")
+line_plot(df, "year", "n", "sex", "first_letter", facet_scales = "free_y")
+line_plot(df, "year", "n", "sex", "name_length", "vowel_start")
+line_plot(df, "year", "n", use_theme = ggplot2::theme_bw)
 }
