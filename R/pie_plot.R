@@ -19,12 +19,15 @@
 #' @importFrom forcats fct_reorder
 #'
 #' @examples
-#' pie_plot(fruit, "Product", "Units")
-#' pie_plot(fruit, "Product", "Units", "Store")
-#' pie_plot(fruit, "Product", "Units", "Store", "Size")
+#' pie_plot(mtcars, "cyl", "1")
+#' pie_plot(mtcars, "cyl", "1", reorder = NULL)
+#' pie_plot(mtcars, "cyl", "1", "gear", reorder = NULL)
+#' pie_plot(mtcars, "cyl", "1", "gear", "am")
+#' pie_plot(mtcars, "cyl", "1", "gear", "am", reorder = NULL)
+#' ##pie_plot(mtcars, "cyl", "1", "am", "am")## WHY ERROR?
 pie_plot = function (data,
                      x,
-                     y,
+                     y = "1",
                      facet_x = NULL,
                      facet_y = NULL,
                      ylabels = ez_labels,
@@ -33,19 +36,28 @@ pie_plot = function (data,
                      round = Inf,
                      signif = 3,
                      palette = ez_col,
+                     reorder = c("x", "facet_x", "facet_y"),
                      label_x = 1.3){
+
   cols = c(x = unname(x),
            y = unname(y),
            facet_x = unname(facet_x),
            facet_y = unname(facet_y))
 
-  # browser()
+  #browser()
 
   gdata = agg_data(data,
                    cols,
-                   intersect(c("x", "facet_x", "facet_y"), names(cols))) %>%
-    mutate(x = fct_reorder(x, y,
-                           function(x) sum(x, na.rm = TRUE))) %>%
+                   group_by = cols[intersect(names(cols),
+                                             c("x", "facet_x", "facet_y"))])
+
+  gdata[["x"]] = factor(gdata[["x"]])
+
+  gdata = reorder_levels(gdata,
+                         reorder)
+
+  gdata = gdata %>%
+    mutate(x = fct_rev(x)) %>%
     arrange(desc(x)) %>%
     group_by(!!!syms(intersect(names(cols), c("facet_x", "facet_y")))) %>%
     mutate(share = y / sum(y, na.rm = TRUE),
@@ -55,7 +67,8 @@ pie_plot = function (data,
                                 ""),
            share_pos = cumsum(share) - share / 2) %>%
     ungroup
-  fill_col = rev(palette(length(unique(gdata[["x"]]))))
+
+  fill_col = rev(palette(length(levels(gdata[["x"]]))))
   g = ggplot(gdata) +
     geom_col(aes(x = factor(1),
                  y = share,
