@@ -23,20 +23,25 @@ agg_data = function(data,
 
   COLS = unpack_cols(cols)
 
-  x = bind_cols(lapply(nameifnot(unique(unname(c(COLS[[2]],
-                                                 group_by,
-                                                 unlist(COLS[[3]]))))),
-                       function(x) eval(parse(text = x),
-                                        envir = data)))
+  first_expr = nameifnot(unique(unname(c(COLS[[2]],
+                                         group_by,
+                                         unlist(COLS[[3]])))))
+
+  x = as.data.frame(sapply(first_expr,
+                           function(x) eval(parse(text = x),
+                                            envir = data),
+                           simplify = FALSE),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE)
 
   group_by = nameifnot(if (is.null(group_by)) not_numeric(x) else group_by)
 
   x = x %>%
-    rename(!!!syms(group_by)) %>%
+    mutate(!!!syms(group_by)) %>%
+    select(!!!syms(c(names(group_by), setdiff(names(x), unname(group_by))))) %>%
     group_by(!!!syms(names(group_by))) %>%
     summarize_all(agg_fun) %>%
-    as.data.frame
-
+    as.data.frame(check.names = FALSE)
 
   if (length(COLS[[3]]) > 0) {
     group_by2 = if (is.null(group_by2)) vector("character", 0) else group_by2
