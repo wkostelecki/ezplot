@@ -15,17 +15,12 @@
 #' @export
 #'
 #' @examples
-#' library(ukbabynames)
-#' area_plot(ukbabynames, "year", "n")
-#' area_plot(ukbabynames, "year", "n", "toupper(substring(name, 1, 1))")
-#'
-#' area_plot(fruit, "OBS", "Units")
-#' area_plot(fruit, "OBS", "Units", size = 14)
-#' area_plot(fruit, "OBS", c("Weekly Units Sold" = "Units"))
-#' area_plot(fruit, "OBS", "Units", "Product")
-#' area_plot(fruit, "OBS", "Units", "Product", "Size")
-#' area_plot(fruit, "OBS", "Units", "Product", "Size", "Store")
-#' area_plot(fruit, "OBS", "Units", use_theme = ggplot2::theme_bw)
+#' area_plot(mtcars, "carb", "1", size = 12)
+#' area_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
+#' area_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
+#' area_plot(mtcars, "carb", c(Count = "1"), size = 12)
+#' area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
+#' area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear", "am")
 area_plot = function(data,
                      x,
                      y,
@@ -50,10 +45,11 @@ area_plot = function(data,
                                              c("x", "group",
                                                "facet_x", "facet_y"))])
 
+  if (any("group" == names(gdata))) gdata[["group"]] = factor(gdata[["group"]])
+
   gdata = reorder_levels(gdata, cols = reorder)
-  if ("group" %in% reorder && "group" %in% names(gdata)) {
-    gdata[["group"]] = forcats::fct_rev(gdata[["group"]])
-  }
+
+    if (any("group" == names(gdata))) gdata[["group"]] = forcats::fct_rev(gdata[["group"]])
 
   g = ggplot(gdata)
 

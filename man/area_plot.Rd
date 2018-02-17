@@ -36,15 +36,10 @@ A ggplot object.
 area_plot
 }
 \examples{
-library(ukbabynames)
-area_plot(ukbabynames, "year", "n")
-area_plot(ukbabynames, "year", "n", "toupper(substring(name, 1, 1))")
-
-area_plot(fruit, "OBS", "Units")
-area_plot(fruit, "OBS", "Units", size = 14)
-area_plot(fruit, "OBS", c("Weekly Units Sold" = "Units"))
-area_plot(fruit, "OBS", "Units", "Product")
-area_plot(fruit, "OBS", "Units", "Product", "Size")
-area_plot(fruit, "OBS", "Units", "Product", "Size", "Store")
-area_plot(fruit, "OBS", "Units", use_theme = ggplot2::theme_bw)
+area_plot(mtcars, "carb", "1", size = 12)
+area_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
+area_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
+area_plot(mtcars, "carb", c(Count = "1"), size = 12)
+area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
+area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear", "am")
 }
