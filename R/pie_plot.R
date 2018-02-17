@@ -11,7 +11,8 @@
 #' @param round Option for rounding label.
 #' @param signif Option for retaining significant figures in label.
 #' @param palette Colour function.
-#' @param label_x Position of label from centre of pie.
+#' @param label_x Position of label from centre of pie.  0 is the centre of the
+#'   pie and 1 is the outer edge.
 #'
 #' @return ggplot object
 #' @export
@@ -20,8 +21,8 @@
 #'
 #' @examples
 #' pie_plot(mtcars, "cyl", "1")
-#' pie_plot(mtcars, "cyl", "1", reorder = NULL)
-#' pie_plot(mtcars, "cyl", "1", "gear", reorder = NULL)
+#' pie_plot(mtcars, "cyl", "1", reorder = NULL, label_x = 0.5)
+#' pie_plot(mtcars, "cyl", "1", "gear", reorder = NULL, label_x = 0.5)
 #' pie_plot(mtcars, "cyl", "1", "gear", "am")
 #' pie_plot(mtcars, "cyl", "1", "gear", "am", reorder = NULL)
 #' ##pie_plot(mtcars, "cyl", "1", "am", "am")## WHY ERROR?
@@ -37,14 +38,14 @@ pie_plot = function (data,
                      signif = 3,
                      palette = ez_col,
                      reorder = c("x", "facet_x", "facet_y"),
-                     label_x = 1.3){
+                     label_x = 0.8){
+
+  stopifnot(label_x >= 0 & label_x <=1)
 
   cols = c(x = unname(x),
            y = unname(y),
            facet_x = unname(facet_x),
            facet_y = unname(facet_y))
-
-  #browser()
 
   gdata = agg_data(data,
                    cols,
@@ -53,8 +54,7 @@ pie_plot = function (data,
 
   gdata[["x"]] = factor(gdata[["x"]])
 
-  gdata = reorder_levels(gdata,
-                         reorder)
+  gdata = reorder_levels(gdata, reorder)
 
   gdata = gdata %>%
     mutate(x = fct_rev(x)) %>%
@@ -69,6 +69,7 @@ pie_plot = function (data,
     ungroup
 
   fill_col = rev(palette(length(levels(gdata[["x"]]))))
+
   g = ggplot(gdata) +
     geom_col(aes(x = factor(1),
                  y = share,
@@ -78,7 +79,7 @@ pie_plot = function (data,
                       values = fill_col,
                       breaks = rev(levels(gdata[["x"]])),
                       labels = function(x) paste0(x, "   ")) +
-    geom_text(aes(label_x,
+    geom_text(aes(label_x + 0.5,
                   share_pos,
                   label = share_label,
                   colour = x),
@@ -92,5 +93,7 @@ pie_plot = function (data,
     scale_x_discrete(breaks = NULL) +
     ylab(NULL) +
     xlab(NULL)
+
   quick_facet(g)
+
 }

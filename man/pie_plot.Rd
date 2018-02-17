@@ -4,9 +4,10 @@
 \alias{pie_plot}
 \title{pie_plot}
 \usage{
-pie_plot(data, x, y, facet_x = NULL, facet_y = NULL, ylabels = ez_labels,
-  size = 20, label_cutoff = 0.04, round = Inf, signif = 3,
-  palette = ez_col, label_x = 1.3)
+pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
+  ylabels = ez_labels, size = 20, label_cutoff = 0.04, round = Inf,
+  signif = 3, palette = ez_col, reorder = c("x", "facet_x", "facet_y"),
+  label_x = 0.8)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -31,7 +32,8 @@ pie_plot(data, x, y, facet_x = NULL, facet_y = NULL, ylabels = ez_labels,
 
 \item{palette}{Colour function.}
 
-\item{label_x}{Position of label from centre of pie.}
+\item{label_x}{Position of label from centre of pie.  0 is the centre of the
+pie and 1 is the outer edge.}
 }
 \value{
 ggplot object
@@ -40,7 +42,10 @@ ggplot object
 pie_plot
 }
 \examples{
-pie_plot(fruit, "Product", "Units")
-pie_plot(fruit, "Product", "Units", "Store")
-pie_plot(fruit, "Product", "Units", "Store", "Size")
+pie_plot(mtcars, "cyl", "1")
+pie_plot(mtcars, "cyl", "1", reorder = NULL, label_x = 0.5)
+pie_plot(mtcars, "cyl", "1", "gear", reorder = NULL, label_x = 0.5)
+pie_plot(mtcars, "cyl", "1", "gear", "am")
+pie_plot(mtcars, "cyl", "1", "gear", "am", reorder = NULL)
+##pie_plot(mtcars, "cyl", "1", "am", "am")## WHY ERROR?
 }
