@@ -18,6 +18,8 @@ save_png = function (g, file, width, height, res, ...){
   invisible(NULL)
 }
 
+
+#' @export
 ez_png = function (g,
                    file,
                    width = 1200,
