@@ -4,7 +4,8 @@
 \alias{side_plot}
 \title{side_plot}
 \usage{
-side_plot(data, x, y, ylabels = ez_labels, size = 20, palette = ez_col)
+side_plot(data, x, y, ylabels = ez_labels, size = 20, palette = ez_col,
+  signif = 3)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -23,6 +24,7 @@ side_plot(data, x, y, ylabels = ez_labels, size = 20, palette = ez_col)
 side_plot
 }
 \examples{
-side_plot(fruit, "Product", "Units")
-side_plot(fruit, "Store", "Units")
+side_plot(mtcars, "gear", "1")
+side_plot(mtcars, "cyl", "hp <= 120")
+side_plot(mtcars, "cyl", c(count = "ifelse(cyl == 4, 1, -1)", "hp <= 120"))
 }
