@@ -1,14 +1,17 @@
 #' roc_plot
 #' @examples
-#' n = 500
+#' library(ggplot2)
+#' n = 10000
 #' actual = sample(c(FALSE, TRUE), n, replace = TRUE)
 #' roc_plot(actual, actual)
 #' roc_plot(actual, runif(n))
 #' fitted = runif(n) ^ ifelse(actual == 1, 0.5, 2)
+#' ggplot(data.frame(actual, fitted)) +
+#'   geom_density(aes(fitted, fill = actual), alpha = 0.5)
 #' roc_plot(actual, fitted)
 #'
 #' @export
-roc_plot = function(actual, fitted, size = 20){
+roc_plot = function(actual, fitted, size = 16){
 
   pred = ROCR::prediction(as.numeric(fitted), actual)
   perf = ROCR::performance(pred, "tpr", "fpr")

@@ -57,7 +57,7 @@ pie_plot = function (data,
   gdata = reorder_levels(gdata, reorder)
 
   gdata = gdata %>%
-    mutate(x = fct_rev(x)) %>%
+    mutate(x = forcats::fct_rev(x)) %>%
     arrange(desc(x)) %>%
     group_by(!!!syms(intersect(names(cols), c("facet_x", "facet_y")))) %>%
     mutate(share = y / sum(y, na.rm = TRUE),

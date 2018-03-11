@@ -5,7 +5,7 @@
 \title{side_plot}
 \usage{
 side_plot(data, x, y, ylabels = ez_labels, size = 20, palette = ez_col,
-  signif = 3)
+  signif = 3, y_rescale = 1.25)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -25,6 +25,8 @@ side_plot
 }
 \examples{
 side_plot(mtcars, "gear", "1")
-side_plot(mtcars, "cyl", "hp <= 120")
+side_plot(mtcars, "cyl", c("Cars with <120 HP" = "hp < 120"))
 side_plot(mtcars, "cyl", c(count = "ifelse(cyl == 4, 1, -1)", "hp <= 120"))
+side_plot(mtcars, "cyl", c("hp <= 120", "~ - wt / cyl"))
+side_plot(mtcars, "cyl", c("1", "-1"))
 }
