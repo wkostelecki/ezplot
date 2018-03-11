@@ -18,20 +18,12 @@
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
-#' library(ukbabynames)
-#' library(dplyr)
-#' df = ukbabynames %>%
-#'   filter(!grepl("^-", name)) %>%
-#'   mutate(first_letter = toupper(substring(name, 1, 1)),
-#'          vowel_start = first_letter %in% c("A", "E", "I", "O", "U"),
-#'          name_length = ifelse(nchar(name) > 5, "Long", "Short"))
-#' line_plot(df, "year", "n")
-#' line_plot(df, "year", c("Number of Babies" = "n"))
-#' line_plot(df, "year", c("Number of Babies" = "n"), "sex")
-#' line_plot(df, "year", "n", "sex", "first_letter")
-#' line_plot(df, "year", "n", "sex", "first_letter", facet_scales = "free_y")
-#' line_plot(df, "year", "n", "sex", "name_length", "vowel_start")
-#' line_plot(df, "year", "n", use_theme = ggplot2::theme_bw)
+#' line_plot(mtcars, "cyl", "1", use_theme = ggplot2::theme_bw)
+#' line_plot(mtcars, "cyl", c(Count = "1"))
+#' line_plot(mtcars, "cyl", c(Count = "1"), "gear")
+#' line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", size = 12)
+#' line_plot(mtcars, "cyl", c(Count = "1"), "vs", "gear", "am", size = 12)
+#' line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", facet_scales = "free_y")
 line_plot = function(data,
                      x,
                      y,
@@ -55,7 +47,13 @@ line_plot = function(data,
                    cols[intersect(names(cols),
                                   c("x", "group", "facet_x", "facet_y"))])
 
+  for (i in intersect(names(gdata), c("group", "facet_x", "facet_y"))) {
+    gdata[[i]] = factor(gdata[[i]])
+  }
+
   g = ggplot(gdata)
+
+
 
   if ("group" %in% names(gdata)){
     g = g +
