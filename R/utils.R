@@ -56,7 +56,7 @@ nameifnot = function(x, make.names = FALSE){
   if (is.null(names(x))){
     names(x) = x
   } else {
-    ind = names(x) == ""
+    ind = is.na(names(x)) | names(x) == ""
     if (any(ind)) names(x)[ind] = x[ind]
   }
   if (make.names) {
@@ -83,7 +83,7 @@ unpack_cols = function(x) {
   stopifnot(is.character(x))
   x = gsub("^ *| *$", "", x)
   x = nameifnot(x)
-  with_tilde = grepl("~", x)
+  with_tilde = grepl("^~", x)
 
   list(x,
        x[!with_tilde],

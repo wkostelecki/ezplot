@@ -10,16 +10,19 @@
 #' @export
 #' @examples
 #' side_plot(mtcars, "gear", "1")
-#' side_plot(mtcars, "cyl", "hp <= 120")
+#' side_plot(mtcars, "cyl", c("Cars with <120 HP" = "hp < 120"))
 #' side_plot(mtcars, "cyl", c(count = "ifelse(cyl == 4, 1, -1)", "hp <= 120"))
+#' side_plot(mtcars, "cyl", c("hp <= 120", "~ - wt / cyl"))
+#' side_plot(mtcars, "cyl", c("1", "-1"))
 side_plot = function(data,
                      x,
                      y,
                      ylabels = ez_labels,
                      size = 20,
                      palette = ez_col,
-                     signif = 3){
-  # browser()
+                     signif = 3,
+                     y_rescale = 1.25){
+
   y = nameifnot(y)
   y_names = names(y)
   cols = c(x = unname(x),
@@ -32,36 +35,36 @@ side_plot = function(data,
   gdata[["x"]] = factor(gdata[["x"]])
 
   gdata = gdata %>%
-    mutate(x = fct_reorder(x, y1, function(x) sum(x, na.rm = TRUE)))
+    mutate(x = forcats::fct_reorder(x, y1, function(x) sum(x, na.rm = TRUE)))
 
   gdata = gdata %>%
     tidyr::gather(facet_x, y, -x) %>%
-    mutate(facet_x = y_names[as.numeric(forcats::fct_inorder(facet_x))])
+    mutate(facet_x = y_names[as.numeric(forcats::fct_inorder(facet_x))],
+           facet_x = forcats::fct_inorder(facet_x))
 
   gdata = gdata %>%
     group_by(facet_x) %>%
-    mutate(label_offset = 0.02 * diff(range(c(y, 0), na.rm = TRUE)) * ifelse(y >= 0, 1, -1)) %>%
+    mutate(y_offset = diff(range(c(y, 0), na.rm = TRUE)) * ifelse(y >= 0, 1, -1),
+           sides = any(y >= 0) + any(y < 0)) %>%
     ungroup
-
-  expand = c(
-    if (min(gdata[["y"]], na.rm = TRUE) < 0) 0.2 else 0,
-    0,
-    if (max(gdata[["y"]], na.rm = TRUE) > 0) 0.2 else 0,
-    0
-  )
 
   g = ggplot(gdata) +
     geom_col(aes(x, y),
              fill = palette(1)) +
-    geom_text(aes(x, y + label_offset,
+    geom_text(aes(x, y + (y_rescale - 1) / 10 * y_offset,
                   label = ez_labels(y, signif = signif),
                   hjust = ifelse(y >= 0, 0, 1)),
               vjust = 0.5,
               size = size / 3.5,
               colour = "grey30") +
-    geom_text(aes(x, 1.2 * y, label = "")) +
-    scale_y_continuous(labels = ez_labels) +
-    coord_flip(expand = FALSE) +
+    geom_text(aes(x,
+                  ifelse(sides < 2,
+                         (y_rescale - 1) * y_offset + y,
+                         (y_rescale - 1) / (2 - y_rescale) * y_offset + y),
+                  label = "")) +
+    scale_y_continuous(labels = ez_labels,
+                       expand = c(0, 0)) +
+    coord_flip() +
     theme_ez(size) +
     xlab(NULL) +
     ylab(NULL) +
