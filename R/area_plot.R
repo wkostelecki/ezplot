@@ -18,9 +18,10 @@
 #' area_plot(mtcars, "carb", "1", size = 12)
 #' area_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
 #' area_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
+#' area_plot(mtcars, "carb", "1", "cyl", reorder = NULL, position = "fill")
 #' area_plot(mtcars, "carb", c(Count = "1"), size = 12)
 #' area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
-#' area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear", "am")
+#' area_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
 area_plot = function(data,
                      x,
                      y,
@@ -30,8 +31,13 @@ area_plot = function(data,
                      size = 20,
                      reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
-                     ylabels = ez_labels,
-                     use_theme = theme_ez){
+                     ylabels = if (position == "fill") {
+                       function(x) ez_labels(100 * x, append = "%")
+                     } else {
+                       ez_labels
+                     },
+                     use_theme = theme_ez,
+                     position = "stacked") {
 
   cols = c(x = unname(x),
            y = unname(y),
@@ -49,7 +55,17 @@ area_plot = function(data,
 
   gdata = reorder_levels(gdata, cols = reorder)
 
-    if (any("group" == names(gdata))) gdata[["group"]] = forcats::fct_rev(gdata[["group"]])
+  if (any("group" == names(gdata))) {
+    gdata[["group"]] = forcats::fct_rev(gdata[["group"]])
+  }
+
+  if (position == "fill") {
+    gdata = gdata %>%
+      group_by(!!!syms(intersect(c("x", "facet_x", "facet_y"),
+                                 names(gdata)))) %>%
+      mutate(y = y / sum(abs(y))) %>%
+      ungroup
+  }
 
   g = ggplot(gdata)
 
