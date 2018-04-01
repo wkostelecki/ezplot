@@ -2,6 +2,7 @@
 
 export(agg_data)
 export(area_plot)
+export(bar_plot)
 export(ez_col)
 export(ez_jet)
 export(ez_labels)
