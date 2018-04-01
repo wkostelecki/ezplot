@@ -21,6 +21,7 @@ side_plot = function(data,
                      size = 20,
                      palette = ez_col,
                      signif = 3,
+                     reorder = TRUE,
                      y_rescale = 1.25){
 
   y = nameifnot(y)
@@ -32,10 +33,12 @@ side_plot = function(data,
                    cols,
                    group_by = cols["x"])
 
-  gdata[["x"]] = factor(gdata[["x"]])
+  gdata[["x"]] = forcats::fct_rev(factor(gdata[["x"]]))
 
-  gdata = gdata %>%
-    mutate(x = forcats::fct_reorder(x, y1, function(x) sum(x, na.rm = TRUE)))
+  if (reorder) {
+    gdata = gdata %>%
+      mutate(x = forcats::fct_reorder(x, -y1, function(x) sum(x, na.rm = TRUE)))
+  }
 
   gdata = gdata %>%
     tidyr::gather(facet_x, y, -x) %>%
