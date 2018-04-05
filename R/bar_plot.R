@@ -78,6 +78,7 @@ bar_plot = function(data,
   g = ggplot(gdata)
 
   if ("group" %in% names(gdata)){
+
     fill_pal = rev(palette(length(unique(gdata[["group"]]))))
     g = g +
       geom_col(aes(x, y,
@@ -86,21 +87,24 @@ bar_plot = function(data,
       scale_fill_manual(NULL,
                         values = fill_pal,
                         labels = function(x) paste0(x, "   "),
-                        breaks = rev)
+                        breaks = rev) +
+      geom_text(aes(x, ylabel_pos,
+                    label = ylabel_text,
+                    colour = group),
+                size = size / 3.5) +
+      scale_colour_manual(NULL, values = text_contrast(fill_pal), guide = "none")
+
   } else {
     fill_pal = palette(1)
     g = g +
       geom_col(aes(x, y),
                fill = fill_pal,
-               width = width)
+               width = width) +
+      geom_text(aes(x, ylabel_pos,
+                    label = ylabel_text),
+                colour = text_contrast(fill_pal),
+                size = size / 3.5)
   }
-
-  g = g +
-    geom_text(aes(x, ylabel_pos,
-                  label = ylabel_text,
-                  colour = group),
-              size = size / 3.5) +
-    scale_colour_manual(NULL, values = text_contrast(fill_pal), guide = "none")
 
   g = quick_facet(g)
 
