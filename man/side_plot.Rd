@@ -5,7 +5,7 @@
 \title{side_plot}
 \usage{
 side_plot(data, x, y, ylabels = ez_labels, size = 20, palette = ez_col,
-  signif = 3, y_rescale = 1.25)
+  signif = 3, reorder = TRUE, y_rescale = 1.25)
 }
 \arguments{
 \item{data}{A data.frame.}
