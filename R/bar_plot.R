@@ -22,6 +22,7 @@
 #' bar_plot(mtcars, "carb", c(Count = "1"), size = 12)
 #' bar_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
 #' bar_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
+#' bar_plot(mtcars, "carb", "sample(c(1, -1), 32, replace = TRUE)", "cyl")
 bar_plot = function(data,
                     x,
                     y,
@@ -60,19 +61,24 @@ bar_plot = function(data,
     gdata[["group"]] = forcats::fct_rev(gdata[["group"]])
   }
 
+  group_vars = intersect(c("x", "facet_x", "facet_y"), names(gdata))
+
   if (position == "fill") {
     gdata = gdata %>%
-      group_by(!!!syms(intersect(c("x", "facet_x", "facet_y"),
-                                 names(gdata)))) %>%
+      group_by(!!!syms(group_vars)) %>%
       mutate(y = y / sum(abs(y))) %>%
       ungroup
   }
 
   gdata = gdata  %>%
-    group_by(!!!syms(intersect(c("x", "facet_x", "facet_y"),
-                               names(gdata)))) %>%
-    mutate(ylabel_pos = cumsum(y) - y / 2,
-           ylabel_text = ylabels(signif(y, 3))) %>%
+    mutate(sign = ifelse(y >= 0, 1, -1)) %>%
+    arrange(!!!syms(intersect(c("x", "facet_x", "facet_y", "group"),
+                              names(gdata)))) %>%
+    group_by(!!!syms(c(group_vars, "sign"))) %>%
+    mutate(ylabel_pos = rev(cumsum(rev(y))) - y / 2,
+           ylabel_text = ifelse(abs(y) > 0,
+                                ylabels(signif(y, 3)),
+                                "")) %>%
     ungroup
 
   g = ggplot(gdata)
@@ -108,11 +114,8 @@ bar_plot = function(data,
 
   g = quick_facet(g)
 
-  if (any(gdata[["y"]] < 0)){
-    expand = c(0.1, 0, 0.1, 0)
-  } else {
-    expand = c(0, 0, 0.1, 0)
-  }
+  expand = c(0.1 * any(gdata[["y"]] < 0), 0,
+             0.1 * any(gdata[["y"]] >= 0), 0)
 
   g +
     xlab(names(x)) +
