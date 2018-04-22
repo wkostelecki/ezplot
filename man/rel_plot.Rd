@@ -2,15 +2,26 @@
 % Please edit documentation in R/rel_plot.R
 \name{rel_plot}
 \alias{rel_plot}
-\title{rel_plot}
+\title{relationship plot}
 \usage{
 rel_plot(data, x, y, group = NULL, size = 20, point_size = 2.5)
 }
+\arguments{
+\item{data}{A data.frame.}
+
+\item{x}{Quoted numeric, character or factor}
+
+\item{y}{Quoted numeric}
+
+\item{size}{base_size}
+
+\item{point_size}{Size for \code{geom_point()}.}
+}
 \description{
-rel_plot
+Examine the relationship between two vectors from data
 }
 \examples{
-rel_plot(fruit, "Units", "Value")
-rel_plot(fruit, "Units", "Value", "paste(Product, Size, Store)")
-rel_plot(fruit, "Product", "Value")
+rel_plot(mtcars, "wt", "hp")
+rel_plot(mtcars, "wt", "hp", "factor(cyl)")
+rel_plot(mtcars, "factor(cyl)", "hp")
 }

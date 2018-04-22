@@ -1,9 +1,15 @@
 
-#' rel_plot
+#' relationship plot
+#' @description Examine the relationship between two vectors from data
+#' @param data A data.frame.
+#' @param x Quoted numeric, character or factor
+#' @param y Quoted numeric
+#' @param size base_size
+#' @param point_size Size for \code{geom_point()}.
 #' @examples
-#' rel_plot(fruit, "Units", "Value")
-#' rel_plot(fruit, "Units", "Value", "paste(Product, Size, Store)")
-#' rel_plot(fruit, "Product", "Value")
+#' rel_plot(mtcars, "wt", "hp")
+#' rel_plot(mtcars, "wt", "hp", "factor(cyl)")
+#' rel_plot(mtcars, "factor(cyl)", "hp")
 #' @export
 rel_plot = function(data, x,  y, group = NULL,
                     size = 20,
@@ -32,7 +38,10 @@ rel_plot = function(data, x,  y, group = NULL,
       scale_y_continuous(labels = ez_labels)
   } else {
     g = ggplot(gdata) +
-      geom_boxplot(aes(x, y))
+      geom_boxplot(aes(x, y, colour = group), size = 0.8, na.rm = TRUE) +
+      scale_color_manual(NULL, values = ez_col(n_group),
+                         labels = function(x) paste0(x, "   ")) +
+      scale_y_continuous(labels = ez_labels)
   }
 
   g = g +
@@ -49,7 +58,9 @@ rel_plot = function(data, x,  y, group = NULL,
   }
 
   g +
-    guides(color=guide_legend(override.aes=list(fill = NA)))
+    guides(color=guide_legend(override.aes = list(fill = NA))) +
+    theme(axis.line.x = element_line(color = "grey85",
+                                     size = if (size > 16) 0.8 else 0.2))
 
 
 }
