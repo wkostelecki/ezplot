@@ -18,7 +18,7 @@ side_plot = function(data,
                      x,
                      y,
                      ylabels = ez_labels,
-                     size = 20,
+                     size = 12,
                      palette = ez_col,
                      signif = 3,
                      reorder = TRUE,
@@ -37,7 +37,7 @@ side_plot = function(data,
 
   if (reorder) {
     gdata = gdata %>%
-      mutate(x = forcats::fct_reorder(x, -y1, function(x) sum(x, na.rm = TRUE)))
+      mutate(x = forcats::fct_reorder(x, y1, function(x) sum(x, na.rm = TRUE)))
   }
 
   gdata = gdata %>%
@@ -77,6 +77,6 @@ side_plot = function(data,
           axis.line.y = element_line(color = "grey85",
                                      size = if (size > 16) 0.8 else 0.2),
           strip.placement = "outside")
-  quick_facet(g, strip.position = "bottom", scales = "free_x")
+  quick_facet(g, strip.position = "bottom", scales = "free_x", nrow = 1)
 
 }

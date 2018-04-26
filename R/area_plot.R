@@ -18,7 +18,7 @@
 #' area_plot(mtcars, "carb", "1", size = 12)
 #' area_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
 #' area_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
-#' area_plot(mtcars, "carb", "1", "cyl", reorder = NULL, position = "fill")
+#' area_plot(mtcars, "cyl", "1", "carb", position = "fill")
 #' area_plot(mtcars, "carb", c(Count = "1"), size = 12)
 #' area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
 #' area_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
