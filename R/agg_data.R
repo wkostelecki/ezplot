@@ -21,6 +21,8 @@ agg_data = function(data,
                     agg_fun = function(x) sum(x, na.rm = TRUE),
                     group_by2 = NULL){
 
+  # browser()
+
   COLS = unpack_cols(cols)
 
   first_expr = nameifnot(unique(unname(c(COLS[[2]],
@@ -68,7 +70,12 @@ agg_data = function(data,
     as.data.frame(check.names = FALSE)
 
   if (length(COLS[[3]]) > 0) {
-    group_by2 = if (is.null(group_by2)) vector("character", 0) else group_by2
+
+    group_by2 = if (length(group_by2) == 0) {
+      vector("character", 0)
+    } else {
+      paste0(".agg_group.", names(group_by2), ".agg_group.")
+    }
 
     x = x %>%
       group_by(!!!syms(group_by2)) %>%
@@ -85,11 +92,15 @@ agg_data = function(data,
   # m = match(names(x), c(COLS[[1]], names(group_by)))
   # m = match(names(x), COLS[[1]])
   take = COLS[[1]]
-  ind = take %in% group_by_ & names(take) %in% names(group_by_)
+  # ind = take %in% group_by_ & names(take) %in% names(group_by_)
+
+  ind = which(match(take, group_by_) == match(names(take), names(group_by_)))
+
 
   pos = which(take[ind] %in% group_by_ & names(take)[ind] %in% names(group_by_))
 
   take[ind] = names(group_by)[pos]
+  # take[ind] = names(group_by)[match(take, group_by_)[pos]]
 
   # take = take[]
   m = match(take, names(x))

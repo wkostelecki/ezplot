@@ -85,10 +85,10 @@ unpack_cols = function(x) {
   x = nameifnot(x)
   with_tilde = grepl("^~", x)
 
-  list(x,
-       x[!with_tilde],
-       lapply(x[with_tilde], function(x) all.vars(as.formula(x))),
-       setNames(sub(" *~ *", "", x[with_tilde]), x[with_tilde]))
+  list(cols = x,
+       direct = x[!with_tilde],
+       indirect_vars = lapply(x[with_tilde], function(x) all.vars(as.formula(x))),
+       indirect_expr = setNames(sub(" *~ *", "", x[with_tilde]), x[with_tilde]))
 
 }
 

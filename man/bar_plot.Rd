@@ -7,8 +7,9 @@
 bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
   size = 20, width = NULL, reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col, ylabels = if (position == "fill") {     function(x)
-  ez_labels(100 * x, append = "\%") } else {     ez_labels },
-  use_theme = theme_ez, position = "stacked")
+  ez_labels(100 * x, append = "\%") } else {     ez_labels }, y_rescale = 1,
+  label_cutoff = 0.12, use_theme = theme_ez, position = "stack",
+  facet_scales = "fixed")
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -45,4 +46,5 @@ bar_plot(mtcars, "carb", "1", "cyl", reorder = NULL, position = "fill")
 bar_plot(mtcars, "carb", c(Count = "1"), size = 12)
 bar_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
 bar_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
+bar_plot(mtcars, "carb", "sample(c(1, -1), 32, replace = TRUE)", "cyl")
 }

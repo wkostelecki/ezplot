@@ -38,8 +38,11 @@ bar_plot = function(data,
                     } else {
                       ez_labels
                     },
+                    y_rescale = 1,
+                    label_cutoff = 0.12,
                     use_theme = theme_ez,
-                    position = "stacked") {
+                    position = "stack",
+                    facet_scales = "fixed") {
 
   cols = c(x = unname(x),
            y = unname(y),
@@ -47,11 +50,11 @@ bar_plot = function(data,
            facet_x = unname(facet_x),
            facet_y = unname(facet_y))
 
+  group_vars = intersect(c("x", "group", "facet_x", "facet_y"), names(cols))
+
   gdata = agg_data(data,
                    cols,
-                   group_by = cols[intersect(names(cols),
-                                             c("x", "group",
-                                               "facet_x", "facet_y"))])
+                   group_by = cols[group_vars])
 
   if (any("group" == names(gdata))) gdata[["group"]] = factor(gdata[["group"]])
 
@@ -61,22 +64,32 @@ bar_plot = function(data,
     gdata[["group"]] = forcats::fct_rev(gdata[["group"]])
   }
 
-  group_vars = intersect(c("x", "facet_x", "facet_y"), names(gdata))
-
   if (position == "fill") {
     gdata = gdata %>%
-      group_by(!!!syms(group_vars)) %>%
+      group_by(!!!syms(setdiff(group_vars, "group"))) %>%
       mutate(y = y / sum(abs(y))) %>%
       ungroup
   }
 
-  gdata = gdata  %>%
+  if (facet_scales == "fixed") {
+    cutoff_groups = intersect(names(gdata), c("facet_x", "facet_y"))
+  } else {
+    cutoff_groups = NULL
+  }
+
+  gdata = gdata %>%
     mutate(sign = ifelse(y >= 0, 1, -1)) %>%
-    arrange(!!!syms(intersect(c("x", "facet_x", "facet_y", "group"),
-                              names(gdata)))) %>%
-    group_by(!!!syms(c(group_vars, "sign"))) %>%
+    group_by(!!!syms(c(setdiff(group_vars, "group"), "sign"))) %>%
+    mutate(y_height = sum(y)) %>%
+    group_by(!!!syms(setdiff(group_vars, c("group", "x", cutoff_groups)))) %>%
+    mutate(y_range = diff(range(y_height, 0)) * (1 + (1 - y_rescale) * n_distinct(sign))) %>%
+    ungroup
+
+  gdata = gdata  %>%
+    arrange(!!!syms(group_vars)) %>%
+    group_by(!!!syms(setdiff(group_vars, "group"))) %>%
     mutate(ylabel_pos = rev(cumsum(rev(y))) - y / 2,
-           ylabel_text = ifelse(abs(y) > 0,
+           ylabel_text = ifelse(abs(y) > label_cutoff * max(y_range),
                                 ylabels(signif(y, 3)),
                                 "")) %>%
     ungroup
@@ -98,7 +111,9 @@ bar_plot = function(data,
                     label = ylabel_text,
                     colour = group),
                 size = size / 3.5) +
-      scale_colour_manual(NULL, values = text_contrast(fill_pal), guide = "none")
+      scale_colour_manual(NULL,
+                          values = text_contrast(fill_pal),
+                          guide = "none")
 
   } else {
     fill_pal = palette(1)
@@ -112,7 +127,7 @@ bar_plot = function(data,
                 size = size / 3.5)
   }
 
-  g = quick_facet(g)
+  g = quick_facet(g, scales = facet_scales)
 
   expand = c(0.1 * any(gdata[["y"]] < 0), 0,
              0.1 * any(gdata[["y"]] >= 0), 0)

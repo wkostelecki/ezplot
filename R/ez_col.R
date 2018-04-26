@@ -31,7 +31,10 @@ ez_col = function(n = 50, palette = NULL){
   freq = c(rep(floor((n - 1) / (len_p - 1)), len_p - 1), 1) +
     c(rep(1, (n - 1) %% (len_p - 1)), rep(0, len_p - (n - 1) %% (len_p - 1)))
   palette = c(palette, tail(palette, 1))
-  unlist(lapply(1:len_p, function(x) colorRampPalette(palette[x + c(0:1)])(freq[x] + 1)[1:freq[x]]))
+  unlist(lapply(1:len_p,
+                function(x) {
+                  colorRampPalette(palette[x + c(0:1)])(freq[x] + 1)[1:freq[x]]
+                }))
 
 }
 
@@ -49,7 +52,7 @@ ez_col = function(n = 50, palette = NULL){
 #' text_contrast("#000000")
 #' text_contrast("black")
 text_contrast = function(x){
-  ifelse(apply(col2rgb(x), 2, mean) >= 128, '#000000', '#FFFFFF')
+  ifelse(apply(col2rgb(x), 2, mean) >= 128, "#000000", "#FFFFFF")
 }
 
 

@@ -37,7 +37,10 @@ area_plot = function(data,
                        ez_labels
                      },
                      use_theme = theme_ez,
-                     position = "stacked") {
+                     position = c("stack", "fill"),
+                     facet_scales = "fixed") {
+
+  position = match.arg(position)
 
   cols = c(x = unname(x),
            y = unname(y),
@@ -85,7 +88,7 @@ area_plot = function(data,
                width = get_incr(gdata[["x"]]))
   }
 
-  g = quick_facet(g)
+  g = quick_facet(g, scales = facet_scales)
 
   if (any(gdata[["y"]] < 0)){
     expand = c(0.1, 0, 0.1, 0)

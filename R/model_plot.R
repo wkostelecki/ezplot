@@ -21,6 +21,7 @@ model_plot = function(data,
                       x = "ID",
                       actual = "Actual",
                       fitted = "Fitted",
+                      facet_x = NULL,
                       point_size = 2,
                       size = 20){
 
@@ -29,61 +30,71 @@ model_plot = function(data,
                      Fitted = eval(parse(text = fitted), data),
                      stringsAsFactors = FALSE)
 
+  gdata[["Residual"]] = gdata[["Actual"]] - gdata[["Fitted"]]
+
+
+  if (!is.null(facet_x)) {
+    gdata[["facet_x"]] = eval(parse(text = facet_x), data)
+  }
+
+  gdata = gdata %>%
+    group_by_at(vars(matches("facet_x"))) %>%
+    mutate(min_af = min(Actual, Fitted, na.rm = TRUE),
+           max_res = max(Residual, na.rm = TRUE)) %>%
+    ungroup
+
   if (is.character(gdata[["ID"]]) | is.factor(gdata[["ID"]])) {
     gdata[["id"]] = gdata[["ID"]]
     gdata[["ID"]] = seq_len(nrow(gdata))
   }
 
-  gdata[["Residual"]] = gdata[["Actual"]] - gdata[["Fitted"]]
 
   g = ggplot(gdata) +
     suppressWarnings(geom_line(
       aes(ID, Actual,
-          color = 'Actual  ',
-          linetype = 'Actual  ',
-          shape = 'Actual  ',
-          size = 'Actual  '),
+          color = "Actual  ",
+          linetype = "Actual  ",
+          shape = "Actual  ",
+          size = "Actual  "),
       na.rm = TRUE
     )) +
     suppressWarnings(geom_point(
       aes(ID, Fitted,
-          color = 'Fitted  ',
-          linetype = 'Fitted  ',
-          shape = 'Fitted  ',
-          size = 'Fitted  '),
+          color = "Fitted  ",
+          linetype = "Fitted  ",
+          shape = "Fitted  ",
+          size = "Fitted  "),
       na.rm = TRUE
     )) +
     suppressWarnings(geom_segment(
       aes(ID,
-          Residual + min(c(Actual, Fitted), na.rm = TRUE) -
-            max(Residual, na.rm = TRUE),
+          Residual + min_af - max_res,
           xend = ID,
-          yend = min(c(Actual, Fitted), na.rm = TRUE) -
-            max(Residual, na.rm = TRUE),
-          color = 'Residual  ',
-          linetype = 'Residual  ',
-          shape = 'Residual  ',
-          size = 'Residual  '),
+          yend = min_af - max_res,
+          color = "Residual  ",
+          linetype = "Residual  ",
+          shape = "Residual  ",
+          size = "Residual  "),
       na.rm = TRUE
     )) +
     scale_colour_manual(NULL,
-                        labels = c('Actual  ', 'Fitted  ', 'Residual  '),
-                        values = c('dodgerblue4',
-                                   'tomato2',
-                                   'mediumorchid4')) +
+                        labels = c("Actual  ", "Fitted  ", "Residual  "),
+                        values = c("dodgerblue4",
+                                   "tomato2",
+                                   "mediumorchid4")) +
     scale_linetype_manual(NULL,
-                          labels = c('Actual  ', 'Fitted  ', 'Residual  '),
+                          labels = c("Actual  ", "Fitted  ", "Residual  "),
                           values = c(1, 0, 1)) +
     scale_shape_manual(NULL,
-                       labels = c('Actual  ', 'Fitted  ', 'Residual  '),
+                       labels = c("Actual  ", "Fitted  ", "Residual  "),
                        values = c(NA, 16, 0)) +
     scale_size_manual(NULL,
-                      labels = c('Actual  ', 'Fitted  ', 'Residual  '),
+                      labels = c("Actual  ", "Fitted  ", "Residual  "),
                       values = point_size ^ c(1, 0.5, 1) * c(0.75, 2, 0.75)) +
     scale_y_continuous(labels = ezplot::ez_labels) +
     ezplot::theme_ez(size) +
     theme(
-      legend.position = 'top',
+      legend.position = "top",
       panel.grid.major.x = element_line(colour = "grey85",
                                         size = if (size > 16) 0.8 else 0.2)
     ) +
@@ -101,6 +112,6 @@ model_plot = function(data,
                                        hjust = 1))
   }
 
-  g
+  quick_facet(g, scales = "free_y")
 
 }

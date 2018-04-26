@@ -35,17 +35,33 @@ line_plot = function(data,
                      palette = ez_col,
                      ylabels = ez_labels,
                      use_theme = theme_ez,
-                     facet_scales = "fixed"){
+                     facet_scales = "fixed") {
+
+  stopifnot(!(length(y) > 1 & !is.null(group)))
+
+  y = nameifnot(y)
 
   cols = c(x = unname(x),
-           y = unname(y),
+           setNames(y, paste0("y", seq_along(y))),
            group = unname(group),
            facet_x = unname(facet_x),
            facet_y = unname(facet_y))
 
   gdata = agg_data(data, cols,
                    cols[intersect(names(cols),
-                                  c("x", "group", "facet_x", "facet_y"))])
+                                  c("x", "group", "facet_x", "facet_y"))],
+                   group_by2 = cols[intersect(names(cols),
+                                              c("group", "facet_x", "facet_y"))])
+
+  if (length(y) > 1) {
+    gdata = tidyr::gather_(gdata, "group", "y", paste0("y", seq_along(y)))
+    gdata[["group"]] =  factor(gdata[["group"]],
+                               paste0("y", seq_along(y)),
+                               names(y))
+
+  } else {
+    gdata = rename(gdata, y = y1)
+  }
 
   for (i in intersect(names(gdata), c("group", "facet_x", "facet_y"))) {
     gdata[[i]] = factor(gdata[[i]])

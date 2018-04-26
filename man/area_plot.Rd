@@ -8,7 +8,7 @@ area_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
   size = 20, reorder = c("group", "facet_x", "facet_y"), palette = ez_col,
   ylabels = if (position == "fill") {     function(x) ez_labels(100 * x,
   append = "\%") } else {     ez_labels }, use_theme = theme_ez,
-  position = "stacked")
+  position = c("stack", "fill"), facet_scales = "fixed")
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -41,7 +41,7 @@ area_plot
 area_plot(mtcars, "carb", "1", size = 12)
 area_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
 area_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
-area_plot(mtcars, "carb", "1", "cyl", reorder = NULL, position = "fill")
+area_plot(mtcars, "cyl", "1", "carb", position = "fill")
 area_plot(mtcars, "carb", c(Count = "1"), size = 12)
 area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
 area_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
