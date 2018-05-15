@@ -4,7 +4,7 @@
 \alias{tile_plot}
 \title{tile_plot}
 \usage{
-tile_plot(data, x, y, z, facet_x = NULL, facet_y = NULL, size = 20,
+tile_plot(data, x, y, z, facet_x = NULL, facet_y = NULL, size = 12,
   ncol = NULL, labels_x = NULL, labels_y = NULL, labels_z = ez_labels,
   palette = ez_jet, reorder = c("facet_x", "facet_y", "x", "y"))
 }

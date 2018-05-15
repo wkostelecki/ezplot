@@ -4,7 +4,7 @@
 \alias{rel_plot}
 \title{relationship plot}
 \usage{
-rel_plot(data, x, y, group = NULL, size = 20, point_size = 2.5)
+rel_plot(data, x, y, group = NULL, size = 12, point_size = 2.5)
 }
 \arguments{
 \item{data}{A data.frame.}

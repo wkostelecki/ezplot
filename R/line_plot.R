@@ -13,7 +13,6 @@
 #' @param palette Colour function.
 #' @param ylabels label formatting function
 #' @param use_theme ggplot theme function
-#'
 #' @return A ggplot object.
 #' @export
 #' @import ggplot2 dplyr
@@ -31,7 +30,7 @@ line_plot = function(data,
                      facet_x = NULL,
                      facet_y = NULL,
                      linesize = 1,
-                     size = 20,
+                     size = 12,
                      palette = ez_col,
                      ylabels = ez_labels,
                      use_theme = theme_ez,

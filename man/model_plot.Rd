@@ -5,7 +5,7 @@
 \title{model_plot}
 \usage{
 model_plot(data, x = "ID", actual = "Actual", fitted = "Fitted",
-  facet_x = NULL, point_size = 2, size = 20)
+  facet_x = NULL, point_size = 2, size = 12)
 }
 \arguments{
 \item{data}{A data.frame.}

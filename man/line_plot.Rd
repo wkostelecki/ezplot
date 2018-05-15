@@ -5,7 +5,7 @@
 \title{line_plot}
 \usage{
 line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  linesize = 1, size = 20, palette = ez_col, ylabels = ez_labels,
+  linesize = 1, size = 12, palette = ez_col, ylabels = ez_labels,
   use_theme = theme_ez, facet_scales = "fixed")
 }
 \arguments{

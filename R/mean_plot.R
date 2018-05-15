@@ -13,7 +13,7 @@
 #'           labels = function(x) ez_labels(100 * x, append = "%"))
 #' @export
 mean_plot = function(data, x, y,
-                     size = 20,
+                     size =12,
                      labels = ez_labels) {
   y = nameifnot(y)
   cols = c(x = unname(x),
@@ -26,7 +26,7 @@ mean_plot = function(data, x, y,
     as.data.frame
 
   ggplot(gdata) +
-    geom_col(aes(x, y)) +
+    geom_col(aes(factor(x), y)) +
     theme_ez(size) +
     ylab(names(y)) +
     xlab(names(x)) +

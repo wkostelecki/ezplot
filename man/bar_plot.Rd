@@ -5,7 +5,7 @@
 \title{bar_plot}
 \usage{
 bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  size = 20, width = NULL, reorder = c("group", "facet_x", "facet_y"),
+  size = 12, width = NULL, reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col, ylabels = if (position == "fill") {     function(x)
   ez_labels(100 * x, append = "\%") } else {     ez_labels }, y_rescale = 1,
   label_cutoff = 0.12, use_theme = theme_ez, position = "stack",
