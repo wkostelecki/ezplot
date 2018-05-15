@@ -1,5 +1,5 @@
 #' area_plot
-#'
+#' @description Aggregates a data.frame and creates a stacked area chart.
 #' @param data A data.frame.
 #' @param x A named character.
 #' @param y A named character.
@@ -7,9 +7,14 @@
 #' @param facet_x character
 #' @param facet_y character
 #' @param size theme size for \code{use_theme()}. Default is 20.
+#' @param reorder A character vector specifying the group variables to reorder.
+#'   Default is \code{c("group", "facet_x", "facet_y")}.
 #' @param palette Colour function.
 #' @param ylabels label formatting function
 #' @param use_theme ggplot theme function
+#' @param position Default is \code{"stack"}
+#' @param facet_scales Option passed to scales argument in facet_wrap/grid.
+#'   Default is \code{"fixed"}.
 #'
 #' @return A ggplot object.
 #' @export
@@ -28,7 +33,7 @@ area_plot = function(data,
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,
-                     size = 20,
+                     size = 12,
                      reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
                      ylabels = if (position == "fill") {
