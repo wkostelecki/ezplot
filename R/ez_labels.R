@@ -13,7 +13,7 @@
 #' ez_labels(10^(0:10))
 #' ez_labels(2000, append = " apples")
 #' ez_labels(0:10, append = " apples", as_factor = TRUE)
-#' ez_labels(c(0, 0.01, 0.001, 0.0001))
+#' ez_labels(c(0, 0.1, 0.01, 0.001, 0.0001))
 ez_labels = function(x,
                      prepend = "",
                      append = "",
@@ -46,7 +46,8 @@ ez_labels = function(x,
   df[["label"]]
 }
 
-superscript = function(x){
+superscript = function(x) {
+  x = ifelse(is.finite(x), x, NA_real_)
   unicode = c("\u2070", "\u00B9", "\u00B2", "\u00B3", "\u2074",
               "\u2075", "\u2076", "\u2077", "\u2078", "\u2079")
   sapply(strsplit(as.character(x), ""),
