@@ -20,5 +20,6 @@ Suggests:
     lubridate,
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    tidyr
 VignetteBuilder: knitr
