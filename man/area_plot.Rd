@@ -13,15 +13,15 @@ area_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character.}
+\item{x}{A named character. Evaluates to a column.}
 
-\item{y}{A named character.}
+\item{y}{A named character.Evaluates to a column.}
 
-\item{group}{character}
+\item{group}{character. Evaluates to a column.}
 
-\item{facet_x}{character}
+\item{facet_x}{character. Evaluates to a column.}
 
-\item{facet_y}{character}
+\item{facet_y}{character. Evaluates to a column.}
 
 \item{size}{theme size for \code{use_theme()}. Default is 20.}
 
@@ -36,8 +36,8 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{position}{Default is \code{"stack"}}
 
-\item{facet_scales}{Option passed to scales argument in facet_wrap/grid.
-Default is \code{"fixed"}.}
+\item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{"fixed"}.}
 }
 \value{
 A ggplot object.
