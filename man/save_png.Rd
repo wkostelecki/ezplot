@@ -4,7 +4,7 @@
 \alias{save_png}
 \title{save_png}
 \usage{
-save_png(g, file, width, height, res, ...)
+save_png(g, file, width, height, res, ..., vp = NULL)
 }
 \arguments{
 \item{g}{A ggplot or ezplot object.}
@@ -18,6 +18,8 @@ save_png(g, file, width, height, res, ...)
 \item{res}{Resolution of output image.}
 
 \item{...}{Further arguments to pass to png}
+
+\item{vp}{Viewport created with grid::viewport}
 }
 \description{
 save_png

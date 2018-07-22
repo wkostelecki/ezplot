@@ -6,15 +6,16 @@
 #' @param height Height or output image.
 #' @param res Resolution of output image.
 #' @param ... Further arguments to pass to png
+#' @param vp Viewport created with grid::viewport
 #'
 #' @importFrom grDevices png dev.off
 #' @export
 #'
 #' @return NULL
-save_png = function (g, file, width, height, res, ...){
+save_png = function (g, file, width, height, res, ..., vp = NULL){
   png(file, width = width, height = height, res = res, ...)
   on.exit(dev.off())
-  print(g)
+  print(g, vp = vp)
   invisible(NULL)
 }
 
@@ -27,6 +28,7 @@ ez_png = function (g,
                    res = 72,
                    resx = 1,
                    ...,
+                   vp = NULL,
                    dir.create = FALSE,
                    check = TRUE){
 
@@ -42,7 +44,8 @@ ez_png = function (g,
            width * resx,
            height * resx,
            res * resx,
-           ...)
+           ...,
+           vp = vp)
 
   if (check) open_file(file)
 
