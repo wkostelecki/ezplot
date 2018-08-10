@@ -13,6 +13,7 @@ na_plot = function(data) {
 
   # names(data) = paste("Column", seq_len(ncol(data)))
   data = data %>%
+    ungroup %>%
     mutate_all(function(x) ifelse(is.na(x), "NA", "Value"))
 
   data$.row = seq_len(nrow(data))
