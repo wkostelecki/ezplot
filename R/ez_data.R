@@ -26,14 +26,14 @@ ez_data = function(
   expand.grid(char = as.character(char),
               fct = factor(fct),
               num = as.numeric(num),
-              Day = seq(lubridate::floor_date(start_date, "week"),
+              day = seq(lubridate::floor_date(start_date, "week"),
                         lubridate::ceiling_date(end_date, "week") - 1,
                         by = "day"),
               stringsAsFactors = FALSE) %>%
-    mutate(Week = lubridate::floor_date(Day, "week"),
-           Month = lubridate::floor_date(Day, "month"),
-           Year = lubridate::year(Day),
-           Year2 = Year + (lubridate::month(Day) - 1) / 12) %>%
+    mutate(week = lubridate::floor_date(day, "week"),
+           month = lubridate::floor_date(day, "month"),
+           year = lubridate::year(day),
+           year2 = year + (lubridate::month(day) - 1) / 12) %>%
     group_by(char, fct, num) %>%
     mutate(units = as.numeric(arima.sim(list(ar = 0.5),
                                         n(),
