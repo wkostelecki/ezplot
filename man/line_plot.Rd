@@ -11,15 +11,15 @@ line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character.}
+\item{x}{A named character. Evaluates to a column.}
 
-\item{y}{A named character.}
+\item{y}{A named character. Evaluates to a column.}
 
-\item{group}{character}
+\item{group}{character. Evaluates to a column.}
 
-\item{facet_x}{character}
+\item{facet_x}{character. Evaluates to a column.}
 
-\item{facet_y}{character}
+\item{facet_y}{character. Evaluates to a column.}
 
 \item{linesize}{width of line for \code{geom_line()}. Default is 1.}
 
@@ -30,6 +30,9 @@ line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 \item{ylabels}{label formatting function}
 
 \item{use_theme}{ggplot theme function}
+
+\item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{"fixed"}.}
 }
 \value{
 A ggplot object.
@@ -44,4 +47,8 @@ line_plot(mtcars, "cyl", c(Count = "1"), "gear")
 line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", size = 12)
 line_plot(mtcars, "cyl", c(Count = "1"), "vs", "gear", "am", size = 12)
 line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", facet_scales = "free_y")
+
+line_plot(ez_data(), "Week", "value")
+line_plot(ez_data(), "Year2", "~ value / units", "char", "fct", "num")
+
 }

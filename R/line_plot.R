@@ -1,18 +1,8 @@
 #' @title line_plot
 #' @name line_plot
 #' @description Creates line plots.
-#'
-#' @param data A data.frame.
-#' @param x A named character.
-#' @param y A named character.
-#' @param group character
-#' @param facet_x character
-#' @param facet_y character
+#' @inheritParams area_plot
 #' @param linesize width of line for \code{geom_line()}. Default is 1.
-#' @param size theme size for \code{use_theme()}. Default is 20.
-#' @param palette Colour function.
-#' @param ylabels label formatting function
-#' @param use_theme ggplot theme function
 #' @return A ggplot object.
 #' @export
 #' @import ggplot2 dplyr
@@ -23,6 +13,10 @@
 #' line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", size = 12)
 #' line_plot(mtcars, "cyl", c(Count = "1"), "vs", "gear", "am", size = 12)
 #' line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", facet_scales = "free_y")
+#'
+#' line_plot(ez_data(), "Week", "value")
+#' line_plot(ez_data(), "Year2", "~ value / units", "char", "fct", "num")
+#'
 line_plot = function(data,
                      x,
                      y,
@@ -92,39 +86,5 @@ line_plot = function(data,
     scale_y_continuous(labels = ylabels) +
     ylab(names(y)) +
     use_theme(size)
-
-}
-
-
-
-#' lineplot
-#' @name lineplot
-#' @description see \code{line_plot}.
-#' @param data A data.frame.
-#' @param x Bare expression.
-#' @param y Bare expression.
-#' @param group Bare expression.
-#' @param facet_x Bare expression.
-#' @param facet_y Bare expression.
-#' @param ... arguments to pass to \code{line_plot}
-#'
-#' @return ggplot
-#' @export
-#' @examples
-#' lineplot(fruit, OBS, Units)
-lineplot = function(data,
-                    x,
-                    y,
-                    group = NULL,
-                    facet_x = NULL,
-                    facet_y = NULL,
-                    ...){
-
-  x = deparse(substitute(x))
-  y = deparse(substitute(y))
-  group = no_null(deparse(substitute(group)))
-  facet_x = no_null(deparse(substitute(facet_x)))
-  facet_y = no_null(deparse(substitute(facet_y)))
-  line_plot(data, x, y, group, facet_x, facet_y, ...)
 
 }
