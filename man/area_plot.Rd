@@ -15,7 +15,7 @@ area_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 
 \item{x}{A named character. Evaluates to a column.}
 
-\item{y}{A named character.Evaluates to a column.}
+\item{y}{A named character. Evaluates to a column.}
 
 \item{group}{character. Evaluates to a column.}
 
