@@ -27,8 +27,9 @@ tile_plot(data, x, y, z, facet_x = NULL, facet_y = NULL, size = 12,
 Default is \code{c("group", "facet_x", "facet_y")}.}
 }
 \description{
-tile_plot
+Creates tile plots.
 }
 \examples{
 tile_plot(mtcars, "factor(cyl)", "factor(am)", "mpg")
+tile_plot(ez_data(), "year", "char", "value", "fct", "num", reorder = NULL)
 }

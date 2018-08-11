@@ -23,11 +23,11 @@ An aggregated data.frame.
 Aggregates data
 }
 \examples{
-library(ukbabynames)
-agg_data(ukbabynames, c(Sex = "sex", Total = "n"))
-agg_data(ukbabynames["sex"])
-agg_data(ukbabynames[c("sex", "n")])
-agg_data(ukbabynames, "n", "year")
-agg_data(ukbabynames, "n", c("sex", "year"))
-agg_data(ukbabynames, c(x = "year", y = "n"), c(x = "year"))
+df = ez_data()
+agg_data(df, c(Units = "units", Value = "value"))
+agg_data(df["fct"])
+agg_data(df[c("fct", "value")])
+agg_data(df, "value", "fct")
+agg_data(df, "value", c("fct", "year"))
+agg_data(df, c(x = "year", y = "value"), c(x = "year"))
 }

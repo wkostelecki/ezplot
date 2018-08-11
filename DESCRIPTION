@@ -5,7 +5,7 @@ Version: 0.1.02
 Author: Wojtek Kostelecki
 Maintainer: Wojtek Kostelecki <wojtek.kostelecki@notrealdomain.com>
 Description: Creates common ggplot charts while aiming to reduce typing.
-License: TBA
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:

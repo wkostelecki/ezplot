@@ -1,5 +1,6 @@
 
 #' tile_plot
+#' @description Creates tile plots.
 #' @inheritParams area_plot
 #' @export
 #' @examples
