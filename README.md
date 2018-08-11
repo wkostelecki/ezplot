@@ -1,10 +1,12 @@
 ## Overview
-ezplot provides high-level wrapper functions for common chart types.
+ezplot provides high-level wrapper functions for common chart types:
+- `line_plot()`
+- `tile_plot()`
 
 ## Intallation
 devtools::install_github("wkostelecki/ezplot")
 
-## example data
+## Example data
 ``` r
 library(ezplot)
 df = ez_data()

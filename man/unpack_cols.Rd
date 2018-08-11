@@ -16,6 +16,8 @@ list
 Unpack cols argument to agg_data
 }
 \examples{
-unpack_cols("x")
-unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
+\dontrun{
+  unpack_cols("x")
+  unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
+}
 }

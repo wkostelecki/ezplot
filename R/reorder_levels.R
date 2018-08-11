@@ -8,9 +8,12 @@
 #'   all columns in \code{cols}.
 #' @return A data.frame.
 #' @examples
-#' reorder_levels(mtcars, "cyl", "1") %>% str
-#' reorder_levels(mtcars, "cyl", "1", FALSE) %>% str
-#' reorder_levels(mtcars, "cyl", "mpg") %>% str
+#' library(magrittr)
+#' \dontrun{
+#'   reorder_levels(mtcars, "cyl", "1") %>% str
+#'   reorder_levels(mtcars, "cyl", "1", FALSE) %>% str
+#'   reorder_levels(mtcars, "cyl", "mpg") %>% str
+#' }
 reorder_levels = function(data,
                           cols = c("group", "facet_x", "facet_y"),
                           y = "y",

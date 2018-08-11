@@ -76,8 +76,10 @@ nameifnot = function(x, make.names = FALSE){
 #' @return list
 #' @importFrom stats as.formula
 #' @examples
-#' unpack_cols("x")
-#' unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
+#' \dontrun{
+#'   unpack_cols("x")
+#'   unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
+#' }
 unpack_cols = function(x) {
 
   stopifnot(is.character(x))

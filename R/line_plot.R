@@ -7,15 +7,14 @@
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
-#' line_plot(mtcars, "cyl", "1", use_theme = ggplot2::theme_bw)
-#' line_plot(mtcars, "cyl", c(Count = "1"))
-#' line_plot(mtcars, "cyl", c(Count = "1"), "gear")
-#' line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", size = 12)
-#' line_plot(mtcars, "cyl", c(Count = "1"), "vs", "gear", "am", size = 12)
-#' line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", facet_scales = "free_y")
 #'
-#' line_plot(ez_data(), "Week", "value")
-#' line_plot(ez_data(), "Year2", "~ value / units", "char", "fct", "num")
+#' df = ez_data()
+#' line_plot(ez_data(), "week", "value", use_theme = ggplot2::theme_bw)
+#' line_plot(ez_data(), "week", c("Sales ($)" = "value"))
+#' line_plot(ez_data(), "week", "value", "char")
+#' line_plot(ez_data(), "week", "value", "char", "fct")
+#' line_plot(ez_data(), "week", "value", "char", "fct", "num", facet_scales = "free_y")
+#' line_plot(ez_data(), "year2", "~ value / units", "char", "fct", "num")
 #'
 line_plot = function(data,
                      x,

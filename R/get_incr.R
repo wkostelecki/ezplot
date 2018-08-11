@@ -5,7 +5,7 @@
 #' @param x A numeric or date vector
 get_incr = function(x){
 
-  if (lubridate:::is.POSIXct(x)) {
+  if (lubridate::is.POSIXct(x)) {
     y = sort(unique(x))
     y = as.numeric(min(difftime(y,
                                 dplyr::lag(y),

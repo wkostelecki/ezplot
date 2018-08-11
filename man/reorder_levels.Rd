@@ -24,7 +24,10 @@ A data.frame.
 Order levels of factor columns using fct_reorder
 }
 \examples{
-reorder_levels(mtcars, "cyl", "1") \%>\% str
-reorder_levels(mtcars, "cyl", "1", FALSE) \%>\% str
-reorder_levels(mtcars, "cyl", "mpg") \%>\% str
+library(magrittr)
+\dontrun{
+  reorder_levels(mtcars, "cyl", "1") \%>\% str
+  reorder_levels(mtcars, "cyl", "1", FALSE) \%>\% str
+  reorder_levels(mtcars, "cyl", "mpg") \%>\% str
+}
 }
