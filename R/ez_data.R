@@ -19,7 +19,7 @@ ez_data = function(
   char = c("A", "B"),
   fct = factor(c("X", "Y", "Other"), c("X", "Y", "Other")),
   num = c(10, 20),
-  seed = 1
+  seed = 9
 ) {
 
   set.seed(seed)

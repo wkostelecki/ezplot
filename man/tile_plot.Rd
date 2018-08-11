@@ -8,17 +8,27 @@ tile_plot(data, x, y, z, facet_x = NULL, facet_y = NULL, size = 12,
   ncol = NULL, labels_x = NULL, labels_y = NULL, labels_z = ez_labels,
   palette = ez_jet, reorder = c("facet_x", "facet_y", "x", "y"))
 }
+\arguments{
+\item{data}{A data.frame.}
+
+\item{x}{A named character. Evaluates to a column.}
+
+\item{y}{A named character. Evaluates to a column.}
+
+\item{facet_x}{character. Evaluates to a column.}
+
+\item{facet_y}{character. Evaluates to a column.}
+
+\item{size}{theme size for \code{use_theme()}. Default is 20.}
+
+\item{palette}{Colour function.}
+
+\item{reorder}{A character vector specifying the group variables to reorder.
+Default is \code{c("group", "facet_x", "facet_y")}.}
+}
 \description{
 tile_plot
 }
 \examples{
-
 tile_plot(mtcars, "factor(cyl)", "factor(am)", "mpg")
-
-library(ukbabynames)
-library(dplyr)
-ukbabynames \%>\%
-  mutate(name = toupper(name)) \%>\%
-  filter(substring(name, 1, 1) \%in\% LETTERS) \%>\%
-  tile_plot("substring(name, 1, 1)", "substring(name, 2, 2)", "n")
 }
