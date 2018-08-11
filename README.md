@@ -1,7 +1,9 @@
 ## Overview
-ezplot provides high-level wrapper functions for common chart types:
+ezplot provides high-level wrapper functions for common chart types with easy faceting:
 - `line_plot()`
 - `tile_plot()`
+
+![](man/figures/README-line_plot.png)<!-- -->
 
 ## Intallation
 devtools::install_github("wkostelecki/ezplot")
