@@ -55,7 +55,7 @@ side_plot = function(data,
     geom_col(aes(x, y),
              fill = palette(1)) +
     geom_text(aes(x, y + (y_rescale - 1) / 10 * y_offset,
-                  label = ez_labels(y, signif = signif),
+                  label = ylabels(signif(y, signif)),
                   hjust = ifelse(y >= 0, 0, 1)),
               vjust = 0.5,
               size = size / 3.5,
@@ -65,7 +65,7 @@ side_plot = function(data,
                          (y_rescale - 1) * y_offset + y,
                          (y_rescale - 1) / (2 - y_rescale) * y_offset + y),
                   label = "")) +
-    scale_y_continuous(labels = ez_labels,
+    scale_y_continuous(labels = ylabels,
                        expand = c(0, 0)) +
     coord_flip() +
     theme_ez(size) +
