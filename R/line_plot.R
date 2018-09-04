@@ -59,9 +59,17 @@ line_plot = function(data,
     gdata[[i]] = factor(gdata[[i]])
   }
 
+  if (is.character(gdata[["x"]]) | is.factor(gdata[[""]])) {
+
+    gdata[["x"]] = factor(gdata[["x"]])
+    x_text = levels(gdata[["x"]])
+    gdata[["x"]] = as.numeric(gdata[["x"]])
+
+  } else {
+    x_text = NULL
+  }
+
   g = ggplot(gdata)
-
-
 
   if ("group" %in% names(gdata)){
     g = g +
@@ -79,11 +87,22 @@ line_plot = function(data,
 
   g = quick_facet(g, scales = facet_scales)
 
-  g +
+  g = g +
     xlab(names(x)) +
     ylab(names(y)) +
     scale_y_continuous(labels = ylabels) +
     ylab(names(y)) +
     use_theme(size)
+
+  if (!is.null(x_text)) {
+    g = g +
+      scale_x_continuous(breaks = seq_along(x_text),
+                         labels = x_text) +
+      theme(axis.text.x = element_text(angle = 90,
+                                       vjust = 0.38,
+                                       hjust = 1))
+  }
+
+  g
 
 }
