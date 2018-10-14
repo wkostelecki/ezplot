@@ -1,9 +1,10 @@
 ## Overview
 ezplot provides high-level wrapper functions for common chart types with easy faceting:
 - `line_plot()`
+- `area_plot()`
 - `tile_plot()`
-
-![](man/figures/README-line_plot.png)<!-- -->
+- `waterfall_plot()`
+- `side_plot()`
 
 ## Intallation
 devtools::install_github("wkostelecki/ezplot")
@@ -25,6 +26,7 @@ summary(df)
 ```
 ## Usage
 ### line_plot
+![](man/figures/README-line_plot.png)<!-- -->
 ``` r
 # plot unit sales with "year2" aggregation along x-axis
 line_plot(df, "year2", "units")
@@ -33,8 +35,30 @@ line_plot(df, "year2", "units", "num", "fct") # add "fct" faceting with facet_wr
 line_plot(df, "year2", "units", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
 ```
 
+### area_plot (stacked area)
+![](man/figures/README-area_plot.png)<!-- -->
+``` r
+# plot unit sales with "year2" aggregation along x-axis
+area_plot(df, "year2", "units")
+area_plot(df, "year2", "units", "num") # adds "num" grouping
+area_plot(df, "year2", "units", "num", "fct") # add "fct" faceting with facet_wrap().
+area_plot(df, "year2", "units", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
+```
+
 ### tile_plot
 ``` r
 tile_plot(df, "year", "char", "value")
 tile_plot(df, "year", "char", "value", "fct", "num")
+```
+
+### waterfall_plot
+![](man/figures/README-waterfall_plot.png)<!-- -->
+```r
+waterfall_plot(df, "year", "units", "fct")
+```
+
+### side_plot
+![](man/figures/README-side_plot.png)<!-- -->
+```r
+side_plot(df, "fct", c("units", "value", price = "~ value / units"))
 ```
