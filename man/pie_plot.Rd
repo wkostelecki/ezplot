@@ -5,7 +5,8 @@
 \title{pie_plot}
 \usage{
 pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
-  ylabels = ez_labels, size = 12, label_cutoff = 0.04, round = Inf,
+  ylabels = function(x) ez_labels(x * 100, append = "\%", round = round,
+  signif = signif), size = 12, label_cutoff = 0.04, round = Inf,
   signif = 3, palette = ez_col, reorder = c("x", "facet_x", "facet_y"),
   label_x = 0.8)
 }

@@ -110,7 +110,7 @@ bar_plot = function(data,
       geom_text(aes(x, ylabel_pos,
                     label = ylabel_text,
                     colour = group),
-                size = size / 3.5) +
+                size = size / 4) +
       scale_colour_manual(NULL,
                           values = text_contrast(fill_pal),
                           guide = "none")
@@ -124,7 +124,7 @@ bar_plot = function(data,
       geom_text(aes(x, ylabel_pos,
                     label = ylabel_text),
                 colour = text_contrast(fill_pal),
-                size = size / 3.5)
+                size = size / 4)
   }
 
   g = quick_facet(g, scales = facet_scales)

@@ -58,7 +58,7 @@ side_plot = function(data,
                   label = ylabels(signif(y, signif)),
                   hjust = ifelse(y >= 0, 0, 1)),
               vjust = 0.5,
-              size = size / 3.5,
+              size = size / 4,
               colour = "grey30") +
     geom_text(aes(x,
                   ifelse(sides < 2,
