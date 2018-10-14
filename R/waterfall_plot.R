@@ -39,6 +39,8 @@ waterfall_plot = function(data,
                           ingroup_label = FALSE,
                           n_x = 2){
 
+  y = nameifnot(y)
+
   data = data %>%
     group_by_(x = x,
               group = group) %>%
