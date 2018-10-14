@@ -1,11 +1,10 @@
-ez_png(line_plot(df, "year", "value", "fct"),
-       height = 150,
-       width = 250,
+ez_png(line_plot(df, "year2", "value", "fct"),
+       height = 200,
+       width = 350,
        resx = 1.5,
        # check = FALSE,
        "man/figures/README-line_plot.png",
        dir.create = TRUE)
-
 
 ez_png(area_plot(df, "year2", "value", "fct"),
        height = 150,

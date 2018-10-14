@@ -1,5 +1,5 @@
 ## Overview
-ezplot provides high-level wrapper functions for common chart types with easy faceting:
+ezplot provides high-level wrapper functions for common chart types with reduced typing and easy faceting:
 - `line_plot()`
 - `area_plot()`
 - `tile_plot()`
