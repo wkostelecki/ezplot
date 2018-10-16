@@ -2,6 +2,7 @@
 ezplot provides high-level wrapper functions for common chart types with reduced typing and easy faceting:
 - `line_plot()`
 - `area_plot()`
+- `bar_plot()`
 - `tile_plot()`
 - `waterfall_plot()`
 - `side_plot()`
@@ -28,21 +29,34 @@ summary(df)
 ### line_plot
 ![](man/figures/README-line_plot.png)<!-- -->
 ``` r
-# plot unit sales with "year2" aggregation along x-axis
-line_plot(df, "year2", "units")
-line_plot(df, "year2", "units", "num") # adds "num" grouping
-line_plot(df, "year2", "units", "num", "fct") # add "fct" faceting with facet_wrap().
-line_plot(df, "year2", "units", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
+# plot value sales with "year2" aggregation along x-axis
+line_plot(df, x = "year2", y = "value")
+line_plot(df, x = "year2", y = "value", group = "fct") # adds "fct" grouping
+
+# add "fct" faceting with facet_wrap()
+line_plot(df, x = "year2", y = "value", group = "num", facet_x = "fct")
+
+# add "fct" and "char" faceting with facet_grid()
+line_plot(df, x = "year2", y = "value", group = "num",
+          facet_x = "fct", facet_y = "char")
 ```
 
 ### area_plot (stacked area)
 ![](man/figures/README-area_plot.png)<!-- -->
 ``` r
-# plot unit sales with "year2" aggregation along x-axis
-area_plot(df, "year2", "units")
-area_plot(df, "year2", "units", "num") # adds "num" grouping
-area_plot(df, "year2", "units", "num", "fct") # add "fct" faceting with facet_wrap().
-area_plot(df, "year2", "units", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
+# plot value sales with "year2" aggregation along x-axis
+area_plot(df, "year2", "value")
+area_plot(df, "year2", "value", "num") # adds "num" grouping
+area_plot(df, "year2", "value", "num", "fct") # add "fct" faceting with facet_wrap().
+area_plot(df, "year2", "value", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
+```
+
+### bar_plot
+![](man/figures/README-bar_plot.png)<!-- -->
+``` r
+# plot value sales with "year2" aggregation along x-axis
+bar_plot(df, x = "year", y = "value")
+bar_plot(df, x = "year", y = "value", group = "fct") # adds "fct" grouping
 ```
 
 ### tile_plot
@@ -54,7 +68,7 @@ tile_plot(df, "year", "char", "value", "fct", "num")
 ### waterfall_plot
 ![](man/figures/README-waterfall_plot.png)<!-- -->
 ```r
-waterfall_plot(df, "year", "units", "fct")
+waterfall_plot(df, "year", "value", "fct")
 ```
 
 ### side_plot

@@ -77,6 +77,7 @@ side_plot = function(data,
           axis.line.y = element_line(color = "grey85",
                                      size = if (size > 16) 0.8 else 0.2),
           strip.placement = "outside")
-  quick_facet(g, strip.position = "bottom", scales = "free_x", nrow = 1)
+  quick_facet(g, strip.position = "bottom", scales = "free_x", nrow = 1) +
+    theme(panel.spacing.x = grid::unit(1.5, "lines"))
 
 }

@@ -92,7 +92,8 @@ line_plot = function(data,
     ylab(names(y)) +
     scale_y_continuous(labels = ylabels) +
     ylab(names(y)) +
-    use_theme(size)
+    use_theme(size) +
+    theme(legend.key.height = grid::unit(0, "lines"))
 
   if (!is.null(x_text)) {
     g = g +

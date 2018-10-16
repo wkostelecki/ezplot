@@ -44,6 +44,8 @@ bar_plot = function(data,
                     position = "stack",
                     facet_scales = "fixed") {
 
+  y = nameifnot(y)
+
   cols = c(x = unname(x),
            y = unname(y),
            group = unname(group),
