@@ -23,7 +23,7 @@ ez_png(bar_plot(df, x = "year", y = "value", group = "fct", size = 10),
        width = 250,
        resx = 1.5,
        # check = FALSE,
-       "man/figures/README-area_plot.png",
+       "man/figures/README-bar_plot.png",
        dir.create = TRUE)
 
 ez_png(waterfall_plot(df, "year", "units", "fct", size = 10),
