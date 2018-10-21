@@ -1,4 +1,8 @@
 #' roc_plot
+#' @param actual Vector of actuals values
+#' @param fitted Vector of fitted values
+#' @param size Base size of ggplot chart
+#' @export
 #' @examples
 #' library(ggplot2)
 #' n = 10000
@@ -9,13 +13,11 @@
 #' ggplot(data.frame(actual, fitted)) +
 #'   geom_density(aes(fitted, fill = actual), alpha = 0.5)
 #' roc_plot(actual, fitted)
-#'
-#' @export
-roc_plot = function(actual, fitted, size = 16){
+roc_plot = function(actual, fitted, size = 12){
 
   pred = ROCR::prediction(as.numeric(fitted), actual)
   perf = ROCR::performance(pred, "tpr", "fpr")
-  auc = slot(ROCR::performance(pred, "auc"), "y.values")[[1]]
+  auc = methods::slot(ROCR::performance(pred, "auc"), "y.values")[[1]]
 
   g = ggplot(data.frame(x = perf@x.values[[1]],
                         y = perf@y.values[[1]])) +

@@ -13,25 +13,28 @@ pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{Value.}
+\item{x}{A named character.}
 
-\item{y}{Value.}
+\item{y}{A named character.}
 
-\item{facet_x}{Value.}
+\item{facet_x}{character}
 
-\item{facet_y}{Value.}
+\item{facet_y}{character}
 
-\item{ylabels}{Label formatting function.}
+\item{ylabels}{label formatting function}
 
-\item{size}{Theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 12.}
 
-\item{label_cutoff}{Label cutoff value.}
+\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding labels}
 
 \item{round}{Option for rounding label.}
 
 \item{signif}{Option for retaining significant figures in label.}
 
 \item{palette}{Colour function.}
+
+\item{reorder}{Vector of dimensions to order by aggregation of y. Default is
+\code{c("group", "facet_x", "facet_y")}}
 
 \item{label_x}{Position of label from centre of pie.  0 is the centre of the
 pie and 1 is the outer edge.}
@@ -43,10 +46,11 @@ ggplot object
 pie_plot
 }
 \examples{
-pie_plot(mtcars, "cyl", "1")
-pie_plot(mtcars, "cyl", "1", reorder = NULL, label_x = 0.5)
-pie_plot(mtcars, "cyl", "1", "gear", reorder = NULL, label_x = 0.5)
-pie_plot(mtcars, "cyl", "1", "gear", "am")
-pie_plot(mtcars, "cyl", "1", "gear", "am", reorder = NULL)
-##pie_plot(mtcars, "cyl", "1", "am", "am")## WHY ERROR?
+df = ez_data()
+pie_plot(df, "fct", "units")
+pie_plot(df, "fct", "units", reorder = NULL, label_x = 0.5)
+pie_plot(df, "fct", "units", "year", reorder = NULL, label_x = 0.5)
+pie_plot(df, "fct", "units", "year", "char")
+pie_plot(df, "fct", "units", "year", "char", reorder = NULL)
+##pie_plot(df, "fct", "units", "char", "char")## WHY ERROR?
 }

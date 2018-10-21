@@ -1,9 +1,10 @@
 #' Aggregates data
 #'
 #' @param data A data.frame.
-#' @param cols Named character vector.
-#' @param group_by A vector of column names.
+#' @param cols Named character vector of column names.
+#' @param group_by Vector of grouping column names.
 #' @param agg_fun Function to use for aggregating.
+#' @param group_by2 Vector of grouping column names to use for delayed (post aggregation) calculation.
 #' @return An aggregated data.frame.
 #' @importFrom rlang syms
 #' @export
@@ -20,8 +21,6 @@ agg_data = function(data,
                     group_by = NULL,
                     agg_fun = function(x) sum(x, na.rm = TRUE),
                     group_by2 = NULL){
-
-  # browser()
 
   COLS = unpack_cols(cols)
 

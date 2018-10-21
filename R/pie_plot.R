@@ -1,16 +1,7 @@
 #' pie_plot
-#'
-#' @param data A data.frame.
-#' @param x Value.
-#' @param y Value.
-#' @param facet_x Value.
-#' @param facet_y Value.
-#' @param ylabels Label formatting function.
-#' @param size Theme size for \code{use_theme()}. Default is 20.
-#' @param label_cutoff Label cutoff value.
+#' @inheritParams bar_plot
 #' @param round Option for rounding label.
 #' @param signif Option for retaining significant figures in label.
-#' @param palette Colour function.
 #' @param label_x Position of label from centre of pie.  0 is the centre of the
 #'   pie and 1 is the outer edge.
 #'
@@ -20,12 +11,13 @@
 #' @importFrom forcats fct_reorder
 #'
 #' @examples
-#' pie_plot(mtcars, "cyl", "1")
-#' pie_plot(mtcars, "cyl", "1", reorder = NULL, label_x = 0.5)
-#' pie_plot(mtcars, "cyl", "1", "gear", reorder = NULL, label_x = 0.5)
-#' pie_plot(mtcars, "cyl", "1", "gear", "am")
-#' pie_plot(mtcars, "cyl", "1", "gear", "am", reorder = NULL)
-#' ##pie_plot(mtcars, "cyl", "1", "am", "am")## WHY ERROR?
+#' df = ez_data()
+#' pie_plot(df, "fct", "units")
+#' pie_plot(df, "fct", "units", reorder = NULL, label_x = 0.5)
+#' pie_plot(df, "fct", "units", "year", reorder = NULL, label_x = 0.5)
+#' pie_plot(df, "fct", "units", "year", "char")
+#' pie_plot(df, "fct", "units", "year", "char", reorder = NULL)
+#' ##pie_plot(df, "fct", "units", "char", "char")## WHY ERROR?
 pie_plot = function (data,
                      x,
                      y = "1",
@@ -65,7 +57,7 @@ pie_plot = function (data,
     group_by(!!!syms(intersect(names(cols), c("facet_x", "facet_y")))) %>%
     mutate(share = y / sum(y, na.rm = TRUE),
            share_label = ifelse(share > label_cutoff,
-                                ylabels(x),
+                                ylabels(share),
                                 ""),
            share_pos = cumsum(share) - share / 2) %>%
     ungroup

@@ -18,10 +18,11 @@ Imports:
     rlang
 RoxygenNote: 6.0.1
 Suggests:
-    lubridate,
-    testthat,
     knitr,
+    lubridate,
+    methods,
     rmarkdown,
     ROCR,
+    testthat,
     tidyr
 VignetteBuilder: knitr

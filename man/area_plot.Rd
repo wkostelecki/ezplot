@@ -46,11 +46,11 @@ A ggplot object.
 Aggregates a data.frame and creates a stacked area chart.
 }
 \examples{
-area_plot(mtcars, "carb", "1", size = 12)
-area_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
-area_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
-area_plot(mtcars, "cyl", "1", "carb", position = "fill")
-area_plot(mtcars, "carb", c(Count = "1"), size = 12)
-area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
-area_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
+area_plot(ez_data(), "year2", "units", size = 12)
+area_plot(ez_data(), "year2", "units", "fct", use_theme = ggplot2::theme_bw)
+area_plot(ez_data(), "year2", "units", "fct", reorder = NULL)
+area_plot(ez_data(), "year2", "units", "fct", position = "fill")
+area_plot(ez_data(), "year2", c("Unit Sales" = "units"), size = 12)
+area_plot(ez_data(), "year2", c("Unit Sales" = "units"), "fct", "char")
+area_plot(ez_data(), "year2", "units", "fct", "char", "num", position = "fill")
 }

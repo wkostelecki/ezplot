@@ -4,7 +4,14 @@
 \alias{roc_plot}
 \title{roc_plot}
 \usage{
-roc_plot(actual, fitted, size = 16)
+roc_plot(actual, fitted, size = 12)
+}
+\arguments{
+\item{actual}{Vector of actuals values}
+
+\item{fitted}{Vector of fitted values}
+
+\item{size}{Base size of ggplot chart}
 }
 \description{
 roc_plot
@@ -19,5 +26,4 @@ fitted = runif(n) ^ ifelse(actual == 1, 0.5, 2)
 ggplot(data.frame(actual, fitted)) +
   geom_density(aes(fitted, fill = actual), alpha = 0.5)
 roc_plot(actual, fitted)
-
 }

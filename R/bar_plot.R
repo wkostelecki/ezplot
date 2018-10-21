@@ -6,23 +6,31 @@
 #' @param group character
 #' @param facet_x character
 #' @param facet_y character
-#' @param size theme size for \code{use_theme()}. Default is 20.
+#' @param size theme size for \code{use_theme()}. Default is 12.
+#' @param width Width of bar.
+#' @param reorder Vector of dimensions to order by aggregation of y. Default is
+#'   \code{c("group", "facet_x", "facet_y")}
 #' @param palette Colour function.
 #' @param ylabels label formatting function
+#' @param y_rescale Rescaling factor for y-axis limits
+#' @param label_cutoff Cutoff size (proportion of limit range) for excluding labels
 #' @param use_theme ggplot theme function
+#' @param position Either \code{"stack"} (default) or \code{"fill"}
+#' @param facet_scales Scales argument passed to \code{fact_wrap()} or \code{facet_grid()}
 #'
 #' @return A ggplot object.
 #' @export
 #'
 #' @examples
-#' bar_plot(mtcars, "carb", "1", size = 12)
-#' bar_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
-#' bar_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
-#' bar_plot(mtcars, "carb", "1", "cyl", reorder = NULL, position = "fill")
-#' bar_plot(mtcars, "carb", c(Count = "1"), size = 12)
-#' bar_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
-#' bar_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
-#' bar_plot(mtcars, "carb", "sample(c(1, -1), 32, replace = TRUE)", "cyl")
+#' df = ez_data()
+#' bar_plot(df, "year", "units")
+#' bar_plot(df, "year", "units", "fct", use_theme = ggplot2::theme_bw)
+#' bar_plot(df, "year", "units", "fct", reorder = NULL)
+#' bar_plot(df, "year", "units", "fct", reorder = NULL, position = "fill")
+#' bar_plot(df, "year", c(Units = "units"))
+#' bar_plot(df, "year", c(Units = "units"), "fct", "char")
+#' bar_plot(df, "year", "units", "fct", "char", "num", position = "fill")
+#' bar_plot(df, "year", "ifelse(fct == 'X', units, -units)", "fct")
 bar_plot = function(data,
                     x,
                     y,
@@ -88,8 +96,8 @@ bar_plot = function(data,
     ungroup
 
   gdata = gdata  %>%
-    arrange(!!!syms(group_vars)) %>%
-    group_by(!!!syms(setdiff(group_vars, "group"))) %>%
+    arrange(!!!syms(c(group_vars, "sign"))) %>%
+    group_by(!!!syms(setdiff(c(group_vars, "sign"), "group"))) %>%
     mutate(ylabel_pos = rev(cumsum(rev(y))) - y / 2,
            ylabel_text = ifelse(abs(y) > label_cutoff * max(y_range),
                                 ylabels(signif(y, 3)),
