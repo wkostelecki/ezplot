@@ -2,6 +2,9 @@
 #' tile_plot
 #' @description Creates tile plots.
 #' @inheritParams area_plot
+#' @param z A named character. Evaluates to a column and is mapped to the fill
+#'   colour of the tiles.
+#' @param labels_z label formatting function
 #' @export
 #' @examples
 #' tile_plot(mtcars, "factor(cyl)", "factor(am)", "mpg")
@@ -13,7 +16,7 @@ tile_plot = function(data,
                      facet_x = NULL,
                      facet_y = NULL,
                      size = 12,
-                     ncol = NULL,
+                     facet_ncol = NULL,
                      labels_x = NULL,
                      labels_y = NULL,
                      labels_z = ez_labels,
@@ -46,7 +49,7 @@ tile_plot = function(data,
                          colours = palette(100),
                          labels = labels_z)
 
-  g = quick_facet(g, ncol)
+  g = quick_facet(g, ncol = facet_ncol)
 
   g = g +
     theme_ez(size) +

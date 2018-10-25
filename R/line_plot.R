@@ -25,7 +25,7 @@ line_plot = function(data,
                      linesize = 1,
                      size = 12,
                      palette = ez_col,
-                     ylabels = ez_labels,
+                     labels_y = ez_labels,
                      use_theme = theme_ez,
                      facet_scales = "fixed") {
 
@@ -90,7 +90,7 @@ line_plot = function(data,
   g = g +
     xlab(names(x)) +
     ylab(names(y)) +
-    scale_y_continuous(labels = ylabels) +
+    scale_y_continuous(labels = labels_y) +
     ylab(names(y)) +
     use_theme(size) +
     theme(legend.key.height = grid::unit(0, "lines"))

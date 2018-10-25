@@ -3,14 +3,15 @@
 #' @description Applies faceting to ggplot objects when g[["data"]] has a
 #'   \code{facet_x} or \code{facet_y} column.
 #' @param g A ggplot object.
-#' @param ... Arguments to pass to \code{facet_grid} or \code{facet_wrap}
-quick_facet = function(g, ...){
+#' @param ncol Number of facet columns.
+#' @param ... Arguments to pass to \code{facet_grid} or \code{facet_wrap}.
+quick_facet = function(g, ncol = NULL, ...){
   if (all(c("facet_x", "facet_y") %in% names(g[["data"]]))){
     g = g + facet_grid(facet_y ~ facet_x, ...)
   } else if ("facet_x" %in% names(g[["data"]])){
-    g = g + facet_wrap(~ facet_x, ...)
+    g = g + facet_wrap(~ facet_x, ncol = ncol, ...)
   } else if ("facet_y" %in% names(g[["data"]])){
-    g = g + facet_wrap(~ facet_y, ...)
+    g = g + facet_wrap(~ facet_y, ncol = ncol, ...)
   }
   g
 }

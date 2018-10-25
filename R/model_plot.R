@@ -1,13 +1,10 @@
 
 
 #' model_plot
-#'
-#' @param data A data.frame.
-#' @param x A quoted expression.
-#' @param actual A quoted expression.
-#' @param fitted A quoted expression.
+#' @inheritParams area_plot
+#' @param actual A character value. Evaluates to a column.
+#' @param fitted A character value. Evaluates to a column.
 #' @param point_size Numeric. Default is 2.
-#' @param size Theme base size. Default is 20.
 #'
 #' @return A ggplot object.
 #' @export

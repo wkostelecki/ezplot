@@ -23,7 +23,7 @@ pie_plot = function (data,
                      y = "1",
                      facet_x = NULL,
                      facet_y = NULL,
-                     ylabels = function(x) ez_labels(x * 100,
+                     labels_y = function(x) ez_labels(x * 100,
                                                      append = "%",
                                                      round = round,
                                                      signif = signif),
@@ -57,7 +57,7 @@ pie_plot = function (data,
     group_by(!!!syms(intersect(names(cols), c("facet_x", "facet_y")))) %>%
     mutate(share = y / sum(y, na.rm = TRUE),
            share_label = ifelse(share > label_cutoff,
-                                ylabels(share),
+                                labels_y(share),
                                 ""),
            share_pos = cumsum(share) - share / 2) %>%
     ungroup

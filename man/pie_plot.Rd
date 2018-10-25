@@ -5,7 +5,7 @@
 \title{pie_plot}
 \usage{
 pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
-  ylabels = function(x) ez_labels(x * 100, append = "\%", round = round,
+  labels_y = function(x) ez_labels(x * 100, append = "\%", round = round,
   signif = signif), size = 12, label_cutoff = 0.04, round = Inf,
   signif = 3, palette = ez_col, reorder = c("x", "facet_x", "facet_y"),
   label_x = 0.8)
@@ -13,17 +13,17 @@ pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{A named character.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{facet_x}{character}
+\item{facet_x}{A character value. Evaluates to a column.}
 
-\item{facet_y}{character}
+\item{facet_y}{A character. Evaluates to a column.}
 
-\item{ylabels}{label formatting function}
+\item{labels_y}{label formatting function}
 
-\item{size}{theme size for \code{use_theme()}. Default is 12.}
+\item{size}{theme size for \code{use_theme()}. Default is 20.}
 
 \item{label_cutoff}{Cutoff size (proportion of limit range) for excluding labels}
 
@@ -33,8 +33,8 @@ pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
 
 \item{palette}{Colour function.}
 
-\item{reorder}{Vector of dimensions to order by aggregation of y. Default is
-\code{c("group", "facet_x", "facet_y")}}
+\item{reorder}{A character vector specifying the group variables to reorder.
+Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{label_x}{Position of label from centre of pie.  0 is the centre of the
 pie and 1 is the outer edge.}

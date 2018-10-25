@@ -12,11 +12,11 @@ waterfall_plot(data, x, y, group, size = 20, labels = ez_labels,
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character. Evaluates to a column.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{A named character. Evaluates to a column.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{group}{character. Evaluates to a column.}
+\item{group}{A character value. Evaluates to a column.}
 
 \item{size}{theme size for \code{use_theme()}. Default is 20.}
 

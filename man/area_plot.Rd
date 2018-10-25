@@ -6,22 +6,23 @@
 \usage{
 area_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
   size = 12, reorder = c("group", "facet_x", "facet_y"), palette = ez_col,
-  ylabels = if (position == "fill") {     function(x) ez_labels(100 * x,
-  append = "\%") } else {     ez_labels }, use_theme = theme_ez,
-  position = c("stack", "fill"), facet_scales = "fixed")
+  labels_y = if (position == "fill") {     function(x) ez_labels(100 * x,
+  append = "\%") } else {     ez_labels }, labels_x = identity,
+  use_theme = theme_ez, position = c("stack", "fill"),
+  facet_scales = "fixed", facet_ncol = NULL)
 }
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character. Evaluates to a column.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{A named character. Evaluates to a column.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{group}{character. Evaluates to a column.}
+\item{group}{A character value. Evaluates to a column.}
 
-\item{facet_x}{character. Evaluates to a column.}
+\item{facet_x}{A character value. Evaluates to a column.}
 
-\item{facet_y}{character. Evaluates to a column.}
+\item{facet_y}{A character. Evaluates to a column.}
 
 \item{size}{theme size for \code{use_theme()}. Default is 20.}
 
@@ -30,14 +31,19 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{palette}{Colour function.}
 
-\item{ylabels}{label formatting function}
+\item{labels_y}{label formatting function}
+
+\item{labels_x}{label formatting function}
 
 \item{use_theme}{ggplot theme function}
 
-\item{position}{Default is \code{"stack"}}
+\item{position}{Either \code{"stack"} (default) or \code{"fill"}}
 
 \item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{"fixed"}.}
+
+\item{facet_ncol}{Option passed to ncol argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{NULL}.}
 }
 \value{
 A ggplot object.
@@ -46,11 +52,12 @@ A ggplot object.
 Aggregates a data.frame and creates a stacked area chart.
 }
 \examples{
-area_plot(ez_data(), "year2", "units", size = 12)
-area_plot(ez_data(), "year2", "units", "fct", use_theme = ggplot2::theme_bw)
-area_plot(ez_data(), "year2", "units", "fct", reorder = NULL)
-area_plot(ez_data(), "year2", "units", "fct", position = "fill")
-area_plot(ez_data(), "year2", c("Unit Sales" = "units"), size = 12)
-area_plot(ez_data(), "year2", c("Unit Sales" = "units"), "fct", "char")
-area_plot(ez_data(), "year2", "units", "fct", "char", "num", position = "fill")
+df = ez_data()
+area_plot(df, "year2", "units", size = 10)
+area_plot(df, "year2", "units", "fct", use_theme = ggplot2::theme_bw)
+area_plot(df, "year2", "units", "fct", reorder = NULL)
+area_plot(df, "year2", "units", "fct", position = "fill")
+area_plot(df, "year2", c("Unit Sales" = "units"), size = 12)
+area_plot(df, "year2", c("Unit Sales" = "units"), "fct", "char")
+area_plot(df, "year2", "units", "fct", "char", "num", position = "fill")
 }

@@ -10,15 +10,17 @@ model_plot(data, x = "ID", actual = "Actual", fitted = "Fitted",
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A quoted expression.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{actual}{A quoted expression.}
+\item{actual}{A character value. Evaluates to a column.}
 
-\item{fitted}{A quoted expression.}
+\item{fitted}{A character value. Evaluates to a column.}
+
+\item{facet_x}{A character value. Evaluates to a column.}
 
 \item{point_size}{Numeric. Default is 2.}
 
-\item{size}{Theme base size. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 20.}
 }
 \value{
 A ggplot object.

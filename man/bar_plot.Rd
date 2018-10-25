@@ -6,7 +6,7 @@
 \usage{
 bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
   size = 12, width = NULL, reorder = c("group", "facet_x", "facet_y"),
-  palette = ez_col, ylabels = if (position == "fill") {     function(x)
+  palette = ez_col, labels_y = if (position == "fill") {     function(x)
   ez_labels(100 * x, append = "\%") } else {     ez_labels }, y_rescale = 1,
   label_cutoff = 0.12, use_theme = theme_ez, position = "stack",
   facet_scales = "fixed")
@@ -14,26 +14,26 @@ bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{A named character.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{group}{character}
+\item{group}{A character value. Evaluates to a column.}
 
-\item{facet_x}{character}
+\item{facet_x}{A character value. Evaluates to a column.}
 
-\item{facet_y}{character}
+\item{facet_y}{A character. Evaluates to a column.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 12.}
+\item{size}{theme size for \code{use_theme()}. Default is 20.}
 
 \item{width}{Width of bar.}
 
-\item{reorder}{Vector of dimensions to order by aggregation of y. Default is
-\code{c("group", "facet_x", "facet_y")}}
+\item{reorder}{A character vector specifying the group variables to reorder.
+Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{palette}{Colour function.}
 
-\item{ylabels}{label formatting function}
+\item{labels_y}{label formatting function}
 
 \item{y_rescale}{Rescaling factor for y-axis limits}
 
@@ -43,7 +43,8 @@ bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 
 \item{position}{Either \code{"stack"} (default) or \code{"fill"}}
 
-\item{facet_scales}{Scales argument passed to \code{fact_wrap()} or \code{facet_grid()}}
+\item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{"fixed"}.}
 }
 \value{
 A ggplot object.

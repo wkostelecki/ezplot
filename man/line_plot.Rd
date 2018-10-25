@@ -5,21 +5,21 @@
 \title{line_plot}
 \usage{
 line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  linesize = 1, size = 12, palette = ez_col, ylabels = ez_labels,
+  linesize = 1, size = 12, palette = ez_col, labels_y = ez_labels,
   use_theme = theme_ez, facet_scales = "fixed")
 }
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character. Evaluates to a column.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{A named character. Evaluates to a column.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{group}{character. Evaluates to a column.}
+\item{group}{A character value. Evaluates to a column.}
 
-\item{facet_x}{character. Evaluates to a column.}
+\item{facet_x}{A character value. Evaluates to a column.}
 
-\item{facet_y}{character. Evaluates to a column.}
+\item{facet_y}{A character. Evaluates to a column.}
 
 \item{linesize}{width of line for \code{geom_line()}. Default is 1.}
 
@@ -27,7 +27,7 @@ line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 
 \item{palette}{Colour function.}
 
-\item{ylabels}{label formatting function}
+\item{labels_y}{label formatting function}
 
 \item{use_theme}{ggplot theme function}
 

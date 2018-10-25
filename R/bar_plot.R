@@ -1,22 +1,8 @@
 #' bar_plot
-#'
-#' @param data A data.frame.
-#' @param x A named character.
-#' @param y A named character.
-#' @param group character
-#' @param facet_x character
-#' @param facet_y character
-#' @param size theme size for \code{use_theme()}. Default is 12.
+#' @inheritParams area_plot
 #' @param width Width of bar.
-#' @param reorder Vector of dimensions to order by aggregation of y. Default is
-#'   \code{c("group", "facet_x", "facet_y")}
-#' @param palette Colour function.
-#' @param ylabels label formatting function
 #' @param y_rescale Rescaling factor for y-axis limits
 #' @param label_cutoff Cutoff size (proportion of limit range) for excluding labels
-#' @param use_theme ggplot theme function
-#' @param position Either \code{"stack"} (default) or \code{"fill"}
-#' @param facet_scales Scales argument passed to \code{fact_wrap()} or \code{facet_grid()}
 #'
 #' @return A ggplot object.
 #' @export
@@ -41,7 +27,7 @@ bar_plot = function(data,
                     width = NULL,
                     reorder = c("group", "facet_x", "facet_y"),
                     palette = ez_col,
-                    ylabels = if (position == "fill") {
+                    labels_y = if (position == "fill") {
                       function(x) ez_labels(100 * x, append = "%")
                     } else {
                       ez_labels
@@ -100,7 +86,7 @@ bar_plot = function(data,
     group_by(!!!syms(setdiff(c(group_vars, "sign"), "group"))) %>%
     mutate(ylabel_pos = rev(cumsum(rev(y))) - y / 2,
            ylabel_text = ifelse(abs(y) > label_cutoff * max(y_range),
-                                ylabels(signif(y, 3)),
+                                labels_y(signif(y, 3)),
                                 "")) %>%
     ungroup
 
@@ -145,7 +131,7 @@ bar_plot = function(data,
   g +
     xlab(names(x)) +
     ylab(names(y)) +
-    scale_y_continuous(labels = ylabels,
+    scale_y_continuous(labels = labels_y,
                        expand = expand) +
     ylab(names(y)) +
     use_theme(size)
