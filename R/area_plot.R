@@ -103,10 +103,14 @@ area_plot = function(data,
 
   g = quick_facet(g, scales = facet_scales, ncol = facet_ncol)
 
-  if (any(gdata[["y"]] < 0)){
-    expand = c(0.1, 0, 0.1, 0)
+
+  if (position == "fill") {
+    expand = rep(0, 4)
   } else {
-    expand = c(0, 0, 0.1, 0)
+    expand = c(0.1 * any(gdata[["y"]] < 0),
+               0,
+               0.1 * any(gdata[["y"]] > 0),
+               0)
   }
 
   g +
