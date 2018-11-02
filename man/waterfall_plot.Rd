@@ -5,7 +5,7 @@
 \title{waterfall_plot}
 \usage{
 waterfall_plot(data, x, y, group, size = 20, labels = ez_labels,
-  label_rescale = 1, y_min = "auto", y_rescale = 1.1, n_signif = 3,
+  label_rescale = 1, y_min = "auto", rescale_y = 1.1, n_signif = 3,
   rotate_xlabel = FALSE, bottom_label = TRUE, ingroup_label = FALSE,
   n_x = 2)
 }
@@ -27,7 +27,7 @@ labels).}
 
 \item{y_min}{Minimum limit of y axis.}
 
-\item{y_rescale}{Scaling factor to extend y_max.}
+\item{rescale_y}{Scaling factor to extend y_max.}
 
 \item{n_signif}{Number of significant figures in labels.}
 

@@ -5,7 +5,7 @@
 \title{side_plot}
 \usage{
 side_plot(data, x, y, labels_y = ez_labels, size = 12, palette = ez_col,
-  signif = 3, reorder = TRUE, y_rescale = 1.25)
+  signif = 3, reorder = TRUE, rescale_y = 1.25)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -25,7 +25,7 @@ side_plot(data, x, y, labels_y = ez_labels, size = 12, palette = ez_col,
 \item{reorder}{A character vector specifying the group variables to reorder.
 Default is \code{c("group", "facet_x", "facet_y")}.}
 
-\item{y_rescale}{Rescaling factor for y-axis limits}
+\item{rescale_y}{Rescaling factor for y-axis limits}
 }
 \description{
 side_plot

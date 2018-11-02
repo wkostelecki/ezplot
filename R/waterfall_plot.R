@@ -5,7 +5,7 @@
 #' @param label_rescale Scaling factor for chart labels (relative to axis
 #'   labels).
 #' @param y_min Minimum limit of y axis.
-#' @param y_rescale Scaling factor to extend y_max.
+#' @param rescale_y Scaling factor to extend y_max.
 #' @param n_signif Number of significant figures in labels.
 #' @param rotate_xlabel Logical.
 #' @param bottom_label Logical.
@@ -32,7 +32,7 @@ waterfall_plot = function(data,
                           labels = ez_labels,
                           label_rescale = 1,
                           y_min = 'auto',
-                          y_rescale = 1.1,
+                          rescale_y = 1.1,
                           n_signif = 3,
                           rotate_xlabel = FALSE,
                           bottom_label = TRUE,
@@ -155,7 +155,7 @@ waterfall_plot = function(data,
   limits = c(y_min,
              max(c(gdata$end, gdata$start), na.rm = TRUE))
 
-  limits[2] = (limits[2] - limits[1]) * y_rescale + limits[1]
+  limits[2] = (limits[2] - limits[1]) * rescale_y + limits[1]
 
   cols = c("0" = 'dodgerblue4',
            "-1" = 'brown',
