@@ -5,9 +5,10 @@
 \title{bar_plot}
 \usage{
 bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  size = 12, width = NULL, reorder = c("group", "facet_x", "facet_y"),
-  palette = ez_col, labels_y = if (position == "fill") {     function(x)
-  ez_labels(100 * x, append = "\%") } else {     ez_labels }, y_rescale = 1,
+  size = 12, width = NULL, reorder = c("group", "facet_x",
+  "facet_y"), palette = ez_col, labels_y = if (position == "fill") {   
+   function(x) ez_labels(100 * x, append = "\%") } else {     ez_labels },
+  label_pos = c("auto", "inside", "top", "both"), rescale_y = 1.1,
   label_cutoff = 0.12, use_theme = theme_ez, position = "stack",
   facet_scales = "fixed")
 }
@@ -35,7 +36,7 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{labels_y}{label formatting function}
 
-\item{y_rescale}{Rescaling factor for y-axis limits}
+\item{rescale_y}{Rescaling factor for y-axis limits}
 
 \item{label_cutoff}{Cutoff size (proportion of limit range) for excluding labels}
 
@@ -55,11 +56,10 @@ bar_plot
 \examples{
 df = ez_data()
 bar_plot(df, "year", "units")
+bar_plot(df, "year", c("Share of Units" = "units"), "fct", position = "fill")
 bar_plot(df, "year", "units", "fct", use_theme = ggplot2::theme_bw)
-bar_plot(df, "year", "units", "fct", reorder = NULL)
-bar_plot(df, "year", "units", "fct", reorder = NULL, position = "fill")
-bar_plot(df, "year", c(Units = "units"))
+bar_plot(df, "year", "units", "fct", reorder = NULL, label_pos = "both")
 bar_plot(df, "year", c(Units = "units"), "fct", "char")
-bar_plot(df, "year", "units", "fct", "char", "num", position = "fill")
-bar_plot(df, "year", "ifelse(fct == 'X', units, -units)", "fct")
+bar_plot(df, "year", "units", "fct", "char", "num")
+bar_plot(df, "year", "ifelse(fct == 'X', units, -units)", "fct", label_pos = "both")
 }
