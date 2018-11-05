@@ -4,8 +4,8 @@
 \alias{ez_png}
 \title{ez_png}
 \usage{
-ez_png(g, file, width = 1200, height = 600, res = 72, resx = 1, ...,
-  vp = NULL, dir.create = FALSE, check = TRUE)
+ez_png(g, file, width = 1200, height = 600, res = 72, resx = 1,
+  ..., vp = NULL, dir.create = FALSE, check = TRUE)
 }
 \arguments{
 \item{g}{A ggplot or ezplot object.}
