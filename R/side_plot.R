@@ -41,7 +41,7 @@ side_plot = function(data,
 
   gdata = gdata %>%
     group_by(facet_x) %>%
-    mutate(y_offset = diff(range(c(y, 0), na.rm = TRUE)) * ifelse(y >= 0, 1, -1),
+    mutate(y_offset = diff(range(c(y[is.finite(y)], 0))) * ifelse(y >= 0, 1, -1),
            sides = any(y >= 0) + any(y < 0)) %>%
     ungroup
 
