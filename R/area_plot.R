@@ -45,7 +45,7 @@ area_plot = function(data,
                      } else {
                        ez_labels
                      },
-                     labels_x = identity,
+                     # labels_x = identity,
                      use_theme = theme_ez,
                      position = c("stack", "fill"),
                      facet_scales = "fixed",
@@ -118,7 +118,7 @@ area_plot = function(data,
     ylab(names(y)) +
     scale_y_continuous(labels = labels_y,
                        expand = expand) +
-    scale_x_continuous(labels = labels_x) +
+    # scale_x_continuous(labels = labels_x) +
     ylab(names(y)) +
     use_theme(size)
 
