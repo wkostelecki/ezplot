@@ -11,6 +11,8 @@ get_incr = function(x){
                                 dplyr::lag(y),
                                 units = "seconds"),
                        na.rm = TRUE))
+  } else if (is.factor(x) || is.character(x)) {
+    y = 1
   } else {
     y = as.numeric(min(diff(sort(unique(x)))))
   }
