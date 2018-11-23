@@ -21,12 +21,12 @@
 #'
 #' roc_plot(df, "actual", "fitted",
 #'          "sample(c(1, 2), n(), TRUE)",
-#'          "sample(c(1, 2), n(), TRUE)")
+#'          "sample(c(3, 4), n(), TRUE)")
 #'
 #' roc_plot(df, "actual", "fitted",
 #'          "sample(c(1, 2), n(), TRUE)",
-#'          "sample(c(1, 2), n(), TRUE)",
-#'          "sample(c(1, 2), n(), TRUE)")
+#'          "sample(c(3, 4), n(), TRUE)",
+#'          "sample(c(5, 6), n(), TRUE)")
 #'
 roc_plot = function(data, actual, fitted,
                     group = NULL,
@@ -88,7 +88,10 @@ roc_plot = function(data, actual, fitted,
 
 }
 
-
+#' roc
+#' @description Calculates ROC and AUC
+#' @param actual Vector with two levels
+#' @param fitted Vector with values between 0 and 1
 #' @examples
 #' roc(sample(c(T, F), 1, replace = TRUE), runif(1))
 #' roc(sample(c(T, F), 3, replace = TRUE), runif(3))
