@@ -13,10 +13,11 @@
 #' @param n_x Number of x levels to show in chart.
 #' @export
 #' @examples
-#' waterfall_plot(ez_data(), "year", "units", "fct")
-#' waterfall_plot(ez_data(), "year", "units", "char")
-#' waterfall_plot(ez_data(), "year", "units", "fct", n_x = 3)
-#' waterfall_plot(ez_data(), "year", "units", "fct",
+#' df = ez_data()
+#' waterfall_plot(df, "year", "units", "fct")
+#' waterfall_plot(df, "year", "units", "char")
+#' waterfall_plot(df, "year", "units", "fct", n_x = 3)
+#' waterfall_plot(df, "year", "units", "fct",
 #'                label_rescale = 0.5,
 #'                ingroup_label = TRUE,
 #'                bottom_label = FALSE,
