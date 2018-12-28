@@ -43,9 +43,12 @@ waterfall_plot = function(data,
   y = nameifnot(y)
 
   data = data %>%
+    mutate_(..y.. = y) %>%
+    # agg_data(cols = c(x = x, group = group, y),
+    #          group_by = "x", group_by2 = "x") %>%
     group_by_(x = x,
               group = group) %>%
-    summarize_(y = paste0("sum(", y, ", na.rm = TRUE)")) %>%
+    summarize(y = sum(..y.., na.rm = TRUE)) %>%
     ungroup %>%
     mutate(x = factor(x),
            group = factor(group)) %>%

@@ -93,7 +93,7 @@ bar_plot = function(data,
     group_by(!!!syms(c(setdiff(group_vars, "group"), "sign"))) %>%
     mutate(y_height = sum(y)) %>%
     group_by(!!!syms(setdiff(group_vars, c("group", "x", cutoff_groups)))) %>%
-    mutate(y_range = diff(range(y_height, 0)) * (1 + (1 - rescale_y) * n_distinct(sign))) %>%
+    mutate(y_range = diff(range(y_height, 0)) * (1 + (1 - rescale_y) * n_distinct(sign))) %>% #### needs fixing
     ungroup
 
   gdata = gdata  %>%
@@ -185,5 +185,3 @@ bar_plot = function(data,
 globalVariables(c("y_height", "y_range",
                   "ylabel_pos", "ylabel_text",
                   "top_y", "top_ylabel_text"))
-
-

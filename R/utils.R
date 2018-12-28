@@ -29,6 +29,7 @@ quick_facet = function(g, ncol = NULL, ...){
 #' no_null("NULL")
 #' no_null("NOPE")
 no_null = function(x){
+  warning("Function no_null() is deprecated and will be removed.")
   if (is.null(x) || (x == "NULL" & length(x) == 1)) return(NULL) else return(x)
 }
 
