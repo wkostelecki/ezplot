@@ -5,7 +5,7 @@
 \title{model_plot}
 \usage{
 model_plot(data, x = "ID", actual = "Actual", fitted = "Fitted",
-  facet_x = NULL, point_size = 2, size = 12)
+  facet_x = NULL, point_size = 2, size = 14)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -20,7 +20,7 @@ model_plot(data, x = "ID", actual = "Actual", fitted = "Fitted",
 
 \item{point_size}{Numeric. Default is 2.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 }
 \value{
 A ggplot object.

@@ -77,10 +77,8 @@ nameifnot = function(x, make.names = FALSE){
 #' @return list
 #' @importFrom stats as.formula
 #' @examples
-#' \dontrun{
-#'   unpack_cols("x")
-#'   unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
-#' }
+#' ezplot:::unpack_cols("x")
+#' ezplot:::unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
 unpack_cols = function(x) {
 
   stopifnot(is.character(x))
@@ -91,7 +89,7 @@ unpack_cols = function(x) {
   list(cols = x,
        direct = x[!with_tilde],
        indirect_vars = lapply(x[with_tilde], function(x) all.vars(as.formula(x))),
-       indirect_expr = setNames(sub(" *~ *", "", x[with_tilde]), x[with_tilde]))
+       indirect_expr = stats::setNames(sub(" *~ *", "", x[with_tilde]), x[with_tilde]))
 
 }
 

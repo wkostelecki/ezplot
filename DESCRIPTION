@@ -16,7 +16,7 @@ Imports:
     ggplot2,
     magrittr,
     rlang
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Suggests:
     knitr,
     lubridate,
@@ -24,5 +24,6 @@ Suggests:
     rmarkdown,
     ROCR,
     testthat,
+    tibble,
     tidyr
 VignetteBuilder: knitr

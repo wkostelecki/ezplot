@@ -12,7 +12,7 @@ side_plot = function(data,
                      x,
                      y,
                      labels_y = ez_labels,
-                     size = 12,
+                     size = 14,
                      palette = ez_col,
                      signif = 3,
                      reorder = TRUE,
@@ -21,7 +21,7 @@ side_plot = function(data,
   y = nameifnot(y)
   y_names = names(y)
   cols = c(x = unname(x),
-           setNames(y, paste0("y", seq_along(y))))
+           stats::setNames(y, paste0("y", seq_along(y))))
 
   gdata = agg_data(data,
                    cols,
@@ -75,3 +75,5 @@ side_plot = function(data,
     theme(panel.spacing.x = grid::unit(1.5, "lines"))
 
 }
+
+globalVariables(c("facet_x", "y_offset", "sides"))

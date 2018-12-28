@@ -29,7 +29,7 @@ waterfall_plot = function(data,
                           x,
                           y,
                           group,
-                          size = 20,
+                          size = 14,
                           labels = ez_labels,
                           label_rescale = 1,
                           y_min = 'auto',
@@ -223,3 +223,7 @@ waterfall_plot = function(data,
   g
 
 }
+
+globalVariables(c("end", ".", "y_next", "change", "start", "y_max", "yaxis_min",
+                  "percent_change", "p_change", "percent_label", "x_pos",
+                  "value_label", "value_label2", "percent_label_0"))

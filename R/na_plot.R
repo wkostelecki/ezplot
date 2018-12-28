@@ -38,3 +38,5 @@ na_plot = function(data) {
                                      vjust = 0.38))
 
 }
+
+globalVariables(c("column", "value"))

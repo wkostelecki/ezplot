@@ -6,7 +6,7 @@
 \usage{
 pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
   labels_y = function(x) ez_labels(x * 100, append = "\%", round = round,
-  signif = signif), size = 12, label_cutoff = 0.04, round = Inf,
+  signif = signif), size = 14, label_cutoff = 0.04, round = Inf,
   signif = 3, palette = ez_col, reorder = c("x", "facet_x",
   "facet_y"), label_x = 0.8)
 }
@@ -23,9 +23,10 @@ pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
 
 \item{labels_y}{label formatting function}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
-\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding labels}
+\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding
+labels}
 
 \item{round}{Option for rounding label.}
 

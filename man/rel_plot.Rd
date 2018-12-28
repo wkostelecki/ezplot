@@ -4,7 +4,7 @@
 \alias{rel_plot}
 \title{relationship plot}
 \usage{
-rel_plot(data, x, y, group = NULL, size = 12, point_size = 2.5)
+rel_plot(data, x, y, group = NULL, size = 14, point_size = 2.5)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -15,7 +15,7 @@ rel_plot(data, x, y, group = NULL, size = 12, point_size = 2.5)
 
 \item{group}{A character value. Evaluates to a column.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{point_size}{Numeric. Default is 2.}
 }

@@ -5,14 +5,22 @@
 \title{roc_plot}
 \usage{
 roc_plot(data, actual, fitted, group = NULL, facet_x = NULL,
-  facet_y = NULL, size = 12)
+  facet_y = NULL, size = 14)
 }
 \arguments{
+\item{data}{A data.frame.}
+
 \item{actual}{Vector of actuals values}
 
 \item{fitted}{Vector of fitted values}
 
-\item{size}{Base size of ggplot chart}
+\item{group}{A character value. Evaluates to a column.}
+
+\item{facet_x}{A character value. Evaluates to a column.}
+
+\item{facet_y}{A character. Evaluates to a column.}
+
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 }
 \description{
 roc_plot

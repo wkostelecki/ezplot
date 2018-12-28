@@ -5,7 +5,7 @@
 \title{line_plot}
 \usage{
 line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  yoy = FALSE, linesize = 1, size = 12, palette = ez_col,
+  yoy = FALSE, linesize = 1, size = 14, palette = ez_col,
   labels_y = ez_labels, use_theme = theme_ez, facet_scales = "fixed")
 }
 \arguments{
@@ -26,7 +26,7 @@ Default is \code{FALSE}.}
 
 \item{linesize}{width of line for \code{geom_line()}. Default is 1.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{palette}{Colour function.}
 

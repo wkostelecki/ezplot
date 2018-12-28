@@ -2,7 +2,10 @@
 #' @inheritParams area_plot
 #' @param width Width of bar.
 #' @param rescale_y Rescaling factor for y-axis limits
-#' @param label_cutoff Cutoff size (proportion of limit range) for excluding labels
+#' @param label_cutoff Cutoff size (proportion of limit range) for excluding
+#'   labels
+#' @param label_pos Position of labels. Can be "auto", "inside", "top" or
+#'   "both".
 #'
 #' @return A ggplot object.
 #' @export
@@ -22,7 +25,7 @@ bar_plot = function(data,
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,
-                    size = 12,
+                    size = 14,
                     width = NULL,
                     reorder = c("group", "facet_x", "facet_y"),
                     palette = ez_col,
@@ -179,6 +182,8 @@ bar_plot = function(data,
 
 }
 
-
+globalVariables(c("y_height", "y_range",
+                  "ylabel_pos", "ylabel_text",
+                  "top_y", "top_ylabel_text"))
 
 

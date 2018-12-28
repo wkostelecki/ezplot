@@ -16,8 +16,6 @@ list
 Unpack cols argument to agg_data
 }
 \examples{
-\dontrun{
-  unpack_cols("x")
-  unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
-}
+ezplot:::unpack_cols("x")
+ezplot:::unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
 }

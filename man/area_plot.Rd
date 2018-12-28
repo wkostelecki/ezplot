@@ -5,7 +5,7 @@
 \title{area_plot}
 \usage{
 area_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  size = 12, reorder = c("group", "facet_x", "facet_y"),
+  size = 14, reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col, labels_y = if (position == "fill") {    
   function(x) ez_labels(100 * x, append = "\%") } else {     ez_labels },
   labels_x = identity, use_theme = theme_ez, position = c("stack",
@@ -24,7 +24,7 @@ area_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 
 \item{facet_y}{A character. Evaluates to a column.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{reorder}{A character vector specifying the group variables to reorder.
 Default is \code{c("group", "facet_x", "facet_y")}.}

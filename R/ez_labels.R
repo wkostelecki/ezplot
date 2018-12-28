@@ -46,6 +46,8 @@ ez_labels = function(x,
   df[["label"]]
 }
 
+globalVariables(c("round_x", "absx", "tens", "label"))
+
 superscript = function(x) {
   x = ifelse(is.finite(x), x, NA_real_)
   unicode = c("\u2070", "\u00B9", "\u00B2", "\u00B3", "\u2074",

@@ -27,7 +27,7 @@ line_plot = function(data,
                      facet_y = NULL,
                      yoy = FALSE,
                      linesize = 1,
-                     size = 12,
+                     size = 14,
                      palette = ez_col,
                      labels_y = ez_labels,
                      use_theme = theme_ez,
@@ -38,7 +38,7 @@ line_plot = function(data,
   y = nameifnot(y)
 
   cols = c(x = unname(x),
-           setNames(y, paste0("y", seq_along(y))),
+           stats::setNames(y, paste0("y", seq_along(y))),
            group = unname(group),
            facet_x = unname(facet_x),
            facet_y = unname(facet_y))
@@ -131,3 +131,5 @@ line_plot = function(data,
   g
 
 }
+
+globalVariables("y1")

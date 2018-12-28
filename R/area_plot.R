@@ -6,7 +6,7 @@
 #' @param group A character value. Evaluates to a column.
 #' @param facet_x A character value. Evaluates to a column.
 #' @param facet_y A character. Evaluates to a column.
-#' @param size theme size for \code{use_theme()}. Default is 20.
+#' @param size theme size for \code{use_theme()}. Default is 14.
 #' @param reorder A character vector specifying the group variables to reorder.
 #'   Default is \code{c("group", "facet_x", "facet_y")}.
 #' @param palette Colour function.
@@ -38,7 +38,7 @@ area_plot = function(data,
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,
-                     size = 12,
+                     size = 14,
                      reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
                      labels_y = if (position == "fill") {

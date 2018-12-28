@@ -27,7 +27,7 @@ pie_plot = function (data,
                                                      append = "%",
                                                      round = round,
                                                      signif = signif),
-                     size = 12,
+                     size = 14,
                      label_cutoff = 0.04,
                      round = Inf,
                      signif = 3,
@@ -91,3 +91,5 @@ pie_plot = function (data,
   quick_facet(g)
 
 }
+
+globalVariables(c("share", "share_pos", "share_label"))

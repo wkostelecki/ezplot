@@ -25,9 +25,7 @@ Order levels of factor columns using fct_reorder
 }
 \examples{
 library(magrittr)
-\dontrun{
-  reorder_levels(mtcars, "cyl", "1") \%>\% str
-  reorder_levels(mtcars, "cyl", "1", FALSE) \%>\% str
-  reorder_levels(mtcars, "cyl", "mpg") \%>\% str
-}
+ezplot:::reorder_levels(mtcars, "cyl", "1") \%>\% str
+ezplot:::reorder_levels(mtcars, "cyl", "1", FALSE) \%>\% str
+ezplot:::reorder_levels(mtcars, "cyl", "mpg") \%>\% str
 }

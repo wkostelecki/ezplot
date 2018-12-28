@@ -4,7 +4,7 @@
 \alias{side_plot}
 \title{side_plot}
 \usage{
-side_plot(data, x, y, labels_y = ez_labels, size = 12,
+side_plot(data, x, y, labels_y = ez_labels, size = 14,
   palette = ez_col, signif = 3, reorder = TRUE, rescale_y = 1.25)
 }
 \arguments{
@@ -16,7 +16,7 @@ side_plot(data, x, y, labels_y = ez_labels, size = 12,
 
 \item{labels_y}{label formatting function}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{palette}{Colour function.}
 

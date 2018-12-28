@@ -15,6 +15,6 @@ roc(actual, fitted)
 Calculates ROC and AUC
 }
 \examples{
-roc(sample(c(T, F), 1, replace = TRUE), runif(1))
-roc(sample(c(T, F), 3, replace = TRUE), runif(3))
+ezplot:::roc(sample(c(TRUE, FALSE), 1, replace = TRUE), runif(1))
+ezplot:::roc(sample(c(TRUE, FALSE), 3, replace = TRUE), runif(3))
 }

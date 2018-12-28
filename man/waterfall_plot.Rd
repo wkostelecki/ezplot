@@ -4,7 +4,7 @@
 \alias{waterfall_plot}
 \title{waterfall_plot}
 \usage{
-waterfall_plot(data, x, y, group, size = 20, labels = ez_labels,
+waterfall_plot(data, x, y, group, size = 14, labels = ez_labels,
   label_rescale = 1, y_min = "auto", rescale_y = 1.1, n_signif = 3,
   rotate_xlabel = FALSE, bottom_label = TRUE, ingroup_label = FALSE,
   n_x = 2)
@@ -18,7 +18,7 @@ waterfall_plot(data, x, y, group, size = 20, labels = ez_labels,
 
 \item{group}{A character value. Evaluates to a column.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{labels}{Function for formatting labels.}
 
@@ -43,10 +43,11 @@ labels).}
 function for creating waterfall charts
 }
 \examples{
-waterfall_plot(ez_data(), "year", "units", "fct")
-waterfall_plot(ez_data(), "year", "units", "char")
-waterfall_plot(ez_data(), "year", "units", "fct", n_x = 3)
-waterfall_plot(ez_data(), "year", "units", "fct",
+df = ez_data()
+waterfall_plot(df, "year", "units", "fct")
+waterfall_plot(df, "year", "units", "char")
+waterfall_plot(df, "year", "units", "fct", n_x = 3)
+waterfall_plot(df, "year", "units", "fct",
                label_rescale = 0.5,
                ingroup_label = TRUE,
                bottom_label = FALSE,

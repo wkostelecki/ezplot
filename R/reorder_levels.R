@@ -9,11 +9,9 @@
 #' @return A data.frame.
 #' @examples
 #' library(magrittr)
-#' \dontrun{
-#'   reorder_levels(mtcars, "cyl", "1") %>% str
-#'   reorder_levels(mtcars, "cyl", "1", FALSE) %>% str
-#'   reorder_levels(mtcars, "cyl", "mpg") %>% str
-#' }
+#' ezplot:::reorder_levels(mtcars, "cyl", "1") %>% str
+#' ezplot:::reorder_levels(mtcars, "cyl", "1", FALSE) %>% str
+#' ezplot:::reorder_levels(mtcars, "cyl", "mpg") %>% str
 reorder_levels = function(data,
                           cols = c("group", "facet_x", "facet_y"),
                           y = "y",

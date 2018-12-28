@@ -5,7 +5,7 @@
 \title{bar_plot}
 \usage{
 bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  size = 12, width = NULL, reorder = c("group", "facet_x",
+  size = 14, width = NULL, reorder = c("group", "facet_x",
   "facet_y"), palette = ez_col, labels_y = if (position == "fill") {   
    function(x) ez_labels(100 * x, append = "\%") } else {     ez_labels },
   label_pos = c("auto", "inside", "top", "both"), rescale_y = 1.1,
@@ -25,7 +25,7 @@ bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 
 \item{facet_y}{A character. Evaluates to a column.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{width}{Width of bar.}
 
@@ -36,9 +36,13 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{labels_y}{label formatting function}
 
+\item{label_pos}{Position of labels. Can be "auto", "inside", "top" or
+"both".}
+
 \item{rescale_y}{Rescaling factor for y-axis limits}
 
-\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding labels}
+\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding
+labels}
 
 \item{use_theme}{ggplot theme function}
 

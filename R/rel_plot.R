@@ -9,7 +9,7 @@
 #' rel_plot(mtcars, "factor(cyl)", "hp")
 #' @export
 rel_plot = function(data, x,  y, group = NULL,
-                    size = 12,
+                    size = 14,
                     point_size = 2.5) {
 
   cols = c(x = unname(x),

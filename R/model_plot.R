@@ -20,7 +20,7 @@ model_plot = function(data,
                       fitted = "Fitted",
                       facet_x = NULL,
                       point_size = 2,
-                      size = 12){
+                      size = 14){
 
   gdata = data.frame(ID = eval(parse(text = x), data),
                      Actual = eval(parse(text = actual), data),
@@ -112,3 +112,5 @@ model_plot = function(data,
   quick_facet(g, scales = "free_y")
 
 }
+
+globalVariables(c("Actual", "Fitted", "Residual", "ID", "min_af", "max_res"))

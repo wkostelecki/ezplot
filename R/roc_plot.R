@@ -1,7 +1,7 @@
 #' roc_plot
+#' @inheritParams area_plot
 #' @param actual Vector of actuals values
 #' @param fitted Vector of fitted values
-#' @param size Base size of ggplot chart
 #' @export
 #' @examples
 #' library(ggplot2)
@@ -32,7 +32,7 @@ roc_plot = function(data, actual, fitted,
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,
-                    size = 12){
+                    size = 14){
 
   cols = c(actual = unname(actual),
            fitted = unname(fitted),
@@ -88,13 +88,15 @@ roc_plot = function(data, actual, fitted,
 
 }
 
+globalVariables(c("false_positive", "true_positive", "x", "y"))
+
 #' roc
 #' @description Calculates ROC and AUC
 #' @param actual Vector with two levels
 #' @param fitted Vector with values between 0 and 1
 #' @examples
-#' roc(sample(c(T, F), 1, replace = TRUE), runif(1))
-#' roc(sample(c(T, F), 3, replace = TRUE), runif(3))
+#' ezplot:::roc(sample(c(TRUE, FALSE), 1, replace = TRUE), runif(1))
+#' ezplot:::roc(sample(c(TRUE, FALSE), 3, replace = TRUE), runif(3))
 roc = function(actual, fitted) {
 
   ind = !is.na(actual) & !is.na(fitted)

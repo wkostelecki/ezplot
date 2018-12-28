@@ -41,15 +41,14 @@ agg_data = function(data,
     pos = match(group_by[ind], COLS[[1]])
     names(group_by)[ind] = names(COLS[[1]])[pos]
   }
+
   group_by = nameifnot(group_by)
-
-
 
   if (length(group_by) == 0) {
     group_by = c(".group." = "1")
   } else {
-    group_by = setNames(paste0("`", group_by, "`"),
-                        names(group_by))
+    group_by = stats::setNames(paste0("`", group_by, "`"),
+                               names(group_by))
   }
 
   names(group_by) = paste0(".agg_group.", names(group_by), ".agg_group.")
