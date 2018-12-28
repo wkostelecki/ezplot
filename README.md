@@ -1,3 +1,5 @@
+[![Travis build status](https://travis-ci.org/wkostelecki/ezplot.svg?branch=master)](https://travis-ci.org/wkostelecki/ezplot)
+
 ## Overview
 ezplot provides high-level wrapper functions for common chart types with reduced typing and easy faceting:
 - `line_plot()`
