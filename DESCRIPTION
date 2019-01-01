@@ -3,8 +3,8 @@ Type: Package
 Title: Plotting package for common chart types
 Version: 0.1.03
 Author: Wojtek Kostelecki
-Maintainer: Wojtek Kostelecki <wojtek.kostelecki@notrealdomain.com>
-Description: Creates common ggplot charts while aiming to reduce typing.
+Maintainer: Wojtek Kostelecki <wojtek.kostelecki@gmail.com>
+Description: Creates common ggplot charts while reducing typing.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
