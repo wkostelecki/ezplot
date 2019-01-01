@@ -17,6 +17,7 @@
 #' roc_plot(df, "actual", "fitted")
 #' roc_plot(df, "actual", "runif")
 #'
+#'\dontrun{
 #' roc_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
 #'
 #' roc_plot(df, "actual", "fitted",
@@ -27,7 +28,7 @@
 #'          "sample(c(1, 2), n(), TRUE)",
 #'          "sample(c(3, 4), n(), TRUE)",
 #'          "sample(c(5, 6), n(), TRUE)")
-#'
+#'}
 roc_plot = function(data, actual, fitted,
                     group = NULL,
                     facet_x = NULL,
