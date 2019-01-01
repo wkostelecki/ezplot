@@ -227,6 +227,7 @@ waterfall_plot = function(data,
 
 }
 
-globalVariables(c("end", ".", "y_next", "change", "start", "y_max", "yaxis_min",
+globalVariables(c("end", ".", "..y..", "y_next", "change", "start",
+                  "y_max", "yaxis_min",
                   "percent_change", "p_change", "percent_label", "x_pos",
                   "value_label", "value_label2", "percent_label_0"))
