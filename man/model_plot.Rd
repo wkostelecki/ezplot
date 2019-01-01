@@ -4,8 +4,8 @@
 \alias{model_plot}
 \title{model_plot}
 \usage{
-model_plot(data, x = "ID", actual = "Actual", fitted = "Fitted",
-  facet_x = NULL, point_size = 2, size = 14)
+model_plot(data, x, actual, fitted, facet_x = NULL, point_size = 2,
+  size = 14)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -30,7 +30,7 @@ model_plot
 }
 \examples{
 y = rnorm(26)
-df = data.frame(ID = 1:26, Actual = y + rnorm(26), Fitted = y, id = letters)
-model_plot(df)
-model_plot(df, "id")
+df = data.frame(ID = 1:26, actual = y + rnorm(26), fitted = y, id = letters)
+model_plot(df, "ID", "actual", "fitted")
+model_plot(df, "id", "actual", "fitted")
 }
