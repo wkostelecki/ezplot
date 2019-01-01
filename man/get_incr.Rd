@@ -10,6 +10,6 @@ get_incr(x)
 \item{x}{A numeric or date vector}
 }
 \description{
-returns the minimun increment between sorted unique values of a
+returns the minimum increment between sorted unique values of a
   vector
 }

@@ -1,6 +1,6 @@
 
 #' get_incr
-#' @description returns the minimun increment between sorted unique values of a
+#' @description returns the minimum increment between sorted unique values of a
 #'   vector
 #' @param x A numeric or date vector
 get_incr = function(x){
