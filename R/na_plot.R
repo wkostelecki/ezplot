@@ -39,4 +39,4 @@ na_plot = function(data) {
 
 }
 
-globalVariables(c("column", "value"))
+globalVariables(c("column", "value", ".row"))
