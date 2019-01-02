@@ -27,4 +27,3 @@ Suggests:
     tibble,
     tidyr,
     covr
-VignetteBuilder: knitr
