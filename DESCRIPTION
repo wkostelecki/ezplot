@@ -4,7 +4,7 @@ Title: Plotting Package for Common Chart Types
 Version: 0.2.01
 Author: Wojtek Kostelecki
 Maintainer: Wojtek Kostelecki <wojtek.kostelecki@gmail.com>
-Description: Creates common ggplot charts while reducing typing.
+Description: Creates common ggplot2 charts while reducing typing.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -27,4 +27,3 @@ Suggests:
     tibble,
     tidyr,
     covr
-VignetteBuilder: knitr
