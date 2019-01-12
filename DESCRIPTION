@@ -1,7 +1,7 @@
 Package: ezplot
 Type: Package
-Title: Plotting Package for Common Chart Types
-Version: 0.2.01
+Title: Functions for Common Chart Types
+Version: 0.2.1
 Author: Wojtek Kostelecki
 Maintainer: Wojtek Kostelecki <wojtek.kostelecki@gmail.com>
 Description: Creates common ggplot charts while reducing typing.
