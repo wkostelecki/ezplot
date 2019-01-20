@@ -47,11 +47,12 @@ ggplot object
 pie_plot
 }
 \examples{
+\donttest{
 df = ez_data()
 pie_plot(df, "fct", "units")
 pie_plot(df, "fct", "units", reorder = NULL, label_x = 0.5)
 pie_plot(df, "fct", "units", "year", reorder = NULL, label_x = 0.5)
 pie_plot(df, "fct", "units", "year", "char")
 pie_plot(df, "fct", "units", "year", "char", reorder = NULL)
-##pie_plot(df, "fct", "units", "char", "char")## WHY ERROR?
+}
 }
