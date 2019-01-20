@@ -13,7 +13,7 @@
 #' df = ez_data()
 #' line_plot(df, "week", "value", use_theme = ggplot2::theme_bw)
 #' line_plot(df, "week", c("Sales ($)" = "value"))
-#' \dontrun{
+#' \donttest{
 #' line_plot(df, "week", "value", "char")
 #' line_plot(df, "week", "value", "char", "fct")
 #' line_plot(df, "week", "value", "char", "fct", "num", facet_scales = "free_y")
