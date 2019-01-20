@@ -9,7 +9,7 @@ nameifnot(x, make.names = FALSE)
 \arguments{
 \item{x}{A character vector.}
 
-\item{make.names}{Logical. Whether to force names of x to be valid variablel
+\item{make.names}{Logical. Whether to force names of x to be valid variable
 names. Default is FALSE.}
 }
 \value{

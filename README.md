@@ -11,7 +11,7 @@ ezplot provides high-level wrapper functions for common chart types with reduced
 - `waterfall_plot()`
 - `side_plot()`
 
-## Intallation
+## Installation
 devtools::install_github("wkostelecki/ezplot")
 
 ## Example data
