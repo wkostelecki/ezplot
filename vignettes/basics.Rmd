@@ -1,0 +1,34 @@
+---
+title: "Basics"
+author: "Wojtek Kostelecki"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Use ezplot to quickly create charts.
+
+
+```{r, fig.show='hold'}
+library(ezplot)
+df = ez_data()
+head(df)
+```
+
+By default, ezplot functions sum values of y when x is repeated.
+
+```{r, echo=TRUE, results='asis'}
+list(line_plot(df, x = "month", y = "units"),
+line_plot(df, x = "month", y = "units", group = "char"))
+```
+
