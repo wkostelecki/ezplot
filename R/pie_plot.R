@@ -1,15 +1,14 @@
-#' pie_plot
+#' @title pie_plot
+#' @name pie_plot
+#' @description Creates pie charts.
 #' @inheritParams bar_plot
 #' @param round Option for rounding label.
 #' @param signif Option for retaining significant figures in label.
 #' @param label_x Position of label from centre of pie.  0 is the centre of the
 #'   pie and 1 is the outer edge.
-#'
 #' @return ggplot object
 #' @export
-#'
 #' @importFrom forcats fct_reorder
-#'
 #' @examples
 #' \donttest{
 #' df = ez_data()

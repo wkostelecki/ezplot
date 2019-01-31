@@ -128,22 +128,26 @@ waterfall_plot = function(data,
 
   if (ingroup_label){
     gdata = gdata %>%
-      mutate(value_label2 = ifelse(is.na(p_change),
-                                   NA,
-                                   paste0('(',
-                                          ifelse(p_change > 0, '+', ''),
-                                          ez_labels(100 * signif(round(p_change, 4), 3),
-                                                    append = "%"),
-                                          ')')))
+      mutate(value_label2 = ifelse(
+        is.na(p_change),
+        NA,
+        paste0('(',
+               ifelse(p_change > 0, '+', ''),
+               ez_labels(100 * signif(round(p_change, 4), 3),
+                         append = "%"),
+               ')')
+      ))
   } else (
     gdata[['value_label2']] = NA_character_
   )
 
   gdata = gdata %>%
     group_by(x) %>%
-    mutate(percent_change = case_when(x_pos == 1 ~ NA_real_,
-                                     is.na(percent_change) ~ signif(round(value / value[1], 3), 2),
-                                     TRUE ~ signif(round(percent_change, 3), 2))) %>%
+    mutate(percent_change = case_when(
+      x_pos == 1 ~ NA_real_,
+      is.na(percent_change) ~ signif(round(value / value[1], 3), 2),
+      TRUE ~ signif(round(percent_change, 3), 2)
+    )) %>%
     ungroup
 
   gdata = gdata %>%

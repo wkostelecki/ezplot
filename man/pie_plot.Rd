@@ -44,7 +44,7 @@ pie and 1 is the outer edge.}
 ggplot object
 }
 \description{
-pie_plot
+Creates pie charts.
 }
 \examples{
 \donttest{
