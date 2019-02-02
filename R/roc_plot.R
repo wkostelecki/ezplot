@@ -17,7 +17,7 @@
 #' roc_plot(df, "actual", "fitted")
 #' roc_plot(df, "actual", "runif")
 #'
-#'\dontrun{
+#'\donttest{
 #' roc_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
 #'
 #' roc_plot(df, "actual", "fitted",

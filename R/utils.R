@@ -48,7 +48,7 @@ not_numeric = function(x){
 #' nameifnot
 #' @description Names unnamed elements of a character vector.
 #' @param x A character vector.
-#' @param make.names Logical. Whether to force names of x to be valid variablel
+#' @param make.names Logical. Whether to force names of x to be valid variable
 #'   names. Default is FALSE.
 #'
 #' @return A named vector.

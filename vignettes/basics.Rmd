@@ -1,0 +1,46 @@
+---
+title: "Basics"
+author: "Wojtek Kostelecki"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Overview
+
+Use ezplot to quickly create presentation-ready charts that are also useful for
+exploratory data analysis. By default, ezplot functions aggregate multiple 
+values of y for repeated categories of x, group, facet_y and facet_x.
+
+
+# Load data
+
+```{r, fig.show='hold'}
+library(ezplot)
+df = ez_data()
+head(df)
+```
+
+
+# line_plot
+```{r, echo=TRUE, results='asis'}
+line_plot(df, x = "month", y = "units")
+line_plot(df, x = "month", y = "units", group = "char")
+```
+# bar_plot
+```{r, echo=TRUE, results='asis'}
+
+bar_plot(df, x = "year", y = "units")
+bar_plot(df, x = "year", y = "units", group = "char")
+```
+

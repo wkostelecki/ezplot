@@ -1,6 +1,10 @@
+^CRAN-RELEASE$
 ^cran-comments\.md$
 ^codecov\.yml$
 ^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-data-raw
+^LICENSE\.md$
+^data-raw$
+^.git$
+^release.R$
