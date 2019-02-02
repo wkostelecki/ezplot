@@ -73,7 +73,7 @@ line_plot = function(data,
     gdata[[i]] = factor(gdata[[i]])
   }
 
-  if (is.character(gdata[["x"]]) | is.factor(gdata[[""]])) {
+  if (is.character(gdata[["x"]]) | is.factor(gdata[["x"]])) {
 
     gdata[["x"]] = factor(gdata[["x"]])
     x_text = levels(gdata[["x"]])
