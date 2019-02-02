@@ -16,8 +16,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-Use ezplot to quickly create charts.
+# Overview
 
+Use ezplot to quickly create presentation-ready charts that are also useful for
+exploratory data analysis. By default, ezplot functions aggregate multiple 
+values of y for repeated categories of x, group, facet_y and facet_x.
+
+
+# Load data
 
 ```{r, fig.show='hold'}
 library(ezplot)
@@ -25,10 +31,16 @@ df = ez_data()
 head(df)
 ```
 
-By default, ezplot functions sum values of y when x is repeated.
 
+# line_plot
 ```{r, echo=TRUE, results='asis'}
-list(line_plot(df, x = "month", y = "units"),
-line_plot(df, x = "month", y = "units", group = "char"))
+line_plot(df, x = "month", y = "units")
+line_plot(df, x = "month", y = "units", group = "char")
+```
+# bar_plot
+```{r, echo=TRUE, results='asis'}
+
+bar_plot(df, x = "year", y = "units")
+bar_plot(df, x = "year", y = "units", group = "char")
 ```
 

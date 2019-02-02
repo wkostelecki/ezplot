@@ -20,6 +20,7 @@ Imports:
     rlang
 RoxygenNote: 6.1.1
 Suggests:
+    covr,
     knitr,
     lubridate,
     methods,
@@ -27,6 +28,5 @@ Suggests:
     ROCR,
     testthat,
     tibble,
-    tidyr,
-    covr
+    tidyr
 VignetteBuilder: knitr
