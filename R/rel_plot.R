@@ -1,18 +1,15 @@
 
 #' relationship plot
 #' @description Examine the relationship between two vectors from data
-#' @param data A data.frame.
-#' @param x Quoted numeric, character or factor
-#' @param y Quoted numeric
-#' @param size base_size
-#' @param point_size Size for \code{geom_point()}.
+#' @inheritParams area_plot
+#' @inheritParams model_plot
 #' @examples
 #' rel_plot(mtcars, "wt", "hp")
 #' rel_plot(mtcars, "wt", "hp", "factor(cyl)")
 #' rel_plot(mtcars, "factor(cyl)", "hp")
 #' @export
 rel_plot = function(data, x,  y, group = NULL,
-                    size = 12,
+                    size = 14,
                     point_size = 2.5) {
 
   cols = c(x = unname(x),

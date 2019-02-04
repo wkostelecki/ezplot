@@ -5,32 +5,51 @@
 \title{bar_plot}
 \usage{
 bar_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  size = 12, width = NULL, reorder = c("group", "facet_x", "facet_y"),
-  palette = ez_col, ylabels = if (position == "fill") {     function(x)
-  ez_labels(100 * x, append = "\%") } else {     ez_labels }, y_rescale = 1,
+  size = 14, width = NULL, reorder = c("group", "facet_x",
+  "facet_y"), palette = ez_col, labels_y = if (position == "fill") {   
+   function(x) ez_labels(100 * x, append = "\%") } else {     ez_labels },
+  label_pos = c("auto", "inside", "top", "both"), rescale_y = 1.1,
   label_cutoff = 0.12, use_theme = theme_ez, position = "stack",
   facet_scales = "fixed")
 }
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{A named character.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{group}{character}
+\item{group}{A character value. Evaluates to a column.}
 
-\item{facet_x}{character}
+\item{facet_x}{A character value. Evaluates to a column.}
 
-\item{facet_y}{character}
+\item{facet_y}{A character. Evaluates to a column.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
+
+\item{width}{Width of bar.}
+
+\item{reorder}{A character vector specifying the group variables to reorder.
+Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{palette}{Colour function.}
 
-\item{ylabels}{label formatting function}
+\item{labels_y}{label formatting function}
+
+\item{label_pos}{Position of labels. Can be "auto", "inside", "top" or
+"both".}
+
+\item{rescale_y}{Rescaling factor for y-axis limits}
+
+\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding
+labels}
 
 \item{use_theme}{ggplot theme function}
+
+\item{position}{Either \code{"stack"} (default) or \code{"fill"}}
+
+\item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{"fixed"}.}
 }
 \value{
 A ggplot object.
@@ -39,12 +58,12 @@ A ggplot object.
 bar_plot
 }
 \examples{
-bar_plot(mtcars, "carb", "1", size = 12)
-bar_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
-bar_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
-bar_plot(mtcars, "carb", "1", "cyl", reorder = NULL, position = "fill")
-bar_plot(mtcars, "carb", c(Count = "1"), size = 12)
-bar_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
-bar_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
-bar_plot(mtcars, "carb", "sample(c(1, -1), 32, replace = TRUE)", "cyl")
+df = ez_data()
+bar_plot(df, "year", "units")
+bar_plot(df, "year", c("Share of Units" = "units"), "fct", position = "fill")
+bar_plot(df, "year", "units", "fct", use_theme = ggplot2::theme_bw)
+bar_plot(df, "year", "units", "fct", reorder = NULL, label_pos = "both")
+bar_plot(df, "year", c(Units = "units"), "fct", "char")
+bar_plot(df, "year", "units", "fct", "char", "num")
+bar_plot(df, "year", "ifelse(fct == 'X', units, -units)", "fct", label_pos = "both")
 }

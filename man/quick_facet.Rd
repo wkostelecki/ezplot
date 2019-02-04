@@ -4,12 +4,14 @@
 \alias{quick_facet}
 \title{Quick facet}
 \usage{
-quick_facet(g, ...)
+quick_facet(g, ncol = NULL, ...)
 }
 \arguments{
 \item{g}{A ggplot object.}
 
-\item{...}{Arguments to pass to \code{facet_grid} or \code{facet_wrap}}
+\item{ncol}{Number of facet columns.}
+
+\item{...}{Arguments to pass to \code{facet_grid} or \code{facet_wrap}.}
 }
 \description{
 Applies faceting to ggplot objects when g[["data"]] has a

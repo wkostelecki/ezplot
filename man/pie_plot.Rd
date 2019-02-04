@@ -5,32 +5,37 @@
 \title{pie_plot}
 \usage{
 pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
-  ylabels = ez_labels, size = 12, label_cutoff = 0.04, round = Inf,
-  signif = 3, palette = ez_col, reorder = c("x", "facet_x", "facet_y"),
-  label_x = 0.8)
+  labels_y = function(x) ez_labels(x * 100, append = "\%", round = round,
+  signif = signif), size = 14, label_cutoff = 0.04, round = Inf,
+  signif = 3, palette = ez_col, reorder = c("x", "facet_x",
+  "facet_y"), label_x = 0.8)
 }
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{Value.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{Value.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{facet_x}{Value.}
+\item{facet_x}{A character value. Evaluates to a column.}
 
-\item{facet_y}{Value.}
+\item{facet_y}{A character. Evaluates to a column.}
 
-\item{ylabels}{Label formatting function.}
+\item{labels_y}{label formatting function}
 
-\item{size}{Theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
-\item{label_cutoff}{Label cutoff value.}
+\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding
+labels}
 
 \item{round}{Option for rounding label.}
 
 \item{signif}{Option for retaining significant figures in label.}
 
 \item{palette}{Colour function.}
+
+\item{reorder}{A character vector specifying the group variables to reorder.
+Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{label_x}{Position of label from centre of pie.  0 is the centre of the
 pie and 1 is the outer edge.}
@@ -39,13 +44,15 @@ pie and 1 is the outer edge.}
 ggplot object
 }
 \description{
-pie_plot
+Creates pie charts.
 }
 \examples{
-pie_plot(mtcars, "cyl", "1")
-pie_plot(mtcars, "cyl", "1", reorder = NULL, label_x = 0.5)
-pie_plot(mtcars, "cyl", "1", "gear", reorder = NULL, label_x = 0.5)
-pie_plot(mtcars, "cyl", "1", "gear", "am")
-pie_plot(mtcars, "cyl", "1", "gear", "am", reorder = NULL)
-##pie_plot(mtcars, "cyl", "1", "am", "am")## WHY ERROR?
+\donttest{
+df = ez_data()
+pie_plot(df, "fct", "units")
+pie_plot(df, "fct", "units", reorder = NULL, label_x = 0.5)
+pie_plot(df, "fct", "units", "year", reorder = NULL, label_x = 0.5)
+pie_plot(df, "fct", "units", "year", "char")
+pie_plot(df, "fct", "units", "year", "char", reorder = NULL)
+}
 }

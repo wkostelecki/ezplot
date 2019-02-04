@@ -4,18 +4,20 @@
 \alias{rel_plot}
 \title{relationship plot}
 \usage{
-rel_plot(data, x, y, group = NULL, size = 12, point_size = 2.5)
+rel_plot(data, x, y, group = NULL, size = 14, point_size = 2.5)
 }
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{Quoted numeric, character or factor}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{Quoted numeric}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{size}{base_size}
+\item{group}{A character value. Evaluates to a column.}
 
-\item{point_size}{Size for \code{geom_point()}.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
+
+\item{point_size}{Numeric. Default is 2.}
 }
 \description{
 Examine the relationship between two vectors from data

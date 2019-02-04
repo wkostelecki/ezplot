@@ -4,21 +4,45 @@
 \alias{tile_plot}
 \title{tile_plot}
 \usage{
-tile_plot(data, x, y, z, facet_x = NULL, facet_y = NULL, size = 12,
-  ncol = NULL, labels_x = NULL, labels_y = NULL, labels_z = ez_labels,
-  palette = ez_jet, reorder = c("facet_x", "facet_y", "x", "y"))
+tile_plot(data, x, y, z, facet_x = NULL, facet_y = NULL, size = 14,
+  facet_ncol = NULL, labels_x = NULL, labels_y = NULL,
+  labels_z = ez_labels, palette = ez_jet, reorder = c("facet_x",
+  "facet_y", "x", "y"))
+}
+\arguments{
+\item{data}{A data.frame.}
+
+\item{x}{A named character value. Evaluates to a column.}
+
+\item{y}{A named character value. Evaluates to a column.}
+
+\item{z}{A named character. Evaluates to a column and is mapped to the fill
+colour of the tiles.}
+
+\item{facet_x}{A character value. Evaluates to a column.}
+
+\item{facet_y}{A character. Evaluates to a column.}
+
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
+
+\item{facet_ncol}{Option passed to ncol argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{NULL}.}
+
+\item{labels_x}{label formatting function}
+
+\item{labels_y}{label formatting function}
+
+\item{labels_z}{label formatting function}
+
+\item{palette}{Colour function.}
+
+\item{reorder}{A character vector specifying the group variables to reorder.
+Default is \code{c("group", "facet_x", "facet_y")}.}
 }
 \description{
-tile_plot
+Creates tile plots.
 }
 \examples{
-
 tile_plot(mtcars, "factor(cyl)", "factor(am)", "mpg")
-
-library(ukbabynames)
-library(dplyr)
-ukbabynames \%>\%
-  mutate(name = toupper(name)) \%>\%
-  filter(substring(name, 1, 1) \%in\% LETTERS) \%>\%
-  tile_plot("substring(name, 1, 1)", "substring(name, 2, 2)", "n")
+tile_plot(ez_data(), "year", "char", "value", "fct", "num", reorder = NULL)
 }

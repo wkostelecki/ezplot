@@ -4,7 +4,23 @@
 \alias{roc_plot}
 \title{roc_plot}
 \usage{
-roc_plot(actual, fitted, size = 16)
+roc_plot(data, actual, fitted, group = NULL, facet_x = NULL,
+  facet_y = NULL, size = 14)
+}
+\arguments{
+\item{data}{A data.frame.}
+
+\item{actual}{Vector of actuals values}
+
+\item{fitted}{Vector of fitted values}
+
+\item{group}{A character value. Evaluates to a column.}
+
+\item{facet_x}{A character value. Evaluates to a column.}
+
+\item{facet_y}{A character. Evaluates to a column.}
+
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 }
 \description{
 roc_plot
@@ -12,12 +28,27 @@ roc_plot
 \examples{
 library(ggplot2)
 n = 10000
-actual = sample(c(FALSE, TRUE), n, replace = TRUE)
-roc_plot(actual, actual)
-roc_plot(actual, runif(n))
-fitted = runif(n) ^ ifelse(actual == 1, 0.5, 2)
-ggplot(data.frame(actual, fitted)) +
-  geom_density(aes(fitted, fill = actual), alpha = 0.5)
-roc_plot(actual, fitted)
+df = data.frame(actual = sample(c(FALSE, TRUE), n, replace = TRUE),
+                runif = runif(n))
+df[["fitted"]] = runif(n) ^ ifelse(df[["actual"]] == 1, 0.5, 2)
 
+ggplot(df) +
+  geom_density(aes(fitted, fill = actual), alpha = 0.5)
+
+roc_plot(df, "actual", "actual")
+roc_plot(df, "actual", "fitted")
+roc_plot(df, "actual", "runif")
+
+\donttest{
+roc_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
+
+roc_plot(df, "actual", "fitted",
+         "sample(c(1, 2), n(), TRUE)",
+         "sample(c(3, 4), n(), TRUE)")
+
+roc_plot(df, "actual", "fitted",
+         "sample(c(1, 2), n(), TRUE)",
+         "sample(c(3, 4), n(), TRUE)",
+         "sample(c(5, 6), n(), TRUE)")
+}
 }

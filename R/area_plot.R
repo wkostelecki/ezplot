@@ -1,49 +1,60 @@
 #' area_plot
 #' @description Aggregates a data.frame and creates a stacked area chart.
 #' @param data A data.frame.
-#' @param x A named character. Evaluates to a column.
-#' @param y A named character. Evaluates to a column.
-#' @param group character. Evaluates to a column.
-#' @param facet_x character. Evaluates to a column.
-#' @param facet_y character. Evaluates to a column.
-#' @param size theme size for \code{use_theme()}. Default is 20.
+#' @param x A named character value. Evaluates to a column.
+#' @param y A named character value. Evaluates to a column.
+#' @param group A character value. Evaluates to a column.
+#' @param facet_x A character value. Evaluates to a column.
+#' @param facet_y A character. Evaluates to a column.
+#' @param size theme size for \code{use_theme()}. Default is 14.
 #' @param reorder A character vector specifying the group variables to reorder.
 #'   Default is \code{c("group", "facet_x", "facet_y")}.
 #' @param palette Colour function.
-#' @param ylabels label formatting function
+#' @param labels_y label formatting function
+#' @param labels_x label formatting function
 #' @param use_theme ggplot theme function
-#' @param position Default is \code{"stack"}
+#' @param position Either \code{"stack"} (default) or \code{"fill"}
 #' @param facet_scales Option passed to scales argument in \code{facet_wrap} or
 #'   \code{facet_grid}. Default is \code{"fixed"}.
+#' @param facet_ncol Option passed to ncol argument in \code{facet_wrap} or
+#'   \code{facet_grid}. Default is \code{NULL}.
 #'
 #' @return A ggplot object.
 #' @export
 #'
 #' @examples
-#' area_plot(mtcars, "carb", "1", size = 12)
-#' area_plot(mtcars, "carb", "1", "cyl", use_theme = ggplot2::theme_bw)
-#' area_plot(mtcars, "carb", "1", "cyl", reorder = NULL)
-#' area_plot(mtcars, "cyl", "1", "carb", position = "fill")
-#' area_plot(mtcars, "carb", c(Count = "1"), size = 12)
-#' area_plot(mtcars, "carb", c(Count = "1"), "cyl", "gear")
-#' area_plot(mtcars, "carb", "1", "cyl", "gear", "am", position = "fill")
+#' \donttest{
+#' df = ez_data()
+#' area_plot(df, "year2", "units", size = 10)
+#' area_plot(df, "year2", "units", "fct", use_theme = ggplot2::theme_bw)
+#' area_plot(df, "year2", "units", "fct", reorder = NULL)
+#' area_plot(df, "year2", "units", "fct", position = "fill")
+#' area_plot(df, "year2", c("Unit Sales" = "units"), size = 12)
+#' area_plot(df, "year2", c("Unit Sales" = "units"), "fct", "char")
+#' area_plot(df, "year2", "units", "fct", "char", "num", position = "fill")
+#' area_plot(df, "as.character(year)", "units")
+#' }
 area_plot = function(data,
                      x,
                      y,
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,
-                     size = 12,
+                     size = 14,
                      reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
-                     ylabels = if (position == "fill") {
+                     labels_y = if (position == "fill") {
                        function(x) ez_labels(100 * x, append = "%")
                      } else {
                        ez_labels
                      },
+                     labels_x = identity,
                      use_theme = theme_ez,
                      position = c("stack", "fill"),
-                     facet_scales = "fixed") {
+                     facet_scales = "fixed",
+                     facet_ncol = NULL) {
+
+  y = nameifnot(y)
 
   position = match.arg(position)
 
@@ -93,19 +104,31 @@ area_plot = function(data,
                width = get_incr(gdata[["x"]]))
   }
 
-  g = quick_facet(g, scales = facet_scales)
+  g = quick_facet(g, scales = facet_scales, ncol = facet_ncol)
 
-  if (any(gdata[["y"]] < 0)){
-    expand = c(0.1, 0, 0.1, 0)
+
+  if (position == "fill") {
+    expand = rep(0, 4)
   } else {
-    expand = c(0, 0, 0.1, 0)
+    expand = c(0.1 * any(gdata[["y"]] < 0),
+               0,
+               0.1 * any(gdata[["y"]] > 0),
+               0)
   }
+
+  scale_x = switch(paste(class(gdata[["x"]]), collapse = ", "),
+                   "Date" = scale_x_date,
+                   "POSIXct, POSIXt" = scale_x_datetime,
+                   "numeric" = scale_x_continuous,
+                   "integer" = scale_x_continuous,
+                   scale_x_discrete)
 
   g +
     xlab(names(x)) +
     ylab(names(y)) +
-    scale_y_continuous(labels = ylabels,
+    scale_y_continuous(labels = labels_y,
                        expand = expand) +
+    scale_x(labels = labels_x) +
     ylab(names(y)) +
     use_theme(size)
 

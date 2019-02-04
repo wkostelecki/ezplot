@@ -5,29 +5,32 @@
 \title{line_plot}
 \usage{
 line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  linesize = 1, size = 12, palette = ez_col, ylabels = ez_labels,
-  use_theme = theme_ez, facet_scales = "fixed")
+  yoy = FALSE, linesize = 1, size = 14, palette = ez_col,
+  labels_y = ez_labels, use_theme = theme_ez, facet_scales = "fixed")
 }
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character. Evaluates to a column.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{A named character. Evaluates to a column.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{group}{character. Evaluates to a column.}
+\item{group}{A character value. Evaluates to a column.}
 
-\item{facet_x}{character. Evaluates to a column.}
+\item{facet_x}{A character value. Evaluates to a column.}
 
-\item{facet_y}{character. Evaluates to a column.}
+\item{facet_y}{A character. Evaluates to a column.}
+
+\item{yoy}{Logical used to indicate whether a YOY grouping should be created.
+Default is \code{FALSE}.}
 
 \item{linesize}{width of line for \code{geom_line()}. Default is 1.}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{palette}{Colour function.}
 
-\item{ylabels}{label formatting function}
+\item{labels_y}{label formatting function}
 
 \item{use_theme}{ggplot theme function}
 
@@ -41,14 +44,16 @@ A ggplot object.
 Creates line plots.
 }
 \examples{
-line_plot(mtcars, "cyl", "1", use_theme = ggplot2::theme_bw)
-line_plot(mtcars, "cyl", c(Count = "1"))
-line_plot(mtcars, "cyl", c(Count = "1"), "gear")
-line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", size = 12)
-line_plot(mtcars, "cyl", c(Count = "1"), "vs", "gear", "am", size = 12)
-line_plot(mtcars, "cyl", c(Count = "1"), "gear", "am", facet_scales = "free_y")
 
-line_plot(ez_data(), "Week", "value")
-line_plot(ez_data(), "Year2", "~ value / units", "char", "fct", "num")
-
+df = ez_data()
+line_plot(df, "week", "value", use_theme = ggplot2::theme_bw)
+line_plot(df, "week", c("Sales ($)" = "value"))
+\donttest{
+line_plot(df, "week", "value", "char")
+line_plot(df, "week", "value", "char", "fct")
+line_plot(df, "week", "value", "char", "fct", "num", facet_scales = "free_y")
+line_plot(df, "year2", "~ value / units", "char", "fct", "num")
+line_plot(df, "week", c("value", "units"))
+line_plot(df, "week", "value", yoy = TRUE)
+}
 }

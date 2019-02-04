@@ -14,16 +14,18 @@ reorder_levels(data, cols = c("group", "facet_x", "facet_y"), y = "y",
 
 \item{y}{Numeric column for order priority.}
 
-\item{.desc}{Default is TRUE for all columns in \code{cols}}
+\item{.desc}{A logical vector of length 1 or ncol(data). Default is TRUE for
+all columns in \code{cols}.}
 }
 \value{
-
+A data.frame.
 }
 \description{
 Order levels of factor columns using fct_reorder
 }
 \examples{
-reorder_levels(mtcars, "cyl", "1") \%>\% str
-reorder_levels(mtcars, "cyl", "1", FALSE) \%>\% str
-reorder_levels(mtcars, "cyl", "mpg") \%>\% str
+library(magrittr)
+ezplot:::reorder_levels(mtcars, "cyl", "1") \%>\% str
+ezplot:::reorder_levels(mtcars, "cyl", "1", FALSE) \%>\% str
+ezplot:::reorder_levels(mtcars, "cyl", "mpg") \%>\% str
 }

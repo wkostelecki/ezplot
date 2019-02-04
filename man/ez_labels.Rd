@@ -4,8 +4,8 @@
 \alias{ez_labels}
 \title{Function for formatting numeric labels}
 \usage{
-ez_labels(x, prepend = "", append = "", as_factor = FALSE, round = Inf,
-  signif = Inf)
+ez_labels(x, prepend = "", append = "", as_factor = FALSE,
+  round = Inf, signif = Inf)
 }
 \arguments{
 \item{x}{numeric}

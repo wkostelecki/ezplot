@@ -1,11 +1,13 @@
 Package: ezplot
 Type: Package
-Title: Plotting package for common chart types
-Version: 0.1.02
+Title: Functions for Common Chart Types
+Version: 0.2.2
 Author: Wojtek Kostelecki
-Maintainer: Wojtek Kostelecki <wojtek.kostelecki@notrealdomain.com>
-Description: Creates common ggplot charts while aiming to reduce typing.
-License: TBA
+Maintainer: Wojtek Kostelecki <wojtek.kostelecki@gmail.com>
+Description: Wrapper for the 'ggplot2' package that creates a variety of common
+    charts (e.g. bar, line, area, ROC, waterfall, pie) while aiming to reduce
+    typing. 
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
@@ -14,12 +16,17 @@ Imports:
     dplyr,
     forcats,
     ggplot2,
+    magrittr,
     rlang
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests:
-    lubridate,
-    testthat,
+    covr,
     knitr,
+    lubridate,
+    methods,
     rmarkdown,
+    ROCR,
+    testthat,
+    tibble,
     tidyr
 VignetteBuilder: knitr

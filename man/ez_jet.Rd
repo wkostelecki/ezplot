@@ -7,6 +7,11 @@
 ez_jet(n = 100, palette = c("dodgerblue4", "steelblue2", "olivedrab3",
   "darkgoldenrod1", "brown"))
 }
+\arguments{
+\item{n}{Number of colours to return.}
+
+\item{palette}{Vector of colours.}
+}
 \description{
 ez_jet
 }

@@ -19,7 +19,7 @@ ez_data = function(
   char = c("A", "B"),
   fct = factor(c("X", "Y", "Other"), c("X", "Y", "Other")),
   num = c(10, 20),
-  seed = 1
+  seed = 9
 ) {
 
   set.seed(seed)
@@ -35,12 +35,18 @@ ez_data = function(
            year = lubridate::year(day),
            year2 = year + (lubridate::month(day) - 1) / 12) %>%
     group_by(char, fct, num) %>%
-    mutate(units = as.numeric(arima.sim(list(ar = 0.5),
-                                        n(),
-                                        function(x) sample(10, x, replace = TRUE))),
-           value = units * round(seq(sample(5:10, 1),
-                                     sample(5:10, 1),
-                                     length.out = n()))) %>%
+    mutate(units = as.numeric(stats::arima.sim(list(ar = 0.5),
+                                               n(),
+                                               function(x) {
+                                                 sample(10, x,
+                                                        replace = TRUE)
+                                               }
+    )),
+    value = units * round(seq(sample(5:10, 1),
+                              sample(5:10, 1),
+                              length.out = n()))) %>%
     ungroup
 
 }
+
+globalVariables(c("day", "year"))

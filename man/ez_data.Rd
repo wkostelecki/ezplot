@@ -6,8 +6,8 @@
 \usage{
 ez_data(start_date = as.Date("2012-01-01"),
   end_date = as.Date("2016-12-31"), char = c("A", "B"),
-  fct = factor(c("X", "Y", "Other"), c("X", "Y", "Other")), num = c(10, 20),
-  seed = 1)
+  fct = factor(c("X", "Y", "Other"), c("X", "Y", "Other")), num = c(10,
+  20), seed = 9)
 }
 \arguments{
 \item{start_date}{A start date value.}

@@ -3,14 +3,15 @@
 #' @description Applies faceting to ggplot objects when g[["data"]] has a
 #'   \code{facet_x} or \code{facet_y} column.
 #' @param g A ggplot object.
-#' @param ... Arguments to pass to \code{facet_grid} or \code{facet_wrap}
-quick_facet = function(g, ...){
+#' @param ncol Number of facet columns.
+#' @param ... Arguments to pass to \code{facet_grid} or \code{facet_wrap}.
+quick_facet = function(g, ncol = NULL, ...){
   if (all(c("facet_x", "facet_y") %in% names(g[["data"]]))){
     g = g + facet_grid(facet_y ~ facet_x, ...)
   } else if ("facet_x" %in% names(g[["data"]])){
-    g = g + facet_wrap(~ facet_x, ...)
+    g = g + facet_wrap(~ facet_x, ncol = ncol, ...)
   } else if ("facet_y" %in% names(g[["data"]])){
-    g = g + facet_wrap(~ facet_y, ...)
+    g = g + facet_wrap(~ facet_y, ncol = ncol, ...)
   }
   g
 }
@@ -28,6 +29,7 @@ quick_facet = function(g, ...){
 #' no_null("NULL")
 #' no_null("NOPE")
 no_null = function(x){
+  warning("Function no_null() is deprecated and will be removed.")
   if (is.null(x) || (x == "NULL" & length(x) == 1)) return(NULL) else return(x)
 }
 
@@ -46,7 +48,7 @@ not_numeric = function(x){
 #' nameifnot
 #' @description Names unnamed elements of a character vector.
 #' @param x A character vector.
-#' @param make.names Logical. Whether to force names of x to be valid variablel
+#' @param make.names Logical. Whether to force names of x to be valid variable
 #'   names. Default is FALSE.
 #'
 #' @return A named vector.
@@ -76,8 +78,8 @@ nameifnot = function(x, make.names = FALSE){
 #' @return list
 #' @importFrom stats as.formula
 #' @examples
-#' unpack_cols("x")
-#' unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
+#' ezplot:::unpack_cols("x")
+#' ezplot:::unpack_cols(c(x = "x", y = "x + y", expr = "~ x + y"))
 unpack_cols = function(x) {
 
   stopifnot(is.character(x))
@@ -88,7 +90,7 @@ unpack_cols = function(x) {
   list(cols = x,
        direct = x[!with_tilde],
        indirect_vars = lapply(x[with_tilde], function(x) all.vars(as.formula(x))),
-       indirect_expr = setNames(sub(" *~ *", "", x[with_tilde]), x[with_tilde]))
+       indirect_expr = stats::setNames(sub(" *~ *", "", x[with_tilde]), x[with_tilde]))
 
 }
 

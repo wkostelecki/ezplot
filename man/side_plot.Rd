@@ -4,21 +4,28 @@
 \alias{side_plot}
 \title{side_plot}
 \usage{
-side_plot(data, x, y, ylabels = ez_labels, size = 12, palette = ez_col,
-  signif = 3, reorder = TRUE, y_rescale = 1.25)
+side_plot(data, x, y, labels_y = ez_labels, size = 14,
+  palette = ez_col, signif = 3, reorder = TRUE, rescale_y = 1.25)
 }
 \arguments{
 \item{data}{A data.frame.}
 
-\item{x}{A named character.}
+\item{x}{A named character value. Evaluates to a column.}
 
-\item{y}{A named character.}
+\item{y}{A named character value. Evaluates to a column.}
 
-\item{ylabels}{label formatting function}
+\item{labels_y}{label formatting function}
 
-\item{size}{theme size for \code{use_theme()}. Default is 20.}
+\item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{palette}{Colour function.}
+
+\item{signif}{Number of significant digits.}
+
+\item{reorder}{A character vector specifying the group variables to reorder.
+Default is \code{c("group", "facet_x", "facet_y")}.}
+
+\item{rescale_y}{Rescaling factor for y-axis limits}
 }
 \description{
 side_plot

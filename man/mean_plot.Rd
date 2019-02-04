@@ -4,7 +4,7 @@
 \alias{mean_plot}
 \title{mean_plot}
 \usage{
-mean_plot(data, x, y, size = 12, labels = ez_labels)
+mean_plot(data, x, y, size = 14, labels = ez_labels)
 }
 \arguments{
 \item{data}{data.frame}

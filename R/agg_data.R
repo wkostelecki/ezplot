@@ -1,27 +1,26 @@
 #' Aggregates data
 #'
 #' @param data A data.frame.
-#' @param cols Named character vector.
-#' @param group_by A vector of column names.
+#' @param cols Named character vector of column names.
+#' @param group_by Vector of grouping column names.
 #' @param agg_fun Function to use for aggregating.
+#' @param group_by2 Vector of grouping column names to use for delayed (post aggregation) calculation.
 #' @return An aggregated data.frame.
 #' @importFrom rlang syms
 #' @export
 #' @examples
-#' library(ukbabynames)
-#' agg_data(ukbabynames, c(Sex = "sex", Total = "n"))
-#' agg_data(ukbabynames["sex"])
-#' agg_data(ukbabynames[c("sex", "n")])
-#' agg_data(ukbabynames, "n", "year")
-#' agg_data(ukbabynames, "n", c("sex", "year"))
-#' agg_data(ukbabynames, c(x = "year", y = "n"), c(x = "year"))
+#' df = ez_data()
+#' agg_data(df, c(Units = "units", Value = "value"))
+#' agg_data(df["fct"])
+#' agg_data(df[c("fct", "value")])
+#' agg_data(df, "value", "fct")
+#' agg_data(df, "value", c("fct", "year"))
+#' agg_data(df, c(x = "year", y = "value"), c(x = "year"))
 agg_data = function(data,
                     cols = names(data),
                     group_by = NULL,
                     agg_fun = function(x) sum(x, na.rm = TRUE),
                     group_by2 = NULL){
-
-  # browser()
 
   COLS = unpack_cols(cols)
 
@@ -42,15 +41,14 @@ agg_data = function(data,
     pos = match(group_by[ind], COLS[[1]])
     names(group_by)[ind] = names(COLS[[1]])[pos]
   }
+
   group_by = nameifnot(group_by)
-
-
 
   if (length(group_by) == 0) {
     group_by = c(".group." = "1")
   } else {
-    group_by = setNames(paste0("`", group_by, "`"),
-                        names(group_by))
+    group_by = stats::setNames(paste0("`", group_by, "`"),
+                               names(group_by))
   }
 
   names(group_by) = paste0(".agg_group.", names(group_by), ".agg_group.")

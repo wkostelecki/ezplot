@@ -13,7 +13,7 @@
 #'           labels = function(x) ez_labels(100 * x, append = "%"))
 #' @export
 mean_plot = function(data, x, y,
-                     size =12,
+                     size = 14,
                      labels = ez_labels) {
   y = nameifnot(y)
   cols = c(x = unname(x),

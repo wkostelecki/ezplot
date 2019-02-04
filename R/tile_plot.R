@@ -1,25 +1,22 @@
 
 #' tile_plot
+#' @description Creates tile plots.
+#' @inheritParams area_plot
+#' @param z A named character. Evaluates to a column and is mapped to the fill
+#'   colour of the tiles.
+#' @param labels_z label formatting function
 #' @export
 #' @examples
-#'
 #' tile_plot(mtcars, "factor(cyl)", "factor(am)", "mpg")
-#'
-#' library(ukbabynames)
-#' library(dplyr)
-#' ukbabynames %>%
-#'   mutate(name = toupper(name)) %>%
-#'   filter(substring(name, 1, 1) %in% LETTERS) %>%
-#'   tile_plot("substring(name, 1, 1)", "substring(name, 2, 2)", "n")
-
+#' tile_plot(ez_data(), "year", "char", "value", "fct", "num", reorder = NULL)
 tile_plot = function(data,
                      x,
                      y,
                      z,
                      facet_x = NULL,
                      facet_y = NULL,
-                     size = 12,
-                     ncol = NULL,
+                     size = 14,
+                     facet_ncol = NULL,
                      labels_x = NULL,
                      labels_y = NULL,
                      labels_z = ez_labels,
@@ -38,9 +35,9 @@ tile_plot = function(data,
                    group_by = cols[intersect(names(cols),
                                              c("x", "y", "facet_x", "facet_y"))])
 
-  gdata = reorder_levels(gdata,
-                         cols = reorder,
-                         y = 'z')
+  gdata = gdata %>%
+    reorder_levels(cols = reorder,
+                   y = 'z')
 
   if (!('y' %in% names(gdata))){
     gdata[["y"]] = ""
@@ -52,7 +49,7 @@ tile_plot = function(data,
                          colours = palette(100),
                          labels = labels_z)
 
-  g = quick_facet(g, ncol)
+  g = quick_facet(g, ncol = facet_ncol)
 
   g = g +
     theme_ez(size) +

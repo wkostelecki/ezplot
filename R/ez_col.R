@@ -57,6 +57,8 @@ text_contrast = function(x){
 
 
 #' ez_jet
+#' @param n Number of colours to return.
+#' @param palette Vector of colours.
 #' @export
 ez_jet = function(n = 100,
                   palette = c("dodgerblue4",

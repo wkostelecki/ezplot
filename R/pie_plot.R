@@ -1,38 +1,33 @@
-#' pie_plot
-#'
-#' @param data A data.frame.
-#' @param x Value.
-#' @param y Value.
-#' @param facet_x Value.
-#' @param facet_y Value.
-#' @param ylabels Label formatting function.
-#' @param size Theme size for \code{use_theme()}. Default is 20.
-#' @param label_cutoff Label cutoff value.
+#' @title pie_plot
+#' @name pie_plot
+#' @description Creates pie charts.
+#' @inheritParams bar_plot
 #' @param round Option for rounding label.
 #' @param signif Option for retaining significant figures in label.
-#' @param palette Colour function.
 #' @param label_x Position of label from centre of pie.  0 is the centre of the
 #'   pie and 1 is the outer edge.
-#'
 #' @return ggplot object
 #' @export
-#'
 #' @importFrom forcats fct_reorder
-#'
 #' @examples
-#' pie_plot(mtcars, "cyl", "1")
-#' pie_plot(mtcars, "cyl", "1", reorder = NULL, label_x = 0.5)
-#' pie_plot(mtcars, "cyl", "1", "gear", reorder = NULL, label_x = 0.5)
-#' pie_plot(mtcars, "cyl", "1", "gear", "am")
-#' pie_plot(mtcars, "cyl", "1", "gear", "am", reorder = NULL)
-#' ##pie_plot(mtcars, "cyl", "1", "am", "am")## WHY ERROR?
+#' \donttest{
+#' df = ez_data()
+#' pie_plot(df, "fct", "units")
+#' pie_plot(df, "fct", "units", reorder = NULL, label_x = 0.5)
+#' pie_plot(df, "fct", "units", "year", reorder = NULL, label_x = 0.5)
+#' pie_plot(df, "fct", "units", "year", "char")
+#' pie_plot(df, "fct", "units", "year", "char", reorder = NULL)
+#' }
 pie_plot = function (data,
                      x,
                      y = "1",
                      facet_x = NULL,
                      facet_y = NULL,
-                     ylabels = ez_labels,
-                     size = 12,
+                     labels_y = function(x) ez_labels(x * 100,
+                                                     append = "%",
+                                                     round = round,
+                                                     signif = signif),
+                     size = 14,
                      label_cutoff = 0.04,
                      round = Inf,
                      signif = 3,
@@ -62,8 +57,7 @@ pie_plot = function (data,
     group_by(!!!syms(intersect(names(cols), c("facet_x", "facet_y")))) %>%
     mutate(share = y / sum(y, na.rm = TRUE),
            share_label = ifelse(share > label_cutoff,
-                                ez_labels(share * 100, append = "%",
-                                          round = round, signif = signif),
+                                labels_y(share),
                                 ""),
            share_pos = cumsum(share) - share / 2) %>%
     ungroup
@@ -97,3 +91,5 @@ pie_plot = function (data,
   quick_facet(g)
 
 }
+
+globalVariables(c("share", "share_pos", "share_label"))
