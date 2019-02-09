@@ -18,7 +18,6 @@
 #' Will only be used if sprint start and end are provided.
 #'
 #' @import ggplot2 rlang dplyr
-#' @importFrom lubridate now
 #' @export
 gantt_plot <- function(data,
                        task,
@@ -58,7 +57,8 @@ gantt_plot <- function(data,
                                   size = 8, alpha = 0.9)
 
   # mark today
-  gantt <- gantt + geom_hline(aes(yintercept = now()), colour = "red")
+  gantt <- gantt + geom_hline(aes(yintercept = lubridate::now()),
+                              colour = "red")
 
 
   range_plan = data %>%
@@ -98,7 +98,7 @@ gantt_plot <- function(data,
     theme(panel.grid.major.x = element_line(linetype = 2),
           panel.grid.minor.x = element_blank(),
           panel.grid.major.y = element_blank()) +
-    labs(caption = timeStamp(now()))
+    labs(caption = timeStamp(lubridate::now()))
 
   return(gantt)
 
