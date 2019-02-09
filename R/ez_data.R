@@ -87,4 +87,4 @@ ez_data2 = function(start_date = as.Date("2012-01-01"),
 
 }
 
-globalVariables(c("day", "year"))
+globalVariables(c("day", "year", "obs", "price"))
