@@ -67,6 +67,7 @@ ez_data2 = function(start_date = as.Date("2012-01-01"),
                         lubridate::ceiling_date(end_date, "week") - 1,
                         by = "week"),
               stringsAsFactors = FALSE) %>%
+    arrange(xsec, obs) %>%
     group_by(xsec) %>%
     mutate(units = as.numeric(
       stats::arima.sim(
