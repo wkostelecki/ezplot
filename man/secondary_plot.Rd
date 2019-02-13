@@ -5,9 +5,9 @@
 \title{secondary_plot
 creates a plot with a secondary y-axis}
 \usage{
-secondary_plot(data, x, y1, y2 = NULL, facet_x = NULL,
-  facet_y = NULL, size_line = 1, labels_y1 = ez_labels,
-  labels_y2 = ez_labels, reorder = c("facet_x", "facet_y"),
+secondary_plot(data, x, y1, y2, facet_x = NULL, facet_y = NULL,
+  size_line = 1, labels_y1 = ez_labels, labels_y2 = ez_labels,
+  ylim1 = NULL, ylim2 = NULL, reorder = c("facet_x", "facet_y"),
   size = 14)
 }
 \arguments{
@@ -44,5 +44,5 @@ df = ez_data2()
 secondary_plot(df, "obs", "units", "price", "xsec")
 df = tibble::rownames_to_column(mtcars, "name")
 secondary_plot(df, "name", "mpg", "hp")
-secondary_plot(df, "name", c(MPG = "mpg"), c(HP = "hp"))
+secondary_plot(df, "name", c(MPG = "mpg"), c(HP = "hp"), ylim1 = c(0, 35), ylim2 = c(0, 350))
 }
