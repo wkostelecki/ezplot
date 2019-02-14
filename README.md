@@ -87,6 +87,7 @@ Plot with secondary y-axis.
 ![](man/figures/README-secondary_plot.png)<!-- -->
 ```r
 secondary_plot(mtcars, "row.names(mtcars)",
-               c("Miles Per Gallon" = "mpg"),
-               c("Horse Power" = "hp"))
+                      c("Miles Per Gallon" = "mpg"), c("Horse Power" = "hp"),
+                      ylim1 = c(0, 35),
+                      ylim2 = c(0, 350))
 ```
