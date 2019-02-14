@@ -5,6 +5,9 @@
 #' @param y2 Variable to plot on the right-hand axis
 #' @param labels_y1 label formatting function
 #' @param labels_y2 label formatting function
+#' @param size_line line size
+#' @param ylim1 (optional) left axis limits
+#' @param ylim2 (optional) right axis limits
 #' @return A ggplot object.
 #' @export
 #' @examples
@@ -98,7 +101,9 @@ secondary_plot = function (data,
                        sec.axis = sec_axis(as.formula(sec_trans),
                                            labels = labels_y2,
                                            name = names(y2))) +
-    theme(legend.position = "right")
+    theme(axis.title.y.right = element_text(color = ez_col(1)),
+          # axis.ticks.y.right = element_line(color = ez_col(1)),
+          axis.text.y.right = element_text(color = ez_col(1)))
 
   if (lubridate::is.Date(gdata[["x"]])) {
     g = g + scale_x_date(labels = function(x) format(x, "%b %y"))
