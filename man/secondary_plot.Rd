@@ -23,9 +23,15 @@ secondary_plot(data, x, y1, y2, facet_x = NULL, facet_y = NULL,
 
 \item{facet_y}{A character. Evaluates to a column.}
 
+\item{size_line}{line size}
+
 \item{labels_y1}{label formatting function}
 
 \item{labels_y2}{label formatting function}
+
+\item{ylim1}{(optional) left axis limits}
+
+\item{ylim2}{(optional) right axis limits}
 
 \item{reorder}{A character vector specifying the group variables to reorder.
 Default is \code{c("group", "facet_x", "facet_y")}.}

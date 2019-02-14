@@ -43,9 +43,12 @@ ez_png(side_plot(df, "fct", c("units", "value", price = "~ value / units"), size
        dir.create = TRUE)
 
 ez_png(secondary_plot(mtcars, "row.names(mtcars)",
-                      c("Miles Per Gallon" = "mpg"), c("Horse Power" = "hp")),
-       height = 250,
-       width = 450,
+                      c("Miles Per Gallon" = "mpg"), c("Horse Power" = "hp"),
+                      ylim1 = c(0, 35),
+                      ylim2 = c(0, 350),
+                      size = 10),
+       height = 200,
+       width = 350,
        resx = 1.5,
        "man/figures/README-secondary_plot.png",
        dir.create = TRUE)
