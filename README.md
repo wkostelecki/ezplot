@@ -80,3 +80,13 @@ waterfall_plot(df, "year", "value", "fct")
 ```r
 side_plot(df, "fct", c("units", "value", price = "~ value / units"))
 ```
+
+### secondary_plot
+Plot with secondary y-axis.
+
+![](man/figures/README-secondary_plot.png)<!-- -->
+```r
+secondary_plot(mtcars, "row.names(mtcars)",
+               c("Miles Per Gallon" = "mpg"),
+               c("Horse Power" = "hp"))
+```
