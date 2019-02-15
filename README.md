@@ -10,6 +10,7 @@ ezplot provides high-level wrapper functions for common chart types with reduced
 - `tile_plot()`
 - `waterfall_plot()`
 - `side_plot()`
+- `secondary_plot()`
 
 ## Installation
 devtools::install_github("wkostelecki/ezplot")
@@ -31,7 +32,6 @@ summary(df)
 ```
 ## Usage
 ### line_plot
-![](man/figures/README-line_plot.png)<!-- -->
 ``` r
 # plot value sales with "year2" aggregation along x-axis
 line_plot(df, x = "year2", y = "value")
@@ -44,9 +44,9 @@ line_plot(df, x = "year2", y = "value", group = "num", facet_x = "fct")
 line_plot(df, x = "year2", y = "value", group = "num",
           facet_x = "fct", facet_y = "char")
 ```
+![](man/figures/README-line_plot.png)<!-- -->
 
 ### area_plot (stacked area)
-![](man/figures/README-area_plot.png)<!-- -->
 ``` r
 # plot value sales with "year2" aggregation along x-axis
 area_plot(df, "year2", "value")
@@ -54,14 +54,15 @@ area_plot(df, "year2", "value", "num") # adds "num" grouping
 area_plot(df, "year2", "value", "num", "fct") # add "fct" faceting with facet_wrap().
 area_plot(df, "year2", "value", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
 ```
+![](man/figures/README-area_plot.png)<!-- -->
 
 ### bar_plot
-![](man/figures/README-bar_plot.png)<!-- -->
 ``` r
 # plot value sales with "year2" aggregation along x-axis
 bar_plot(df, x = "year", y = "value")
 bar_plot(df, x = "year", y = "value", group = "fct") # adds "fct" grouping
 ```
+![](man/figures/README-bar_plot.png)<!-- -->
 
 ### tile_plot
 ``` r
@@ -70,23 +71,23 @@ tile_plot(df, "year", "char", "value", "fct", "num")
 ```
 
 ### waterfall_plot
-![](man/figures/README-waterfall_plot.png)<!-- -->
 ```r
 waterfall_plot(df, "year", "value", "fct")
 ```
+![](man/figures/README-waterfall_plot.png)<!-- -->
 
 ### side_plot
-![](man/figures/README-side_plot.png)<!-- -->
 ```r
 side_plot(df, "fct", c("units", "value", price = "~ value / units"))
 ```
+![](man/figures/README-side_plot.png)<!-- -->
 
 ### secondary_plot
 Plot with secondary y-axis.
-
-![](man/figures/README-secondary_plot.png)<!-- -->
 ```r
 secondary_plot(mtcars, "row.names(mtcars)",
-               c("Miles Per Gallon" = "mpg"),
-               c("Horse Power" = "hp"))
+                      c("Miles Per Gallon" = "mpg"), c("Horse Power" = "hp"),
+                      ylim1 = c(0, 35),
+                      ylim2 = c(0, 350))
 ```
+![](man/figures/README-secondary_plot.png)<!-- -->
