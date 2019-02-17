@@ -5,7 +5,7 @@
 \title{model_plot}
 \usage{
 model_plot(data, x, actual, fitted, facet_x = NULL, point_size = 2,
-  size = 14)
+  res_bins = NA_real_, size = 14)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -20,6 +20,9 @@ model_plot(data, x, actual, fitted, facet_x = NULL, point_size = 2,
 
 \item{point_size}{Numeric. Default is 2.}
 
+\item{res_bins}{Number of bins in the residual distribution. Default value
+(NA) doesn't show the distribution.}
+
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
 }
 \value{
@@ -33,4 +36,5 @@ y = rnorm(26)
 df = data.frame(ID = 1:26, actual = y + rnorm(26), fitted = y, id = letters)
 model_plot(df, "ID", "actual", "fitted")
 model_plot(df, "id", "actual", "fitted")
+model_plot(df, "ID", "actual", "fitted", res_bins = 10)
 }

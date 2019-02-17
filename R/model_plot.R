@@ -4,6 +4,8 @@
 #' @inheritParams area_plot
 #' @param actual A character value. Evaluates to a column.
 #' @param fitted A character value. Evaluates to a column.
+#' @param res_bins Number of bins in the residual distribution. Default value
+#'   (NA) doesn't show the distribution.
 #' @param point_size Numeric. Default is 2.
 #'
 #' @return A ggplot object.
@@ -14,12 +16,14 @@
 #' df = data.frame(ID = 1:26, actual = y + rnorm(26), fitted = y, id = letters)
 #' model_plot(df, "ID", "actual", "fitted")
 #' model_plot(df, "id", "actual", "fitted")
+#' model_plot(df, "ID", "actual", "fitted", res_bins = 10)
 model_plot = function(data,
                       x,
                       actual,
                       fitted,
                       facet_x = NULL,
                       point_size = 2,
+                      res_bins = NA_real_,
                       size = 14){
 
   gdata = data.frame(ID = eval(parse(text = x), data),
@@ -107,6 +111,31 @@ model_plot = function(data,
       theme(axis.text.x = element_text(angle = 90,
                                        vjust = 0.38,
                                        hjust = 1))
+  }
+
+  if (!is.na(res_bins)) {
+    # browser()
+    bin_data = gdata %>%
+      group_by_at(vars(matches("facet_x"))) %>%
+      mutate(bins = cut(Residual + min_af - max_res,
+                        breaks = res_bins),
+             x_start = max(ID)) %>%
+      group_by_(.dots = intersect(c("facet_x", "bins"), names(.))) %>%
+      summarize(n = n(),
+                x_start = x_start[1],
+                x_range = diff(range(.$ID))) %>%
+      ungroup %>%
+      mutate(x_start = x_start + 0.02 * x_range,
+             y_start = as.numeric(gsub("\\(|,.*", "", bins)),
+             y_end = as.numeric(gsub(".*,|]", "", bins)),
+             x_end = x_start + 0.05 * x_range * n / max(n))
+    g = g +
+      geom_rect(data = bin_data,
+                aes(xmin = x_start,
+                    xmax = x_end,
+                    ymin = y_start,
+                    ymax = y_end),
+                colour = "mediumorchid4")
   }
 
   quick_facet(g, scales = "free_y")
