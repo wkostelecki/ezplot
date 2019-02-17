@@ -41,7 +41,7 @@ distribution_plot = function (data,
       "; Mean = ",
       ez_labels(signif(mean(x), 3)),
       "; SD = ",
-      ez_labels(signif(sd(x), 3)),
+      ez_labels(signif(stats::sd(x), 3)),
       "\nDW = ",
       ez_labels(signif(dw(x), 3)),
       "; Skew = ",
@@ -65,3 +65,6 @@ distribution_plot = function (data,
          x = names(x))
 
 }
+
+
+globalVariables(c("..densitiy.."))
