@@ -110,11 +110,11 @@ model_plot = function(data,
                          expand = c(0, 0.6)) +
       theme(axis.text.x = element_text(angle = 90,
                                        vjust = 0.38,
-                                       hjust = 1))
+                                       hjust = 1),
+            panel.grid.major.x = element_blank())
   }
 
   if (!is.na(res_bins)) {
-    # browser()
     bin_data = gdata %>%
       group_by_at(vars(matches("facet_x"))) %>%
       mutate(bins = cut(Residual + min_af - max_res,
