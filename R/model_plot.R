@@ -145,5 +145,4 @@ model_plot = function(data,
 }
 
 globalVariables(c("Actual", "Fitted", "Residual", "ID", "min_af", "max_res",
-                  "x_start", "x_range", "xmin", "xmax", "ymin", "ymax", "bins",
-                  "..density.."))
+                  "x_start", "x_range", "xmin", "xmax", "ymin", "ymax", "bins"))

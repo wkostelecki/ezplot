@@ -67,4 +67,4 @@ distribution_plot = function (data,
 }
 
 
-globalVariables(c("..densitiy.."))
+globalVariables(c("..density.."))
