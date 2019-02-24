@@ -17,6 +17,7 @@
 #' model_plot(df, "ID", "actual", "fitted")
 #' model_plot(df, "id", "actual", "fitted")
 #' model_plot(df, "ID", "actual", "fitted", res_bins = 10)
+#' model_plot(df, "id", "actual", "fitted", res_bins = 10)
 model_plot = function(data,
                       x,
                       actual,
@@ -123,18 +124,19 @@ model_plot = function(data,
       group_by_(.dots = intersect(c("facet_x", "bins"), names(.))) %>%
       summarize(n = n(),
                 x_start = x_start[1],
-                x_range = diff(range(.$ID))) %>%
+                x_range = diff(range(as.numeric(.$ID)))) %>%
       ungroup %>%
-      mutate(x_start = x_start + 0.02 * x_range,
-             y_start = as.numeric(gsub("\\(|,.*", "", bins)),
-             y_end = as.numeric(gsub(".*,|]", "", bins)),
-             x_end = x_start + 0.05 * x_range * n / max(n))
+      mutate(xmin = as.numeric(x_start) + 0.02 * x_range,
+             xmax = xmin + 0.05 * x_range * n / max(n),
+             ymin = as.numeric(gsub("\\(|,.*", "", bins)),
+             ymax = as.numeric(gsub(".*,|]", "", bins)))
     g = g +
       geom_rect(data = bin_data,
-                aes(xmin = x_start,
-                    xmax = x_end,
-                    ymin = y_start,
-                    ymax = y_end),
+                aes(xmin = xmin,
+                    xmax = xmax,
+                    ymin = ymin,
+                    ymax = ymax),
+                fill = "mediumorchid4",
                 colour = "mediumorchid4")
   }
 
@@ -142,4 +144,6 @@ model_plot = function(data,
 
 }
 
-globalVariables(c("Actual", "Fitted", "Residual", "ID", "min_af", "max_res"))
+globalVariables(c("Actual", "Fitted", "Residual", "ID", "min_af", "max_res",
+                  "x_start", "x_range", "xmin", "xmax", "ymin", "ymax", "bins",
+                  "..density.."))
