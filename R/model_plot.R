@@ -117,10 +117,10 @@ model_plot = function(data,
 
   if (!is.na(res_bins)) {
     bin_data = gdata %>%
-      group_by_at(vars(matches("facet_x"))) %>%
       mutate(bins = cut(Residual + min_af - max_res,
-                        breaks = res_bins),
-             x_start = max(ID)) %>%
+                        breaks = res_bins)) %>%
+      group_by_at(vars(matches("facet_x"))) %>%
+      mutate(x_start = max(ID)) %>%
       group_by_(.dots = intersect(c("facet_x", "bins"), names(.))) %>%
       summarize(n = n(),
                 x_start = x_start[1],
