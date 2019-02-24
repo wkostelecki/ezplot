@@ -58,7 +58,8 @@ distribution_plot = function (data,
                    stat = "bin",
                    binwidth = binwidth) +
     scale_x_continuous(labels = ez_labels) +
-    scale_y_continuous(labels = ez_labels) +
+    scale_y_continuous(labels = ez_labels,
+                       expand = c(0, 0, 0.1, 0)) +
     use_theme(size) +
     facet_wrap(~ facet_x_label) +
     labs(y = "Density",
