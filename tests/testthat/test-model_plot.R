@@ -11,4 +11,10 @@ test_that("model_plot works", {
 
   expect_equal(nrow(g$data), length(y))
 
+  g = model_plot(df, "id", "actual", "fitted",
+                 facet_x = "id %in% letters[1:13]",
+                 res_bins = 20)
+
+  expect_equal(nrow(g$data), length(y))
+
 })
