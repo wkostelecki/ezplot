@@ -37,4 +37,5 @@ df = data.frame(ID = 1:26, actual = y + rnorm(26), fitted = y, id = letters)
 model_plot(df, "ID", "actual", "fitted")
 model_plot(df, "id", "actual", "fitted")
 model_plot(df, "ID", "actual", "fitted", res_bins = 10)
+model_plot(df, "id", "actual", "fitted", res_bins = 10)
 }
