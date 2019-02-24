@@ -27,8 +27,8 @@ A data.frame.
 }
 \description{
 Creates example data using \code{expand.grid()} on \code{char},
-  \code{fct} and \code{num} and then adding random \code{units} and
-  \code{value} columns.
+  \code{fct} and \code{num} and then adding random \code{units}, \code{value}
+  and \code{price} columns.
 }
 \examples{
 df = ez_data()
