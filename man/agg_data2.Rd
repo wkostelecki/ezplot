@@ -4,8 +4,8 @@
 \alias{agg_data2}
 \title{Aggregates data}
 \usage{
-agg_data2(data, cols = names(data), group_by = NULL, agg_fun = function(x)
-  sum(x, na.rm = TRUE), group_by2 = NULL)
+agg_data2(data, cols = names(data), group_by = NULL,
+  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL)
 }
 \description{
 Aggregates data
