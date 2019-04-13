@@ -9,7 +9,7 @@ get_incr = function(x){
     y = sort(unique(x))
     y = as.numeric(min(difftime(y,
                                 dplyr::lag(y),
-                                units = "seconds"),
+                                units = "secs"),
                        na.rm = TRUE))
   } else if (is.factor(x) || is.character(x)) {
     y = 1

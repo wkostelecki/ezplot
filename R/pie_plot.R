@@ -1,23 +1,23 @@
-#' pie_plot
+#' @title pie_plot
+#' @name pie_plot
+#' @description Creates pie charts.
 #' @inheritParams bar_plot
 #' @param round Option for rounding label.
 #' @param signif Option for retaining significant figures in label.
 #' @param label_x Position of label from centre of pie.  0 is the centre of the
 #'   pie and 1 is the outer edge.
-#'
 #' @return ggplot object
 #' @export
-#'
 #' @importFrom forcats fct_reorder
-#'
 #' @examples
+#' \donttest{
 #' df = ez_data()
 #' pie_plot(df, "fct", "units")
 #' pie_plot(df, "fct", "units", reorder = NULL, label_x = 0.5)
 #' pie_plot(df, "fct", "units", "year", reorder = NULL, label_x = 0.5)
 #' pie_plot(df, "fct", "units", "year", "char")
 #' pie_plot(df, "fct", "units", "year", "char", reorder = NULL)
-#' ##pie_plot(df, "fct", "units", "char", "char")## WHY ERROR?
+#' }
 pie_plot = function (data,
                      x,
                      y = "1",

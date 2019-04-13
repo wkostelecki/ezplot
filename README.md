@@ -1,6 +1,8 @@
 [![Coverage status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://codecov.io/github/wkostelecki/ezplot?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/ezplot)](https://cran.r-project.org/package=ezplot)
 [![Travis build status](https://travis-ci.org/wkostelecki/ezplot.svg?branch=master)](https://travis-ci.org/wkostelecki/ezplot)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ezplot)](http://www.r-pkg.org/pkg/ezplot)
+[![Total CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](http://www.r-pkg.org/pkg/ezplot)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
 ## Overview
@@ -11,8 +13,9 @@ ezplot provides high-level wrapper functions for common chart types with reduced
 - `tile_plot()`
 - `waterfall_plot()`
 - `side_plot()`
+- `secondary_plot()`
 
-## Intallation
+## Installation
 devtools::install_github("wkostelecki/ezplot")
 
 ## Example data
@@ -32,7 +35,6 @@ summary(df)
 ```
 ## Usage
 ### line_plot
-![](man/figures/README-line_plot.png)<!-- -->
 ``` r
 # plot value sales with "year2" aggregation along x-axis
 line_plot(df, x = "year2", y = "value")
@@ -45,9 +47,9 @@ line_plot(df, x = "year2", y = "value", group = "num", facet_x = "fct")
 line_plot(df, x = "year2", y = "value", group = "num",
           facet_x = "fct", facet_y = "char")
 ```
+![](man/figures/README-line_plot.png)<!-- -->
 
 ### area_plot (stacked area)
-![](man/figures/README-area_plot.png)<!-- -->
 ``` r
 # plot value sales with "year2" aggregation along x-axis
 area_plot(df, "year2", "value")
@@ -55,14 +57,15 @@ area_plot(df, "year2", "value", "num") # adds "num" grouping
 area_plot(df, "year2", "value", "num", "fct") # add "fct" faceting with facet_wrap().
 area_plot(df, "year2", "value", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
 ```
+![](man/figures/README-area_plot.png)<!-- -->
 
 ### bar_plot
-![](man/figures/README-bar_plot.png)<!-- -->
 ``` r
 # plot value sales with "year2" aggregation along x-axis
 bar_plot(df, x = "year", y = "value")
 bar_plot(df, x = "year", y = "value", group = "fct") # adds "fct" grouping
 ```
+![](man/figures/README-bar_plot.png)<!-- -->
 
 ### tile_plot
 ``` r
@@ -71,13 +74,23 @@ tile_plot(df, "year", "char", "value", "fct", "num")
 ```
 
 ### waterfall_plot
-![](man/figures/README-waterfall_plot.png)<!-- -->
 ```r
 waterfall_plot(df, "year", "value", "fct")
 ```
+![](man/figures/README-waterfall_plot.png)<!-- -->
 
 ### side_plot
-![](man/figures/README-side_plot.png)<!-- -->
 ```r
 side_plot(df, "fct", c("units", "value", price = "~ value / units"))
 ```
+![](man/figures/README-side_plot.png)<!-- -->
+
+### secondary_plot
+Plot with secondary y-axis.
+```r
+secondary_plot(mtcars, "row.names(mtcars)",
+                      c("Miles Per Gallon" = "mpg"), c("Horse Power" = "hp"),
+                      ylim1 = c(0, 35),
+                      ylim2 = c(0, 350))
+```
+![](man/figures/README-secondary_plot.png)<!-- -->

@@ -5,7 +5,7 @@
 \title{line_plot}
 \usage{
 line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  yoy = FALSE, linesize = 1, size = 14, palette = ez_col,
+  yoy = FALSE, size_line = 1, size = 14, palette = ez_col,
   labels_y = ez_labels, use_theme = theme_ez, facet_scales = "fixed")
 }
 \arguments{
@@ -24,7 +24,7 @@ line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
 \item{yoy}{Logical used to indicate whether a YOY grouping should be created.
 Default is \code{FALSE}.}
 
-\item{linesize}{width of line for \code{geom_line()}. Default is 1.}
+\item{size_line}{width of line for \code{geom_line()}. Default is 1.}
 
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
 
@@ -48,7 +48,7 @@ Creates line plots.
 df = ez_data()
 line_plot(df, "week", "value", use_theme = ggplot2::theme_bw)
 line_plot(df, "week", c("Sales ($)" = "value"))
-\dontrun{
+\donttest{
 line_plot(df, "week", "value", "char")
 line_plot(df, "week", "value", "char", "fct")
 line_plot(df, "week", "value", "char", "fct", "num", facet_scales = "free_y")

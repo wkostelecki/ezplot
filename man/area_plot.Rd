@@ -52,6 +52,7 @@ A ggplot object.
 Aggregates a data.frame and creates a stacked area chart.
 }
 \examples{
+\donttest{
 df = ez_data()
 area_plot(df, "year2", "units", size = 10)
 area_plot(df, "year2", "units", "fct", use_theme = ggplot2::theme_bw)
@@ -61,4 +62,5 @@ area_plot(df, "year2", c("Unit Sales" = "units"), size = 12)
 area_plot(df, "year2", c("Unit Sales" = "units"), "fct", "char")
 area_plot(df, "year2", "units", "fct", "char", "num", position = "fill")
 area_plot(df, "as.character(year)", "units")
+}
 }
