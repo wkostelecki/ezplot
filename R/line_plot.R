@@ -4,7 +4,7 @@
 #' @inheritParams area_plot
 #' @param yoy Logical used to indicate whether a YOY grouping should be created.
 #'   Default is \code{FALSE}.
-#' @param linesize width of line for \code{geom_line()}. Default is 1.
+#' @param size_line width of line for \code{geom_line()}. Default is 1.
 #' @return A ggplot object.
 #' @export
 #' @import ggplot2 dplyr
@@ -28,7 +28,7 @@ line_plot = function(data,
                      facet_x = NULL,
                      facet_y = NULL,
                      yoy = FALSE,
-                     linesize = 1,
+                     size_line = 1,
                      size = 14,
                      palette = ez_col,
                      labels_y = ez_labels,
@@ -73,7 +73,7 @@ line_plot = function(data,
     gdata[[i]] = factor(gdata[[i]])
   }
 
-  if (is.character(gdata[["x"]]) | is.factor(gdata[[""]])) {
+  if (is.character(gdata[["x"]]) | is.factor(gdata[["x"]])) {
 
     gdata[["x"]] = factor(gdata[["x"]])
     x_text = levels(gdata[["x"]])
@@ -89,7 +89,7 @@ line_plot = function(data,
     if (yoy) {
       g = g +
         geom_line(mapping = aes(x, y, colour = group),
-                  size = linesize) +
+                  size = size_line) +
         scale_color_manual(NULL,
                            values = palette(length(unique(gdata[["group"]]))),
                            labels = function(x) paste0(x, "   ")) +
@@ -99,7 +99,7 @@ line_plot = function(data,
     } else {
       g = g +
         geom_line(aes(x, y, colour = group),
-                  size = linesize) +
+                  size = size_line) +
         scale_colour_manual(NULL,
                             values = palette(length(unique(gdata[["group"]]))),
                             labels = function(x) paste0(x, "   "))
@@ -107,7 +107,7 @@ line_plot = function(data,
   } else {
     g = g +
       geom_line(aes(x, y),
-                size = linesize,
+                size = size_line,
                 colour = palette(1))
   }
 
