@@ -1,4 +1,10 @@
 #' Aggregates data
+#' @param data A data frame
+#' @param cols Column names to retain
+#' @param group_by Column names to use in grouping. All others are aggregated
+#' @param agg_fun function to use for aggregation
+#' @param group_by2 Column names to use in second grouping step (after
+#'   aggregation)
 #' @examples
 #' agg_data2(mtcars, "cyl")
 #' agg_data2(mtcars, c("factor(cyl)", "cyl"))
@@ -36,8 +42,8 @@ agg_data2 = function(data,
   if (length(group_by) == 0) {
     group_by = c(".group." = "1")
   } else {
-    group_by = setNames(paste0("`", group_by, "`"),
-                        names(group_by))
+    group_by = stats::setNames(paste0("`", group_by, "`"),
+                               names(group_by))
   }
 
   names(group_by) = paste0(".agg_group.", names(group_by), ".agg_group.")

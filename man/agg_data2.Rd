@@ -4,8 +4,20 @@
 \alias{agg_data2}
 \title{Aggregates data}
 \usage{
-agg_data2(data, cols = names(data), group_by = NULL, agg_fun = function(x)
-  sum(x, na.rm = TRUE), group_by2 = NULL)
+agg_data2(data, cols = names(data), group_by = NULL,
+  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL)
+}
+\arguments{
+\item{data}{A data frame}
+
+\item{cols}{Column names to retain}
+
+\item{group_by}{Column names to use in grouping. All others are aggregated}
+
+\item{agg_fun}{function to use for aggregation}
+
+\item{group_by2}{Column names to use in second grouping step (after
+aggregation)}
 }
 \description{
 Aggregates data

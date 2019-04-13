@@ -5,7 +5,8 @@
 \title{Aggregates data}
 \usage{
 agg_data(data, cols = names(data), group_by = NULL,
-  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL)
+  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL,
+  env = parent.frame())
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -17,6 +18,8 @@ agg_data(data, cols = names(data), group_by = NULL,
 \item{agg_fun}{Function to use for aggregating.}
 
 \item{group_by2}{Vector of grouping column names to use for delayed (post aggregation) calculation.}
+
+\item{env}{Environment for extra variables.}
 }
 \value{
 An aggregated data.frame.
