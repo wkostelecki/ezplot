@@ -5,6 +5,7 @@
 #' @param group_by Vector of grouping column names.
 #' @param agg_fun Function to use for aggregating.
 #' @param group_by2 Vector of grouping column names to use for delayed (post aggregation) calculation.
+#' @param env Environment for extra variables.
 #' @return An aggregated data.frame.
 #' @importFrom rlang syms
 #' @export

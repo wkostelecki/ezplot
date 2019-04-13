@@ -26,6 +26,7 @@ Suggests:
     methods,
     rmarkdown,
     ROCR,
+    stats,
     testthat,
     tibble,
     tidyr
