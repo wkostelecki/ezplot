@@ -3,20 +3,27 @@
 #' @param data A data frame
 #' @export
 #' @examples
+#' \dontrun{
 #' ez_app(mtcars)
+#' }
 ez_app = function(data) {
 
   ui <- shiny::fluidPage(
 
-    shiny::titlePanel("ezplot"),
-    shiny::fluidRow(
-      shiny::selectInput("x",
-                         "Select x-value",
-                         names(data)),
-      shiny::selectInput("y",
-                         "Select y-value",
-                         names(data)),
-      shiny::plotOutput("plot")
+    shiny::column(
+      width = 12,
+      shiny::fluidRow(
+        shiny::selectInput("x",
+                           "Select x-value",
+                           names(data)),
+        shiny::selectInput("y",
+                           "Select y-value",
+                           names(data)),
+        shiny::selectInput("geom",
+                           "Select chart type",
+                           c("line", "bar", "pie")),
+        shiny::plotOutput("plot")
+      )
     )
 
   )
@@ -24,12 +31,14 @@ ez_app = function(data) {
   server <- function(input, output) {
 
     output$plot <- shiny::renderPlot({
-      ezplot::line_plot(data, input$x, input$y)
+      shiny::req(input$x, input$y, input$geom)
+      plot_f = eval(parse(text = paste0("ezplot::", input$geom, "_plot")))
+      plot_f(data, input$x, input$y)
     })
   }
 
-  shiny::runGadget(app = shinyApp(ui = ui,
-                                  server = server),
+  shiny::runGadget(app = shiny::shinyApp(ui = ui,
+                                         server = server),
                    viewer = shiny::browserViewer())
 
 }

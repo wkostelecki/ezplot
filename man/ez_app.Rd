@@ -13,5 +13,7 @@ ez_app(data)
 ez_app
 }
 \examples{
+\dontrun{
 ez_app(mtcars)
+}
 }
