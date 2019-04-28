@@ -26,9 +26,9 @@ agg_data = function(data,
 
   COLS = unpack_cols(cols)
 
-  first_expr = nameifnot(unique(unname(c(COLS[[2]],
+  first_expr = nameifnot(unique(unname(c(COLS[["direct"]],
                                          group_by,
-                                         unlist(COLS[[3]])))))
+                                         unlist(COLS[["indirect_vars"]])))))
 
   x = transmute(data,
                 !!!lapply(first_expr,
@@ -36,9 +36,9 @@ agg_data = function(data,
 
   if (is.null(group_by)) {
     group_by = not_numeric(x)
-    ind = group_by %in% COLS[[1]]
-    pos = match(group_by[ind], COLS[[1]])
-    names(group_by)[ind] = names(COLS[[1]])[pos]
+    ind = group_by %in% COLS[["cols"]]
+    pos = match(group_by[ind], COLS[["cols"]])
+    names(group_by)[ind] = names(COLS[["cols"]])[pos]
   }
 
   group_by = nameifnot(group_by)
@@ -56,17 +56,11 @@ agg_data = function(data,
     mutate_(.dots = group_by[!(names(group_by) %in% names(x))])
 
   x = x %>%
-    # mutate(!!!syms(COLS[[1]][!(names(COLS[[1]]) %in% names(x))])) %>%
-
-    # select(!!!syms(c(names(group_by),
-    #                  setdiff(names(x),
-    #                          setdiff(unname(group_by),
-    #                                  unlist(unname(COLS[[3]]))))))) %>%
     group_by(!!!syms(names(group_by))) %>%
     summarize_if(function(x) is.numeric(x) | is.logical(x), agg_fun) %>%
     as.data.frame(check.names = FALSE)
 
-  if (length(COLS[[3]]) > 0) {
+  if (length(COLS[["indirect_vars"]]) > 0) {
 
     group_by2 = if (length(group_by2) == 0) {
       vector("character", 0)
@@ -76,36 +70,25 @@ agg_data = function(data,
 
     x = x %>%
       group_by(!!!syms(group_by2)) %>%
-      mutate_(.dots = COLS[[4]]) %>%
+      mutate_(.dots = COLS[["indirect_expr"]]) %>%
       as.data.frame
 
   }
 
-  # names(x) = gsub("\\.agg_group\\.", "", names(x))
-
   group_by_ = gsub("`", "", group_by)
   names(group_by_) = gsub("\\.agg_group\\.", "", names(group_by_))
 
-  # m = match(names(x), c(COLS[[1]], names(group_by)))
-  # m = match(names(x), COLS[[1]])
-  take = COLS[[1]]
-  # ind = take %in% group_by_ & names(take) %in% names(group_by_)
-
+  take = COLS[["cols"]]
   ind = which(match(take, group_by_) == match(names(take), names(group_by_)))
-
 
   pos = which(take[ind] %in% group_by_ & names(take)[ind] %in% names(group_by_))
 
   take[ind] = names(group_by)[pos]
-  # take[ind] = names(group_by)[match(take, group_by_)[pos]]
 
-  # take = take[]
   m = match(take, names(x))
 
-  # x = x[, !is.na(m), drop = FALSE]
-
   x = x[, m, drop = FALSE]
-  names(x) = names(COLS[[1]])
+  names(x) = names(COLS[["cols"]])
 
   x
 
