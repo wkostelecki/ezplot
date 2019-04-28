@@ -43,7 +43,7 @@ waterfall_plot = function(data,
   y = nameifnot(y)
 
   data = data %>%
-    mutate(..y.. = !!sym(y)) %>%
+    mutate(..y.. = !!rlang::parse_quo(y, env = parent.frame())) %>%
     group_by(x = !!sym(x),
              group = !!sym(group)) %>%
     summarize(y = sum(..y.., na.rm = TRUE)) %>%
