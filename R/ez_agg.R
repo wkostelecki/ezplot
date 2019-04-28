@@ -17,11 +17,18 @@ ez_agg = function(data, groups, dots) {
 
 }
 
-
-agg_table = function(data, x, ...,
-             group = NULL,
-             facet_x = NULL,
-             facet_y = NULL) {
+#'
+#' @examples
+#' a = 2
+#' ezplot::agg_table(mtcars, cyl, 1, group = cyl)
+#' ezplot::agg_table(mtcars, cyl, y1 = 1, group = cyl)
+#' ezplot::agg_table(mtcars, cyl, "Number of Cars" = 1, group = cyl)
+agg_table = function(data,
+                     x,
+                     ...,
+                     group = NULL,
+                     facet_x = NULL,
+                     facet_y = NULL) {
 
   x = enquo(x)
   dots = enquos(...)
