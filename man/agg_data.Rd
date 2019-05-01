@@ -36,5 +36,5 @@ agg_data(df[c("fct", "value")])
 agg_data(df, "value", "fct")
 agg_data(df, "value", c("fct", "year"))
 agg_data(df, c(x = "year", y = "value"), c(x = "year"))
-agg_data2(mtcars, c(x = "cyl", y = "1", group = "cyl"), c(x = "cyl", group = "cyl"))
+agg_data(mtcars, c(x = "cyl", y = "1", group = "cyl"), c(x = "cyl", group = "cyl"))
 }
