@@ -12,7 +12,7 @@
 tile_plot = function(data,
                      x,
                      y,
-                     z,
+                     z = "1",
                      facet_x = NULL,
                      facet_y = NULL,
                      size = 14,
@@ -21,7 +21,7 @@ tile_plot = function(data,
                      labels_y = NULL,
                      labels_z = ez_labels,
                      palette = ez_jet,
-                     reorder = c('facet_x', 'facet_y', "x", "y")){
+                     reorder = c('facet_x', 'facet_y')){
 
 
   cols = c(x = unname(x),
