@@ -56,4 +56,8 @@ line_plot(df, "year2", "~ value / units", "char", "fct", "num")
 line_plot(df, "week", c("value", "units"))
 line_plot(df, "week", "value", yoy = TRUE)
 }
+\donttest{
+line_plot(mtcars, "cyl", "1", "cyl")
+}
+
 }
