@@ -27,6 +27,7 @@ Suggests:
     psych,
     rmarkdown,
     ROCR,
+    stats,
     testthat,
     tibble,
     tidyr

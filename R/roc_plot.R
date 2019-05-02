@@ -43,15 +43,16 @@ roc_plot = function(data, actual, fitted,
 
   data = data %>%
     ungroup %>%
-    transmute_(.dots = cols)
+    transmute(!!!lapply(cols,
+                        function(x) rlang::parse_quo(x, env = parent.frame())))
 
   total = data %>%
-    tibble::as.tibble() %>%
+    tibble::as_tibble() %>%
     summarize(roc = list(roc(actual, fitted)))
 
   gdata = data %>%
-    group_by_(.dots = intersect(names(cols),
-                                c("group", "facet_x", "facet_y"))) %>%
+    group_by(!!!syms(intersect(names(cols),
+                               c("group", "facet_x", "facet_y")))) %>%
     summarize(roc = list(roc(actual, fitted))) %>%
     ungroup %>%
     tidyr::unnest(roc)
