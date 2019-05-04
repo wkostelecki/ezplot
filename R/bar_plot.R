@@ -150,8 +150,8 @@ bar_plot = function(data,
 
   if (label_pos %in% c("top", "both")) {
     top_labels = gdata %>%
-      group_by_(.dots = intersect(names(gdata),
-                                  c("x", "facet_x", "facet_y"))) %>%
+      group_by(!!!syms(intersect(names(gdata),
+                                 c("x", "facet_x", "facet_y")))) %>%
       summarize(top_y = sum(y[y > 0], na.rm = TRUE),
                 y = sum(y, na.rm = TRUE)) %>%
       ungroup %>%

@@ -5,18 +5,22 @@
 \title{Aggregates data}
 \usage{
 agg_data(data, cols = names(data), group_by = NULL,
-  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL)
+  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL,
+  env = parent.frame())
 }
 \arguments{
 \item{data}{A data.frame.}
 
 \item{cols}{Named character vector of column names.}
 
-\item{group_by}{Vector of grouping column names.}
+\item{group_by}{Vector of grouping columns.}
 
 \item{agg_fun}{Function to use for aggregating.}
 
-\item{group_by2}{Vector of grouping column names to use for delayed (post aggregation) calculation.}
+\item{group_by2}{Vector of grouping column names to use for delayed (post
+aggregation) calculation.}
+
+\item{env}{Environment for extra variables.}
 }
 \value{
 An aggregated data.frame.
@@ -32,4 +36,5 @@ agg_data(df[c("fct", "value")])
 agg_data(df, "value", "fct")
 agg_data(df, "value", c("fct", "year"))
 agg_data(df, c(x = "year", y = "value"), c(x = "year"))
+agg_data(mtcars, c(x = "cyl", y = "1", group = "cyl"), c(x = "cyl", group = "cyl"))
 }

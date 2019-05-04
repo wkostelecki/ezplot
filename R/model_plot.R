@@ -121,7 +121,7 @@ model_plot = function(data,
                         breaks = res_bins)) %>%
       group_by_at(vars(matches("facet_x"))) %>%
       mutate(x_start = max(ID)) %>%
-      group_by_(.dots = intersect(c("facet_x", "bins"), names(.))) %>%
+      group_by(!!!syms(intersect(c("facet_x", "bins"), names(.)))) %>%
       summarize(n = n(),
                 x_start = x_start[1],
                 x_range = diff(range(as.numeric(.$ID)))) %>%

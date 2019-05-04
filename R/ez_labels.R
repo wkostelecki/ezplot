@@ -24,8 +24,7 @@ ez_labels = function(x,
                     unit = c("", "k", "m", "b", "t", "qd", "qn", "sx", "sp"),
                     stringsAsFactors = FALSE)
 
-  # browser()
-  df = data_frame(x = x) %>%
+  df = tibble::tibble(x = x) %>%
     mutate(round_x = signif(round(x, round), signif),
            sign = sign(x),
            absx = abs(round_x),
