@@ -20,7 +20,8 @@ agg_data = function(data,
                     cols = names(data),
                     group_by = NULL,
                     agg_fun = function(x) sum(x, na.rm = TRUE),
-                    group_by2 = NULL){
+                    group_by2 = NULL,
+                    env = parent.frame()){
 
   COLS = unpack_cols(cols)
 
@@ -28,12 +29,9 @@ agg_data = function(data,
                                          group_by,
                                          unlist(COLS[[3]])))))
 
-  x = as.data.frame(sapply(first_expr,
-                           function(x) eval(parse(text = x),
-                                            envir = data),
-                           simplify = FALSE),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE)
+  x = transmute(data,
+                !!!lapply(first_expr,
+                          function(x) rlang::parse_quo(x, env = env)))
 
   if (is.null(group_by)) {
     group_by = not_numeric(x)
