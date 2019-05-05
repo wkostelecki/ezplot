@@ -21,6 +21,10 @@
 #' line_plot(df, "week", c("value", "units"))
 #' line_plot(df, "week", "value", yoy = TRUE)
 #' }
+#' \donttest{
+#' line_plot(mtcars, "cyl", "1", "cyl")
+#' }
+#'
 line_plot = function(data,
                      x,
                      y,
