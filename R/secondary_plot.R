@@ -11,15 +11,16 @@
 #' @return A ggplot object.
 #' @export
 #' @examples
-#' df = ez_data2()
-#' secondary_plot(df, "obs", "units", "price", "xsec")
-#' df = tibble::rownames_to_column(mtcars, "name")
-#' secondary_plot(df, "name", "mpg", "hp")
-#' secondary_plot(df, "name", c(MPG = "mpg"), c(HP = "hp"), ylim1 = c(0, 35), ylim2 = c(0, 350))
+#' library(tsibbledata)
+#' secondary_plot(pelt, "Year", "Hare", "Lynx")
+#' secondary_plot(pelt, "Year", c("Hare Population" = "Hare"), c("Lynx Population" = "Lynx"))
+#' secondary_plot(aus_production, "Quarter", "Beer", "Cement",
+#'                "lubridate::quarter(Quarter)",
+#'                ylim1 = c(0, 600), ylim2 = c(0, 3000))
 secondary_plot = function (data,
                            x,
-                           y1,
-                           y2,
+                           y1 = "1",
+                           y2 = "1",
                            facet_x = NULL,
                            facet_y = NULL,
                            size_line = 1,
@@ -29,6 +30,9 @@ secondary_plot = function (data,
                            ylim2 = NULL,
                            reorder = c("facet_x", "facet_y"),
                            size = 14) {
+
+  y1 = nameifnot(y1)
+  y2 = nameifnot(y2)
 
   cols = c(x = unname(x),
            y1 = unname(y1),
@@ -84,9 +88,12 @@ secondary_plot = function (data,
                       y2_range,
                       y1_range,
                       y2_adjust)
+  col1 = ez_col(1)
+  col2 = ez_col(2)[2]
 
   g = ggplot(gdata) +
     geom_line(aes(x, y1),
+              colour = col1,
               size = size_line,
               na.rm = TRUE) +
     theme_ez(size) +
@@ -95,15 +102,16 @@ secondary_plot = function (data,
 
   g = g + geom_line(aes(x, y2),
                     size = size_line,
-                    colour = ez_col(1),
+                    colour = col2,
                     na.rm = TRUE) +
     scale_y_continuous(labels = labels_y1,
                        sec.axis = sec_axis(as.formula(sec_trans),
                                            labels = labels_y2,
                                            name = names(y2))) +
-    theme(axis.title.y.right = element_text(color = ez_col(1)),
-          # axis.ticks.y.right = element_line(color = ez_col(1)),
-          axis.text.y.right = element_text(color = ez_col(1)))
+    theme(axis.title.y.right = element_text(color = col2, vjust = 1),
+          axis.text.y.right = element_text(color = col2),
+          axis.title.y.left = element_text(color = col1),
+          axis.text.y.left = element_text(color = col1))
 
   if (lubridate::is.Date(gdata[["x"]])) {
     g = g + scale_x_date(labels = function(x) format(x, "%b %y"))
