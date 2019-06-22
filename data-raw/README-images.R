@@ -1,14 +1,33 @@
 library(ezplot)
 library(ggplot2)
-df = ez_data()
+library(dplyr)
+library(tsibbledata)
 
-ez_png(line_plot(df, "year2", "value", "fct", size = 10),
-       height = 200,
-       width = 350,
-       resx = 1.5,
-       # check = FALSE,
-       "man/figures/README-line_plot.png",
-       dir.create = TRUE)
+
+# line_plot 1 -------------------------------------------------------------
+
+line_plot(ansett, x = "Week", y = "Passengers") %>%
+        ez_png(height = 200,
+               width = 350,
+               resx = 1.5,
+               # check = FALSE,
+               "man/figures/README-line_plot_1.png",
+               dir.create = TRUE)
+
+
+# line_plot 2 -------------------------------------------------------------
+
+line_plot(ansett, x = "Week",
+          y = c("Yearly Passengers" = "Passengers"),
+          group = "substr(Airports, 5, 7)",
+          facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
+          facet_scales = "free_y") %>%
+        ez_png("man/figures/README-line_plot_2.png",
+               height = 350,
+               width = 750,
+               resx = 1.5)
+
+
 
 ez_png(area_plot(df, "year2", "value", "fct", size = 10),
        height = 150,
@@ -42,11 +61,11 @@ ez_png(side_plot(df, "fct", c("units", "value", price = "~ value / units"), size
        "man/figures/README-side_plot.png",
        dir.create = TRUE)
 
-ez_png(secondary_plot(mtcars, "row.names(mtcars)",
-                      c("Miles Per Gallon" = "mpg"), c("Horse Power" = "hp"),
-                      ylim1 = c(0, 35),
-                      ylim2 = c(0, 350),
-                      size = 10),
+ez_png(secondary_plot(pelt, "Year",
+                      c("Hare Population" = "Hare"), c("Lynx Population" = "Lynx"),
+                      size = 10,
+                      ylim1 = c(0, 160e3),
+                      ylim2 = c(0, 80e3)),
        height = 200,
        width = 350,
        resx = 1.5,
