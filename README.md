@@ -33,8 +33,6 @@ ezplot provides high-level wrapper functions for common chart types with reduced
 - `side_plot()`
 - `secondary_plot()`
 
-## Example data
-
 ``` r
 library(ezplot)
 library(tsibbledata)
@@ -42,16 +40,14 @@ library(tsibbledata)
 ## Usage
 ### line_plot
 ``` r
-line_plot(ansett, x = "Week", y = "Passengers") # weekly aggregate "Passengers""
+line_plot(ansett, x = "Week", y = "Passengers") # weekly aggregate "Passengers"
 ```
 ![](man/figures/README-line_plot_1.png)<!-- -->
 ``` r
-# Other examples
+# Other examples:
 line_plot(ansett, x = "Week", y = "Passengers", group = "Airports") # adds "Airports" grouping
 line_plot(ansett, x = "Week", y = "Passengers", group = "Airports", facet_x = "Class") # facet by "Class"
 ```
-
-
 
 ``` r
 # with group and two facets:
@@ -65,9 +61,13 @@ line_plot(ansett, x = "Week",
 
 ### area_plot (stacked area)
 ``` r
-# plot value sales with "year2" aggregation along x-axis
-area_plot(df, "year2", "value")
-area_plot(df, "year2", "value", "num") # adds "num" grouping
+area_plot(ansett, x = "Week", y = "Passengers")
+area_plot(ansett, x = "Week", y = c("Weekly Passengers" = "Passengers"), "Class")
+```
+
+``` r
+# Other examples:
+area_plot(ansett, "Week", "Passengers", "Class")
 area_plot(df, "year2", "value", "num", "fct") # add "fct" faceting with facet_wrap().
 area_plot(df, "year2", "value", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
 ```
@@ -75,9 +75,10 @@ area_plot(df, "year2", "value", "num", "fct", "char") # add "fct" and "char" fac
 
 ### bar_plot
 ``` r
-# plot value sales with "year2" aggregation along x-axis
-bar_plot(df, x = "year", y = "value")
-bar_plot(df, x = "year", y = "value", group = "fct") # adds "fct" grouping
+bar_plot(ansett, x = "lubridate::year(Week)", y = "Passengers")
+bar_plot(ansett, x = "lubridate::year(Week)",
+         y = c("Yearly Passengers" = "Passengers"), "Class")
+
 ```
 ![](man/figures/README-bar_plot.png)<!-- -->
 

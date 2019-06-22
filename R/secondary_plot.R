@@ -14,9 +14,12 @@
 #' library(tsibbledata)
 #' secondary_plot(pelt, "Year", "Hare", "Lynx")
 #' secondary_plot(pelt, "Year", c("Hare Population" = "Hare"), c("Lynx Population" = "Lynx"))
-#' secondary_plot(aus_production, "Quarter", "Beer", "Cement",
+#' secondary_plot(aus_production, "Quarter",
+#'                c("Quarterly Beer Production (megalitres)" = "Beer"),
+#'                c("Quarterly Cement Production (tonnes)" = "Cement"),
 #'                "lubridate::quarter(Quarter)",
-#'                ylim1 = c(0, 600), ylim2 = c(0, 3000))
+#'                ylim1 = c(0, 600), ylim2 = c(0, 3000),
+#'                size = 10)
 secondary_plot = function (data,
                            x,
                            y1 = "1",

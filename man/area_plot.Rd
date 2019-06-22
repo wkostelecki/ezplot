@@ -4,11 +4,11 @@
 \alias{area_plot}
 \title{area_plot}
 \usage{
-area_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  size = 14, reorder = c("group", "facet_x", "facet_y"),
-  palette = ez_col, labels_y = if (position == "fill") {    
-  function(x) ez_labels(100 * x, append = "\%") } else {     ez_labels },
-  labels_x = identity, use_theme = theme_ez, position = c("stack",
+area_plot(data, x, y = "1", group = NULL, facet_x = NULL,
+  facet_y = NULL, size = 14, reorder = c("group", "facet_x",
+  "facet_y"), palette = ez_col, labels_y = if (position == "fill") {   
+   function(x) ez_labels(100 * x, append = "\%") } else {     ez_labels },
+  labels_x = NULL, use_theme = theme_ez, position = c("stack",
   "fill"), facet_scales = "fixed", facet_ncol = NULL)
 }
 \arguments{

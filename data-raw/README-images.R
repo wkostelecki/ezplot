@@ -4,14 +4,21 @@ library(dplyr)
 library(tsibbledata)
 
 
+# data overview -----------------------------------------------------------
+
+lapply(objects("package:tsibbledata"),
+       function(x) head(eval(parse(text = x)))) %>%
+        setNames(objects("package:tsibbledata"))
+
+
 # line_plot 1 -------------------------------------------------------------
 
 line_plot(ansett, x = "Week", y = "Passengers") %>%
-        ez_png(height = 200,
+        ez_png("man/figures/README-line_plot_1.png",
+               height = 200,
                width = 350,
                resx = 1.5,
                # check = FALSE,
-               "man/figures/README-line_plot_1.png",
                dir.create = TRUE)
 
 
@@ -27,23 +34,28 @@ line_plot(ansett, x = "Week",
                width = 750,
                resx = 1.5)
 
+# area_plot ---------------------------------------------------------------
 
 
-ez_png(area_plot(df, "year2", "value", "fct", size = 10),
-       height = 150,
-       width = 250,
-       resx = 1.5,
-       # check = FALSE,
-       "man/figures/README-area_plot.png",
-       dir.create = TRUE)
 
-ez_png(bar_plot(df, x = "year", y = "value", group = "fct", size = 10),
-       height = 150,
-       width = 250,
-       resx = 1.5,
-       # check = FALSE,
-       "man/figures/README-bar_plot.png",
-       dir.create = TRUE)
+area_plot(ansett, x = "Week",
+          y = c("Weekly Passengers" = "Passengers"), "Class") %>%
+        ez_png("man/figures/README-area_plot.png",
+               height = 300,
+               width = 500,
+               resx = 1.5,
+               dir.create = TRUE)
+
+
+# bar_plot ----------------------------------------------------------------
+
+bar_plot(ansett, x = "lubridate::year(Week)",
+         y = c("Yearly Passengers" = "Passengers"), "Class") %>%
+        ez_png("man/figures/README-bar_plot.png",
+               height = 300,
+               width = 500,
+               resx = 1.5,
+               dir.create = TRUE)
 
 ez_png(waterfall_plot(df, "year", "units", "fct", size = 10),
        height = 150,
