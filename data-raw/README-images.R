@@ -57,6 +57,23 @@ bar_plot(ansett, x = "lubridate::year(Week)",
                resx = 1.5,
                dir.create = TRUE)
 
+
+# tile_plot ---------------------------------------------------------------
+
+nyc_bikes %>%
+        mutate(duration = as.numeric(stop_time - start_time)) %>%
+        filter(between(duration, 0, 16)) %>%
+        tile_plot(c("Hour of Day" = "lubridate::hour(start_time)"),
+                  c("Ride Duration (min)" = "duration - duration %% 2 + 1")) %>%
+        ez_png("man/figures/README-tile_plot.png",
+               height = 200,
+               width = 400,
+               resx = 1.5,
+               dir.create = TRUE)
+
+# waterfall ---------------------------------------------------------------
+
+
 ez_png(waterfall_plot(df, "year", "units", "fct", size = 10),
        height = 150,
        width = 250,

@@ -84,9 +84,14 @@ bar_plot(ansett, x = "lubridate::year(Week)",
 
 ### tile_plot
 ``` r
-tile_plot(df, "year", "char", "value")
-tile_plot(df, "year", "char", "value", "fct", "num")
+nyc_bikes %>% 
+  mutate(duration = as.numeric(stop_time - start_time)) %>% 
+  filter(between(duration, 0, 16)) %>% 
+  tile_plot(c("Hour of Day" = "lubridate::hour(start_time)"),
+            c("Ride Duration (min)" = "duration - duration %% 2 + 1"))
 ```
+![](man/figures/README-tile_plot.png)<!-- -->
+
 
 ### waterfall_plot
 ```r
