@@ -67,7 +67,7 @@ area_plot(ansett, x = "Week", y = c("Weekly Passengers" = "Passengers"), "Class"
 
 ``` r
 area_plot(ansett, "Week",
-          y = c("Yearly Passengers" = "Passengers"),
+          y = c("Weekly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",
           facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
           facet_scales = "free_y")

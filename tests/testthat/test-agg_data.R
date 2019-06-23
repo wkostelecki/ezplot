@@ -99,7 +99,7 @@ test_that("select renamings", {
 
 context("more agg_data")
 
-test_that("", {
+test_that("mixed groups/numeric/categorical", {
 
   df = agg_data(mtcars,
                 c(x = "factor(cyl)", y = "hp", z = "factor(am)"),
@@ -129,3 +129,24 @@ test_that("", {
 
 })
 
+test_that("mixed '~' works", {
+
+  df = agg_data(airquality,
+                c("Month",
+                  "Ozone",
+                  x = "Wind",
+                  "Ozone / Wind * Solar.R",
+                  "~ Ozone / Wind * Solar.R"),
+                group_by = "Month")
+  target = airquality %>%
+    group_by(Month) %>%
+    summarize(Ozone2 = sum(Ozone, na.rm = TRUE),
+              x = sum(Wind, na.rm = TRUE),
+              `Ozone / Wind * Solar.R` = sum(Ozone / Wind * Solar.R, na.rm = TRUE),
+              Solar.R = sum(Solar.R, na.rm = TRUE)) %>%
+    as.data.frame() %>%
+    rename(Ozone = Ozone2) %>%
+    mutate(`~ Ozone / Wind * Solar.R` = Ozone / x * Solar.R) %>%
+    select(-Solar.R)
+  expect_equal(df, target)
+})
