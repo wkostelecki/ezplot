@@ -10,9 +10,13 @@
 #' @import ggplot2 dplyr
 #' @examples
 #'
-#' df = ez_data()
-#' line_plot(df, "week", "value", use_theme = ggplot2::theme_bw)
-#' line_plot(df, "week", c("Sales ($)" = "value"))
+#' library(tsibbledata)
+#' line_plot(pelt, "Year", "Hare")
+#' line_plot(pelt, "Year", c("Hare", "Lynx"))
+#'
+#' line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
+#' line_plot(pelt, "Year", c("Hare Population" = "Hare"))
+#'
 #' \donttest{
 #' line_plot(df, "week", "value", "char")
 #' line_plot(df, "week", "value", "char", "fct")
@@ -21,9 +25,13 @@
 #' line_plot(df, "week", c("value", "units"))
 #' line_plot(df, "week", "value", yoy = TRUE)
 #' }
+#' \donttest{
+#' line_plot(mtcars, "cyl", "1", "cyl")
+#' }
+#'
 line_plot = function(data,
                      x,
-                     y,
+                     y = "1",
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,
@@ -130,7 +138,7 @@ line_plot = function(data,
                                        hjust = 1))
   }
 
-  g
+  g + coord_cartesian(expand = FALSE)
 
 }
 

@@ -11,14 +11,14 @@ test_that("agg_data base cases", {
                  group_by(cyl = as.character(cyl)) %>%
                  summarize_all(sum) %>%
                  as.data.frame %>%
-                 select_(.dots = names(mtcars)))
+                 select(!!!syms(names(mtcars))))
 
   expect_equal(agg_data(mtcars, group_by = "cyl"),
                mtcars %>%
                  group_by(cyl) %>%
                  summarize_all(sum) %>%
                  as.data.frame %>%
-                 select_(.dots = names(mtcars)))
+                 select(!!!syms(names(mtcars))))
 
   expect_equal(agg_data(mtcars, c(x = "as.character(cyl)", "mpg")),
                mtcars %>%
@@ -94,3 +94,38 @@ test_that("select renamings", {
   )
 
 })
+
+
+
+context("more agg_data")
+
+test_that("other cases", {
+
+  df = agg_data(mtcars,
+                c(x = "factor(cyl)", y = "hp", z = "factor(am)"),
+                group_by = c(x = "factor(cyl)", z = "factor(am)"))
+
+  expected = mtcars %>%
+    group_by(x = factor(cyl), z = factor(am)) %>%
+    summarize(y = sum(hp)) %>%
+    ungroup() %>%
+    select(x, y, z) %>%
+    as.data.frame()
+
+  expect_equal(df, expected)
+
+  df = agg_data(mtcars,
+                c(x = "factor(cyl)", y = "hp", z = "factor(am)"),
+                group_by = c(z = "factor(am)", x = "factor(cyl)"))
+
+  expected = mtcars %>%
+    group_by(z = factor(am), x = factor(cyl)) %>%
+    summarize(y = sum(hp)) %>%
+    ungroup() %>%
+    select(x, y, z) %>%
+    as.data.frame()
+
+  expect_equal(df, expected)
+
+})
+

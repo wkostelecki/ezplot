@@ -36,7 +36,7 @@
 #' }
 area_plot = function(data,
                      x,
-                     y,
+                     y = "1",
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,
@@ -48,7 +48,7 @@ area_plot = function(data,
                      } else {
                        ez_labels
                      },
-                     labels_x = identity,
+                     labels_x = NULL,
                      use_theme = theme_ez,
                      position = c("stack", "fill"),
                      facet_scales = "fixed",
@@ -116,19 +116,26 @@ area_plot = function(data,
                0)
   }
 
-  scale_x = switch(paste(class(gdata[["x"]]), collapse = ", "),
-                   "Date" = scale_x_date,
-                   "POSIXct, POSIXt" = scale_x_datetime,
-                   "numeric" = scale_x_continuous,
-                   "integer" = scale_x_continuous,
-                   scale_x_discrete)
+
+  if (!is.null(labels_x)) {
+
+    scale_x = if (lubridate::is.Date(gdata[["x"]])) {
+      scale_x_date
+    } else if (lubridate::is.POSIXt(gdata[["x"]])) {
+      scale_x_datetime
+    } else {
+      scale_x_continuous
+    }
+
+    g = g + scale_x(labels = labels_x)
+
+  }
 
   g +
     xlab(names(x)) +
     ylab(names(y)) +
     scale_y_continuous(labels = labels_y,
                        expand = expand) +
-    scale_x(labels = labels_x) +
     ylab(names(y)) +
     use_theme(size)
 

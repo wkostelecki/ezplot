@@ -20,7 +20,8 @@ distribution_plot = function (data,
            facet_x = unname(facet_x))
 
   data = data %>%
-    transmute_(.dots = cols)
+    transmute(!!!lapply(cols,
+                        function(x) rlang::parse_quo(x, env = parent.frame())))
 
   binwidth = diff(range(data[["x"]])) / nbins
 
@@ -32,7 +33,7 @@ distribution_plot = function (data,
   }
 
   data = data %>%
-    group_by_(.dots = intersect(c("facet_x"), names(cols))) %>%
+    group_by(!!!syms(intersect("facet_x", names(cols)))) %>%
     mutate(facet_x_label = paste0(
       ifelse(facet_x == "", "",
              paste0(facet_x, "\n")),
