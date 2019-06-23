@@ -3,10 +3,9 @@
 #' @param data A data frame
 #' @export
 #' @examples
+#' library(tsibbledata)
 #' \dontrun{
-#' ez_app(mtcars)
-#' ez_app(airquality)
-#' ez_app(ez_data())
+#' ez_app(ansett)
 #' }
 ez_app = function(data) {
 
@@ -33,7 +32,7 @@ ez_server = function(data) {
       args = list(data = data,
                   x = input$x,
                   y = input$y,
-                  group = input$group,
+                  group = if (input$group == "Select group") NULL else input$group,
                   size = 20)
 
       args = args[intersect(names(args), names(as.list(args(plot_f))))]
@@ -61,13 +60,13 @@ ez_ui = function(data) {
         width = 3,
         shiny::selectInput("y",
                            "Select y-value",
-                           c("1", names(data)))
+                           c("1", names(data)[sapply(data, is.numeric)]))
       ),
       shiny::column(
         width = 3,
         shiny::selectInput("group",
                            "Select group",
-                           names(data))
+                           c("Select group", names(data)))
       ),
       shiny::column(
         width = 3,
