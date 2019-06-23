@@ -1,11 +1,30 @@
+# ezplot
+
+<!-- badges: start -->
 [![Coverage status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://codecov.io/github/wkostelecki/ezplot?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/ezplot)](https://cran.r-project.org/package=ezplot)
 [![Travis build status](https://travis-ci.org/wkostelecki/ezplot.svg?branch=master)](https://travis-ci.org/wkostelecki/ezplot)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ezplot)](http://www.r-pkg.org/pkg/ezplot)
 [![Total CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](http://www.r-pkg.org/pkg/ezplot)
+<!-- badges: end -->
+
+## Installation
+
+You can install the released version of ezplot from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("ezplot")
+```
+
+... or the latest stable Github version with: 
+
+``` r
+devtools::install_github("wkostelecki/ezplot")
+```
 
 ## Overview
-ezplot provides high-level wrapper functions for common chart types with reduced typing and easy faceting:
+
+ezplot provides high-level wrapper functions for common chart types with reduced typing and easy faceting. e.g.:
 - `line_plot()`
 - `area_plot()`
 - `bar_plot()`
@@ -14,82 +33,88 @@ ezplot provides high-level wrapper functions for common chart types with reduced
 - `side_plot()`
 - `secondary_plot()`
 
-## Installation
-devtools::install_github("wkostelecki/ezplot")
-
-## Example data
 ``` r
 library(ezplot)
-df = ez_data()
-summary(df)
-
-#>     char              fct            num          day                  week                month                 year          year2          units            value       
-#> Length:21924       X    :7308   Min.   :10   Min.   :2012-01-01   Min.   :2012-01-01   Min.   :2012-01-01   Min.   :2012   Min.   :2012   Min.   : 2.383   Min.   : 14.30  
-#> Class :character   Y    :7308   1st Qu.:10   1st Qu.:2013-04-01   1st Qu.:2013-03-31   1st Qu.:2013-04-01   1st Qu.:2013   1st Qu.:2013   1st Qu.: 8.420   1st Qu.: 57.94  
-#> Mode  :character   Other:7308   Median :15   Median :2014-07-02   Median :2014-06-29   Median :2014-07-01   Median :2014   Median :2014   Median :11.018   Median : 76.32  
-#>                                 Mean   :15   Mean   :2014-07-02   Mean   :2014-06-29   Mean   :2014-06-17   Mean   :2014   Mean   :2014   Mean   :10.991   Mean   : 78.29  
-#>                                 3rd Qu.:20   3rd Qu.:2015-10-02   3rd Qu.:2015-09-27   3rd Qu.:2015-10-01   3rd Qu.:2015   3rd Qu.:2016   3rd Qu.:13.507   3rd Qu.: 96.27  
-#>                                 Max.   :20   Max.   :2016-12-31   Max.   :2016-12-25   Max.   :2016-12-01   Max.   :2016   Max.   :2017   Max.   :19.656   Max.   :190.04  
-
+library(tsibbledata)
 ```
 ## Usage
 ### line_plot
 ``` r
-# plot value sales with "year2" aggregation along x-axis
-line_plot(df, x = "year2", y = "value")
-line_plot(df, x = "year2", y = "value", group = "fct") # adds "fct" grouping
-
-# add "fct" faceting with facet_wrap()
-line_plot(df, x = "year2", y = "value", group = "num", facet_x = "fct")
-
-# add "fct" and "char" faceting with facet_grid()
-line_plot(df, x = "year2", y = "value", group = "num",
-          facet_x = "fct", facet_y = "char")
+line_plot(ansett, x = "Week", y = "Passengers") # weekly aggregate "Passengers"
 ```
-![](man/figures/README-line_plot.png)<!-- -->
+![](man/figures/README-line_plot_1.png)<!-- -->
+``` r
+# Other examples:
+line_plot(ansett, x = "Week", y = "Passengers", group = "Airports") # adds "Airports" grouping
+line_plot(ansett, x = "Week", y = "Passengers", group = "Airports", facet_x = "Class") # facet by "Class"
+```
+
+``` r
+# with group and two facets:
+line_plot(ansett, x = "Week",
+          y = c("Weekly Passengers" = "Passengers"),
+          group = "substr(Airports, 5, 7)",
+          facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
+          facet_scales = "free_y")
+```
+![](man/figures/README-line_plot_2.png)<!-- -->
 
 ### area_plot (stacked area)
 ``` r
-# plot value sales with "year2" aggregation along x-axis
-area_plot(df, "year2", "value")
-area_plot(df, "year2", "value", "num") # adds "num" grouping
-area_plot(df, "year2", "value", "num", "fct") # add "fct" faceting with facet_wrap().
-area_plot(df, "year2", "value", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
+area_plot(ansett, x = "Week", y = "Passengers")
+area_plot(ansett, x = "Week", y = c("Weekly Passengers" = "Passengers"), "Class")
 ```
 ![](man/figures/README-area_plot.png)<!-- -->
 
+``` r
+# Other examples:
+area_plot(ansett, "Week",
+          y = c("Yearly Passengers" = "Passengers"),
+          group = "substr(Airports, 5, 7)",
+          facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
+          facet_scales = "free_y")
+```
+
 ### bar_plot
 ``` r
-# plot value sales with "year2" aggregation along x-axis
-bar_plot(df, x = "year", y = "value")
-bar_plot(df, x = "year", y = "value", group = "fct") # adds "fct" grouping
+bar_plot(ansett, x = "lubridate::year(Week)", y = "Passengers")
+bar_plot(ansett, x = "lubridate::year(Week)",
+         y = c("Yearly Passengers" = "Passengers"), "Class")
+
 ```
 ![](man/figures/README-bar_plot.png)<!-- -->
 
 ### tile_plot
 ``` r
-tile_plot(df, "year", "char", "value")
-tile_plot(df, "year", "char", "value", "fct", "num")
+nyc_bikes %>% 
+  mutate(duration = as.numeric(stop_time - start_time)) %>% 
+  filter(between(duration, 0, 16)) %>% 
+  tile_plot(c("Hour of Day" = "lubridate::hour(start_time)"),
+            c("Ride Duration (min)" = "duration - duration %% 2 + 1"))
 ```
+![](man/figures/README-tile_plot.png)<!-- -->
+
 
 ### waterfall_plot
 ```r
-waterfall_plot(df, "year", "value", "fct")
+waterfall_plot(aus_retail, "lubridate::year(Month)", "Turnover", "sub(' Territory', '\nTerritory', State)", rotate_xlabel = TRUE)
 ```
 ![](man/figures/README-waterfall_plot.png)<!-- -->
 
 ### side_plot
 ```r
-side_plot(df, "fct", c("units", "value", price = "~ value / units"))
+side_plot(PBS, "paste(Concession, Type, sep = ' - ')", 
+          c("Scripts", "Cost", "Average Cost" = "~ Cost / Scripts"))
 ```
 ![](man/figures/README-side_plot.png)<!-- -->
 
 ### secondary_plot
 Plot with secondary y-axis.
 ```r
-secondary_plot(mtcars, "row.names(mtcars)",
-                      c("Miles Per Gallon" = "mpg"), c("Horse Power" = "hp"),
-                      ylim1 = c(0, 35),
-                      ylim2 = c(0, 350))
+secondary_plot(pelt, "Year",
+               c("Hare Population" = "Hare"), c("Lynx Population" = "Lynx"),
+               size = 10,
+               ylim1 = c(0, 160e3),
+               ylim2 = c(0, 80e3))
 ```
 ![](man/figures/README-secondary_plot.png)<!-- -->
