@@ -63,7 +63,7 @@ bar_plot(ansett, x = "lubridate::year(Week)",
 nyc_bikes %>%
         mutate(duration = as.numeric(stop_time - start_time)) %>%
         filter(between(duration, 0, 16)) %>%
-        tile_plot(c("Hour of Day" = "lubridate::hour(start_time)"),
+        tile_plot(c("Hour of Day" = "lubridate::hour(start_time) + 0.5"),
                   c("Ride Duration (min)" = "duration - duration %% 2 + 1")) %>%
         ez_png("man/figures/README-tile_plot.png",
                height = 200,
@@ -73,25 +73,27 @@ nyc_bikes %>%
 
 # waterfall ---------------------------------------------------------------
 
-waterfall_plot(aus_retail, "lubridate::year(Month)", "Turnover", "State", rotate_xlabel = TRUE) %>%
+waterfall_plot(aus_retail,
+               "lubridate::year(Month)",
+               "Turnover",
+               "sub(' Territory', '\nTerritory', State)",
+               rotate_xlabel = TRUE) %>%
         ez_png("man/figures/README-waterfall_plot.png",
                height = 300,
-               width = 500,
+               width = 450,
                resx = 1.5,
                dir.create = TRUE)
-
-
 
 # side_plot ---------------------------------------------------------------
 
 side_plot(PBS, "paste(Concession, Type, sep = ' - ')",
           c("Scripts", "Cost", "Average Cost" = "~ Cost / Scripts")) %>%
-ez_png(height = 150,
-       width = 600,
-       resx = 1.5,
-       # check = FALSE,
-       "man/figures/README-side_plot.png",
-       dir.create = TRUE)
+        ez_png(height = 150,
+               width = 600,
+               resx = 1.5,
+               # check = FALSE,
+               "man/figures/README-side_plot.png",
+               dir.create = TRUE)
 
 # secondary_plot ----------------------------------------------------------
 

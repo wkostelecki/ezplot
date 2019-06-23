@@ -33,18 +33,17 @@ ezplot provides high-level wrapper functions for common chart types with reduced
 - `side_plot()`
 - `secondary_plot()`
 
+## Usage
 ``` r
 library(ezplot)
 library(tsibbledata)
 ```
-## Usage
 ### line_plot
 ``` r
 line_plot(ansett, x = "Week", y = "Passengers") # weekly aggregate "Passengers"
 ```
 ![](man/figures/README-line_plot_1.png)<!-- -->
 ``` r
-# Other examples:
 line_plot(ansett, x = "Week", y = "Passengers", group = "Airports") # adds "Airports" grouping
 line_plot(ansett, x = "Week", y = "Passengers", group = "Airports", facet_x = "Class") # facet by "Class"
 ```
@@ -67,7 +66,6 @@ area_plot(ansett, x = "Week", y = c("Weekly Passengers" = "Passengers"), "Class"
 ![](man/figures/README-area_plot.png)<!-- -->
 
 ``` r
-# Other examples:
 area_plot(ansett, "Week",
           y = c("Yearly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",
@@ -78,8 +76,10 @@ area_plot(ansett, "Week",
 ### bar_plot
 ``` r
 bar_plot(ansett, x = "lubridate::year(Week)", y = "Passengers")
-bar_plot(ansett, x = "lubridate::year(Week)",
-         y = c("Yearly Passengers" = "Passengers"), "Class")
+bar_plot(ansett, 
+         x = "lubridate::year(Week)",
+         y = c("Yearly Passengers" = "Passengers"),
+         "Class")
 
 ```
 ![](man/figures/README-bar_plot.png)<!-- -->
@@ -97,13 +97,18 @@ nyc_bikes %>%
 
 ### waterfall_plot
 ```r
-waterfall_plot(aus_retail, "lubridate::year(Month)", "Turnover", "sub(' Territory', '\nTerritory', State)", rotate_xlabel = TRUE)
+waterfall_plot(aus_retail,
+               "lubridate::year(Month)",
+               "Turnover", 
+               "sub(' Territory', '\nTerritory', State)", 
+               rotate_xlabel = TRUE)
 ```
 ![](man/figures/README-waterfall_plot.png)<!-- -->
 
 ### side_plot
 ```r
-side_plot(PBS, "paste(Concession, Type, sep = ' - ')", 
+side_plot(PBS, 
+          "paste(Concession, Type, sep = ' - ')", 
           c("Scripts", "Cost", "Average Cost" = "~ Cost / Scripts"))
 ```
 ![](man/figures/README-side_plot.png)<!-- -->

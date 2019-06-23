@@ -7,8 +7,12 @@
 #' @param labels_z label formatting function
 #' @export
 #' @examples
-#' tile_plot(mtcars, "factor(cyl)", "factor(am)", "mpg")
-#' tile_plot(ez_data(), "year", "char", "value", "fct", "num", reorder = NULL)
+#' library(tsibbledata)
+#' nyc_bikes %>%
+#'   mutate(duration = as.numeric(stop_time - start_time)) %>%
+#'   filter(between(duration, 0, 16)) %>%
+#'   tile_plot(c("Hour of Day" = "lubridate::hour(start_time) + 0.5"),
+#'             c("Ride Duration (min)" = "duration - duration %% 2 + 1"))
 tile_plot = function(data,
                      x,
                      y,
@@ -20,6 +24,7 @@ tile_plot = function(data,
                      labels_x = NULL,
                      labels_y = NULL,
                      labels_z = ez_labels,
+                     zlim = function(x) c(pmin(0, x[1]), pmax(0, x[2])),
                      palette = ez_jet,
                      reorder = c('facet_x', 'facet_y')){
 
@@ -47,7 +52,8 @@ tile_plot = function(data,
     geom_tile(aes(x, y, fill = z)) +
     scale_fill_gradientn(names(z),
                          colours = palette(100),
-                         labels = labels_z)
+                         labels = labels_z,
+                         limits = zlim)
 
   g = quick_facet(g, ncol = facet_ncol)
 
@@ -64,3 +70,4 @@ tile_plot = function(data,
   g
 
 }
+
