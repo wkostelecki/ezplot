@@ -52,7 +52,7 @@ line_plot(ansett, x = "Week", y = "Passengers", group = "Airports", facet_x = "C
 ``` r
 # with group and two facets:
 line_plot(ansett, x = "Week",
-          y = c("Yearly Passengers" = "Passengers"),
+          y = c("Weekly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",
           facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
           facet_scales = "free_y")
@@ -64,14 +64,16 @@ line_plot(ansett, x = "Week",
 area_plot(ansett, x = "Week", y = "Passengers")
 area_plot(ansett, x = "Week", y = c("Weekly Passengers" = "Passengers"), "Class")
 ```
+![](man/figures/README-area_plot.png)<!-- -->
 
 ``` r
 # Other examples:
-area_plot(ansett, "Week", "Passengers", "Class")
-area_plot(df, "year2", "value", "num", "fct") # add "fct" faceting with facet_wrap().
-area_plot(df, "year2", "value", "num", "fct", "char") # add "fct" and "char" faceting with facet_grid().
+area_plot(ansett, "Week",
+          y = c("Yearly Passengers" = "Passengers"),
+          group = "substr(Airports, 5, 7)",
+          facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
+          facet_scales = "free_y")
 ```
-![](man/figures/README-area_plot.png)<!-- -->
 
 ### bar_plot
 ``` r
@@ -95,22 +97,24 @@ nyc_bikes %>%
 
 ### waterfall_plot
 ```r
-waterfall_plot(df, "year", "value", "fct")
+waterfall_plot(aus_retail, "lubridate::year(Month)", "Turnover", "sub(' Territory', '\nTerritory', State)", rotate_xlabel = TRUE)
 ```
 ![](man/figures/README-waterfall_plot.png)<!-- -->
 
 ### side_plot
 ```r
-side_plot(df, "fct", c("units", "value", price = "~ value / units"))
+side_plot(PBS, "paste(Concession, Type, sep = ' - ')", 
+          c("Scripts", "Cost", "Average Cost" = "~ Cost / Scripts"))
 ```
 ![](man/figures/README-side_plot.png)<!-- -->
 
 ### secondary_plot
 Plot with secondary y-axis.
 ```r
-secondary_plot(mtcars, "row.names(mtcars)",
-                      c("Miles Per Gallon" = "mpg"), c("Horse Power" = "hp"),
-                      ylim1 = c(0, 35),
-                      ylim2 = c(0, 350))
+secondary_plot(pelt, "Year",
+               c("Hare Population" = "Hare"), c("Lynx Population" = "Lynx"),
+               size = 10,
+               ylim1 = c(0, 160e3),
+               ylim2 = c(0, 80e3))
 ```
 ![](man/figures/README-secondary_plot.png)<!-- -->

@@ -25,7 +25,7 @@ line_plot(ansett, x = "Week", y = "Passengers") %>%
 # line_plot 2 -------------------------------------------------------------
 
 line_plot(ansett, x = "Week",
-          y = c("Yearly Passengers" = "Passengers"),
+          y = c("Weekly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",
           facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
           facet_scales = "free_y") %>%
@@ -73,22 +73,28 @@ nyc_bikes %>%
 
 # waterfall ---------------------------------------------------------------
 
+waterfall_plot(aus_retail, "lubridate::year(Month)", "Turnover", "State", rotate_xlabel = TRUE) %>%
+        ez_png("man/figures/README-waterfall_plot.png",
+               height = 300,
+               width = 500,
+               resx = 1.5,
+               dir.create = TRUE)
 
-ez_png(waterfall_plot(df, "year", "units", "fct", size = 10),
-       height = 150,
-       width = 250,
-       resx = 1.5,
-       # check = FALSE,
-       "man/figures/README-waterfall_plot.png",
-       dir.create = TRUE)
 
-ez_png(side_plot(df, "fct", c("units", "value", price = "~ value / units"), size = 10),
-       height = 150,
-       width = 450,
+
+# side_plot ---------------------------------------------------------------
+
+side_plot(PBS, "paste(Concession, Type, sep = ' - ')",
+          c("Scripts", "Cost", "Average Cost" = "~ Cost / Scripts")) %>%
+ez_png(height = 150,
+       width = 600,
        resx = 1.5,
        # check = FALSE,
        "man/figures/README-side_plot.png",
        dir.create = TRUE)
+
+# secondary_plot ----------------------------------------------------------
+
 
 ez_png(secondary_plot(pelt, "Year",
                       c("Hare Population" = "Hare"), c("Lynx Population" = "Lynx"),
