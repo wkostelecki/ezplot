@@ -53,14 +53,15 @@ Aggregates a data.frame and creates a stacked area chart.
 }
 \examples{
 \donttest{
-df = ez_data()
-area_plot(df, "year2", "units", size = 10)
-area_plot(df, "year2", "units", "fct", use_theme = ggplot2::theme_bw)
-area_plot(df, "year2", "units", "fct", reorder = NULL)
-area_plot(df, "year2", "units", "fct", position = "fill")
-area_plot(df, "year2", c("Unit Sales" = "units"), size = 12)
-area_plot(df, "year2", c("Unit Sales" = "units"), "fct", "char")
-area_plot(df, "year2", "units", "fct", "char", "num", position = "fill")
-area_plot(df, "as.character(year)", "units")
+library(tsibbledata)
+area_plot(ansett, x = "Week", y = "Passengers")
+area_plot(ansett,
+          x = "Week", y = c("Weekly Passengers" = "Passengers"), "Class")
+area_plot(ansett, "Week",
+          y = c("Weekly Passengers" = "Passengers"),
+          group = "substr(Airports, 5, 7)",
+          facet_x = "substr(Airports, 1, 3)",
+          facet_y = "Class",
+          facet_scales = "free_y")
 }
 }

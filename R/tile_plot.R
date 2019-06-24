@@ -5,14 +5,18 @@
 #' @param z A named character. Evaluates to a column and is mapped to the fill
 #'   colour of the tiles.
 #' @param labels_z label formatting function
+#' @param zlim argument for \code{scale_fill_grandientn(limits = zlim)}
 #' @export
 #' @examples
+#' \dontrun{
 #' library(tsibbledata)
+#' library(dplyr)
 #' nyc_bikes %>%
 #'   mutate(duration = as.numeric(stop_time - start_time)) %>%
 #'   filter(between(duration, 0, 16)) %>%
 #'   tile_plot(c("Hour of Day" = "lubridate::hour(start_time) + 0.5"),
 #'             c("Ride Duration (min)" = "duration - duration %% 2 + 1"))
+#' }
 tile_plot = function(data,
                      x,
                      y,
