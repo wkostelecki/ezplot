@@ -89,8 +89,10 @@ unpack_cols = function(x) {
 
   list(cols = x,
        direct = x[!with_tilde],
-       indirect_vars = lapply(x[with_tilde], function(x) all.vars(as.formula(x))),
-       indirect_expr = stats::setNames(sub(" *~ *", "", x[with_tilde]), x[with_tilde]))
+       indirect_vars = lapply(x[with_tilde],
+                              function(x) all.vars(as.formula(x))),
+       indirect_expr = stats::setNames(sub(" *~ *", "", x[with_tilde]),
+                                       x[with_tilde]))
 
 }
 

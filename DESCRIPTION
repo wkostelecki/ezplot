@@ -1,12 +1,12 @@
 Package: ezplot
 Type: Package
 Title: Functions for Common Chart Types
-Version: 0.2.2
+Version: 0.3.0
 Author: Wojtek Kostelecki
 Maintainer: Wojtek Kostelecki <wojtek.kostelecki@gmail.com>
 Description: Wrapper for the 'ggplot2' package that creates a variety of common
-    charts (e.g. bar, line, area, ROC, waterfall, pie) while aiming to reduce
-    typing. 
+  charts (e.g. bar, line, area, ROC, waterfall, pie) while aiming to reduce
+  typing. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -27,7 +27,9 @@ Suggests:
     psych,
     rmarkdown,
     ROCR,
+    stats,
     testthat,
     tibble,
-    tidyr
+    tidyr,
+    tsibbledata
 VignetteBuilder: knitr

@@ -11,14 +11,14 @@ test_that("agg_data base cases", {
                  group_by(cyl = as.character(cyl)) %>%
                  summarize_all(sum) %>%
                  as.data.frame %>%
-                 select_(.dots = names(mtcars)))
+                 select(!!!syms(names(mtcars))))
 
   expect_equal(agg_data(mtcars, group_by = "cyl"),
                mtcars %>%
                  group_by(cyl) %>%
                  summarize_all(sum) %>%
                  as.data.frame %>%
-                 select_(.dots = names(mtcars)))
+                 select(!!!syms(names(mtcars))))
 
   expect_equal(agg_data(mtcars, c(x = "as.character(cyl)", "mpg")),
                mtcars %>%
@@ -93,4 +93,60 @@ test_that("select renamings", {
       as.data.frame
   )
 
+})
+
+
+
+context("more agg_data")
+
+test_that("mixed groups/numeric/categorical", {
+
+  df = agg_data(mtcars,
+                c(x = "factor(cyl)", y = "hp", z = "factor(am)"),
+                group_by = c(x = "factor(cyl)", z = "factor(am)"))
+
+  expected = mtcars %>%
+    group_by(x = factor(cyl), z = factor(am)) %>%
+    summarize(y = sum(hp)) %>%
+    ungroup() %>%
+    select(x, y, z) %>%
+    as.data.frame()
+
+  expect_equal(df, expected)
+
+  df = agg_data(mtcars,
+                c(x = "factor(cyl)", y = "hp", z = "factor(am)"),
+                group_by = c(z = "factor(am)", x = "factor(cyl)"))
+
+  expected = mtcars %>%
+    group_by(z = factor(am), x = factor(cyl)) %>%
+    summarize(y = sum(hp)) %>%
+    ungroup() %>%
+    select(x, y, z) %>%
+    as.data.frame()
+
+  expect_equal(df, expected)
+
+})
+
+test_that("mixed '~' works", {
+
+  df = agg_data(airquality,
+                c("Month",
+                  "Ozone",
+                  x = "Wind",
+                  "Ozone / Wind * Solar.R",
+                  "~ Ozone / Wind * Solar.R"),
+                group_by = "Month")
+  target = airquality %>%
+    group_by(Month) %>%
+    summarize(Ozone2 = sum(Ozone, na.rm = TRUE),
+              x = sum(Wind, na.rm = TRUE),
+              `Ozone / Wind * Solar.R` = sum(Ozone / Wind * Solar.R, na.rm = TRUE),
+              Solar.R = sum(Solar.R, na.rm = TRUE)) %>%
+    as.data.frame() %>%
+    rename(Ozone = Ozone2) %>%
+    mutate(`~ Ozone / Wind * Solar.R` = Ozone / x * Solar.R) %>%
+    select(-Solar.R)
+  expect_equal(df, target)
 })
