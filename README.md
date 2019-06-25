@@ -86,10 +86,10 @@ bar_plot(ansett,
 
 ### tile_plot
 ``` r
-nyc_bikes %>% 
-  mutate(duration = as.numeric(stop_time - start_time)) %>% 
-  filter(between(duration, 0, 16)) %>% 
-  tile_plot(c("Hour of Day" = "lubridate::hour(start_time)"),
+nyc_bikes %>%
+  mutate(duration = as.numeric(stop_time - start_time)) %>%
+  filter(between(duration, 0, 16)) %>%
+  tile_plot(c("Trip Start (Hour of Day)" = "lubridate::hour(start_time) + 0.5"),
             c("Ride Duration (min)" = "duration - duration %% 2 + 1"))
 ```
 ![](man/figures/README-tile_plot.png)<!-- -->

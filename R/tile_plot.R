@@ -20,7 +20,7 @@
 tile_plot = function(data,
                      x,
                      y,
-                     z = "1",
+                     z = c(Count = "1"),
                      facet_x = NULL,
                      facet_y = NULL,
                      size = 14,
