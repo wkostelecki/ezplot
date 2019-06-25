@@ -9,16 +9,15 @@ test_that("ez_png works", {
 
   suppressWarnings(
     expect_error(ez_png(ggplot2::ggplot(),
-                      "temp/test.png",
+                      "temp_dir/test.png",
                       check = FALSE))
   )
 
   ez_png(ggplot2::ggplot(),
-         "temp/test.png",
+         "temp_dir/test.png",
          dir.create = TRUE,
          check = FALSE)
-  expect_true(file.exists("temp/test.png"))
-  unlink("temp/test.png")
-  unlink("temp")
+  expect_true(file.exists("temp_dir/test.png"))
+  unlink("temp_dir", recursive = TRUE)
 
 })

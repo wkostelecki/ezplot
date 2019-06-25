@@ -1,5 +1,5 @@
 covr = covr::package_coverage()
-report(covr)
+covr::report(covr)
 
 devtools::spell_check()
 devtools::check() # R CMD check
