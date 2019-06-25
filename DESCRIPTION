@@ -16,7 +16,6 @@ Imports:
     dplyr,
     forcats,
     ggplot2,
-    magrittr,
     rlang
 RoxygenNote: 6.1.1
 Suggests:
