@@ -8,10 +8,9 @@
 #'   all columns in \code{cols}.
 #' @return A data.frame.
 #' @examples
-#' library(magrittr)
-#' ezplot:::reorder_levels(mtcars, "cyl", "1") %>% str
-#' ezplot:::reorder_levels(mtcars, "cyl", "1", FALSE) %>% str
-#' ezplot:::reorder_levels(mtcars, "cyl", "mpg") %>% str
+#' str(ezplot:::reorder_levels(mtcars, "cyl", "1"))
+#' str(ezplot:::reorder_levels(mtcars, "cyl", "1", FALSE))
+#' str(ezplot:::reorder_levels(mtcars, "cyl", "mpg"))
 reorder_levels = function(data,
                           cols = c("group", "facet_x", "facet_y"),
                           y = "y",
