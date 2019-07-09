@@ -34,3 +34,5 @@ calendar_plot = function(data, x, y, ...) {
           axis.ticks = element_blank())
 
 }
+
+globalVariables(c("month", "week"))
