@@ -27,9 +27,10 @@ calendar_plot = function(data, x, y, ...) {
     mutate(month_week = week - min(week) + 1) %>%
     ungroup
 
-  tile_plot(gdata, "wday", "month_week", "y", "year", "month", reorder = NULL, ...) +
-    scale_y_reverse(labels = function(x) rep("", length(x)))
-
-
+  tile_plot(gdata, "wday", "month_week", "y", "year", "month", reorder = NULL, ...) %>%
+    quick_facet(scales = "free_y") +
+    scale_y_reverse(labels = function(x) rep("", length(x))) +
+    theme(panel.spacing.y = grid::unit(0, "lines"),
+          axis.ticks = element_blank())
 
 }
