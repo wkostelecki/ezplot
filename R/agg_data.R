@@ -30,9 +30,10 @@ agg_data = function(data,
   first_expr = nameifnot(unique(unname(c(COLS[["direct"]],
                                          group_by,
                                          unlist(COLS[["indirect_vars"]])))))
-  x = transmute(data,
-                !!!lapply(first_expr,
-                          function(x) rlang::parse_quo(x, env = env)))
+  x = data %>%
+    as.data.frame %>%
+    transmute(!!!lapply(first_expr,
+                        function(x) rlang::parse_quo(x, env = env)))
 
   if (is.null(group_by)) {
     group_by = not_numeric(x)
@@ -52,6 +53,7 @@ agg_data = function(data,
   x = x %>%
     group_by(!!!syms(group_by[!(names(group_by) %in% names(x))])) %>%
     summarize_if(function(x) is.numeric(x) | is.logical(x), agg_fun) %>%
+    # summarize_all(agg_fun) %>%
     as.data.frame(check.names = FALSE)
 
   if (length(COLS[["indirect_vars"]]) > 0) {

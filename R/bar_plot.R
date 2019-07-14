@@ -11,8 +11,11 @@
 #' @export
 #'
 #' @examples
+#' library(tsibbledata)
+#' library(lubridate)
+#' bar_plot(ansett, "year(Week)", "Passengers")
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class")
 #' df = ez_data()
-#' bar_plot(df, "year", "units")
 #' bar_plot(df, "year", c("Share of Units" = "units"), "fct", position = "fill")
 #' bar_plot(df, "year", "units", "fct", use_theme = ggplot2::theme_bw)
 #' bar_plot(df, "year", "units", "fct", reorder = NULL, label_pos = "both")
@@ -21,7 +24,7 @@
 #' bar_plot(df, "year", "ifelse(fct == 'X', units, -units)", "fct", label_pos = "both")
 bar_plot = function(data,
                     x,
-                    y,
+                    y = "1",
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,

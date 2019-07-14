@@ -18,7 +18,7 @@ test_that("multiple y works", {
   expect_equal(names(g[["data"]]), c("x", "group", "y"))
 })
 
-test_that("specia case x-axes work", {
+test_that("special case x-axes work", {
   df = ez_data()
 
   g = line_plot(df, "day", "units", yoy = TRUE)
