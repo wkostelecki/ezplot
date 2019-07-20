@@ -35,4 +35,4 @@ calendar_plot = function(data, x, y, ...) {
 
 }
 
-globalVariables(c("month", "week"))
+globalVariables(c("month", "week", "year"))
