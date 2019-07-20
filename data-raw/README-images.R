@@ -1,7 +1,12 @@
+
+# packages ----------------------------------------------------------------
+
+
 library(ezplot)
 library(ggplot2)
 library(dplyr)
 library(tsibbledata)
+library(lubridate)
 
 
 # data overview -----------------------------------------------------------
@@ -108,4 +113,15 @@ ez_png(secondary_plot(pelt, "Year",
        resx = 1.5,
        "man/figures/README-secondary_plot.png",
        dir.create = TRUE)
+
+
+
+
+line_plot(gafa_stock, "Date", c("Closing Stock Price" = "Close"),
+          yoy = TRUE, facet_y = "Symbol",
+          facet_scales = "free_y",
+          labels = function(x) ez_labels(x, prepend = "$")) %>%
+  ez_png("man/figures/README-line_plot_3.png",
+         width = 500, height = 300)
+
 

@@ -48,8 +48,8 @@ line_plot(ansett, x = "Week", y = "Passengers", group = "Airports") # adds "Airp
 line_plot(ansett, x = "Week", y = "Passengers", group = "Airports", facet_x = "Class") # facet by "Class"
 ```
 
+with group and two facets:
 ``` r
-# with group and two facets:
 line_plot(ansett, x = "Week",
           y = c("Weekly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",
@@ -57,6 +57,15 @@ line_plot(ansett, x = "Week",
           facet_scales = "free_y")
 ```
 ![](man/figures/README-line_plot_2.png)<!-- -->
+
+With YOY comparisons:
+``` r
+line_plot(gafa_stock, "Date", c("Closing Stock Price" = "Close"),
+          yoy = TRUE, facet_y = "Symbol",
+          facet_scales = "free_y",
+          labels = function(x) ez_labels(x, prepend = "$"))
+```
+![](man/figures/README-line_plot_3.png)<!-- -->
 
 ### area_plot (stacked area)
 ``` r

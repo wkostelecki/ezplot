@@ -45,24 +45,9 @@ A ggplot object.
 Creates line plots.
 }
 \examples{
-
 library(tsibbledata)
 line_plot(pelt, "Year", "Hare")
 line_plot(pelt, "Year", c("Hare", "Lynx"))
-
 line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
 line_plot(pelt, "Year", c("Hare Population" = "Hare"))
-
-\donttest{
-line_plot(df, "week", "value", "char")
-line_plot(df, "week", "value", "char", "fct")
-line_plot(df, "week", "value", "char", "fct", "num", facet_scales = "free_y")
-line_plot(df, "year2", "~ value / units", "char", "fct", "num")
-line_plot(df, "week", c("value", "units"))
-line_plot(df, "week", "value", yoy = TRUE)
-}
-\donttest{
-line_plot(mtcars, "cyl", "1", "cyl")
-}
-
 }
