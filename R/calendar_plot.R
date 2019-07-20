@@ -21,8 +21,8 @@ calendar_plot = function(data, x, y, ...) {
     mutate(wday = factor(wd[lubridate::wday(x)], wd),
            week = lubridate::epiweek(x),
            year = lubridate::year(x),
-           month = factor(month.name[lubridate::month(x)], month.name),
-           week = ifelse(month == "December" & week == 1, 53, week)) %>%
+           month = factor(month.abb[lubridate::month(x)], month.abb),
+           week = ifelse(month == "Dec" & week == 1, 53, week)) %>%
     group_by(year, month) %>%
     mutate(month_week = week - min(week) + 1) %>%
     ungroup
