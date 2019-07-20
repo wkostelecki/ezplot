@@ -15,13 +15,16 @@
 #' library(lubridate)
 #' bar_plot(ansett, "year(Week)", "Passengers")
 #' bar_plot(ansett, "year(Week)", "Passengers", "Class")
-#' df = ez_data()
-#' bar_plot(df, "year", c("Share of Units" = "units"), "fct", position = "fill")
-#' bar_plot(df, "year", "units", "fct", use_theme = ggplot2::theme_bw)
-#' bar_plot(df, "year", "units", "fct", reorder = NULL, label_pos = "both")
-#' bar_plot(df, "year", c(Units = "units"), "fct", "char")
-#' bar_plot(df, "year", "units", "fct", "char", "num")
-#' bar_plot(df, "year", "ifelse(fct == 'X', units, -units)", "fct", label_pos = "both")
+#' bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
+
+#' bar_plot(ansett, "Airports", "Passengers", "Class", use_theme = ggplot2::theme_bw)
+#' bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
+#' bar_plot(ansett, "sub('-.*', '', Airports)", c("Total Passengers" = "Passengers"),
+#'          "Class",
+#'          "sub('.*-', '', Airports)")
+#' bar_plot(ansett, "Airports",
+#'          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
+#'          "Class", label_pos = "both")
 bar_plot = function(data,
                     x,
                     y = "1",

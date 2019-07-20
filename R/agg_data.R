@@ -10,14 +10,14 @@
 #' @importFrom rlang syms
 #' @export
 #' @examples
-#' df = ez_data()
-#' agg_data(df, c(Units = "units", Value = "value"))
-#' agg_data(df["fct"])
-#' agg_data(df[c("fct", "value")])
-#' agg_data(df, "value", "fct")
-#' agg_data(df, "value", c("fct", "year"))
-#' agg_data(df, c(x = "year", y = "value"), c(x = "year"))
-#' agg_data(mtcars, c(x = "cyl", y = "1", group = "cyl"), c(x = "cyl", group = "cyl"))
+#' library(tsibbledata)
+#' agg_data(ansett, c("Passengers", count = "1"))
+#' agg_data(ansett["Class"])
+#' agg_data(ansett[c("Class", "Passengers")])
+#' agg_data(ansett, "Passengers", "Class")
+#' agg_data(ansett, "Passengers", c("Class", "Airports"))
+#' agg_data(ansett, c(x = "Airports", y = "Passengers"), c(x = "Airports"))
+#' agg_data(ansett, c(x = "Class", y = "1", group = "Airports"), c(x = "Class", group = "Airports"))
 agg_data = function(data,
                     cols = names(data),
                     group_by = NULL,
