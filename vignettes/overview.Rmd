@@ -1,0 +1,57 @@
+---
+title: "Overview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.align = "center"
+)
+```
+
+# Overview
+Use ezplot to quickly create presentation-ready charts that are also useful for
+exploratory data analysis. By default, ezplot functions aggregate multiple 
+values of y for repeated categories of x, group, facet_y and facet_x.
+
+```{r setup}
+library(ezplot)
+library(tsibbledata)
+library(ggplot2)
+```
+
+# line_plot
+## Weekly aggregation:
+```{r}
+line_plot(ansett, x = "Week", y = "Passengers")
+```
+
+## Add grouping:
+```{r}
+line_plot(ansett, x = "Week", y = "Passengers", group = "Class")
+```
+
+## Add faceting:
+```{r, fig.width = 7, fig.height = 6}
+line_plot(ansett, x = "Week", y = "Passengers",
+          group = "Class", facet_x = "Airports",
+          facet_scales = "free_y", size = 10) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.38, hjust = 1))
+```
+
+## See YOY comparisons:
+```{r, fig.height = 5}
+line_plot(gafa_stock, "Date", c("Closing Stock Price" = "Close"),
+          facet_y = "Symbol",
+          facet_scales = "free_y",
+          yoy = TRUE,
+          labels = function(x) ez_labels(x, prepend = "$"))
+```
+
