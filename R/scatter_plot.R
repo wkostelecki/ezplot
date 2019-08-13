@@ -20,7 +20,7 @@ scatter_plot = function(data, x,  y, group = NULL,
   gdata = data %>%
     as.data.frame() %>%
     transmute(!!!lapply(cols,
-                        function(x) rlang::parse_quo(x, env = env))) %>%
+                        function(x) rlang::parse_quo(x, env = env)))
 
   if (!exists("group", gdata)) {
     gdata[["group"]] = ""
