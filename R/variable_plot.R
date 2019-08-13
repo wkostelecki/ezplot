@@ -23,6 +23,7 @@
 #'                 "Expenditure\nGrowth (%)" = "Expenditure",
 #'                 "Unemployment (%)" = "Unemployment"),
 #'                facet_x = "Country", geom = "bar")
+#' variable_plot(PBS, "Type", "Scripts", "Concession", switch = "y", geom = "col")
 variable_plot = function(data,
                          x, y,
                          group = NULL,
@@ -115,7 +116,8 @@ variable_plot = function(data,
                  position = "dodge",
                  na.rm = TRUE) +
         scale_fill_manual(NULL,
-                          values = ez_col(length(unique(gdata[["group"]]))))
+                          values = ez_col(length(unique(gdata[["group"]]))),
+                          labels = function(x) paste0(x, "   "))
 
       g = g +
         geom_text(aes(x, value,

@@ -22,4 +22,7 @@ test_that("variable_plot bar geom works", {
                              facet_x = "Country", geom = "bar"),
                NA)
 
+  expect_error(variable_plot(tsibbledata::PBS, "Type", "Scripts", "Concession", switch = "y", geom = "col"),
+               NA)
+
 })

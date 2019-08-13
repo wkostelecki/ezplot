@@ -55,4 +55,5 @@ variable_plot(subset(hh_budget, Year > 2013), "Year",
                 "Expenditure\\nGrowth (\%)" = "Expenditure",
                 "Unemployment (\%)" = "Unemployment"),
                facet_x = "Country", geom = "bar")
+variable_plot(PBS, "Type", "Scripts", "Concession", switch = "y", geom = "col")
 }
