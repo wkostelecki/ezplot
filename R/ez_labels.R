@@ -19,7 +19,7 @@ ez_labels = function(x,
                      append = "",
                      as_factor = FALSE,
                      round = Inf,
-                     signif = Inf){
+                     signif = Inf) {
   unit = data.frame(order = 0:8,
                     unit = c("", "k", "m", "b", "t", "qd", "qn", "sx", "sp"),
                     stringsAsFactors = FALSE)
@@ -52,7 +52,7 @@ superscript = function(x) {
   unicode = c("\u2070", "\u00B9", "\u00B2", "\u00B3", "\u2074",
               "\u2075", "\u2076", "\u2077", "\u2078", "\u2079")
   sapply(strsplit(as.character(x), ""),
-         function(x){
+         function(x) {
            paste(unicode[as.numeric(x) + 1], collapse = "")
          })
 

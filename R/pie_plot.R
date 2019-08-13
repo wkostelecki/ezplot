@@ -31,7 +31,7 @@ pie_plot = function (data,
                      signif = 3,
                      palette = ez_col,
                      reorder = c("x", "facet_x", "facet_y"),
-                     label_x = 0.8){
+                     label_x = 0.8) {
 
   stopifnot(label_x >= 0 & label_x <=1)
 

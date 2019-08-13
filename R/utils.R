@@ -5,12 +5,12 @@
 #' @param g A ggplot object.
 #' @param ncol Number of facet columns.
 #' @param ... Arguments to pass to \code{facet_grid} or \code{facet_wrap}.
-quick_facet = function(g, ncol = NULL, ...){
-  if (all(c("facet_x", "facet_y") %in% names(g[["data"]]))){
+quick_facet = function(g, ncol = NULL, ...) {
+  if (all(c("facet_x", "facet_y") %in% names(g[["data"]]))) {
     g = g + facet_grid(facet_y ~ facet_x, ...)
-  } else if ("facet_x" %in% names(g[["data"]])){
+  } else if ("facet_x" %in% names(g[["data"]])) {
     g = g + facet_wrap(~ facet_x, ncol = ncol, ...)
-  } else if ("facet_y" %in% names(g[["data"]])){
+  } else if ("facet_y" %in% names(g[["data"]])) {
     g = g + facet_wrap(~ facet_y, ncol = ncol, ...)
   }
   g
@@ -28,7 +28,7 @@ quick_facet = function(g, ncol = NULL, ...){
 #' no_null(NULL)
 #' no_null("NULL")
 #' no_null("NOPE")
-no_null = function(x){
+no_null = function(x) {
   warning("Function no_null() is deprecated and will be removed.")
   if (is.null(x) || (x == "NULL" & length(x) == 1)) return(NULL) else return(x)
 }
@@ -39,7 +39,7 @@ no_null = function(x){
 #'
 #' @return A character vector.
 #'
-not_numeric = function(x){
+not_numeric = function(x) {
   ind = sapply(x, function(x) !is.numeric(x))
   names(ind)[ind]
 }
@@ -53,9 +53,9 @@ not_numeric = function(x){
 #'
 #' @return A named vector.
 #'
-nameifnot = function(x, make.names = FALSE){
+nameifnot = function(x, make.names = FALSE) {
   stopifnot(is.character(x))
-  if (is.null(names(x))){
+  if (is.null(names(x))) {
     names(x) = x
   } else {
     ind = is.na(names(x)) | names(x) == ""

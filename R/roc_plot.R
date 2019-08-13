@@ -34,7 +34,7 @@ roc_plot = function(data, actual, fitted,
                     facet_x = NULL,
                     facet_y = NULL,
                     size = 14,
-                    env = parent.frame()){
+                    env = parent.frame()) {
 
   cols = c(actual = unname(actual),
            fitted = unname(fitted),

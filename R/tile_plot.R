@@ -30,7 +30,7 @@ tile_plot = function(data,
                      labels_z = ez_labels,
                      zlim = function(x) c(pmin(0, x[1]), pmax(0, x[2])),
                      palette = ez_jet,
-                     reorder = c('facet_x', 'facet_y')){
+                     reorder = c('facet_x', 'facet_y')) {
 
 
   cols = c(x = unname(x),
@@ -48,7 +48,7 @@ tile_plot = function(data,
     reorder_levels(cols = reorder,
                    y = 'z')
 
-  if (!('y' %in% names(gdata))){
+  if (!('y' %in% names(gdata))) {
     gdata[["y"]] = ""
   }
 

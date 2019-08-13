@@ -115,7 +115,7 @@ bar_plot = function(data,
 
 
 
-  if ("group" %in% names(gdata)){
+  if (exists("group", gdata)) {
 
     fill_pal = rev(palette(length(unique(gdata[["group"]]))))
     g = g +
@@ -136,7 +136,7 @@ bar_plot = function(data,
   }
 
   if (label_pos %in% c("inside", "both")) {
-    if ("group" %in% names(gdata)){
+    if (exists("group", gdata)) {
       g = g +
         geom_text(aes(x, ylabel_pos,
                       label = ylabel_text,
