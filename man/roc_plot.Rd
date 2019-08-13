@@ -5,7 +5,7 @@
 \title{roc_plot}
 \usage{
 roc_plot(data, actual, fitted, group = NULL, facet_x = NULL,
-  facet_y = NULL, size = 14)
+  facet_y = NULL, size = 14, env = parent.frame())
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -21,6 +21,8 @@ roc_plot(data, actual, fitted, group = NULL, facet_x = NULL,
 \item{facet_y}{A character. Evaluates to a column.}
 
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \description{
 roc_plot

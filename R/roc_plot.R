@@ -33,7 +33,8 @@ roc_plot = function(data, actual, fitted,
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,
-                    size = 14){
+                    size = 14,
+                    env = parent.frame()){
 
   cols = c(actual = unname(actual),
            fitted = unname(fitted),
@@ -44,7 +45,7 @@ roc_plot = function(data, actual, fitted,
   data = data %>%
     ungroup %>%
     transmute(!!!lapply(cols,
-                        function(x) rlang::parse_quo(x, env = parent.frame())))
+                        function(x) rlang::parse_quo(x, env = env)))
 
   total = data %>%
     tibble::as_tibble() %>%
