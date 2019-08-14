@@ -32,7 +32,7 @@ secondary_plot = function (data,
                            ylim1 = NULL,
                            ylim2 = NULL,
                            reorder = c("facet_x", "facet_y"),
-                           size = 14) {
+                           size = 11) {
 
   y1 = nameifnot(y1)
   y2 = nameifnot(y2)

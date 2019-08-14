@@ -1,7 +1,7 @@
 Package: ezplot
 Type: Package
 Title: Functions for Common Chart Types
-Version: 0.2.2
+Version: 0.3.1
 Author: Wojtek Kostelecki
 Maintainer: Wojtek Kostelecki <wojtek.kostelecki@gmail.com>
 Description: Wrapper for the 'ggplot2' package that creates a variety of common
@@ -16,7 +16,6 @@ Imports:
     dplyr,
     forcats,
     ggplot2,
-    magrittr,
     rlang
 RoxygenNote: 6.1.1
 Suggests:

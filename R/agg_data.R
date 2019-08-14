@@ -10,29 +10,30 @@
 #' @importFrom rlang syms
 #' @export
 #' @examples
-#' df = ez_data()
-#' agg_data(df, c(Units = "units", Value = "value"))
-#' agg_data(df["fct"])
-#' agg_data(df[c("fct", "value")])
-#' agg_data(df, "value", "fct")
-#' agg_data(df, "value", c("fct", "year"))
-#' agg_data(df, c(x = "year", y = "value"), c(x = "year"))
-#' agg_data(mtcars, c(x = "cyl", y = "1", group = "cyl"), c(x = "cyl", group = "cyl"))
+#' library(tsibbledata)
+#' agg_data(ansett, c("Passengers", count = "1"))
+#' agg_data(ansett["Class"])
+#' agg_data(ansett[c("Class", "Passengers")])
+#' agg_data(ansett, "Passengers", "Class")
+#' agg_data(ansett, "Passengers", c("Class", "Airports"))
+#' agg_data(ansett, c(x = "Airports", y = "Passengers"), c(x = "Airports"))
+#' agg_data(ansett, c(x = "Class", y = "1", group = "Airports"), c(x = "Class", group = "Airports"))
 agg_data = function(data,
                     cols = names(data),
                     group_by = NULL,
                     agg_fun = function(x) sum(x, na.rm = TRUE),
                     group_by2 = NULL,
-                    env = parent.frame()){
+                    env = parent.frame()) {
 
   COLS = unpack_cols(cols)
 
   first_expr = nameifnot(unique(unname(c(COLS[["direct"]],
                                          group_by,
                                          unlist(COLS[["indirect_vars"]])))))
-  x = transmute(data,
-                !!!lapply(first_expr,
-                          function(x) rlang::parse_quo(x, env = env)))
+  x = data %>%
+    as.data.frame %>%
+    transmute(!!!lapply(first_expr,
+                        function(x) rlang::parse_quo(x, env = env)))
 
   if (is.null(group_by)) {
     group_by = not_numeric(x)
@@ -52,6 +53,7 @@ agg_data = function(data,
   x = x %>%
     group_by(!!!syms(group_by[!(names(group_by) %in% names(x))])) %>%
     summarize_if(function(x) is.numeric(x) | is.logical(x), agg_fun) %>%
+    # summarize_all(agg_fun) %>%
     as.data.frame(check.names = FALSE)
 
   if (length(COLS[["indirect_vars"]]) > 0) {

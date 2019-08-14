@@ -10,7 +10,7 @@
 #' @examples
 #' library(ggplot2)
 #' ggplot(mtcars) + geom_point(aes(cyl, mpg)) + theme_ez()
-theme_ez = function (base_size = 11, base_family = ""){
+theme_ez = function (base_size = 11, base_family = "") {
   theme_grey(base_size = base_size,
              base_family = base_family) %+replace%
     theme(axis.text = element_text(size = rel(0.8),
@@ -44,5 +44,6 @@ theme_ez = function (base_size = 11, base_family = ""){
           axis.title.x = element_text(margin = margin(t = base_size / 2),
                                       colour = "grey30"),
           legend.position = "top",
-          legend.key = element_blank())
+          legend.key = element_blank(),
+          panel.spacing.y = grid::unit(1, "lines"))
 }

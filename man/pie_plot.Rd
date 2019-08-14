@@ -6,7 +6,7 @@
 \usage{
 pie_plot(data, x, y = "1", facet_x = NULL, facet_y = NULL,
   labels_y = function(x) ez_labels(x * 100, append = "\%", round = round,
-  signif = signif), size = 14, label_cutoff = 0.04, round = Inf,
+  signif = signif), size = 11, label_cutoff = 0.04, round = Inf,
   signif = 3, palette = ez_col, reorder = c("x", "facet_x",
   "facet_y"), label_x = 0.8)
 }
@@ -48,11 +48,9 @@ Creates pie charts.
 }
 \examples{
 \donttest{
-df = ez_data()
-pie_plot(df, "fct", "units")
-pie_plot(df, "fct", "units", reorder = NULL, label_x = 0.5)
-pie_plot(df, "fct", "units", "year", reorder = NULL, label_x = 0.5)
-pie_plot(df, "fct", "units", "year", "char")
-pie_plot(df, "fct", "units", "year", "char", reorder = NULL)
+library(tsibbledata)
+pie_plot(ansett, "Class", "Passengers")
+pie_plot(ansett, "Class", "Passengers", reorder = NULL, label_x = 0.5)
+pie_plot(ansett, "Class", "Passengers", "Airports", reorder = NULL, label_x = 0.5)
 }
 }

@@ -12,11 +12,11 @@ side_plot = function(data,
                      x,
                      y = "1",
                      labels_y = ez_labels,
-                     size = 14,
+                     size = 11,
                      palette = ez_col,
                      signif = 3,
                      reorder = TRUE,
-                     rescale_y = 1.25){
+                     rescale_y = 1.25) {
 
   y = nameifnot(y)
   y_names = names(y)

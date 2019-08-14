@@ -4,7 +4,7 @@
 \alias{side_plot}
 \title{side_plot}
 \usage{
-side_plot(data, x, y = "1", labels_y = ez_labels, size = 14,
+side_plot(data, x, y = "1", labels_y = ez_labels, size = 11,
   palette = ez_col, signif = 3, reorder = TRUE, rescale_y = 1.25)
 }
 \arguments{

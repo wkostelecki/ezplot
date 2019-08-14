@@ -5,11 +5,12 @@
 \title{area_plot}
 \usage{
 area_plot(data, x, y = "1", group = NULL, facet_x = NULL,
-  facet_y = NULL, size = 14, reorder = c("group", "facet_x",
+  facet_y = NULL, size = 11, reorder = c("group", "facet_x",
   "facet_y"), palette = ez_col, labels_y = if (position == "fill") {   
    function(x) ez_labels(100 * x, append = "\%") } else {     ez_labels },
   labels_x = NULL, use_theme = theme_ez, position = c("stack",
-  "fill"), facet_scales = "fixed", facet_ncol = NULL)
+  "fill"), facet_scales = "fixed", facet_ncol = NULL,
+  env = parent.frame())
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -44,6 +45,8 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{facet_ncol}{Option passed to ncol argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{NULL}.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \value{
 A ggplot object.
@@ -53,14 +56,15 @@ Aggregates a data.frame and creates a stacked area chart.
 }
 \examples{
 \donttest{
-df = ez_data()
-area_plot(df, "year2", "units", size = 10)
-area_plot(df, "year2", "units", "fct", use_theme = ggplot2::theme_bw)
-area_plot(df, "year2", "units", "fct", reorder = NULL)
-area_plot(df, "year2", "units", "fct", position = "fill")
-area_plot(df, "year2", c("Unit Sales" = "units"), size = 12)
-area_plot(df, "year2", c("Unit Sales" = "units"), "fct", "char")
-area_plot(df, "year2", "units", "fct", "char", "num", position = "fill")
-area_plot(df, "as.character(year)", "units")
+library(tsibbledata)
+area_plot(ansett, x = "Week", y = "Passengers")
+area_plot(ansett,
+          x = "Week", y = c("Weekly Passengers" = "Passengers"), "Class")
+area_plot(ansett, "Week",
+          y = c("Weekly Passengers" = "Passengers"),
+          group = "substr(Airports, 5, 7)",
+          facet_x = "substr(Airports, 1, 3)",
+          facet_y = "Class",
+          facet_scales = "free_y")
 }
 }

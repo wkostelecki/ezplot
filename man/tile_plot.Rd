@@ -4,9 +4,10 @@
 \alias{tile_plot}
 \title{tile_plot}
 \usage{
-tile_plot(data, x, y, z = "1", facet_x = NULL, facet_y = NULL,
-  size = 14, facet_ncol = NULL, labels_x = NULL, labels_y = NULL,
-  labels_z = ez_labels, palette = ez_jet, reorder = c("facet_x",
+tile_plot(data, x, y, z = c(Count = "1"), facet_x = NULL,
+  facet_y = NULL, size = 11, facet_ncol = NULL, labels_x = NULL,
+  labels_y = NULL, labels_z = ez_labels, zlim = function(x) c(pmin(0,
+  x[1]), pmax(0, x[2])), palette = ez_jet, reorder = c("facet_x",
   "facet_y"))
 }
 \arguments{
@@ -34,6 +35,8 @@ colour of the tiles.}
 
 \item{labels_z}{label formatting function}
 
+\item{zlim}{argument for \code{scale_fill_grandientn(limits = zlim)}}
+
 \item{palette}{Colour function.}
 
 \item{reorder}{A character vector specifying the group variables to reorder.
@@ -43,6 +46,13 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 Creates tile plots.
 }
 \examples{
-tile_plot(mtcars, "factor(cyl)", "factor(am)", "mpg")
-tile_plot(ez_data(), "year", "char", "value", "fct", "num", reorder = NULL)
+\dontrun{
+library(tsibbledata)
+library(dplyr)
+nyc_bikes \%>\%
+  mutate(duration = as.numeric(stop_time - start_time)) \%>\%
+  filter(between(duration, 0, 16)) \%>\%
+  tile_plot(c("Hour of Day" = "lubridate::hour(start_time) + 0.5"),
+            c("Ride Duration (min)" = "duration - duration \%\% 2 + 1"))
+}
 }

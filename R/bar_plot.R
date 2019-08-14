@@ -11,21 +11,27 @@
 #' @export
 #'
 #' @examples
-#' df = ez_data()
-#' bar_plot(df, "year", "units")
-#' bar_plot(df, "year", c("Share of Units" = "units"), "fct", position = "fill")
-#' bar_plot(df, "year", "units", "fct", use_theme = ggplot2::theme_bw)
-#' bar_plot(df, "year", "units", "fct", reorder = NULL, label_pos = "both")
-#' bar_plot(df, "year", c(Units = "units"), "fct", "char")
-#' bar_plot(df, "year", "units", "fct", "char", "num")
-#' bar_plot(df, "year", "ifelse(fct == 'X', units, -units)", "fct", label_pos = "both")
+#' library(tsibbledata)
+#' library(lubridate)
+#' bar_plot(ansett, "year(Week)", "Passengers")
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class")
+#' bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
+
+#' bar_plot(ansett, "Airports", "Passengers", "Class", use_theme = ggplot2::theme_bw)
+#' bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
+#' bar_plot(ansett, "sub('-.*', '', Airports)", c("Total Passengers" = "Passengers"),
+#'          "Class",
+#'          "sub('.*-', '', Airports)")
+#' bar_plot(ansett, "Airports",
+#'          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
+#'          "Class", label_pos = "both")
 bar_plot = function(data,
                     x,
-                    y,
+                    y = "1",
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,
-                    size = 14,
+                    size = 11,
                     width = NULL,
                     reorder = c("group", "facet_x", "facet_y"),
                     palette = ez_col,
@@ -109,7 +115,7 @@ bar_plot = function(data,
 
 
 
-  if ("group" %in% names(gdata)){
+  if (exists("group", gdata)) {
 
     fill_pal = rev(palette(length(unique(gdata[["group"]]))))
     g = g +
@@ -130,7 +136,7 @@ bar_plot = function(data,
   }
 
   if (label_pos %in% c("inside", "both")) {
-    if ("group" %in% names(gdata)){
+    if (exists("group", gdata)) {
       g = g +
         geom_text(aes(x, ylabel_pos,
                       label = ylabel_text,

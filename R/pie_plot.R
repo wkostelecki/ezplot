@@ -11,12 +11,10 @@
 #' @importFrom forcats fct_reorder
 #' @examples
 #' \donttest{
-#' df = ez_data()
-#' pie_plot(df, "fct", "units")
-#' pie_plot(df, "fct", "units", reorder = NULL, label_x = 0.5)
-#' pie_plot(df, "fct", "units", "year", reorder = NULL, label_x = 0.5)
-#' pie_plot(df, "fct", "units", "year", "char")
-#' pie_plot(df, "fct", "units", "year", "char", reorder = NULL)
+#' library(tsibbledata)
+#' pie_plot(ansett, "Class", "Passengers")
+#' pie_plot(ansett, "Class", "Passengers", reorder = NULL, label_x = 0.5)
+#' pie_plot(ansett, "Class", "Passengers", "Airports", reorder = NULL, label_x = 0.5)
 #' }
 pie_plot = function (data,
                      x,
@@ -27,13 +25,13 @@ pie_plot = function (data,
                                                      append = "%",
                                                      round = round,
                                                      signif = signif),
-                     size = 14,
+                     size = 11,
                      label_cutoff = 0.04,
                      round = Inf,
                      signif = 3,
                      palette = ez_col,
                      reorder = c("x", "facet_x", "facet_y"),
-                     label_x = 0.8){
+                     label_x = 0.8) {
 
   stopifnot(label_x >= 0 & label_x <=1)
 
