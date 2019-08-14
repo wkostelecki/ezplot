@@ -42,7 +42,9 @@ library(tsibbledata)
 ``` r
 line_plot(ansett, x = "Week", y = "Passengers") # weekly aggregate "Passengers"
 ```
+<p align="center">
 ![](man/figures/README-line_plot_1.png)<!-- -->
+</p>
 ``` r
 line_plot(ansett, x = "Week", y = "Passengers", group = "Airports") # adds "Airports" grouping
 line_plot(ansett, x = "Week", y = "Passengers", group = "Airports", facet_x = "Class") # facet by "Class"
