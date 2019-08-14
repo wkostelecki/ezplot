@@ -33,7 +33,7 @@ roc_plot = function(data, actual, fitted,
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,
-                    size = 14){
+                    size = 11) {
 
   cols = c(actual = unname(actual),
            fitted = unname(fitted),

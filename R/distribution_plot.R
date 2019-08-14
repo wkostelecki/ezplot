@@ -14,7 +14,7 @@ distribution_plot = function (data,
                               facet_x = NULL,
                               nbins = 20,
                               use_theme = theme_ez,
-                              size = 14) {
+                              size = 11) {
 
   cols = c(x = unname(x),
            facet_x = unname(facet_x))

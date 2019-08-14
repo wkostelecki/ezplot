@@ -41,7 +41,7 @@ area_plot = function(data,
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,
-                     size = 14,
+                     size = 11,
                      reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
                      labels_y = if (position == "fill") {

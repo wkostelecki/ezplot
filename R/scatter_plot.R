@@ -9,7 +9,7 @@
 #' scatter_plot(mtcars, "factor(cyl)", "hp")
 #' @export
 scatter_plot = function(data, x,  y, group = NULL,
-                    size = 14,
+                    size = 11,
                     point_size = 2.5) {
 
   cols = c(x = unname(x),
