@@ -43,15 +43,16 @@ waterfall_plot = function(data,
                           rotate_xlabel = FALSE,
                           bottom_label = TRUE,
                           ingroup_label = FALSE,
-                          n_x = 2){
+                          n_x = 2,
+                          env = parent.frame()){
 
   y = nameifnot(y)
 
   data = data %>%
     as.data.frame() %>%
-    mutate(..y.. = !!rlang::parse_quo(y, env = parent.frame())) %>%
-    group_by(x = !!rlang::parse_quo(x, env = parent.frame()),
-             group = !!rlang::parse_quo(group, env = parent.frame())) %>%
+    mutate(..y.. = !!rlang::parse_quo(y, env = env)) %>%
+    group_by(x = !!rlang::parse_quo(x, env = env),
+             group = !!rlang::parse_quo(group, env = env)) %>%
     summarize(y = sum(..y.., na.rm = TRUE)) %>%
     ungroup %>%
     mutate(x = factor(x),
