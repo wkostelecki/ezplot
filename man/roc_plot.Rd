@@ -5,7 +5,7 @@
 \title{roc_plot}
 \usage{
 roc_plot(data, actual, fitted, group = NULL, facet_x = NULL,
-  facet_y = NULL, size = 14, env = parent.frame())
+  facet_y = NULL, size = 11, env = parent.frame())
 }
 \arguments{
 \item{data}{A data.frame.}

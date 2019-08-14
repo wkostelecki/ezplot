@@ -4,7 +4,7 @@
 \alias{waterfall_plot}
 \title{waterfall_plot}
 \usage{
-waterfall_plot(data, x, y, group, size = 14, labels = ez_labels,
+waterfall_plot(data, x, y, group, size = 11, labels = ez_labels,
   label_rescale = 1, y_min = "auto", rescale_y = 1.1, n_signif = 3,
   rotate_xlabel = FALSE, bottom_label = TRUE, ingroup_label = FALSE,
   n_x = 2, env = parent.frame())

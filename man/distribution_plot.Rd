@@ -5,7 +5,7 @@
 \title{distribution_plot}
 \usage{
 distribution_plot(data, x, facet_x = NULL, nbins = 20,
-  use_theme = theme_ez, size = 14, env = parent.frame())
+  use_theme = theme_ez, size = 11, env = parent.frame())
 }
 \arguments{
 \item{data}{A data.frame.}
