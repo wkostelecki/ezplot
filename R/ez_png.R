@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @return NULL
-save_png = function (g, file, width, height, res, ..., vp = NULL){
+save_png = function (g, file, width, height, res, ..., vp = NULL) {
   png(file, width = width, height = height, res = res, ...)
   on.exit(dev.off())
   print(g, vp = vp)
@@ -40,7 +40,7 @@ ez_png = function (g,
                    ...,
                    vp = NULL,
                    dir.create = FALSE,
-                   check = TRUE){
+                   check = TRUE) {
 
   file = normalizePath(file, winslash = "/", mustWork = FALSE)
   dir_path = dirname(file)
@@ -63,7 +63,7 @@ ez_png = function (g,
 
 }
 
-open_file = function(file){
+open_file = function(file) {
   file = normalizePath(file, winslash = "/", mustWork = TRUE)
   system(sprintf("open \"%s\"", file))
   invisible(NULL)

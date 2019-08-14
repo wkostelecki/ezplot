@@ -77,7 +77,7 @@ line_plot = function(data,
 
   g = ggplot(gdata)
 
-  if ("group" %in% names(gdata)){
+  if ("group" %in% names(gdata)) {
     if (yoy) {
       g = g +
         geom_line(mapping = aes(x, y, colour = group),

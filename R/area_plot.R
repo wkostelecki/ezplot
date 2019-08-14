@@ -92,7 +92,7 @@ area_plot = function(data,
 
   g = ggplot(gdata)
 
-  if ("group" %in% names(gdata)){
+  if (exists("group", gdata)) {
     g = g +
       geom_col(aes(x, y,
                    fill = group),
