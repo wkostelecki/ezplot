@@ -16,7 +16,7 @@ ez_server = function(data) {
       output
     })
 
-    output$select_x = renderUI({
+    output$select_x = shiny::renderUI({
       shiny::req(full_data())
       shiny::selectInput("selected_x",
                          "Select x-value",
@@ -48,7 +48,7 @@ ez_server = function(data) {
 
       plot_f = utils::getFromNamespace(paste0(input$geom, "_plot"), "ezplot")
 
-      args = list(data = isolate(full_data()),
+      args = list(data = shiny::isolate(full_data()),
                   x = input$selected_x,
                   y = input$selected_y,
                   group = if (input$selected_group == "<No Group>") NULL else input$selected_group,

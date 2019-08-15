@@ -20,9 +20,11 @@ Imports:
 RoxygenNote: 6.1.1
 Suggests:
     covr,
+    DT,
     knitr,
     lubridate,
     methods,
+    miniUI,
     psych,
     rmarkdown,
     ROCR,
