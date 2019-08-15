@@ -147,6 +147,13 @@ nyc_bikes %>%
             c("Ride Duration (min)" = "duration - duration %% 2 + 1"))
 ```
 
+```{r tile_plot-2, fig.width = 7}
+tile_plot(vic_elec,
+          c("Temperature (C)" = "round(Temperature)"), 
+          c("Half-Hourly Demand (MW)" = "round(Demand, -2)"),
+          labels_y = ez_labels, facet_x = "year(Time)")
+```
+
 ### waterfall_plot
 ```{r waterfall_plot-1, fig.height = 4}
 waterfall_plot(aus_retail,

@@ -177,6 +177,15 @@ nyc_bikes %>%
 
 <img src="man/figures/README-tile_plot-1-1.png" style="display: block; margin: auto;" />
 
+``` r
+tile_plot(vic_elec,
+          c("Temperature (C)" = "round(Temperature)"), 
+          c("Half-Hourly Demand (MW)" = "round(Demand, -2)"),
+          labels_y = ez_labels, facet_x = "year(Time)")
+```
+
+<img src="man/figures/README-tile_plot-2-1.png" style="display: block; margin: auto;" />
+
 ### waterfall\_plot
 
 ``` r

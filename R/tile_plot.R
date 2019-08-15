@@ -59,6 +59,14 @@ tile_plot = function(data,
                          labels = labels_z,
                          limits = zlim)
 
+  if (!is.null(labels_x)) {
+    g = g + scale_x_continuous(labels = labels_x)
+  }
+
+  if (!is.null(labels_y)) {
+    g = g + scale_y_continuous(labels = labels_y)
+  }
+
   g = quick_facet(g, ncol = facet_ncol)
 
   g = g +
