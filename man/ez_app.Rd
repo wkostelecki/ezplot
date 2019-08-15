@@ -4,7 +4,7 @@
 \alias{ez_app}
 \title{ez_app}
 \usage{
-ez_app(data)
+ez_app(data = NULL)
 }
 \arguments{
 \item{data}{A data frame}
@@ -14,8 +14,7 @@ ez_app
 }
 \examples{
 \dontrun{
-ez_app(mtcars)
-ez_app(airquality)
-ez_app(ez_data())
+library(tsibbledata)
+ez_app(ansett)
 }
 }
