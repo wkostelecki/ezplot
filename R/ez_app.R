@@ -3,11 +3,11 @@
 #' @param data A data frame
 #' @export
 #' @examples
-#' library(tsibbledata)
 #' \dontrun{
+#' library(tsibbledata)
 #' ez_app(ansett)
 #' }
-ez_app = function(data) {
+ez_app = function(data = NULL) {
 
   ui = ez_ui(data)
 
@@ -47,34 +47,39 @@ ez_server = function(data) {
 #' @inheritParams ez_app
 #' @export
 ez_ui = function(data) {
-  shiny::fluidPage(
-    shiny::br(),
-    shiny::fluidRow(
-      shiny::column(
-        width = 3,
-        shiny::selectInput("x",
-                           "Select x-value",
-                           c(names(data), "row_number()"))
-      ),
-      shiny::column(
-        width = 3,
-        shiny::selectInput("y",
-                           "Select y-value",
-                           c("1", names(data)[sapply(data, is.numeric)]))
-      ),
-      shiny::column(
-        width = 3,
-        shiny::selectInput("group",
-                           "Select group",
-                           c("Select group", names(data)))
-      ),
-      shiny::column(
-        width = 3,
-        shiny::selectInput("geom",
-                           "Select chart type",
-                           c("line", "bar", "area", "pie", "waterfall"))
+  miniUI::miniPage(
+    miniUI::gadgetTitleBar("ezplot"),
+    miniUI::miniContentPanel(
+      shiny::fillRow(
+        flex = c(1,3),
+        shiny::fillCol(
+          shiny::selectInput(
+            "data_name",
+            "Select data",
+            choices = c("ansett", "aus_livestock", "aus_production", "aus_retail",
+                        "gafa_stock", "global_economy", "hh_budget", "nyc_bikes",
+                        "olympic_running", "PBS", "pelt", "vic_elec"),
+            width = "100%"
+          ),
+          shiny::selectInput("geom",
+                             "Select chart type",
+                             c("line", "bar", "area", "pie", "waterfall"),
+                             width = "100%"),
+          shiny::selectInput("x",
+                             "Select x-value",
+                             c(names(data), "row_number()"),
+                             width = "100%"),
+          shiny::selectInput("y",
+                             "Select y-value",
+                             c("1", names(data)[sapply(data, is.numeric)]),
+                             width = "100%"),
+          shiny::selectInput("group",
+                             "Select group",
+                             c("Select group", names(data)),
+                             width = "100%")
+        ),
+        shiny::fillCol(shiny::plotOutput("plot", height = "100%"))
       )
-    ),
-    shiny::fluidRow(shiny::plotOutput("plot"))
+    )
   )
 }
