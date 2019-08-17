@@ -28,7 +28,8 @@ ez_server = function(data) {
       shiny::req(full_data())
       shiny::selectInput("selected_y",
                          "Select y-value",
-                         c("1", names(full_data())[sapply(full_data(), is.numeric)]),
+                         c(names(full_data())[sapply(full_data(), is.numeric)],
+                           nrow = "1"),
                          width = "100%")
     })
 
@@ -36,33 +37,65 @@ ez_server = function(data) {
       shiny::req(full_data())
       shiny::selectInput("selected_group",
                          "Select group",
-                         c("<No Group>", names(full_data())),
+                         c("[None]", names(full_data())),
                          width = "100%")
     })
 
+    output$select_facet_x = shiny::renderUI({
+      shiny::req(full_data())
+      # if (!("facet_x" %in% names(as.list(args(plot_f()))))) return(NULL)
+      shiny::selectInput("selected_facet_x",
+                         "Select \"X\" facet value",
+                         c("[None]", names(full_data())),
+                         width = "100%")
+    })
 
+    output$select_facet_y = shiny::renderUI({
+      shiny::req(full_data())
+      # if (!("facet_y" %in% names(as.list(args(plot_f()))))) return(NULL)
+      shiny::selectInput("selected_facet_y",
+                         "Select \"Y\" facet value",
+                         c("[None]", names(full_data())),
+                         width = "100%")
+    })
+
+    plot_f = reactive({
+      req(input$geom)
+      utils::getFromNamespace(paste0(input$geom, "_plot"), "ezplot")
+    })
 
     output$plot = shiny::renderPlot({
-      shiny::req(input$selected_x, input$selected_y, input$selected_group,
-                 input$geom)
-
-      plot_f = utils::getFromNamespace(paste0(input$geom, "_plot"), "ezplot")
+      # browser()
+      shiny::req(input$selected_x,
+                 input$selected_y,
+                 input$selected_group,
+                 input$selected_facet_x,
+                 input$selected_facet_y,
+                 plot_f())
 
       args = list(data = shiny::isolate(full_data()),
                   x = input$selected_x,
                   y = input$selected_y,
-                  group = if (input$selected_group == "<No Group>") NULL else input$selected_group,
+                  group = if (input$selected_group == "[None]") NULL else input$selected_group,
+                  facet_x = if (input$selected_facet_x == "[None]") NULL else input$selected_facet_x,
+                  facet_y = if (input$selected_facet_y == "[None]") NULL else input$selected_facet_y,
                   size = 20)
 
-      args = args[intersect(names(args), names(as.list(args(plot_f))))]
-
-      do.call(plot_f, args)
-
+      args = args[intersect(names(args), names(as.list(args(plot_f()))))]
+      do.call(plot_f(), args)
     })
 
     output$data_table = DT::renderDataTable({
       shiny::req(full_data())
       full_data()
+    })
+
+    observeEvent(input$done, {
+      stopApp(ggplot_obj())
+    })
+
+    observeEvent(input$cancel, {
+      stopApp(NULL)
     })
 
   }
