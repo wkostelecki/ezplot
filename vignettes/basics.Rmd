@@ -27,20 +27,24 @@ values of y for repeated categories of x, group, facet_y and facet_x.
 
 ```{r, fig.show='hold'}
 library(ezplot)
-df = ez_data()
-head(df)
+library(tsibbledata)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(lubridate))
 ```
 
 
-# line_plot
+## line_plot
 ```{r, echo=TRUE, results='asis'}
-line_plot(df, x = "month", y = "units")
-line_plot(df, x = "month", y = "units", group = "char")
+line_plot(ansett, x = "Week", y = "Passengers")
+line_plot(ansett, x = "Week", y = "Passengers", group = "Class")
 ```
-# bar_plot
+
+## bar_plot
 ```{r, echo=TRUE, results='asis'}
 
-bar_plot(df, x = "year", y = "units")
-bar_plot(df, x = "year", y = "units", group = "char")
+df = ansett %>% 
+  filter(between(year(Week), 1988, 1991))
+bar_plot(df, x = "year(Week)", y = "Passengers")
+bar_plot(df, x = "year(Week)", y = "Passengers", group = "Class")
 ```
 

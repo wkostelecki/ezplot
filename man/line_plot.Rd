@@ -4,9 +4,10 @@
 \alias{line_plot}
 \title{line_plot}
 \usage{
-line_plot(data, x, y, group = NULL, facet_x = NULL, facet_y = NULL,
-  yoy = FALSE, size_line = 1, size = 14, palette = ez_col,
-  labels_y = ez_labels, use_theme = theme_ez, facet_scales = "fixed")
+line_plot(data, x, y = "1", group = NULL, facet_x = NULL,
+  facet_y = NULL, yoy = FALSE, size_line = 1, size = 14,
+  palette = ez_col, labels_y = ez_labels, use_theme = theme_ez,
+  facet_scales = "fixed")
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -44,16 +45,9 @@ A ggplot object.
 Creates line plots.
 }
 \examples{
-
-df = ez_data()
-line_plot(df, "week", "value", use_theme = ggplot2::theme_bw)
-line_plot(df, "week", c("Sales ($)" = "value"))
-\donttest{
-line_plot(df, "week", "value", "char")
-line_plot(df, "week", "value", "char", "fct")
-line_plot(df, "week", "value", "char", "fct", "num", facet_scales = "free_y")
-line_plot(df, "year2", "~ value / units", "char", "fct", "num")
-line_plot(df, "week", c("value", "units"))
-line_plot(df, "week", "value", yoy = TRUE)
-}
+library(tsibbledata)
+line_plot(pelt, "Year", "Hare")
+line_plot(pelt, "Year", c("Hare", "Lynx"))
+line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
+line_plot(pelt, "Year", c("Hare Population" = "Hare"))
 }

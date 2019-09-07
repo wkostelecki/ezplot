@@ -1,14 +1,14 @@
 
-#' relationship plot
-#' @description Examine the relationship between two vectors from data
+#' scatter plot
+#' @description create a scatter plot
 #' @inheritParams area_plot
 #' @inheritParams model_plot
 #' @examples
-#' rel_plot(mtcars, "wt", "hp")
-#' rel_plot(mtcars, "wt", "hp", "factor(cyl)")
-#' rel_plot(mtcars, "factor(cyl)", "hp")
+#' scatter_plot(mtcars, "wt", "hp")
+#' scatter_plot(mtcars, "wt", "hp", "factor(cyl)")
+#' scatter_plot(mtcars, "factor(cyl)", "hp")
 #' @export
-rel_plot = function(data, x,  y, group = NULL,
+scatter_plot = function(data, x,  y, group = NULL,
                     size = 14,
                     point_size = 2.5) {
 
@@ -35,7 +35,9 @@ rel_plot = function(data, x,  y, group = NULL,
       scale_y_continuous(labels = ez_labels)
   } else {
     g = ggplot(gdata) +
-      geom_boxplot(aes(x, y, colour = group), size = 0.8, na.rm = TRUE) +
+      geom_point(aes(x, y, colour = group),
+                 size = 0.8,
+                 na.rm = TRUE) +
       scale_color_manual(NULL, values = ez_col(n_group),
                          labels = function(x) paste0(x, "   ")) +
       scale_y_continuous(labels = ez_labels)

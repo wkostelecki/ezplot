@@ -10,7 +10,7 @@
 #' side_plot(mtcars, "cyl", c("1", "-1"))
 side_plot = function(data,
                      x,
-                     y,
+                     y = "1",
                      labels_y = ez_labels,
                      size = 14,
                      palette = ez_col,

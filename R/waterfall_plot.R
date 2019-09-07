@@ -13,18 +13,23 @@
 #' @param n_x Number of x levels to show in chart.
 #' @export
 #' @examples
-#' df = ez_data()
-#' waterfall_plot(df, "year", "units", "fct")
-#' waterfall_plot(df, "year", "units", "char")
-#' waterfall_plot(df, "year", "units", "fct", n_x = 3)
-#' waterfall_plot(df, "year", "units", "fct",
+#' library(tsibbledata)
+#' waterfall_plot(aus_retail,
+#'                "lubridate::year(Month)",
+#'                "Turnover",
+#'                "sub(' Territory', '\nTerritory', State)",
+#'                rotate_xlabel = TRUE)
+#' waterfall_plot(aus_retail,
+#'                "lubridate::year(Month)",
+#'                "Turnover",
+#'                "sub(' Territory', '\nTerritory', State)",
+#'                rotate_xlabel = TRUE,
 #'                label_rescale = 0.5,
 #'                ingroup_label = TRUE,
 #'                bottom_label = FALSE,
 #'                n_x = 3,
 #'                size = 20,
-#'                y_min = 0,
-#'                rotate_xlabel = TRUE)
+#'                y_min = 0)
 waterfall_plot = function(data,
                           x,
                           y,
@@ -43,11 +48,10 @@ waterfall_plot = function(data,
   y = nameifnot(y)
 
   data = data %>%
-    mutate_(..y.. = y) %>%
-    # agg_data(cols = c(x = x, group = group, y),
-    #          group_by = "x", group_by2 = "x") %>%
-    group_by_(x = x,
-              group = group) %>%
+    as.data.frame() %>%
+    mutate(..y.. = !!rlang::parse_quo(y, env = parent.frame())) %>%
+    group_by(x = !!rlang::parse_quo(x, env = parent.frame()),
+             group = !!rlang::parse_quo(group, env = parent.frame())) %>%
     summarize(y = sum(..y.., na.rm = TRUE)) %>%
     ungroup %>%
     mutate(x = factor(x),

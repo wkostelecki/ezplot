@@ -9,21 +9,14 @@
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
-#'
-#' df = ez_data()
-#' line_plot(df, "week", "value", use_theme = ggplot2::theme_bw)
-#' line_plot(df, "week", c("Sales ($)" = "value"))
-#' \donttest{
-#' line_plot(df, "week", "value", "char")
-#' line_plot(df, "week", "value", "char", "fct")
-#' line_plot(df, "week", "value", "char", "fct", "num", facet_scales = "free_y")
-#' line_plot(df, "year2", "~ value / units", "char", "fct", "num")
-#' line_plot(df, "week", c("value", "units"))
-#' line_plot(df, "week", "value", yoy = TRUE)
-#' }
+#' library(tsibbledata)
+#' line_plot(pelt, "Year", "Hare")
+#' line_plot(pelt, "Year", c("Hare", "Lynx"))
+#' line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
+#' line_plot(pelt, "Year", c("Hare Population" = "Hare"))
 line_plot = function(data,
                      x,
-                     y,
+                     y = "1",
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,
@@ -66,7 +59,6 @@ line_plot = function(data,
   if (yoy) {
     gdata[["group"]] = lubridate::year(gdata[["x"]])
     gdata[["x"]] = lubridate::yday(gdata[["x"]])
-
   }
 
   for (i in intersect(names(gdata), c("group", "facet_x", "facet_y"))) {
@@ -94,6 +86,7 @@ line_plot = function(data,
                            values = palette(length(unique(gdata[["group"]]))),
                            labels = function(x) paste0(x, "   ")) +
         scale_x_continuous(breaks = c(1, 91, 182, 274, 366),
+                           limits = c(1, 366),
                            labels = c("Jan", "Apr", "Jul", "Oct", "Jan")) +
         theme(legend.position = "top")
     } else {
@@ -130,7 +123,7 @@ line_plot = function(data,
                                        hjust = 1))
   }
 
-  g
+  g + coord_cartesian(expand = FALSE)
 
 }
 

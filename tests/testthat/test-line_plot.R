@@ -18,13 +18,14 @@ test_that("multiple y works", {
   expect_equal(names(g[["data"]]), c("x", "group", "y"))
 })
 
-test_that("specia case x-axes work", {
-  df = ez_data()
+test_that("special case x-axes work", {
 
-  g = line_plot(df, "day", "units", yoy = TRUE)
-  expect_equal(range(g[["data"]][["x"]]), c(1, 366))
 
-  g = line_plot(df, "char", "units")
-  expect_equal(g[["data"]][["x"]], c(1, 2))
+  g = line_plot(tsibbledata::gafa_stock, "Date", "High", yoy = TRUE)
+  expect_true(all(g[["data"]][["x"]] <= 366))
+  expect_true(all(g[["data"]][["x"]] >= 1))
+
+  g = line_plot(tsibbledata::gafa_stock, "Symbol", "Open")
+  expect_equal(g[["data"]][["x"]], 1:4)
 
 })

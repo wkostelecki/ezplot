@@ -5,18 +5,22 @@
 \title{Aggregates data}
 \usage{
 agg_data(data, cols = names(data), group_by = NULL,
-  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL)
+  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL,
+  env = parent.frame())
 }
 \arguments{
 \item{data}{A data.frame.}
 
 \item{cols}{Named character vector of column names.}
 
-\item{group_by}{Vector of grouping column names.}
+\item{group_by}{Vector of grouping columns.}
 
 \item{agg_fun}{Function to use for aggregating.}
 
-\item{group_by2}{Vector of grouping column names to use for delayed (post aggregation) calculation.}
+\item{group_by2}{Vector of grouping column names to use for delayed (post
+aggregation) calculation.}
+
+\item{env}{Environment for extra variables.}
 }
 \value{
 An aggregated data.frame.
@@ -25,11 +29,12 @@ An aggregated data.frame.
 Aggregates data
 }
 \examples{
-df = ez_data()
-agg_data(df, c(Units = "units", Value = "value"))
-agg_data(df["fct"])
-agg_data(df[c("fct", "value")])
-agg_data(df, "value", "fct")
-agg_data(df, "value", c("fct", "year"))
-agg_data(df, c(x = "year", y = "value"), c(x = "year"))
+library(tsibbledata)
+agg_data(ansett, c("Passengers", count = "1"))
+agg_data(ansett["Class"])
+agg_data(ansett[c("Class", "Passengers")])
+agg_data(ansett, "Passengers", "Class")
+agg_data(ansett, "Passengers", c("Class", "Airports"))
+agg_data(ansett, c(x = "Airports", y = "Passengers"), c(x = "Airports"))
+agg_data(ansett, c(x = "Class", y = "1", group = "Airports"), c(x = "Class", group = "Airports"))
 }
