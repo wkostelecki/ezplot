@@ -4,7 +4,6 @@
 # ezplot
 
 <!-- badges: start -->
-
 [![Coverage
 status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://codecov.io/github/wkostelecki/ezplot?branch=master)
 [![CRAN
@@ -15,6 +14,7 @@ status](https://travis-ci.org/wkostelecki/ezplot.svg?branch=master)](https://tra
 downloads](http://cranlogs.r-pkg.org/badges/ezplot)](http://www.r-pkg.org/pkg/ezplot)
 [![Total CRAN
 downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](http://www.r-pkg.org/pkg/ezplot)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 ## Overview
