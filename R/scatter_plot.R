@@ -24,6 +24,8 @@ scatter_plot = function(data, x,  y, group = NULL,
 
   if (!exists("group", gdata)) {
     gdata[["group"]] = ""
+  } else {
+    gdata[["group"]] = factor(gdata[["group"]])
   }
 
   n_group = length(unique(gdata[["group"]]))
