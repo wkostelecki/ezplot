@@ -34,13 +34,13 @@ suppressPackageStartupMessages(library(lubridate))
 
 
 ## line_plot
-```{r, echo=TRUE, results='asis'}
+```{r, echo=TRUE, results='asis', fig.width = 7.1}
 line_plot(ansett, x = "Week", y = "Passengers")
 line_plot(ansett, x = "Week", y = "Passengers", group = "Class")
 ```
 
 ## bar_plot
-```{r, echo=TRUE, results='asis'}
+```{r, echo=TRUE, results='asis', fig.width = 7.1}
 
 df = ansett %>% 
   filter(between(year(Week), 1988, 1991))

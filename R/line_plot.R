@@ -22,7 +22,7 @@ line_plot = function(data,
                      facet_y = NULL,
                      yoy = FALSE,
                      size_line = 1,
-                     size = 14,
+                     size = 11,
                      palette = ez_col,
                      labels_y = ez_labels,
                      use_theme = theme_ez,
@@ -77,7 +77,7 @@ line_plot = function(data,
 
   g = ggplot(gdata)
 
-  if ("group" %in% names(gdata)){
+  if ("group" %in% names(gdata)) {
     if (yoy) {
       g = g +
         geom_line(mapping = aes(x, y, colour = group),

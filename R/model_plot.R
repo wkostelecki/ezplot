@@ -25,7 +25,7 @@ model_plot = function(data,
                       facet_x = NULL,
                       point_size = 2,
                       res_bins = NA_real_,
-                      size = 14){
+                      size = 11) {
 
   gdata = data.frame(ID = eval(parse(text = x), data),
                      Actual = eval(parse(text = actual), data),

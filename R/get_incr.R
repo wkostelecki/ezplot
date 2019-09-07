@@ -3,7 +3,7 @@
 #' @description returns the minimum increment between sorted unique values of a
 #'   vector
 #' @param x A numeric or date vector
-get_incr = function(x){
+get_incr = function(x) {
 
   if (lubridate::is.POSIXct(x)) {
     y = sort(unique(x))

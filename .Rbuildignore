@@ -9,3 +9,4 @@
 ^.git$
 ^release.R$
 .vscode
+^README\.Rmd$

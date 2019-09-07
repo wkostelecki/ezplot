@@ -34,7 +34,7 @@ waterfall_plot = function(data,
                           x,
                           y,
                           group,
-                          size = 14,
+                          size = 11,
                           labels = ez_labels,
                           label_rescale = 1,
                           y_min = 'auto',
@@ -43,15 +43,16 @@ waterfall_plot = function(data,
                           rotate_xlabel = FALSE,
                           bottom_label = TRUE,
                           ingroup_label = FALSE,
-                          n_x = 2){
+                          n_x = 2,
+                          env = parent.frame()) {
 
   y = nameifnot(y)
 
   data = data %>%
     as.data.frame() %>%
-    mutate(..y.. = !!rlang::parse_quo(y, env = parent.frame())) %>%
-    group_by(x = !!rlang::parse_quo(x, env = parent.frame()),
-             group = !!rlang::parse_quo(group, env = parent.frame())) %>%
+    mutate(..y.. = !!rlang::parse_quo(y, env = env)) %>%
+    group_by(x = !!rlang::parse_quo(x, env = env),
+             group = !!rlang::parse_quo(group, env = env)) %>%
     summarize(y = sum(..y.., na.rm = TRUE)) %>%
     ungroup %>%
     mutate(x = factor(x),
@@ -62,7 +63,7 @@ waterfall_plot = function(data,
 
   x_levels = levels(data[["x"]])
 
-  if (length(x_levels) < 2){
+  if (length(x_levels) < 2) {
     stop('x column must have at least two levels for a waterfall chart')
   }
 
@@ -98,7 +99,7 @@ waterfall_plot = function(data,
     ungroup %>%
     mutate(col = ifelse(change >= 0, 1, -1))
 
-  if (y_min == 'auto'){
+  if (y_min == 'auto') {
     y_min = group_totals %>%
       summarize(y_max = max(start, end),
                 y_min = min(start, end)) %>%
@@ -130,7 +131,7 @@ waterfall_plot = function(data,
                                 labels(signif(round(value, 2), 3)),
                                 labels(signif(value, n_signif))))
 
-  if (ingroup_label){
+  if (ingroup_label) {
     gdata = gdata %>%
       mutate(value_label2 = ifelse(
         is.na(p_change),
@@ -206,13 +207,13 @@ waterfall_plot = function(data,
                        labels = gdata[["label"]]) +
     ylab(names(y))
 
-  if (rotate_xlabel){
+  if (rotate_xlabel) {
     g = g + theme(axis.text.x = element_text(angle = 90,
                                              vjust = 0.5,
                                              hjust = 1))
   }
 
-  if (bottom_label){
+  if (bottom_label) {
     g = g +
       geom_text(aes(x_pos, y_min,
                     label = percent_label),
