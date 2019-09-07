@@ -2,7 +2,7 @@
 #' @inheritParams ez_app
 #' @export
 ez_server = function(data) {
-  function(input, output) {
+  function(input, output, session) {
 
     full_data = shiny::reactive({
       shiny::req(input$selected_data)

@@ -41,7 +41,21 @@ ez_ui = function(data) {
           shiny::uiOutput("select_facet_x"),
           shiny::uiOutput("select_facet_y")
         ),
-        shiny::fillCol(shiny::plotOutput("plot", height = "100%"))
+        shiny::tabsetPanel(
+          # height = "100%",
+          shiny::tabPanel(
+            "Chart",
+            # height = "100%",
+            shiny::fillCol(
+              shiny::br(),
+              shiny::plotOutput("plot", height = "600"))
+          ),
+          shiny::tabPanel(
+            "Data",
+            shiny::br(),
+            DT::dataTableOutput("data_table")
+          )
+        )
       )
     )
   )

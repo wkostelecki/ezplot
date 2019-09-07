@@ -2,3 +2,4 @@
 .Rhistory
 .RData
 .vscode
+tests/testthat/Rplots.pdf
