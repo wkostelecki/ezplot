@@ -2,6 +2,8 @@
 output: github_document
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -145,6 +147,13 @@ nyc_bikes %>%
   filter(between(duration, 0, 16)) %>%
   tile_plot(c("Trip Start (Hour of Day)" = "lubridate::hour(start_time) + 0.5"),
             c("Ride Duration (min)" = "duration - duration %% 2 + 1"))
+```
+
+```{r tile_plot-2, fig.width = 7}
+tile_plot(vic_elec,
+          c("Temperature (C)" = "round(Temperature)"), 
+          c("Half-Hourly Demand (MW)" = "round(Demand, -2)"),
+          labels_y = ez_labels, facet_x = "year(Time)")
 ```
 
 ### waterfall_plot
