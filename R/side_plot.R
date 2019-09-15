@@ -51,7 +51,7 @@ side_plot = function(data,
     geom_text(aes(x, y + (rescale_y - 1) / 10 * y_offset,
                   label = labels_y(signif(y, signif)),
                   hjust = ifelse(y >= 0, 0, 1)),
-              vjust = 0.5,
+              vjust = 0.42,
               size = size / 4,
               colour = "grey30") +
     geom_text(aes(x,

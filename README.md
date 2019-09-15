@@ -4,6 +4,7 @@
 # ezplot
 
 <!-- badges: start -->
+
 [![Coverage
 status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://codecov.io/github/wkostelecki/ezplot?branch=master)
 [![CRAN
@@ -133,7 +134,7 @@ area_plot(ansett, x = "Week",
 Add faceting:
 
 ``` r
-area_plot(subset(ansett, ),
+area_plot(ansett,
           "year(Week) + (month(Week) - 1) / 12",
           y = c("Monthly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",

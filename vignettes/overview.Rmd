@@ -82,7 +82,7 @@ area_plot(ansett, x = "Week",
 
 Add faceting:
 ```{r, fig.width = 7, fig.height = 4}
-area_plot(subset(ansett, ),
+area_plot(ansett,
           "year(Week) + (month(Week) - 1) / 12",
           y = c("Monthly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",
