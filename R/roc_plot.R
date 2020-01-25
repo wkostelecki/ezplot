@@ -5,7 +5,7 @@
 #' @export
 #' @examples
 #' library(ggplot2)
-#' n = 10000
+#' n = 1000
 #' df = data.frame(actual = sample(c(FALSE, TRUE), n, replace = TRUE),
 #'                 runif = runif(n))
 #' df[["fitted"]] = runif(n) ^ ifelse(df[["actual"]] == 1, 0.5, 2)
@@ -15,7 +15,7 @@
 #'
 #' roc_plot(df, "actual", "actual")
 #' roc_plot(df, "actual", "fitted")
-#' roc_plot(df, "actual", "runif")
+#' roc_plot(df, "actual", "runif", size_line = 0.5)
 #'
 #'\donttest{
 #' roc_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
@@ -33,6 +33,7 @@ roc_plot = function(data, actual, fitted,
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,
+                    size_line = 1,
                     size = 11,
                     env = parent.frame()) {
 
@@ -69,7 +70,8 @@ roc_plot = function(data, actual, fitted,
   } else {
     g = g +
       geom_line(aes(x = false_positive,
-                    y = true_positive))
+                    y = true_positive),
+                size = size_line)
   }
 
   g = quick_facet(g)
@@ -77,6 +79,7 @@ roc_plot = function(data, actual, fitted,
   g = g +
     geom_line(data = data.frame(x = c(0, 1), y = c(0, 1)),
               aes(x, y),
+              size = size_line,
               linetype = 2) +
     coord_equal() +
     theme_minimal(size) +
