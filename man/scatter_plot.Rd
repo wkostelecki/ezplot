@@ -4,8 +4,15 @@
 \alias{scatter_plot}
 \title{scatter plot}
 \usage{
-scatter_plot(data, x, y, group = NULL, size = 11, point_size = 2.5,
-  env = parent.frame())
+scatter_plot(
+  data,
+  x,
+  y,
+  group = NULL,
+  size = 11,
+  point_size = 2.5,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{data}{A data.frame.}

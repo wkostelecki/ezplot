@@ -4,9 +4,14 @@
 \alias{agg_data}
 \title{Aggregates data}
 \usage{
-agg_data(data, cols = names(data), group_by = NULL,
-  agg_fun = function(x) sum(x, na.rm = TRUE), group_by2 = NULL,
-  env = parent.frame())
+agg_data(
+  data,
+  cols = names(data),
+  group_by = NULL,
+  agg_fun = function(x) sum(x, na.rm = TRUE),
+  group_by2 = NULL,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{data}{A data.frame.}

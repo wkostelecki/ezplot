@@ -4,9 +4,20 @@
 \alias{variable_plot}
 \title{variable_plot}
 \usage{
-variable_plot(data, x, y, group = NULL, facet_x = NULL, size = 14,
-  labels_y = ez_labels, geom = "line", size_line = 1, ylab = NULL,
-  yoy = FALSE, switch = "y")
+variable_plot(
+  data,
+  x,
+  y,
+  group = NULL,
+  facet_x = NULL,
+  size = 14,
+  labels_y = ez_labels,
+  geom = "line",
+  size_line = 1,
+  ylab = NULL,
+  yoy = FALSE,
+  switch = "y"
+)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -46,13 +57,13 @@ variable_plot(ansett, "Week", "Passengers", facet_x = "Class", yoy = TRUE)
 variable_plot(pelt, "Year", c("Lynx", "Hare"), "round(Year, -1)")
 variable_plot(hh_budget, "Year", c("Debt", "Expenditure"), "Country")
 variable_plot(subset(hh_budget, Year > 2013), "Year",
-              c("Debt\\n(\% of disposable income)" = "Debt",
-                "Expenditure\\nGrowth (\%)" = "Expenditure",
+              c("Debt\n(\% of disposable income)" = "Debt",
+                "Expenditure\nGrowth (\%)" = "Expenditure",
                 "Unemployment (\%)" = "Unemployment"),
                group = "Country", geom = "bar")
 variable_plot(subset(hh_budget, Year > 2013), "Year",
-              c("Debt\\n(\% of disposable income)" = "Debt",
-                "Expenditure\\nGrowth (\%)" = "Expenditure",
+              c("Debt\n(\% of disposable income)" = "Debt",
+                "Expenditure\nGrowth (\%)" = "Expenditure",
                 "Unemployment (\%)" = "Unemployment"),
                facet_x = "Country", geom = "bar")
 variable_plot(PBS, "Type", "Scripts", "Concession", switch = "y", geom = "col")

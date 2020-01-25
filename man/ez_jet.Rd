@@ -4,8 +4,10 @@
 \alias{ez_jet}
 \title{ez_jet}
 \usage{
-ez_jet(n = 100, palette = c("dodgerblue4", "steelblue2", "olivedrab3",
-  "darkgoldenrod1", "brown"))
+ez_jet(
+  n = 100,
+  palette = c("dodgerblue4", "steelblue2", "olivedrab3", "darkgoldenrod1", "brown")
+)
 }
 \arguments{
 \item{n}{Number of colours to return.}
