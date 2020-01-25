@@ -4,8 +4,8 @@
 #' @param rescale_y Rescaling factor for y-axis limits
 #' @param label_cutoff Cutoff size (proportion of limit range) for excluding
 #'   labels
-#' @param label_pos Position of labels. Can be "auto", "inside", "top" or
-#'   "both".
+#' @param label_pos Position of labels. Can be "auto", "inside", "top", "both"
+#'   or "none".
 #'
 #' @return A ggplot object.
 #' @export
@@ -40,7 +40,7 @@ bar_plot = function(data,
                     } else {
                       ez_labels
                     },
-                    label_pos = c("auto", "inside", "top", "both"),
+                    label_pos = c("auto", "inside", "top", "both", "none"),
                     rescale_y = 1.1,
                     label_cutoff = 0.12,
                     use_theme = theme_ez,
