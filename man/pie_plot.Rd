@@ -36,7 +36,7 @@ pie_plot(
 
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
 
-\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding
+\item{label_cutoff}{Cutoff size (proportion of y data range) for excluding
 labels}
 
 \item{round}{Option for rounding label.}

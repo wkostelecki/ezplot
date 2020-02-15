@@ -140,6 +140,14 @@ bar_plot(subset(aus_retail, year(Month) >= 2010),
          y = "Turnover",
          group = "State")
 ```
+Share of turnover:
+```{r bar_plot-3, fig.width = 7, fig.height = 4}
+bar_plot(subset(aus_retail, year(Month) >= 2010), 
+         x = "year(Month)",
+         y = "Turnover",
+         group = "State",
+         position = "fill")
+```
 
 ### tile_plot
 ```{r tile_plot-1}

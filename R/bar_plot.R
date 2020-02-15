@@ -2,7 +2,7 @@
 #' @inheritParams area_plot
 #' @param width Width of bar.
 #' @param rescale_y Rescaling factor for y-axis limits
-#' @param label_cutoff Cutoff size (proportion of limit range) for excluding
+#' @param label_cutoff Cutoff size (proportion of y data range) for excluding
 #'   labels
 #' @param label_pos Position of labels. Can be "auto", "inside", "top", "both"
 #'   or "none".
@@ -99,14 +99,15 @@ bar_plot = function(data,
     group_by(!!!syms(c(setdiff(group_vars, "group"), "sign"))) %>%
     mutate(y_height = sum(y)) %>%
     group_by(!!!syms(setdiff(group_vars, c("group", "x", cutoff_groups)))) %>%
-    mutate(y_range = diff(range(y_height, 0)) * (1 + (1 - rescale_y) * n_distinct(sign))) %>% #### needs fixing
+    mutate(y_span = diff(range(y_height, 0)),
+           y_range = y_span * (1 + (1 - rescale_y) * n_distinct(sign))) %>%
     ungroup
 
   gdata = gdata  %>%
     arrange(!!!syms(c(group_vars, "sign"))) %>%
     group_by(!!!syms(setdiff(c(group_vars, "sign"), "group"))) %>%
     mutate(ylabel_pos = rev(cumsum(rev(y))) - y / 2,
-           ylabel_text = ifelse(abs(y) > label_cutoff * max(y_range),
+           ylabel_text = ifelse(abs(y) > label_cutoff * max(y_span),
                                 labels_y(signif(y, 3)),
                                 "")) %>%
     ungroup

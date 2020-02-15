@@ -54,7 +54,7 @@ or "none".}
 
 \item{rescale_y}{Rescaling factor for y-axis limits}
 
-\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding
+\item{label_cutoff}{Cutoff size (proportion of y data range) for excluding
 labels}
 
 \item{use_theme}{ggplot theme function}
