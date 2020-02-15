@@ -189,6 +189,6 @@ bar_plot = function(data,
 
 }
 
-globalVariables(c("y_height", "y_range",
+globalVariables(c("y_height", "y_range", "y_span",
                   "ylabel_pos", "ylabel_text",
                   "top_y", "top_ylabel_text"))

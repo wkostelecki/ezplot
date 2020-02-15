@@ -29,6 +29,8 @@ roc_plot(
 
 \item{facet_y}{A character. Evaluates to a column.}
 
+\item{size_line}{width of line for \code{geom_line()}. Default is 1.}
+
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{env}{environment for evaluating expressions.}

@@ -1,5 +1,6 @@
 #' roc_plot
 #' @inheritParams area_plot
+#' @inheritParams line_plot
 #' @param actual Vector of actuals values
 #' @param fitted Vector of fitted values
 #' @export
