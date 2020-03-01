@@ -16,7 +16,6 @@
 #' bar_plot(ansett, "year(Week)", "Passengers")
 #' bar_plot(ansett, "year(Week)", "Passengers", "Class")
 #' bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
-
 #' bar_plot(ansett, "Airports", "Passengers", "Class", use_theme = ggplot2::theme_bw)
 #' bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
 #' bar_plot(ansett, "sub('-.*', '', Airports)", c("Total Passengers" = "Passengers"),
@@ -25,6 +24,7 @@
 #' bar_plot(ansett, "Airports",
 #'          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
 #'          "Class", label_pos = "both")
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", coord_flip = TRUE)
 bar_plot = function(data,
                     x,
                     y = "1",
@@ -40,12 +40,14 @@ bar_plot = function(data,
                     } else {
                       ez_labels
                     },
+                    labels_x = identity,
                     label_pos = c("auto", "inside", "top", "both", "none"),
                     rescale_y = 1.1,
                     label_cutoff = 0.12,
                     use_theme = theme_ez,
                     position = "stack",
-                    facet_scales = "fixed") {
+                    facet_scales = "fixed",
+                    coord_flip = FALSE) {
 
   label_pos = match.arg(label_pos)
 
@@ -112,6 +114,10 @@ bar_plot = function(data,
                                 "")) %>%
     ungroup
 
+  if (coord_flip && (is.factor(gdata[["x"]]) | is.character(gdata[["x"]]))) {
+    gdata[["x"]] = forcats::fct_rev(factor(gdata[["x"]]))
+  }
+
   g = ggplot(gdata)
 
 
@@ -142,7 +148,8 @@ bar_plot = function(data,
         geom_text(aes(x, ylabel_pos,
                       label = ylabel_text,
                       colour = group),
-                  size = size / 4) +
+                  size = size / 4,
+                  vjust = 0.42) +
         scale_colour_manual(NULL,
                             values = text_contrast(fill_pal),
                             guide = "none")
@@ -166,10 +173,12 @@ bar_plot = function(data,
 
     g = g +
       geom_text(data = top_labels,
-                aes(x, top_y,
+                aes(x,
+                    top_y, #y + (rescale_y - 1) / 10 * y_offset
                     label = top_ylabel_text),
                 size = size / 4,
-                vjust = -0.5)
+                vjust = if (coord_flip) 0.42 else -0.5,
+                hjust = if (coord_flip) -0.1 else 0.5)
   }
 
   g = quick_facet(g, scales = facet_scales)
@@ -179,13 +188,26 @@ bar_plot = function(data,
              (rescale_y - 1) * any(gdata[["y"]] >= 0) * (position == "stack"),
              0)
 
-  g +
+  g = g +
     xlab(names(x)) +
     ylab(names(y)) +
     scale_y_continuous(labels = labels_y,
                        expand = expand) +
     ylab(names(y)) +
     use_theme(size)
+
+  if (coord_flip) {
+    g = g +
+      coord_flip() +
+      theme(axis.text.y = element_text(angle = 0))
+
+    if (is.numeric(gdata[["x"]])) {
+      g = g + scale_x_reverse(labels = labels_x)
+    }
+
+  }
+
+  g
 
 }
 

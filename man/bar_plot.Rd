@@ -17,12 +17,14 @@ bar_plot(
   palette = ez_col,
   labels_y = if (position == "fill") {     function(x) ez_labels(100 * x, append = "\%")
     } else {     ez_labels },
+  labels_x = identity,
   label_pos = c("auto", "inside", "top", "both", "none"),
   rescale_y = 1.1,
   label_cutoff = 0.12,
   use_theme = theme_ez,
   position = "stack",
-  facet_scales = "fixed"
+  facet_scales = "fixed",
+  coord_flip = FALSE
 )
 }
 \arguments{
@@ -48,6 +50,8 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 \item{palette}{Colour function.}
 
 \item{labels_y}{label formatting function}
+
+\item{labels_x}{label formatting function}
 
 \item{label_pos}{Position of labels. Can be "auto", "inside", "top", "both"
 or "none".}
@@ -84,4 +88,5 @@ bar_plot(ansett, "sub('-.*', '', Airports)", c("Total Passengers" = "Passengers"
 bar_plot(ansett, "Airports",
          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
          "Class", label_pos = "both")
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", coord_flip = TRUE)
 }
