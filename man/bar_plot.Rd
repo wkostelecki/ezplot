@@ -84,7 +84,7 @@ bar_plot(ansett, "Airports", "Passengers", "Class", use_theme = ggplot2::theme_b
 bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
 bar_plot(ansett, "sub('-.*', '', Airports)", c("Total Passengers" = "Passengers"),
          "Class",
-         "sub('.*-', '', Airports)")
+         "sub('.*-', '', Airports)", label_pos = "both")
 bar_plot(ansett, "Airports",
          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
          "Class", label_pos = "both")

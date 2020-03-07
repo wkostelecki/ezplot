@@ -20,7 +20,7 @@
 #' bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
 #' bar_plot(ansett, "sub('-.*', '', Airports)", c("Total Passengers" = "Passengers"),
 #'          "Class",
-#'          "sub('.*-', '', Airports)")
+#'          "sub('.*-', '', Airports)", label_pos = "both")
 #' bar_plot(ansett, "Airports",
 #'          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
 #'          "Class", label_pos = "both")
@@ -91,16 +91,16 @@ bar_plot = function(data,
   }
 
   if (facet_scales == "fixed") {
-    cutoff_groups = intersect(names(gdata), c("facet_x", "facet_y"))
+    facet_groups = intersect(names(gdata), c("facet_x", "facet_y"))
   } else {
-    cutoff_groups = NULL
+    facet_groups = NULL
   }
 
   gdata = gdata %>%
     mutate(sign = ifelse(y >= 0, 1, -1)) %>%
     group_by(!!!syms(c(setdiff(group_vars, "group"), "sign"))) %>%
     mutate(y_height = sum(y)) %>%
-    group_by(!!!syms(setdiff(group_vars, c("group", "x", cutoff_groups)))) %>%
+    group_by(!!!syms(setdiff(group_vars, c("group", "x", facet_groups)))) %>%
     mutate(y_span = diff(range(y_height, 0)),
            y_range = y_span * (1 + (1 - rescale_y) * n_distinct(sign))) %>%
     ungroup
@@ -166,7 +166,8 @@ bar_plot = function(data,
     top_labels = gdata %>%
       group_by(!!!syms(intersect(names(gdata),
                                  c("x", "facet_x", "facet_y")))) %>%
-      summarize(top_y = sum(y[y > 0], na.rm = TRUE),
+      summarize(y_range = y_range[1],
+                top_y = sum(y[y > 0], na.rm = TRUE),
                 y = sum(y, na.rm = TRUE)) %>%
       ungroup %>%
       mutate(top_ylabel_text = labels_y(signif(y, 3)))
@@ -174,11 +175,11 @@ bar_plot = function(data,
     g = g +
       geom_text(data = top_labels,
                 aes(x,
-                    top_y, #y + (rescale_y - 1) / 10 * y_offset
+                    top_y + y_range / 100,# TODO: apply h offset here if coord_flip
                     label = top_ylabel_text),
                 size = size / 4,
                 vjust = if (coord_flip) 0.42 else -0.5,
-                hjust = if (coord_flip) -0.1 else 0.5)
+                hjust = if (coord_flip) 0 else 0.5)
   }
 
   g = quick_facet(g, scales = facet_scales)
