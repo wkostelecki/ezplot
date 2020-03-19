@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/wkostelecki/ezplot.svg?branch=master)](https://travis-ci.org/wkostelecki/ezplot)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ezplot)](http://www.r-pkg.org/pkg/ezplot)
 [![Total CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](http://www.r-pkg.org/pkg/ezplot)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 ## Overview
@@ -115,7 +116,7 @@ area_plot(ansett, x = "Week",
 
 Add faceting:
 ```{r area_plot-3, fig.width = 8, fig.height = 4}
-area_plot(subset(ansett, ),
+area_plot(ansett,
           "year(Week) + (month(Week) - 1) / 12",
           y = c("Monthly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",
@@ -138,6 +139,14 @@ bar_plot(subset(aus_retail, year(Month) >= 2010),
          x = "year(Month)",
          y = "Turnover",
          group = "State")
+```
+Share of turnover:
+```{r bar_plot-3, fig.width = 7, fig.height = 4}
+bar_plot(subset(aus_retail, year(Month) >= 2010), 
+         x = "year(Month)",
+         y = "Turnover",
+         group = "State",
+         position = "fill")
 ```
 
 ### tile_plot

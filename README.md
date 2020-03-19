@@ -4,6 +4,7 @@
 # ezplot
 
 <!-- badges: start -->
+
 [![Coverage
 status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://codecov.io/github/wkostelecki/ezplot?branch=master)
 [![CRAN
@@ -133,7 +134,7 @@ area_plot(ansett, x = "Week",
 Add faceting:
 
 ``` r
-area_plot(subset(ansett, ),
+area_plot(ansett,
           "year(Week) + (month(Week) - 1) / 12",
           y = c("Monthly Passengers" = "Passengers"),
           group = "substr(Airports, 5, 7)",
@@ -166,6 +167,17 @@ bar_plot(subset(aus_retail, year(Month) >= 2010),
 ```
 
 <img src="man/figures/README-bar_plot-2-1.png" style="display: block; margin: auto;" />
+Share of turnover:
+
+``` r
+bar_plot(subset(aus_retail, year(Month) >= 2010), 
+         x = "year(Month)",
+         y = "Turnover",
+         group = "State",
+         position = "fill")
+```
+
+<img src="man/figures/README-bar_plot-3-1.png" style="display: block; margin: auto;" />
 
 ### tile\_plot
 

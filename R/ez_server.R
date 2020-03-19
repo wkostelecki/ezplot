@@ -59,13 +59,12 @@ ez_server = function(data) {
                          width = "100%")
     })
 
-    plot_f = reactive({
-      req(input$geom)
+    plot_f = shiny::reactive({
+      shiny::req(input$geom)
       utils::getFromNamespace(paste0(input$geom, "_plot"), "ezplot")
     })
 
-    output$plot = shiny::renderPlot({
-      # browser()
+    ggplot_obj = shiny::reactive({
       shiny::req(input$selected_x,
                  input$selected_y,
                  input$selected_group,
@@ -85,17 +84,21 @@ ez_server = function(data) {
       do.call(plot_f(), args)
     })
 
+    output$plot = shiny::renderPlot({
+      ggplot_obj()
+    })
+
     output$data_table = DT::renderDataTable({
       shiny::req(full_data())
       full_data()
     })
 
-    observeEvent(input$done, {
-      stopApp(ggplot_obj())
+    shiny::observeEvent(input$done, {
+      shiny::stopApp(ggplot_obj())
     })
 
-    observeEvent(input$cancel, {
-      stopApp(NULL)
+    shiny::observeEvent(input$cancel, {
+      shiny::stopApp(NULL)
     })
 
   }

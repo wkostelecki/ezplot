@@ -4,8 +4,16 @@
 \alias{model_plot}
 \title{model_plot}
 \usage{
-model_plot(data, x, actual, fitted, facet_x = NULL, point_size = 2,
-  res_bins = NA_real_, size = 11)
+model_plot(
+  data,
+  x,
+  actual,
+  fitted,
+  facet_x = NULL,
+  point_size = 2,
+  res_bins = NA_real_,
+  size = 11
+)
 }
 \arguments{
 \item{data}{A data.frame.}
