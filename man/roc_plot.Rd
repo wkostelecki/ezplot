@@ -53,6 +53,7 @@ roc_plot(df, "actual", "fitted")
 roc_plot(df, "actual", "runif", size_line = 0.5)
 
 \donttest{
+library(dplyr, warn.conflicts = FALSE)
 roc_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
 
 roc_plot(df, "actual", "fitted",
