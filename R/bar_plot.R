@@ -6,7 +6,8 @@
 #'   labels
 #' @param label_pos Position of labels. Can be "auto", "inside", "top", "both"
 #'   or "none".
-#'
+#' @param coord_flip logical (default is FALSE). If TRUE, flips the x and y
+#'   coordinate using ggplot2::coord_flip()
 #' @return A ggplot object.
 #' @export
 #'

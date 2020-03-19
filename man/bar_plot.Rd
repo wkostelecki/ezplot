@@ -67,6 +67,9 @@ labels}
 
 \item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{"fixed"}.}
+
+\item{coord_flip}{logical (default is FALSE). If TRUE, flips the x and y
+coordinate using ggplot2::coord_flip()}
 }
 \value{
 A ggplot object.
