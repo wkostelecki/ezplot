@@ -14,14 +14,15 @@ distribution_plot = function (data,
                               facet_x = NULL,
                               nbins = 20,
                               use_theme = theme_ez,
-                              size = 14) {
+                              size = 11,
+                              env = parent.frame()) {
 
   cols = c(x = unname(x),
            facet_x = unname(facet_x))
 
   data = data %>%
     transmute(!!!lapply(cols,
-                        function(x) rlang::parse_quo(x, env = parent.frame())))
+                        function(x) rlang::parse_quo(x, env = env)))
 
   binwidth = diff(range(data[["x"]])) / nbins
 

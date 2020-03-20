@@ -23,14 +23,14 @@ tile_plot = function(data,
                      z = c(Count = "1"),
                      facet_x = NULL,
                      facet_y = NULL,
-                     size = 14,
+                     size = 11,
                      facet_ncol = NULL,
                      labels_x = NULL,
                      labels_y = NULL,
                      labels_z = ez_labels,
                      zlim = function(x) c(pmin(0, x[1]), pmax(0, x[2])),
                      palette = ez_jet,
-                     reorder = c('facet_x', 'facet_y')){
+                     reorder = c('facet_x', 'facet_y')) {
 
 
   cols = c(x = unname(x),
@@ -48,7 +48,7 @@ tile_plot = function(data,
     reorder_levels(cols = reorder,
                    y = 'z')
 
-  if (!('y' %in% names(gdata))){
+  if (!('y' %in% names(gdata))) {
     gdata[["y"]] = ""
   }
 
@@ -58,6 +58,14 @@ tile_plot = function(data,
                          colours = palette(100),
                          labels = labels_z,
                          limits = zlim)
+
+  if (!is.null(labels_x)) {
+    g = g + scale_x_continuous(labels = labels_x)
+  }
+
+  if (!is.null(labels_y)) {
+    g = g + scale_y_continuous(labels = labels_y)
+  }
 
   g = quick_facet(g, ncol = facet_ncol)
 

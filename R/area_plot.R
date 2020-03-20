@@ -18,6 +18,7 @@
 #'   \code{facet_grid}. Default is \code{"fixed"}.
 #' @param facet_ncol Option passed to ncol argument in \code{facet_wrap} or
 #'   \code{facet_grid}. Default is \code{NULL}.
+#' @param env environment for evaluating expressions.
 #'
 #' @return A ggplot object.
 #' @export
@@ -41,7 +42,7 @@ area_plot = function(data,
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,
-                     size = 14,
+                     size = 11,
                      reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
                      labels_y = if (position == "fill") {
@@ -53,7 +54,8 @@ area_plot = function(data,
                      use_theme = theme_ez,
                      position = c("stack", "fill"),
                      facet_scales = "fixed",
-                     facet_ncol = NULL) {
+                     facet_ncol = NULL,
+                     env = parent.frame()) {
 
   y = nameifnot(y)
 
@@ -69,7 +71,8 @@ area_plot = function(data,
                    cols,
                    group_by = cols[intersect(names(cols),
                                              c("x", "group",
-                                               "facet_x", "facet_y"))])
+                                               "facet_x", "facet_y"))],
+                   env = env)
 
   if (any("group" == names(gdata))) gdata[["group"]] = factor(gdata[["group"]])
 
@@ -89,7 +92,7 @@ area_plot = function(data,
 
   g = ggplot(gdata)
 
-  if ("group" %in% names(gdata)){
+  if (exists("group", gdata)) {
     g = g +
       geom_col(aes(x, y,
                    fill = group),
@@ -116,7 +119,6 @@ area_plot = function(data,
                0.1 * any(gdata[["y"]] > 0),
                0)
   }
-
 
   if (!is.null(labels_x)) {
 

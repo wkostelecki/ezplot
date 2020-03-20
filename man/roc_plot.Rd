@@ -4,8 +4,17 @@
 \alias{roc_plot}
 \title{roc_plot}
 \usage{
-roc_plot(data, actual, fitted, group = NULL, facet_x = NULL,
-  facet_y = NULL, size = 14)
+roc_plot(
+  data,
+  actual,
+  fitted,
+  group = NULL,
+  facet_x = NULL,
+  facet_y = NULL,
+  size_line = 1,
+  size = 11,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -20,14 +29,18 @@ roc_plot(data, actual, fitted, group = NULL, facet_x = NULL,
 
 \item{facet_y}{A character. Evaluates to a column.}
 
+\item{size_line}{width of line for \code{geom_line()}. Default is 1.}
+
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \description{
 roc_plot
 }
 \examples{
 library(ggplot2)
-n = 10000
+n = 1000
 df = data.frame(actual = sample(c(FALSE, TRUE), n, replace = TRUE),
                 runif = runif(n))
 df[["fitted"]] = runif(n) ^ ifelse(df[["actual"]] == 1, 0.5, 2)
@@ -37,9 +50,10 @@ ggplot(df) +
 
 roc_plot(df, "actual", "actual")
 roc_plot(df, "actual", "fitted")
-roc_plot(df, "actual", "runif")
+roc_plot(df, "actual", "runif", size_line = 0.5)
 
 \donttest{
+library(dplyr, warn.conflicts = FALSE)
 roc_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
 
 roc_plot(df, "actual", "fitted",

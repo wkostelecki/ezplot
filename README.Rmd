@@ -1,0 +1,191 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  fig.width = 6,
+  fig.height = 3,
+  fig.align = "center"
+)
+```
+# ezplot
+
+<!-- badges: start -->
+[![Coverage status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://codecov.io/github/wkostelecki/ezplot?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/ezplot)](https://cran.r-project.org/package=ezplot)
+[![Travis build status](https://travis-ci.org/wkostelecki/ezplot.svg?branch=master)](https://travis-ci.org/wkostelecki/ezplot)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ezplot)](http://www.r-pkg.org/pkg/ezplot)
+[![Total CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](http://www.r-pkg.org/pkg/ezplot)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+<!-- badges: end -->
+
+## Overview
+
+ezplot provides high-level wrapper functions for common chart types with reduced typing and easy faceting. e.g.:
+
+- `line_plot()`
+- `area_plot()`
+- `bar_plot()`
+- `tile_plot()`
+- `waterfall_plot()`
+- `side_plot()`
+- `secondary_plot()`
+
+## Installation
+
+You can install the released version of ezplot from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("ezplot")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("wkostelecki/ezplot")
+```
+
+## Usage
+
+```{r load packages}
+library(ezplot)
+library(tsibbledata)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(lubridate))
+```
+
+### line_plot
+Weekly aggregation:
+```{r line_plot-1}
+line_plot(ansett, x = "Week", y = "Passengers")
+```
+
+Add grouping:
+```{r line_plot-2}
+line_plot(ansett, x = "Week", y = "Passengers", group = "Class")
+```
+
+Add faceting:
+```{r line_plot-3, fig.width = 8, fig.height = 5}
+line_plot(ansett, x = "Week", y = "Passengers",
+          group = "Class", facet_x = "Airports",
+          facet_scales = "free_y") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.38, hjust = 1))
+```
+
+Plot YOY comparisons:
+```{r line_plot4, fig.width = 8, fig.height = 4}
+line_plot(gafa_stock, "Date", c("Closing Stock Price" = "Close"),
+          facet_y = "Symbol",
+          facet_scales = "free_y",
+          yoy = TRUE,
+          labels = function(x) ez_labels(x, prepend = "$"))
+```
+
+Plot multiple numeric columns:
+```{r line_plot-5, fig.width = 7, fig.height = 4}
+line_plot(hh_budget,
+          "Year",
+          c("DI", "Expenditure", "Savings"),
+          facet_x = "Country") +
+  theme(panel.spacing.x = unit(1, "lines")) +
+  ylab(NULL)
+  
+```
+
+### area_plot
+Weekly aggregation:
+```{r area_plot-1}
+area_plot(ansett, x = "Week", y = "Passengers")
+```
+
+Add grouping:
+```{r area_plot-2}
+area_plot(ansett, x = "Week",
+          y = c("Weekly Passengers" = "Passengers"),
+          "Class")
+```
+
+Add faceting:
+```{r area_plot-3, fig.width = 8, fig.height = 4}
+area_plot(ansett,
+          "year(Week) + (month(Week) - 1) / 12",
+          y = c("Monthly Passengers" = "Passengers"),
+          group = "substr(Airports, 5, 7)",
+          facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
+          facet_scales = "free_y") +
+          theme(axis.text.x = element_text(angle = 90, vjust = 0.38, hjust = 1))
+```
+
+### bar_plot
+Yearly aggregation:
+```{r bar_plot-1}
+bar_plot(subset(aus_retail, year(Month) >= 2010), 
+         x = "year(Month)",
+         y = "Turnover")
+```
+
+With grouping:
+```{r bar_plot-2, fig.width = 7, fig.height = 4}
+bar_plot(subset(aus_retail, year(Month) >= 2010), 
+         x = "year(Month)",
+         y = "Turnover",
+         group = "State")
+```
+Share of turnover:
+```{r bar_plot-3, fig.width = 7, fig.height = 4}
+bar_plot(subset(aus_retail, year(Month) >= 2010), 
+         x = "year(Month)",
+         y = "Turnover",
+         group = "State",
+         position = "fill")
+```
+
+### tile_plot
+```{r tile_plot-1}
+nyc_bikes %>%
+  mutate(duration = as.numeric(stop_time - start_time)) %>%
+  filter(between(duration, 0, 16)) %>%
+  tile_plot(c("Trip Start (Hour of Day)" = "lubridate::hour(start_time) + 0.5"),
+            c("Ride Duration (min)" = "duration - duration %% 2 + 1"))
+```
+
+```{r tile_plot-2, fig.width = 7}
+tile_plot(vic_elec,
+          c("Temperature (C)" = "round(Temperature)"), 
+          c("Half-Hourly Demand (MW)" = "round(Demand, -2)"),
+          labels_y = ez_labels, facet_x = "year(Time)")
+```
+
+### waterfall_plot
+```{r waterfall_plot-1, fig.height = 4}
+waterfall_plot(aus_retail,
+               "lubridate::year(Month)",
+               "Turnover", 
+               "sub(' Territory', '\nTerritory', State)", 
+               rotate_xlabel = TRUE)
+```
+
+### side_plot
+```{r side_plot-1, fig.width = 8}
+side_plot(PBS, 
+          "paste(Concession, Type, sep = ' - ')", 
+          c("Scripts", "Cost", "Average Cost" = "~ Cost / Scripts"))
+```
+
+### secondary_plot
+Plot with secondary y-axis.
+```{r secondary_plot-1}
+secondary_plot(pelt, "Year",
+               c("Hare Population" = "Hare"), c("Lynx Population" = "Lynx"),
+               ylim1 = c(0, 160e3),
+               ylim2 = c(0, 80e3))
+```

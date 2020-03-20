@@ -1,0 +1,111 @@
+---
+title: "Overview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.align = "center"
+)
+```
+
+Use ezplot to quickly create presentation-ready charts that are also useful for
+exploratory data analysis. By default, ezplot functions aggregate multiple 
+values of y for repeated categories of x, group, facet_y and facet_x.
+
+```{r setup}
+library(ezplot)
+library(tsibbledata)
+suppressPackageStartupMessages(library(lubridate))
+library(ggplot2)
+library(grid)
+```
+
+### line_plot
+Weekly aggregation:
+```{r}
+line_plot(ansett, x = "Week", y = "Passengers")
+```
+
+Add grouping:
+```{r}
+line_plot(ansett, x = "Week", y = "Passengers", group = "Class")
+```
+
+Add faceting:
+```{r, fig.width = 7, fig.height = 6}
+line_plot(ansett, x = "Week", y = "Passengers",
+          group = "Class", facet_x = "Airports",
+          facet_scales = "free_y", size = 10) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.38, hjust = 1))
+```
+
+Plot YOY comparisons:
+```{r, fig.height = 5}
+line_plot(gafa_stock, "Date", c("Closing Stock Price" = "Close"),
+          facet_y = "Symbol",
+          facet_scales = "free_y",
+          yoy = TRUE,
+          labels = function(x) ez_labels(x, prepend = "$"))
+```
+
+Plot multiple numeric columns:
+```{r, fig.width = 7, fig.height = 5}
+line_plot(hh_budget,
+          "Year",
+          c("DI", "Expenditure", "Savings"),
+          facet_x = "Country") +
+  theme(panel.spacing.x = unit(1, "lines")) +
+  ylab(NULL)
+  
+```
+
+### area_plot
+Weekly aggregation:
+```{r}
+area_plot(ansett, x = "Week", y = "Passengers")
+```
+
+Add grouping:
+```{r}
+area_plot(ansett, x = "Week",
+          y = c("Weekly Passengers" = "Passengers"),
+          "Class")
+```
+
+Add faceting:
+```{r, fig.width = 7, fig.height = 4}
+area_plot(ansett,
+          "year(Week) + (month(Week) - 1) / 12",
+          y = c("Monthly Passengers" = "Passengers"),
+          group = "substr(Airports, 5, 7)",
+          facet_x = "substr(Airports, 1, 3)", facet_y = "Class",
+          facet_scales = "free_y") +
+          theme(axis.text.x = element_text(angle = 90, vjust = 0.38, hjust = 1))
+```
+
+### bar_plot
+Yearly aggregation
+```{r}
+bar_plot(subset(aus_retail, year(Month) >= 2010), 
+         x = "year(Month)",
+         y = "Turnover")
+```
+
+With grouping:
+```{r, fig.width = 7, fig.height = 4}
+bar_plot(subset(aus_retail, year(Month) >= 2010), 
+         x = "year(Month)",
+         y = "Turnover",
+         group = "State",
+         size = 10)
+```
+
+

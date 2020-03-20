@@ -4,10 +4,23 @@
 \alias{waterfall_plot}
 \title{waterfall_plot}
 \usage{
-waterfall_plot(data, x, y, group, size = 14, labels = ez_labels,
-  label_rescale = 1, y_min = "auto", rescale_y = 1.1, n_signif = 3,
-  rotate_xlabel = FALSE, bottom_label = TRUE, ingroup_label = FALSE,
-  n_x = 2)
+waterfall_plot(
+  data,
+  x,
+  y,
+  group,
+  size = 11,
+  labels = ez_labels,
+  label_rescale = 1,
+  y_min = "auto",
+  rescale_y = 1.1,
+  n_signif = 3,
+  rotate_xlabel = FALSE,
+  bottom_label = TRUE,
+  ingroup_label = FALSE,
+  n_x = 2,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -38,6 +51,8 @@ labels).}
 \item{ingroup_label}{Logical. Shows in-group percentage change.}
 
 \item{n_x}{Number of x levels to show in chart.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \description{
 function for creating waterfall charts
@@ -47,12 +62,12 @@ library(tsibbledata)
 waterfall_plot(aus_retail,
                "lubridate::year(Month)",
                "Turnover",
-               "sub(' Territory', '\\nTerritory', State)",
+               "sub(' Territory', '\nTerritory', State)",
                rotate_xlabel = TRUE)
 waterfall_plot(aus_retail,
                "lubridate::year(Month)",
                "Turnover",
-               "sub(' Territory', '\\nTerritory', State)",
+               "sub(' Territory', '\nTerritory', State)",
                rotate_xlabel = TRUE,
                label_rescale = 0.5,
                ingroup_label = TRUE,

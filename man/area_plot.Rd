@@ -4,12 +4,25 @@
 \alias{area_plot}
 \title{area_plot}
 \usage{
-area_plot(data, x, y = "1", group = NULL, facet_x = NULL,
-  facet_y = NULL, size = 14, reorder = c("group", "facet_x",
-  "facet_y"), palette = ez_col, labels_y = if (position == "fill") {   
-   function(x) ez_labels(100 * x, append = "\%") } else {     ez_labels },
-  labels_x = NULL, use_theme = theme_ez, position = c("stack",
-  "fill"), facet_scales = "fixed", facet_ncol = NULL)
+area_plot(
+  data,
+  x,
+  y = "1",
+  group = NULL,
+  facet_x = NULL,
+  facet_y = NULL,
+  size = 11,
+  reorder = c("group", "facet_x", "facet_y"),
+  palette = ez_col,
+  labels_y = if (position == "fill") {     function(x) ez_labels(100 * x, append = "\%")
+    } else {     ez_labels },
+  labels_x = NULL,
+  use_theme = theme_ez,
+  position = c("stack", "fill"),
+  facet_scales = "fixed",
+  facet_ncol = NULL,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -44,6 +57,8 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{facet_ncol}{Option passed to ncol argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{NULL}.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \value{
 A ggplot object.

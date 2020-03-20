@@ -4,8 +4,12 @@
 \alias{reorder_levels}
 \title{Order levels of factor columns using fct_reorder}
 \usage{
-reorder_levels(data, cols = c("group", "facet_x", "facet_y"), y = "y",
-  .desc = rep(TRUE, length(cols)))
+reorder_levels(
+  data,
+  cols = c("group", "facet_x", "facet_y"),
+  y = "y",
+  .desc = rep(TRUE, length(cols))
+)
 }
 \arguments{
 \item{data}{A data.frame.}

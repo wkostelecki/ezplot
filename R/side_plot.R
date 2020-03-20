@@ -12,11 +12,11 @@ side_plot = function(data,
                      x,
                      y = "1",
                      labels_y = ez_labels,
-                     size = 14,
+                     size = 11,
                      palette = ez_col,
                      signif = 3,
                      reorder = TRUE,
-                     rescale_y = 1.25){
+                     rescale_y = 1.25) {
 
   y = nameifnot(y)
   y_names = names(y)
@@ -51,7 +51,7 @@ side_plot = function(data,
     geom_text(aes(x, y + (rescale_y - 1) / 10 * y_offset,
                   label = labels_y(signif(y, signif)),
                   hjust = ifelse(y >= 0, 0, 1)),
-              vjust = 0.5,
+              vjust = 0.42,
               size = size / 4,
               colour = "grey30") +
     geom_text(aes(x,

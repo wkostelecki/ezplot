@@ -4,11 +4,22 @@
 \alias{tile_plot}
 \title{tile_plot}
 \usage{
-tile_plot(data, x, y, z = c(Count = "1"), facet_x = NULL,
-  facet_y = NULL, size = 14, facet_ncol = NULL, labels_x = NULL,
-  labels_y = NULL, labels_z = ez_labels, zlim = function(x) c(pmin(0,
-  x[1]), pmax(0, x[2])), palette = ez_jet, reorder = c("facet_x",
-  "facet_y"))
+tile_plot(
+  data,
+  x,
+  y,
+  z = c(Count = "1"),
+  facet_x = NULL,
+  facet_y = NULL,
+  size = 11,
+  facet_ncol = NULL,
+  labels_x = NULL,
+  labels_y = NULL,
+  labels_z = ez_labels,
+  zlim = function(x) c(pmin(0, x[1]), pmax(0, x[2])),
+  palette = ez_jet,
+  reorder = c("facet_x", "facet_y")
+)
 }
 \arguments{
 \item{data}{A data.frame.}

@@ -4,7 +4,15 @@
 \alias{scatter_plot}
 \title{scatter plot}
 \usage{
-scatter_plot(data, x, y, group = NULL, size = 14, point_size = 2.5)
+scatter_plot(
+  data,
+  x,
+  y,
+  group = NULL,
+  size = 11,
+  point_size = 2.5,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -18,6 +26,8 @@ scatter_plot(data, x, y, group = NULL, size = 14, point_size = 2.5)
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{point_size}{Numeric. Default is 2.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \description{
 create a scatter plot

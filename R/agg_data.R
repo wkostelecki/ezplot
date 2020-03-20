@@ -23,7 +23,7 @@ agg_data = function(data,
                     group_by = NULL,
                     agg_fun = function(x) sum(x, na.rm = TRUE),
                     group_by2 = NULL,
-                    env = parent.frame()){
+                    env = parent.frame()) {
 
   COLS = unpack_cols(cols)
 

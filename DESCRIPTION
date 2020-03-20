@@ -17,15 +17,18 @@ Imports:
     forcats,
     ggplot2,
     rlang
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Suggests:
     covr,
+    DT,
     knitr,
     lubridate,
     methods,
+    miniUI,
     psych,
     rmarkdown,
     ROCR,
+    shiny,
     stats,
     testthat,
     tibble,

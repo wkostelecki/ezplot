@@ -4,10 +4,21 @@
 \alias{line_plot}
 \title{line_plot}
 \usage{
-line_plot(data, x, y = "1", group = NULL, facet_x = NULL,
-  facet_y = NULL, yoy = FALSE, size_line = 1, size = 14,
-  palette = ez_col, labels_y = ez_labels, use_theme = theme_ez,
-  facet_scales = "fixed")
+line_plot(
+  data,
+  x,
+  y = "1",
+  group = NULL,
+  facet_x = NULL,
+  facet_y = NULL,
+  yoy = FALSE,
+  size_line = 1,
+  size = 11,
+  palette = ez_col,
+  labels_y = ez_labels,
+  use_theme = theme_ez,
+  facet_scales = "fixed"
+)
 }
 \arguments{
 \item{data}{A data.frame.}

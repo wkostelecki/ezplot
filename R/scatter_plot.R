@@ -9,18 +9,23 @@
 #' scatter_plot(mtcars, "factor(cyl)", "hp")
 #' @export
 scatter_plot = function(data, x,  y, group = NULL,
-                    size = 14,
-                    point_size = 2.5) {
+                        size = 11,
+                        point_size = 2.5,
+                        env = parent.frame()) {
 
   cols = c(x = unname(x),
            y = unname(y),
            group = unname(group))
 
   gdata = data %>%
-    transmute_(.dots = cols)
+    as.data.frame() %>%
+    transmute(!!!lapply(cols,
+                        function(x) rlang::parse_quo(x, env = env)))
 
   if (!exists("group", gdata)) {
     gdata[["group"]] = ""
+  } else {
+    gdata[["group"]] = factor(gdata[["group"]])
   }
 
   n_group = length(unique(gdata[["group"]]))

@@ -4,13 +4,28 @@
 \alias{bar_plot}
 \title{bar_plot}
 \usage{
-bar_plot(data, x, y = "1", group = NULL, facet_x = NULL,
-  facet_y = NULL, size = 14, width = NULL, reorder = c("group",
-  "facet_x", "facet_y"), palette = ez_col, labels_y = if (position ==
-  "fill") {     function(x) ez_labels(100 * x, append = "\%") } else {    
-  ez_labels }, label_pos = c("auto", "inside", "top", "both"),
-  rescale_y = 1.1, label_cutoff = 0.12, use_theme = theme_ez,
-  position = "stack", facet_scales = "fixed")
+bar_plot(
+  data,
+  x,
+  y = "1",
+  group = NULL,
+  facet_x = NULL,
+  facet_y = NULL,
+  size = 11,
+  width = NULL,
+  reorder = c("group", "facet_x", "facet_y"),
+  palette = ez_col,
+  labels_y = if (position == "fill") {     function(x) ez_labels(100 * x, append = "\%")
+    } else {     ez_labels },
+  labels_x = identity,
+  label_pos = c("auto", "inside", "top", "both", "none"),
+  rescale_y = 1.1,
+  label_cutoff = 0.12,
+  use_theme = theme_ez,
+  position = "stack",
+  facet_scales = "fixed",
+  coord_flip = FALSE
+)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -36,12 +51,14 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{labels_y}{label formatting function}
 
-\item{label_pos}{Position of labels. Can be "auto", "inside", "top" or
-"both".}
+\item{labels_x}{label formatting function}
+
+\item{label_pos}{Position of labels. Can be "auto", "inside", "top", "both"
+or "none".}
 
 \item{rescale_y}{Rescaling factor for y-axis limits}
 
-\item{label_cutoff}{Cutoff size (proportion of limit range) for excluding
+\item{label_cutoff}{Cutoff size (proportion of y data range) for excluding
 labels}
 
 \item{use_theme}{ggplot theme function}
@@ -50,6 +67,9 @@ labels}
 
 \item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{"fixed"}.}
+
+\item{coord_flip}{logical (default is FALSE). If TRUE, flips the x and y
+coordinate using ggplot2::coord_flip()}
 }
 \value{
 A ggplot object.
@@ -67,8 +87,9 @@ bar_plot(ansett, "Airports", "Passengers", "Class", use_theme = ggplot2::theme_b
 bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
 bar_plot(ansett, "sub('-.*', '', Airports)", c("Total Passengers" = "Passengers"),
          "Class",
-         "sub('.*-', '', Airports)")
+         "sub('.*-', '', Airports)", label_pos = "both")
 bar_plot(ansett, "Airports",
          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
          "Class", label_pos = "both")
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", coord_flip = TRUE)
 }

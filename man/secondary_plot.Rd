@@ -5,10 +5,21 @@
 \title{secondary_plot
 creates a plot with a secondary y-axis}
 \usage{
-secondary_plot(data, x, y1 = "1", y2 = "1", facet_x = NULL,
-  facet_y = NULL, size_line = 1, labels_y1 = ez_labels,
-  labels_y2 = ez_labels, ylim1 = NULL, ylim2 = NULL,
-  reorder = c("facet_x", "facet_y"), size = 14)
+secondary_plot(
+  data,
+  x,
+  y1 = "1",
+  y2 = "1",
+  facet_x = NULL,
+  facet_y = NULL,
+  size_line = 1,
+  labels_y1 = ez_labels,
+  labels_y2 = ez_labels,
+  ylim1 = NULL,
+  ylim2 = NULL,
+  reorder = c("facet_x", "facet_y"),
+  size = 11
+)
 }
 \arguments{
 \item{data}{A data.frame.}

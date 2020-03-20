@@ -1,11 +1,12 @@
 #' roc_plot
 #' @inheritParams area_plot
+#' @inheritParams line_plot
 #' @param actual Vector of actuals values
 #' @param fitted Vector of fitted values
 #' @export
 #' @examples
 #' library(ggplot2)
-#' n = 10000
+#' n = 1000
 #' df = data.frame(actual = sample(c(FALSE, TRUE), n, replace = TRUE),
 #'                 runif = runif(n))
 #' df[["fitted"]] = runif(n) ^ ifelse(df[["actual"]] == 1, 0.5, 2)
@@ -15,9 +16,10 @@
 #'
 #' roc_plot(df, "actual", "actual")
 #' roc_plot(df, "actual", "fitted")
-#' roc_plot(df, "actual", "runif")
+#' roc_plot(df, "actual", "runif", size_line = 0.5)
 #'
 #'\donttest{
+#' library(dplyr, warn.conflicts = FALSE)
 #' roc_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
 #'
 #' roc_plot(df, "actual", "fitted",
@@ -33,7 +35,9 @@ roc_plot = function(data, actual, fitted,
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,
-                    size = 14){
+                    size_line = 1,
+                    size = 11,
+                    env = parent.frame()) {
 
   cols = c(actual = unname(actual),
            fitted = unname(fitted),
@@ -44,7 +48,7 @@ roc_plot = function(data, actual, fitted,
   data = data %>%
     ungroup %>%
     transmute(!!!lapply(cols,
-                        function(x) rlang::parse_quo(x, env = parent.frame())))
+                        function(x) rlang::parse_quo(x, env = env)))
 
   total = data %>%
     tibble::as_tibble() %>%
@@ -68,7 +72,8 @@ roc_plot = function(data, actual, fitted,
   } else {
     g = g +
       geom_line(aes(x = false_positive,
-                    y = true_positive))
+                    y = true_positive),
+                size = size_line)
   }
 
   g = quick_facet(g)
@@ -76,6 +81,7 @@ roc_plot = function(data, actual, fitted,
   g = g +
     geom_line(data = data.frame(x = c(0, 1), y = c(0, 1)),
               aes(x, y),
+              size = size_line,
               linetype = 2) +
     coord_equal() +
     theme_minimal(size) +

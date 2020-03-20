@@ -4,8 +4,15 @@
 \alias{distribution_plot}
 \title{distribution_plot}
 \usage{
-distribution_plot(data, x, facet_x = NULL, nbins = 20,
-  use_theme = theme_ez, size = 14)
+distribution_plot(
+  data,
+  x,
+  facet_x = NULL,
+  nbins = 20,
+  use_theme = theme_ez,
+  size = 11,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{data}{A data.frame.}
@@ -19,6 +26,8 @@ distribution_plot(data, x, facet_x = NULL, nbins = 20,
 \item{use_theme}{ggplot theme function}
 
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \description{
 distribution_plot
