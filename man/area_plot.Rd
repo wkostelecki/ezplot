@@ -14,8 +14,8 @@ area_plot(
   size = 11,
   reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col,
-  labels_y = if (position == "fill") {     function(x) ez_labels(100 * x, append = "\%")
-    } else {     ez_labels },
+  labels_y = if (position == "fill") {     function(x) ez_labels(100 * x, append =
+    "\%") } else {     ez_labels },
   labels_x = NULL,
   use_theme = theme_ez,
   position = c("stack", "fill"),

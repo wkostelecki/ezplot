@@ -35,7 +35,10 @@ test_that("agg_data base cases", {
                  as.data.frame)
 
   expect_equal(agg_data(mtcars, c(cyl = "as.character(cyl)")),
-               mtcars %>% distinct(cyl = as.character(cyl)) %>% arrange(cyl))
+               mtcars %>%
+                 distinct(cyl = as.character(cyl)) %>%
+                 tibble::remove_rownames() %>%
+                 arrange(cyl))
 
   expect_equal(agg_data(mtcars, c("cyl", "mpg * hp"), "cyl"),
                mtcars %>%
@@ -150,3 +153,4 @@ test_that("mixed '~' works", {
     select(-Solar.R)
   expect_equal(df, target)
 })
+
