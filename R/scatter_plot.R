@@ -33,7 +33,7 @@ scatter_plot = function(data, x,  y, group = NULL,
   if (is.numeric(gdata[["x"]])) {
     g = ggplot(gdata) +
       geom_point(aes(x, y, color = group), size = point_size) +
-      geom_smooth(aes(x, y, color = group), method = "lm") +
+      geom_smooth(aes(x, y, color = group), method = "lm", formula = y ~ x) +
       scale_color_manual(NULL, values = ez_col(n_group),
                          labels = function(x) paste0(x, "   ")) +
       scale_x_continuous(labels = ez_labels) +
