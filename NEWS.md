@@ -1,3 +1,10 @@
+# ezplot 0.4.0
+- prep for dplyr 1.0.0
+- fixed "don't test" examples
+- added ez_app and variable_plot
+- coord_flip option for bar_plot
+- deleted mean_plot
+
 # ezplot 0.3.1
 - bug fixes for tsibbles
 - clean up
