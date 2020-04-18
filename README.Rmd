@@ -128,7 +128,7 @@ area_plot(ansett,
 ### bar_plot
 Yearly aggregation:
 ```{r bar_plot-1}
-bar_plot(subset(aus_retail, year(Month) >= 2010), 
+bar_plot(subset(aus_retail, year(Month) >= 2010),
          x = "year(Month)",
          y = "Turnover")
 ```

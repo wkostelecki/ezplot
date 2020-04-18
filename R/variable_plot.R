@@ -114,6 +114,7 @@ variable_plot = function(data,
       g = ggplot(gdata) +
         geom_col(aes(x, value, fill = group),
                  position = "dodge",
+                 orientation = "x",
                  na.rm = TRUE) +
         scale_fill_manual(NULL,
                           values = ez_col(length(unique(gdata[["group"]]))),
@@ -136,6 +137,7 @@ variable_plot = function(data,
       g = ggplot(gdata) +
         geom_col(aes(x, value),
                  fill = ez_col(1),
+                 orientation = "x",
                  na.rm = TRUE)
 
       g = g +

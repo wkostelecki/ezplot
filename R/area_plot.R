@@ -96,7 +96,8 @@ area_plot = function(data,
     g = g +
       geom_col(aes(x, y,
                    fill = group),
-               width = get_incr(gdata[["x"]])) +
+               width = get_incr(gdata[["x"]]),
+               orientation = "x") +
       scale_fill_manual(NULL,
                         values = rev(palette(length(unique(gdata[["group"]])))),
                         labels = function(x) paste0(x, "   "),
@@ -105,7 +106,8 @@ area_plot = function(data,
     g = g +
       geom_col(aes(x, y),
                fill = palette(1),
-               width = get_incr(gdata[["x"]]))
+               width = get_incr(gdata[["x"]]),
+               orientation = "x")
   }
 
   g = quick_facet(g, scales = facet_scales, ncol = facet_ncol)

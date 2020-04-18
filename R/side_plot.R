@@ -47,7 +47,8 @@ side_plot = function(data,
 
   g = ggplot(gdata) +
     geom_col(aes(x, y),
-             fill = palette(1)) +
+             fill = palette(1),
+             orientation = "x") +
     geom_text(aes(x, y + (rescale_y - 1) / 10 * y_offset,
                   label = labels_y(signif(y, signif)),
                   hjust = ifelse(y >= 0, 0, 1)),
@@ -68,8 +69,7 @@ side_plot = function(data,
     theme(panel.grid.major.y = element_blank(),
           panel.grid.major.x = element_line(colour = "grey85",
                                             size = if (size > 16) 0.8 else 0.2),
-          axis.line.y = element_line(color = "grey85",
-                                     size = if (size > 16) 0.8 else 0.2),
+          axis.line.x = element_blank(),
           strip.placement = "outside")
   quick_facet(g, strip.position = "bottom", scales = "free_x", nrow = 1) +
     theme(panel.spacing.x = grid::unit(1.5, "lines"))

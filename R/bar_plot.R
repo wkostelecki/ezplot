@@ -129,7 +129,8 @@ bar_plot = function(data,
     g = g +
       geom_col(aes(x, y,
                    fill = group),
-               width = width) +
+               width = width,
+               orientation = "x") +
       scale_fill_manual(NULL,
                         values = fill_pal,
                         labels = function(x) paste0(x, "   "),
@@ -140,6 +141,7 @@ bar_plot = function(data,
     g = g +
       geom_col(aes(x, y),
                fill = fill_pal,
+               orientation = "x",
                width = width)
   }
 
