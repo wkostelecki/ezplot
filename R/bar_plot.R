@@ -176,7 +176,7 @@ bar_plot = function(data,
     g = g +
       geom_text(data = top_labels,
                 aes(x,
-                    top_y + y_range / 100,# TODO: apply h offset here if coord_flip
+                    top_y + y_range / 100,
                     label = top_ylabel_text),
                 size = size / 4,
                 vjust = if (coord_flip) 0.42 else -0.5,
