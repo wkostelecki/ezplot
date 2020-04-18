@@ -1,3 +1,6 @@
+# ezplot 0.4.1
+- fixed problems where geom_col(orientation = "x") was no longer used by default
+
 # ezplot 0.4.0
 - prep for dplyr 1.0.0
 - fixed "don't test" examples
