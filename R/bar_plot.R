@@ -152,7 +152,7 @@ bar_plot = function(data,
                       label = ylabel_text,
                       colour = group),
                   size = size / 4,
-                  vjust = 0.42) +
+                  vjust = 0.38) +
         scale_colour_manual(NULL,
                             values = text_contrast(fill_pal),
                             guide = "none")
@@ -181,7 +181,7 @@ bar_plot = function(data,
                     top_y + y_range / 100,
                     label = top_ylabel_text),
                 size = size / 4,
-                vjust = if (coord_flip) 0.42 else -0.5,
+                vjust = if (coord_flip) 0.38 else -0.2,
                 hjust = if (coord_flip) 0 else 0.5)
   }
 

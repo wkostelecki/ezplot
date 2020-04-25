@@ -122,7 +122,7 @@ variable_plot = function(data,
 
       g = g +
         geom_text(aes(x, value,
-                      vjust = ifelse(value >= 0, -0.5, 1.4),
+                      vjust = ifelse(value >= 0, -0.2, 1.4),
                       group = group,
                       label = ylabel_text),
                   position = position_dodge(width = 0.9),
@@ -141,7 +141,7 @@ variable_plot = function(data,
                  na.rm = TRUE)
 
       g = g +
-        geom_text(aes(x, value, vjust = ifelse(value >= 0, -0.5, 1.4),
+        geom_text(aes(x, value, vjust = ifelse(value >= 0, -0.2, 1.4),
                       label = ylabel_text),
                   size = size / 4 * label_rescale,
                   na.rm = TRUE) +

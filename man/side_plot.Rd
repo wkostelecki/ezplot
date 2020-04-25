@@ -40,9 +40,9 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 side_plot
 }
 \examples{
-side_plot(mtcars, "gear", "1")
+side_plot(mtcars, "gear", "1", rescale_y = 4/3)
 side_plot(mtcars, "cyl", c("Cars with <120 HP" = "hp < 120"))
 side_plot(mtcars, "cyl", c(count = "ifelse(cyl == 4, 1, -1)", "hp <= 120"))
-side_plot(mtcars, "cyl", c("hp <= 120", "~ - wt / cyl"))
+side_plot(mtcars, "cyl", c("hp <= 120", "~ - wt / cyl"), rescale_y = 1.5)
 side_plot(mtcars, "cyl", c("1", "-1"))
 }

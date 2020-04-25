@@ -3,10 +3,10 @@
 #' @param signif Number of significant digits.
 #' @export
 #' @examples
-#' side_plot(mtcars, "gear", "1")
+#' side_plot(mtcars, "gear", "1", rescale_y = 4/3)
 #' side_plot(mtcars, "cyl", c("Cars with <120 HP" = "hp < 120"))
 #' side_plot(mtcars, "cyl", c(count = "ifelse(cyl == 4, 1, -1)", "hp <= 120"))
-#' side_plot(mtcars, "cyl", c("hp <= 120", "~ - wt / cyl"))
+#' side_plot(mtcars, "cyl", c("hp <= 120", "~ - wt / cyl"), rescale_y = 1.5)
 #' side_plot(mtcars, "cyl", c("1", "-1"))
 side_plot = function(data,
                      x,
@@ -41,24 +41,26 @@ side_plot = function(data,
 
   gdata = gdata %>%
     group_by(facet_x) %>%
-    mutate(y_offset = diff(range(c(y[is.finite(y)], 0))) * ifelse(y >= 0, 1, -1),
-           sides = any(y >= 0) + any(y < 0)) %>%
+    mutate(sides = any(y >= 0) + any(y < 0),
+           y_range = diff(range(c(y[is.finite(y)], 0))) * ifelse(y >= 0, 1, -1),
+           y_rescaled_range = y_range * ifelse(sides < 2, rescale_y, 2 * rescale_y - 1),
+           y_text_nudge = y_rescaled_range / 60,
+           y_axis_nudge = (y_rescaled_range - y_range) / sides) %>%
     ungroup
 
   g = ggplot(gdata) +
     geom_col(aes(x, y),
              fill = palette(1),
              orientation = "x") +
-    geom_text(aes(x, y + (rescale_y - 1) / 10 * y_offset,
+    geom_text(aes(x,
+                  y + y_text_nudge,
                   label = labels_y(signif(y, signif)),
                   hjust = ifelse(y >= 0, 0, 1)),
-              vjust = 0.42,
+              vjust = 0.38,
               size = size / 4,
               colour = "grey30") +
     geom_text(aes(x,
-                  ifelse(sides < 2,
-                         (rescale_y - 1) * y_offset + y,
-                         (rescale_y - 1) / (2 - rescale_y) * y_offset + y),
+                  y + y_axis_nudge,
                   label = "")) +
     scale_y_continuous(labels = labels_y,
                        expand = c(0, 0)) +
@@ -76,4 +78,4 @@ side_plot = function(data,
 
 }
 
-globalVariables(c("facet_x", "y_offset", "sides"))
+globalVariables(c("facet_x", "y_range", "sides"))
