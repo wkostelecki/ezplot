@@ -1,0 +1,53 @@
+
+
+#' histogram_plot
+#' @description creates a densityi plot
+#' @export
+#' @examples
+#' histogram_plot(airquality, "Wind", group = "Month")
+#' histogram_plot(airquality, "Wind", "density", facet_x = "Month")
+histogram_plot = function(data, x,
+                          y = "count",
+                          group = NULL, facet_x = NULL,
+                          facet_y = NULL,
+                          position = "stack",
+                          bins = 30,
+                          alpha = 0.5,
+                          facet_scales = "fixed",
+                          ncol = NULL,
+                          env = parent.frame()) {
+
+  cols = c(x = unname(x),
+           group = unname(group),
+           facet_x = unname(facet_x),
+           facet_y = unname(facet_y))
+
+  gdata = data %>%
+    transmute(!!!lapply(cols,
+                        function(x) rlang::parse_quo(x, env = env)))
+
+  if (exists("group", gdata)) {
+    g = ggplot(gdata) +
+      geom_histogram(aes_string("x",
+                                fill = "forcats::fct_rev(factor(group))",
+                                y = paste0("..", y, "..")),
+                     position = position,
+                     bins = bins,
+                     alpha = alpha) +
+      scale_fill_manual(NULL,
+                        values = rev(ez_col(n_distinct(gdata[["group"]]))),
+                        breaks = rev,
+                        labels = function(x) paste0(x, "   "))
+  } else {
+    g = ggplot(gdata) +
+      geom_histogram(aes_string("x",
+                                y = paste0("..", y, "..")),
+                     fill = ez_col(1), bins = bins)
+  }
+
+  quick_facet(g, scales = facet_scales, ncol = ncol) +
+    theme_ez() +
+    scale_y_continuous(labels = ez_labels, expand = c(0, 0)) +
+    xlab(names(nameifnot(x)))
+
+}
