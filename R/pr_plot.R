@@ -80,7 +80,8 @@ pr_plot = function(data, actual, fitted,
   g = quick_facet(g)
 
   g = g +
-    geom_line(data = data.frame(x = c(0, 1), y = c(0.5, 0.5)),
+    geom_line(data = data.frame(x = c(0, 1)),
+              y = mean(data$actual),
               aes(x, y),
               size = size_line,
               linetype = 2) +
