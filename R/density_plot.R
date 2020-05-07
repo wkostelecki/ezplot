@@ -32,7 +32,7 @@ density_plot = function(data, x, group = NULL, facet_x = NULL,
                    outline.type = "full",
                    adjust = adjust,
                    alpha = alpha) +
-      scale_fill_manual(NULL, values = ez_col(n_distinct(gdata[["group"]])),
+      scale_fill_manual(names(group), values = ez_col(n_distinct(gdata[["group"]])),
                         labels = function(x) paste0(x, "   "))
   } else {
     g = ggplot(gdata) +
