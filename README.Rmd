@@ -189,3 +189,35 @@ secondary_plot(pelt, "Year",
                ylim1 = c(0, 160e3),
                ylim2 = c(0, 80e3))
 ```
+
+```{r density_plot-1}
+nyc_bikes %>% 
+  mutate(duration = as.numeric(stop_time - start_time)) %>%
+  density_plot(c("time of day" = "as.numeric(start_time) %% 86400 / 60 / 60"),
+               group = "ifelse(wday(start_time) %in% c(1, 7), 'week end', 'week day')")
+
+```
+
+```{r histogram_plot-1}
+nyc_bikes %>% 
+  mutate(duration = as.numeric(stop_time - start_time)) %>%
+  histogram_plot(c("time of day" = "as.numeric(start_time) %% 86400 / 60 / 60"),
+                 "density",
+                 group = "ifelse(wday(start_time) %in% c(1, 7), 'week end', 'week day')",
+                 position = "identity",
+                 bins = 48)
+```
+
+```{r roc_plot-1}
+library(ROCR)
+data(ROCR.simple)
+
+df = data.frame(pred = ROCR.simple$predictions,
+                lab = ROCR.simple$labels)
+
+set.seed(4)
+roc_plot(df, "lab", "pred")
+roc_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+pr_plot(df, "lab", "pred")
+pr_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+```
