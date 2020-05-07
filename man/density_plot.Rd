@@ -13,9 +13,32 @@ density_plot(
   adjust = 1,
   alpha = 0.5,
   facet_scales = "fixed",
-  ncol = NULL,
+  facet_ncol = NULL,
   env = parent.frame()
 )
+}
+\arguments{
+\item{data}{A data.frame.}
+
+\item{x}{A named character value. Evaluates to a column.}
+
+\item{group}{A character value. Evaluates to a column.}
+
+\item{facet_x}{A character value. Evaluates to a column.}
+
+\item{facet_y}{A character. Evaluates to a column.}
+
+\item{adjust}{multiplicate bandwidth adjustment}
+
+\item{alpha}{alpha}
+
+\item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{"fixed"}.}
+
+\item{facet_ncol}{Option passed to ncol argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{NULL}.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \description{
 creates a densityi plot
@@ -23,5 +46,5 @@ creates a densityi plot
 \examples{
 density_plot(mtcars, "wt", "cyl")
 density_plot(subset(tsibbledata::olympic_running, Length == "100m" & Year >= 1980),
-             "Time", "Year - Year \%\% 10", "Sex", facet_scales = "free", ncol = 1, adjust = 2)
+             "Time", "Year - Year \%\% 10", "Sex", facet_scales = "free", facet_ncol = 1, adjust = 2)
 }
