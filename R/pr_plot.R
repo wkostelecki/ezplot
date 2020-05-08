@@ -97,7 +97,7 @@ pr_plot = function(data, actual, fitted,
 
 }
 
-globalVariables(c("false_positive", "true_positive", "x", "y"))
+globalVariables(c("precision", "recall"))
 
 
 

@@ -78,4 +78,4 @@ side_plot = function(data,
 
 }
 
-globalVariables(c("facet_x", "y_range", "sides"))
+globalVariables(c("facet_x", "y_range", "sides", "y_rescaled_range", "y_text_nudge", "y_axis_nudge"))
