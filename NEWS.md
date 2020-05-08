@@ -2,7 +2,7 @@
 - added density_plot
 - added histogram_plot
 - added pr_plot
-
+- added lift_plot
 
 # ezplot 0.4.1
 - fixed problems where geom_col(orientation = "x") was no longer used by default

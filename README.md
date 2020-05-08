@@ -55,6 +55,7 @@ library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(lubridate))
+suppressPackageStartupMessages(library(ROCR, warn.conflicts = FALSE))
 ```
 
 ### line\_plot
@@ -257,13 +258,6 @@ nyc_bikes %>%
 <img src="man/figures/README-histogram_plot-1-1.png" style="display: block; margin: auto;" />
 
 ``` r
-library(ROCR)
-#> Loading required package: gplots
-#> 
-#> Attaching package: 'gplots'
-#> The following object is masked from 'package:stats':
-#> 
-#>     lowess
 data(ROCR.simple)
 
 df = data.frame(pred = ROCR.simple$predictions,
@@ -292,3 +286,15 @@ pr_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
 ```
 
 <img src="man/figures/README-roc_plot-1-4.png" style="display: block; margin: auto;" />
+
+``` r
+lift_plot(df, "lab", "pred")
+```
+
+<img src="man/figures/README-roc_plot-1-5.png" style="display: block; margin: auto;" />
+
+``` r
+lift_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+```
+
+<img src="man/figures/README-roc_plot-1-6.png" style="display: block; margin: auto;" />

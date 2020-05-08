@@ -60,6 +60,7 @@ library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(lubridate))
+suppressPackageStartupMessages(library(ROCR, warn.conflicts = FALSE))
 ```
 
 ### line_plot
@@ -209,7 +210,6 @@ nyc_bikes %>%
 ```
 
 ```{r roc_plot-1}
-library(ROCR)
 data(ROCR.simple)
 
 df = data.frame(pred = ROCR.simple$predictions,
@@ -220,4 +220,6 @@ roc_plot(df, "lab", "pred")
 roc_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
 pr_plot(df, "lab", "pred")
 pr_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+lift_plot(df, "lab", "pred")
+lift_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
 ```
