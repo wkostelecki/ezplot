@@ -106,6 +106,8 @@ globalVariables(c("values"))
 #' @description Precision recall calculation
 #' @param actual Vector with two levels
 #' @param fitted Vector with values between 0 and 1
+#' @param y_value metric for ROCR::performance
+#' @param x_value metric for ROCR::performance
 #' @examples
 #' ezplot:::perf(sample(c(TRUE, FALSE), 1, replace = TRUE), runif(1), "lift", "rpp")
 #' ezplot:::perf(sample(c(TRUE, FALSE), 10, replace = TRUE), runif(10), "lift", "rpp")

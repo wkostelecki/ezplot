@@ -15,9 +15,36 @@ histogram_plot(
   bins = 30,
   alpha = 0.5,
   facet_scales = "fixed",
-  ncol = NULL,
+  facet_ncol = NULL,
   env = parent.frame()
 )
+}
+\arguments{
+\item{data}{A data.frame.}
+
+\item{x}{A named character value. Evaluates to a column.}
+
+\item{y}{A named character value. Evaluates to a column.}
+
+\item{group}{A character value. Evaluates to a column.}
+
+\item{facet_x}{A character value. Evaluates to a column.}
+
+\item{facet_y}{A character. Evaluates to a column.}
+
+\item{position}{Either \code{"stack"} (default) or \code{"fill"}}
+
+\item{bins}{number of bins}
+
+\item{alpha}{fill alpha}
+
+\item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{"fixed"}.}
+
+\item{facet_ncol}{Option passed to ncol argument in \code{facet_wrap} or
+\code{facet_grid}. Default is \code{NULL}.}
+
+\item{env}{environment for evaluating expressions.}
 }
 \description{
 creates a densityi plot

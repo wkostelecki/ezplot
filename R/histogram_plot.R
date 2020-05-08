@@ -2,6 +2,9 @@
 
 #' histogram_plot
 #' @description creates a densityi plot
+#' @inheritParams area_plot
+#' @param bins number of bins
+#' @param alpha fill alpha
 #' @export
 #' @examples
 #' histogram_plot(airquality, "Wind", group = "Month")
@@ -14,7 +17,7 @@ histogram_plot = function(data, x,
                           bins = 30,
                           alpha = 0.5,
                           facet_scales = "fixed",
-                          ncol = NULL,
+                          facet_ncol = NULL,
                           env = parent.frame()) {
 
   cols = c(x = unname(x),
@@ -45,7 +48,7 @@ histogram_plot = function(data, x,
                      fill = ez_col(1), bins = bins)
   }
 
-  quick_facet(g, scales = facet_scales, ncol = ncol) +
+  quick_facet(g, scales = facet_scales, ncol = facet_ncol) +
     theme_ez() +
     scale_y_continuous(labels = ez_labels, expand = c(0, 0)) +
     xlab(names(nameifnot(x)))

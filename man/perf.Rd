@@ -10,6 +10,10 @@ perf(actual, fitted, y_value, x_value)
 \item{actual}{Vector with two levels}
 
 \item{fitted}{Vector with values between 0 and 1}
+
+\item{y_value}{metric for ROCR::performance}
+
+\item{x_value}{metric for ROCR::performance}
 }
 \description{
 Precision recall calculation
