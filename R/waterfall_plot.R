@@ -1,11 +1,11 @@
 #' waterfall_plot
 #' @description function for creating waterfall charts
 #' @inheritParams area_plot
+#' @inheritParams bar_plot
 #' @param labels Function for formatting labels.
 #' @param label_rescale Scaling factor for chart labels (relative to axis
 #'   labels).
 #' @param y_min Minimum limit of y axis.
-#' @param rescale_y Scaling factor to extend y_max.
 #' @param n_signif Number of significant figures in labels.
 #' @param rotate_xlabel Logical.
 #' @param bottom_label Logical.

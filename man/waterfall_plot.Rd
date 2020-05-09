@@ -40,7 +40,7 @@ labels).}
 
 \item{y_min}{Minimum limit of y axis.}
 
-\item{rescale_y}{Scaling factor to extend y_max.}
+\item{rescale_y}{Rescaling factor for y-axis limits}
 
 \item{n_signif}{Number of significant figures in labels.}
 

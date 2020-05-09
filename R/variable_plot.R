@@ -2,6 +2,7 @@
 #' @description Plots variables (multiple "y" values) broken out as vertical
 #'   facets.
 #' @inheritParams line_plot
+#' @inheritParams bar_plot
 #' @param ylab y label text
 #' @param switch Option to switch location of variable (facet) labels. Default
 #'   is 'y' (yes) which shows facet strips on left side of panels.
@@ -34,7 +35,8 @@ variable_plot = function(data,
                          size_line = 1,
                          ylab = NULL,
                          yoy = FALSE,
-                         switch = "y") {
+                         switch = "y",
+                         rescale_y = 1) {
 
   if (yoy & !is.null(group)) {
     stop("Can't use both the \"group\" and \"yoy\" arguments in variable_plot.")
@@ -60,6 +62,9 @@ variable_plot = function(data,
                          factor_key = TRUE)
 
   if (inherits(gdata[["x"]], c("numeric", "integer", "Date", "POSIXt"))) {
+    if (inherits(gdata[["x"]], "Date") && length(class(gdata[["x"]])) > 1) {
+      gdata[["x"]] = as.Date(gdata[["x"]])
+    }
     incr = get_incr(gdata[["x"]])
     gdata = gdata %>%
       group_by(!!!syms(setdiff(names(gdata), c("x", "value")))) %>%
@@ -101,13 +106,12 @@ variable_plot = function(data,
     }
   } else if (geom %in% c("bar", "col")) {
 
-    y_rescale = 1
     label_rescale = 1
     gdata = gdata %>%
       mutate(value = ifelse(is.finite(value), value, NA_real_),
              ylabel_text = labels_y(signif(value, 3))) %>%
       group_by(variable) %>%
-      mutate(y_space = (1.1 * y_rescale - 1) * diff(range(c(0, value), na.rm = TRUE)) * sign(value)) %>%
+      mutate(y_space = (1.1 * rescale_y - 1) * diff(range(c(0, value), na.rm = TRUE)) * sign(value)) %>%
       ungroup()
 
     if ("group" %in% names(gdata)) {
@@ -122,7 +126,7 @@ variable_plot = function(data,
 
       g = g +
         geom_text(aes(x, value,
-                      vjust = ifelse(value >= 0, -0.2, 1.4),
+                      vjust = ifelse(value >= 0, -0.2, 1),
                       group = group,
                       label = ylabel_text),
                   position = position_dodge(width = 0.9),

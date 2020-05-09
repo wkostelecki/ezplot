@@ -13,6 +13,7 @@ pr_plot(
   facet_y = NULL,
   size_line = 1,
   size = 11,
+  labs = "short",
   env = parent.frame()
 )
 }
@@ -32,6 +33,8 @@ pr_plot(
 \item{size_line}{width of line for \code{geom_line()}. Default is 1.}
 
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
+
+\item{labs}{'short' or 'long'}
 
 \item{env}{environment for evaluating expressions.}
 }

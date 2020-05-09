@@ -16,7 +16,8 @@ variable_plot(
   size_line = 1,
   ylab = NULL,
   yoy = FALSE,
-  switch = "y"
+  switch = "y",
+  rescale_y = 1
 )
 }
 \arguments{
@@ -45,6 +46,8 @@ Default is \code{FALSE}.}
 
 \item{switch}{Option to switch location of variable (facet) labels. Default
 is 'y' (yes) which shows facet strips on left side of panels.}
+
+\item{rescale_y}{Rescaling factor for y-axis limits}
 }
 \description{
 Plots variables (multiple "y" values) broken out as vertical

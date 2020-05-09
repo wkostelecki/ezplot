@@ -3,8 +3,7 @@
 #' @inheritParams area_plot
 #' @inheritParams line_plot
 #' @inheritParams roc_plot
-#' @param actual Vector of actuals values
-#' @param fitted Vector of fitted values
+#' @param labs 'short' or 'long'
 #' @export
 #' @examples
 #' library(ggplot2)
@@ -38,6 +37,7 @@ pr_plot = function(data, actual, fitted,
                     facet_y = NULL,
                     size_line = 1,
                     size = 11,
+                   labs = "short",
                     env = parent.frame()) {
 
   cols = c(actual = unname(actual),
@@ -79,6 +79,14 @@ pr_plot = function(data, actual, fitted,
 
   g = quick_facet(g)
 
+  if (labs == "long") {
+    xlab = 'Recall\nTrue Positive Rate\nSensitivity\nTP/P'
+    ylab = 'Precision\nPositive Predictive Value\nTP/(TP+FP)'
+  } else {
+    xlab = "Recall"
+    ylab = "Precision"
+  }
+
   g = g +
     geom_line(data = data.frame(x = c(0, 1)),
               y = mean(data$actual),
@@ -87,8 +95,8 @@ pr_plot = function(data, actual, fitted,
               linetype = 2) +
     coord_equal() +
     theme_minimal(size) +
-    xlab('Recall\nTrue Positive Rate\nSensitivity\nTP/P') +
-    ylab('Precision\nPositive Predictive Value\nTP/(TP+FP)') +
+    xlab(xlab) +
+    ylab(ylab) +
     scale_y_continuous(labels = ez_labels, limits = c(0, 1)) +
     scale_x_continuous(labels = ez_labels, limits = c(0, 1)) +
     theme(plot.title = element_text(hjust = 0.5))
