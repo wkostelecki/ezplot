@@ -41,7 +41,7 @@ density_plot(
 \item{env}{environment for evaluating expressions.}
 }
 \description{
-creates a densityi plot
+creates a density plot
 }
 \examples{
 density_plot(mtcars, "wt", "cyl")

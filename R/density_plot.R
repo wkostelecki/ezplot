@@ -1,5 +1,5 @@
 #' density_plot
-#' @description creates a densityi plot
+#' @description creates a density plot
 #' @inheritParams area_plot
 #' @param adjust multiplicate bandwidth adjustment
 #' @param alpha alpha

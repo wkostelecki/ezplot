@@ -47,7 +47,7 @@ histogram_plot(
 \item{env}{environment for evaluating expressions.}
 }
 \description{
-creates a densityi plot
+creates a histogram plot
 }
 \examples{
 histogram_plot(airquality, "Wind", group = "Month")

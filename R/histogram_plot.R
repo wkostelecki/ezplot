@@ -1,7 +1,7 @@
 
 
 #' histogram_plot
-#' @description creates a densityi plot
+#' @description creates a histogram plot
 #' @inheritParams area_plot
 #' @param bins number of bins
 #' @param alpha fill alpha
