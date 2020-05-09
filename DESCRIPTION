@@ -16,13 +16,14 @@ Imports:
     dplyr,
     forcats,
     ggplot2,
-    rlang
+    lubridate,
+    rlang,
+    tsibble
 RoxygenNote: 7.1.0
 Suggests:
     covr,
     DT,
     knitr,
-    lubridate,
     methods,
     miniUI,
     psych,
