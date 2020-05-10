@@ -56,6 +56,7 @@ devtools::install_github("wkostelecki/ezplot")
 
 ```{r load packages}
 library(ezplot)
+library(patchwork)
 library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(ggplot2))
@@ -191,6 +192,7 @@ secondary_plot(pelt, "Year",
                ylim2 = c(0, 80e3))
 ```
 
+### density_plot
 ```{r density_plot-1}
 nyc_bikes %>% 
   mutate(duration = as.numeric(stop_time - start_time)) %>%
@@ -199,6 +201,7 @@ nyc_bikes %>%
 
 ```
 
+### histogram_plot
 ```{r histogram_plot-1}
 nyc_bikes %>% 
   mutate(duration = as.numeric(stop_time - start_time)) %>%
@@ -209,17 +212,29 @@ nyc_bikes %>%
                  bins = 48)
 ```
 
-```{r roc_plot-1}
+### Classification data
+```{r classification data}
 data(ROCR.simple)
-
 df = data.frame(pred = ROCR.simple$predictions,
                 lab = ROCR.simple$labels)
-
 set.seed(4)
-roc_plot(df, "lab", "pred")
-roc_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
-pr_plot(df, "lab", "pred")
-pr_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
-lift_plot(df, "lab", "pred")
-lift_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+```
+
+### roc_plot
+```{r roc_plot-1}
+roc_plot(df, "lab", "pred") + 
+  roc_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+```
+
+### pr_plot
+Precision-Recall plot
+```{r pr_plot-1}
+pr_plot(df, "lab", "pred") +
+  pr_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+```
+
+### lift_plot
+```{r lift_plot-1}
+lift_plot(df, "lab", "pred") +
+  lift_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
 ```
