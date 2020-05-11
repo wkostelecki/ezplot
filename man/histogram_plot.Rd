@@ -11,6 +11,7 @@ histogram_plot(
   group = NULL,
   facet_x = NULL,
   facet_y = NULL,
+  palette = ez_col,
   position = "stack",
   bins = 30,
   alpha = 0.5,
@@ -31,6 +32,8 @@ histogram_plot(
 \item{facet_x}{A character value. Evaluates to a column.}
 
 \item{facet_y}{A character. Evaluates to a column.}
+
+\item{palette}{Colour function.}
 
 \item{position}{Either \code{"stack"} (default) or \code{"fill"}}
 

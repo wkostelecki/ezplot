@@ -32,13 +32,14 @@
 #'         "sample(c(5, 6), n(), TRUE)")
 #'}
 pr_plot = function(data, actual, fitted,
-                    group = NULL,
-                    facet_x = NULL,
-                    facet_y = NULL,
-                    size_line = 1,
-                    size = 11,
+                   group = NULL,
+                   facet_x = NULL,
+                   facet_y = NULL,
+                   palette = ez_col,
+                   size_line = 1,
+                   size = 11,
                    labs = "short",
-                    env = parent.frame()) {
+                   env = parent.frame()) {
 
   cols = c(actual = unname(actual),
            fitted = unname(fitted),
@@ -69,7 +70,7 @@ pr_plot = function(data, actual, fitted,
       geom_line(aes(x = recall,
                     y = precision,
                     colour = factor(group))) +
-      scale_colour_manual(NULL, values = ez_col(n_distinct(gdata[["group"]])))
+      scale_colour_manual(NULL, values = palette(n_distinct(gdata[["group"]])))
   } else {
     g = g +
       geom_line(aes(x = recall,

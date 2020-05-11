@@ -13,6 +13,7 @@ histogram_plot = function(data, x,
                           y = "count",
                           group = NULL, facet_x = NULL,
                           facet_y = NULL,
+                          palette = ez_col,
                           position = "stack",
                           bins = 30,
                           alpha = 0.5,
@@ -38,14 +39,14 @@ histogram_plot = function(data, x,
                      bins = bins,
                      alpha = alpha) +
       scale_fill_manual(NULL,
-                        values = rev(ez_col(n_distinct(gdata[["group"]]))),
+                        values = rev(palette(n_distinct(gdata[["group"]]))),
                         breaks = rev,
                         labels = function(x) paste0(x, "   "))
   } else {
     g = ggplot(gdata) +
       geom_histogram(aes_string("x",
                                 y = paste0("..", y, "..")),
-                     fill = ez_col(1), bins = bins)
+                     fill = palette(1), bins = bins)
   }
 
   quick_facet(g, scales = facet_scales, ncol = facet_ncol) +

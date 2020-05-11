@@ -9,6 +9,7 @@
 #' scatter_plot(mtcars, "factor(cyl)", "hp")
 #' @export
 scatter_plot = function(data, x,  y, group = NULL,
+                        palette = ez_col,
                         size = 11,
                         point_size = 2.5,
                         env = parent.frame()) {
@@ -34,7 +35,7 @@ scatter_plot = function(data, x,  y, group = NULL,
     g = ggplot(gdata) +
       geom_point(aes(x, y, color = group), size = point_size) +
       geom_smooth(aes(x, y, color = group), method = "lm", formula = y ~ x) +
-      scale_color_manual(NULL, values = ez_col(n_group),
+      scale_color_manual(NULL, values = palette(n_group),
                          labels = function(x) paste0(x, "   ")) +
       scale_x_continuous(labels = ez_labels) +
       scale_y_continuous(labels = ez_labels)
@@ -43,7 +44,7 @@ scatter_plot = function(data, x,  y, group = NULL,
       geom_point(aes(x, y, colour = group),
                  size = 0.8,
                  na.rm = TRUE) +
-      scale_color_manual(NULL, values = ez_col(n_group),
+      scale_color_manual(NULL, values = palette(n_group),
                          labels = function(x) paste0(x, "   ")) +
       scale_y_continuous(labels = ez_labels)
   }

@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' na_plot(airquality)
-na_plot = function(data) {
+na_plot = function(data, palette = ez_col) {
 
   cols = names(data)
 
@@ -25,8 +25,8 @@ na_plot = function(data) {
     geom_tile(aes(column, .row,
                   fill = value,
                   colour = value)) +
-    scale_fill_manual(NULL, values = ez_col(2)) +
-    scale_colour_manual(NULL, values = c(NA, ez_col(2)[2])) +
+    scale_fill_manual(NULL, values = palette(2)) +
+    scale_colour_manual(NULL, values = c(NA, palette(2)[2])) +
     scale_y_reverse() +
     scale_x_discrete(position = "top") +
     xlab(NULL) +

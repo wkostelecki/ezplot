@@ -11,6 +11,7 @@ pr_plot(
   group = NULL,
   facet_x = NULL,
   facet_y = NULL,
+  palette = ez_col,
   size_line = 1,
   size = 11,
   labs = "short",
@@ -29,6 +30,8 @@ pr_plot(
 \item{facet_x}{A character value. Evaluates to a column.}
 
 \item{facet_y}{A character. Evaluates to a column.}
+
+\item{palette}{Colour function.}
 
 \item{size_line}{width of line for \code{geom_line()}. Default is 1.}
 

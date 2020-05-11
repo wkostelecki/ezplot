@@ -35,6 +35,7 @@ roc_plot = function(data, actual, fitted,
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,
+                    palette = ez_col,
                     size_line = 1,
                     size = 11,
                     env = parent.frame()) {
@@ -68,7 +69,7 @@ roc_plot = function(data, actual, fitted,
       geom_line(aes(x = false_positive,
                     y = true_positive,
                     colour = factor(group))) +
-      scale_colour_manual(NULL, values = ez_col(n_distinct(gdata[["group"]])))
+      scale_colour_manual(NULL, values = palette(n_distinct(gdata[["group"]])))
   } else {
     g = g +
       geom_line(aes(x = false_positive,

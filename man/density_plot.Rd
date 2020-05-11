@@ -10,6 +10,7 @@ density_plot(
   group = NULL,
   facet_x = NULL,
   facet_y = NULL,
+  palette = ez_col,
   adjust = 1,
   alpha = 0.5,
   facet_scales = "fixed",
@@ -27,6 +28,8 @@ density_plot(
 \item{facet_x}{A character value. Evaluates to a column.}
 
 \item{facet_y}{A character. Evaluates to a column.}
+
+\item{palette}{Colour function.}
 
 \item{adjust}{multiplicate bandwidth adjustment}
 

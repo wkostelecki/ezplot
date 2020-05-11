@@ -4,7 +4,7 @@
 \alias{na_plot}
 \title{na_plot}
 \usage{
-na_plot(data)
+na_plot(data, palette = ez_col)
 }
 \arguments{
 \item{data}{A data.frame.}

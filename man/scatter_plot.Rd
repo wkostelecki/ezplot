@@ -9,6 +9,7 @@ scatter_plot(
   x,
   y,
   group = NULL,
+  palette = ez_col,
   size = 11,
   point_size = 2.5,
   env = parent.frame()
@@ -22,6 +23,8 @@ scatter_plot(
 \item{y}{A named character value. Evaluates to a column.}
 
 \item{group}{A character value. Evaluates to a column.}
+
+\item{palette}{Colour function.}
 
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
 
