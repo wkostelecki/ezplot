@@ -8,6 +8,8 @@ na_plot(data, palette = ez_col)
 }
 \arguments{
 \item{data}{A data.frame.}
+
+\item{palette}{Colour function.}
 }
 \value{
 A ggplot object.

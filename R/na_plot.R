@@ -2,7 +2,7 @@
 
 #' na_plot
 #' @description Visual representation of the NAs in a data.frame
-#' @param data A data.frame.
+#' @inheritParams area_plot
 #' @return A ggplot object.
 #' @export
 #' @examples
