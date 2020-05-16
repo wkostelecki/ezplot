@@ -13,26 +13,27 @@
 #'                 runif = runif(n))
 #' df[["fitted"]] = runif(n) ^ ifelse(df[["actual"]] == 1, 0.5, 2)
 #'
-#' ggplot(df) +
-#'   geom_density(aes(fitted, fill = actual), alpha = 0.5)
+#' density_plot(df, "fitted", "actual")
 #'
-#' lift_plot(df, "actual", "fitted")
-#' lift_plot(df, "actual", "runif", size_line = 0.5)
+#' lift_plot(df, "fitted", "actual")
+#' lift_plot(df, "runif", "actual", size_line = 0.5)
 #'
 #'\donttest{
 #' library(dplyr, warn.conflicts = FALSE)
-#' lift_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
+#' lift_plot(df, "fitted", "actual", "sample(c(1, 2), n(), TRUE)")
 #'
-#' lift_plot(df, "actual", "fitted",
+#' lift_plot(df, "fitted", "actual",
 #'         "sample(c(1, 2), n(), TRUE)",
 #'         "sample(c(3, 4), n(), TRUE)")
 #'
-#' lift_plot(df, "actual", "fitted",
+#' lift_plot(df, "fitted", "actual",
 #'         "sample(c(1, 2), n(), TRUE)",
 #'         "sample(c(3, 4), n(), TRUE)",
 #'         "sample(c(5, 6), n(), TRUE)")
 #'}
-lift_plot = function(data, actual, fitted,
+lift_plot = function(data,
+                     fitted,
+                     actual,
                      group = NULL,
                      facet_x = NULL,
                      facet_y = NULL,

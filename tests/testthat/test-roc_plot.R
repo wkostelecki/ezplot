@@ -6,11 +6,11 @@ test_that("base functionality works", {
              yhat = c(0.5, 0.8, 0.9),
              letter = c("a", "b", "b"))
 
-  g = roc_plot(df, "y", "yhat")
+  g = roc_plot(df, "yhat", "y")
   expect_equal(g[["data"]]$true_positive, c(0, 0.5, 0.5, 1))
   expect_equal(g[["data"]]$false_positive, c(0, 0, 1, 1))
 
-  g = roc_plot(df, "y", "yhat", group = "letter")
+  g = roc_plot(df, "yhat", "y", group = "letter")
   expect_equal(g[["data"]]$true_positive, c(NA, 0, 1, 1))
   expect_equal(g[["data"]]$false_positive, c(NA, 0, 0, 1))
 

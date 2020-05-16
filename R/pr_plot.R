@@ -12,26 +12,27 @@
 #'                 runif = runif(n))
 #' df[["fitted"]] = runif(n) ^ ifelse(df[["actual"]] == 1, 0.5, 2)
 #'
-#' ggplot(df) +
-#'   geom_density(aes(fitted, fill = actual), alpha = 0.5)
+#' density_plot(df, "fitted", "actual")
 #'
-#' pr_plot(df, "actual", "fitted")
-#' pr_plot(df, "actual", "runif", size_line = 0.5)
+#' pr_plot(df, "fitted", "actual")
+#' pr_plot(df, "runif", "actual", size_line = 0.5)
 #'
 #'\donttest{
 #' library(dplyr, warn.conflicts = FALSE)
-#' pr_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
+#' pr_plot(df, "fitted", "actual", "sample(c(1, 2), n(), TRUE)")
 #'
-#' pr_plot(df, "actual", "fitted",
+#' pr_plot(df, "fitted", "actual",
 #'         "sample(c(1, 2), n(), TRUE)",
 #'         "sample(c(3, 4), n(), TRUE)")
 #'
-#' pr_plot(df, "actual", "fitted",
+#' pr_plot(df, "fitted", "actual",
 #'         "sample(c(1, 2), n(), TRUE)",
 #'         "sample(c(3, 4), n(), TRUE)",
 #'         "sample(c(5, 6), n(), TRUE)")
 #'}
-pr_plot = function(data, actual, fitted,
+pr_plot = function(data,
+                   fitted,
+                   actual,
                    group = NULL,
                    facet_x = NULL,
                    facet_y = NULL,

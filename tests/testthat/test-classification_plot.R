@@ -5,16 +5,15 @@ df = data.frame(label = c(F, F, F, T, T, F, T, F, T, T, T),
 
 test_that("pr_plot", {
 
-  g = pr_plot(df, "label", "prediction")
+  g = pr_plot(df, "prediction", "label")
   expect_equal(nrow(g$data), 11)
 
 })
 
 
-
 test_that("lift_plot", {
 
-  g = lift_plot(df, "label", "prediction")
+  g = lift_plot(df, "prediction", "label")
   expect_equal(nrow(g$data), 11)
 
 })

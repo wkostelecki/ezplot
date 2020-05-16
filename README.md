@@ -274,8 +274,8 @@ set.seed(4)
 ### roc\_plot
 
 ``` r
-roc_plot(df, "lab", "pred") + 
-  roc_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+roc_plot(df, "pred", "lab") + 
+  roc_plot(df, "pred", "lab", group = "sample(c(0, 1), n(), replace = TRUE)")
 ```
 
 <img src="man/figures/README-roc_plot-1-1.png" style="display: block; margin: auto;" />
@@ -285,8 +285,8 @@ roc_plot(df, "lab", "pred") +
 Precision-Recall plot
 
 ``` r
-pr_plot(df, "lab", "pred") +
-  pr_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+pr_plot(df, "pred", "lab") +
+  pr_plot(df, "pred", "lab", group = "sample(c(0, 1), n(), replace = TRUE)")
 ```
 
 <img src="man/figures/README-pr_plot-1-1.png" style="display: block; margin: auto;" />
@@ -294,8 +294,8 @@ pr_plot(df, "lab", "pred") +
 ### lift\_plot
 
 ``` r
-lift_plot(df, "lab", "pred") +
-  lift_plot(df, "lab", "pred", group = "sample(c(0, 1), n(), replace = TRUE)")
+lift_plot(df, "pred", "lab") +
+  lift_plot(df, "pred", "lab", group = "sample(c(0, 1), n(), replace = TRUE)")
 ```
 
 <img src="man/figures/README-lift_plot-1-1.png" style="display: block; margin: auto;" />

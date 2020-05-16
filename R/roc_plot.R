@@ -1,8 +1,8 @@
 #' roc_plot
 #' @inheritParams area_plot
 #' @inheritParams line_plot
-#' @param actual Vector of actuals values
 #' @param fitted Vector of fitted values
+#' @param actual Vector of actuals values
 #' @export
 #' @examples
 #' library(ggplot2)
@@ -15,23 +15,25 @@
 #'   geom_density(aes(fitted, fill = actual), alpha = 0.5)
 #'
 #' roc_plot(df, "actual", "actual")
-#' roc_plot(df, "actual", "fitted")
-#' roc_plot(df, "actual", "runif", size_line = 0.5)
+#' roc_plot(df, "fitted", "actual")
+#' roc_plot(df, "runif", "actual", size_line = 0.5)
 #'
 #'\donttest{
 #' library(dplyr, warn.conflicts = FALSE)
-#' roc_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
+#' roc_plot(df, "fitted", "actual", "sample(c(1, 2), n(), TRUE)")
 #'
-#' roc_plot(df, "actual", "fitted",
+#' roc_plot(df, "fitted", "actual",
 #'          "sample(c(1, 2), n(), TRUE)",
 #'          "sample(c(3, 4), n(), TRUE)")
 #'
-#' roc_plot(df, "actual", "fitted",
+#' roc_plot(df, "fitted", "actual",
 #'          "sample(c(1, 2), n(), TRUE)",
 #'          "sample(c(3, 4), n(), TRUE)",
 #'          "sample(c(5, 6), n(), TRUE)")
 #'}
-roc_plot = function(data, actual, fitted,
+roc_plot = function(data,
+                    fitted,
+                    actual,
                     group = NULL,
                     facet_x = NULL,
                     facet_y = NULL,

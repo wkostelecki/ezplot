@@ -8,5 +8,5 @@ devtools::check_rhub()
 devtools::release()
 
 
-# git2r::tag(name = "v0.5.0", message = "CRAN release")
-# git2r::push()
+git2r::tag(name = "v0.5.0", message = "non-CRAN")
+git2r::push()

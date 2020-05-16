@@ -6,8 +6,8 @@
 \usage{
 lift_plot(
   data,
-  actual,
   fitted,
+  actual,
   group = NULL,
   facet_x = NULL,
   facet_y = NULL,
@@ -19,9 +19,9 @@ lift_plot(
 \arguments{
 \item{data}{A data.frame.}
 
-\item{actual}{Vector of actuals values}
-
 \item{fitted}{Vector of fitted values}
+
+\item{actual}{Vector of actuals values}
 
 \item{group}{A character value. Evaluates to a column.}
 
@@ -45,21 +45,20 @@ df = data.frame(actual = sample(c(FALSE, TRUE), n, replace = TRUE),
                 runif = runif(n))
 df[["fitted"]] = runif(n) ^ ifelse(df[["actual"]] == 1, 0.5, 2)
 
-ggplot(df) +
-  geom_density(aes(fitted, fill = actual), alpha = 0.5)
+density_plot(df, "fitted", "actual")
 
-lift_plot(df, "actual", "fitted")
-lift_plot(df, "actual", "runif", size_line = 0.5)
+lift_plot(df, "fitted", "actual")
+lift_plot(df, "runif", "actual", size_line = 0.5)
 
 \donttest{
 library(dplyr, warn.conflicts = FALSE)
-lift_plot(df, "actual", "fitted", "sample(c(1, 2), n(), TRUE)")
+lift_plot(df, "fitted", "actual", "sample(c(1, 2), n(), TRUE)")
 
-lift_plot(df, "actual", "fitted",
+lift_plot(df, "fitted", "actual",
         "sample(c(1, 2), n(), TRUE)",
         "sample(c(3, 4), n(), TRUE)")
 
-lift_plot(df, "actual", "fitted",
+lift_plot(df, "fitted", "actual",
         "sample(c(1, 2), n(), TRUE)",
         "sample(c(3, 4), n(), TRUE)",
         "sample(c(5, 6), n(), TRUE)")
