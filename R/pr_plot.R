@@ -55,12 +55,12 @@ pr_plot = function(data,
 
   total = data %>%
     tibble::as_tibble() %>%
-    summarize(prec_rec = list(prec_rec(actual, fitted)))
+    summarize(prec_rec = list(prec_rec(fitted, actual)))
 
   gdata = data %>%
     group_by(!!!syms(intersect(names(cols),
                                c("group", "facet_x", "facet_y")))) %>%
-    summarize(prec_rec = list(prec_rec(actual, fitted))) %>%
+    summarize(prec_rec = list(prec_rec(fitted, actual))) %>%
     ungroup %>%
     tidyr::unnest(prec_rec)
 
@@ -68,13 +68,14 @@ pr_plot = function(data,
 
   if (exists("group", gdata)) {
     g = g +
-      geom_line(aes(x = recall,
+      geom_path(aes(x = recall,
                     y = precision,
-                    colour = factor(group))) +
+                    colour = factor(group)),
+                size = size_line) +
       scale_colour_manual(NULL, values = palette(n_distinct(gdata[["group"]])))
   } else {
     g = g +
-      geom_line(aes(x = recall,
+      geom_path(aes(x = recall,
                     y = precision),
                 size = size_line)
   }
@@ -90,7 +91,7 @@ pr_plot = function(data,
   }
 
   g = g +
-    geom_line(data = data.frame(x = c(0, 1)),
+    geom_path(data = data.frame(x = c(0, 1)),
               y = mean(data$actual),
               aes(x, y),
               size = size_line,
@@ -113,12 +114,12 @@ globalVariables(c("precision", "recall"))
 
 #' prec_rec
 #' @description Precision recall calculation
-#' @param actual Vector with two levels
 #' @param fitted Vector with values between 0 and 1
+#' @param actual Vector with two levels
 #' @examples
 #' ezplot:::prec_rec(sample(c(TRUE, FALSE), 1, replace = TRUE), runif(1))
 #' ezplot:::prec_rec(sample(c(TRUE, FALSE), 5, replace = TRUE), runif(5))
-prec_rec = function(actual, fitted) {
+prec_rec = function(fitted, actual) {
 
   ind = !is.na(actual) & !is.na(fitted)
   actual = actual[ind]

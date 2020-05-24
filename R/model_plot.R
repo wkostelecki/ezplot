@@ -41,7 +41,7 @@ model_plot = function(data,
 
   gdata = gdata %>%
     group_by_at(vars(matches("facet_x"))) %>%
-    mutate(min_af = min(Actual, Fitted, na.rm = TRUE),
+    mutate(min_af = min(Fitted, Actual, na.rm = TRUE),
            max_res = max(Residual, na.rm = TRUE)) %>%
     ungroup
 

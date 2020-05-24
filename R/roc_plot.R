@@ -55,12 +55,12 @@ roc_plot = function(data,
 
   total = data %>%
     tibble::as_tibble() %>%
-    summarize(roc = list(roc(actual, fitted)))
+    summarize(roc = list(roc(fitted, actual)))
 
   gdata = data %>%
     group_by(!!!syms(intersect(names(cols),
                                c("group", "facet_x", "facet_y")))) %>%
-    summarize(roc = list(roc(actual, fitted))) %>%
+    summarize(roc = list(roc(fitted, actual))) %>%
     ungroup %>%
     tidyr::unnest(roc)
 
@@ -68,14 +68,14 @@ roc_plot = function(data,
 
   if (exists("group", gdata)) {
     g = g +
-      geom_line(aes(x = false_positive,
-                    y = true_positive,
+      geom_line(aes(x = x,
+                    y = y,
                     colour = factor(group))) +
       scale_colour_manual(NULL, values = palette(n_distinct(gdata[["group"]])))
   } else {
     g = g +
-      geom_line(aes(x = false_positive,
-                    y = true_positive),
+      geom_line(aes(x = x,
+                    y = y),
                 size = size_line)
   }
 
@@ -99,16 +99,16 @@ roc_plot = function(data,
 
 }
 
-globalVariables(c("false_positive", "true_positive", "x", "y"))
+globalVariables(c("x", "y"))
 
 #' roc
 #' @description Calculates ROC and AUC
 #' @param actual Vector with two levels
 #' @param fitted Vector with values between 0 and 1
 #' @examples
-#' ezplot:::roc(sample(c(TRUE, FALSE), 1, replace = TRUE), runif(1))
-#' ezplot:::roc(sample(c(TRUE, FALSE), 3, replace = TRUE), runif(3))
-roc = function(actual, fitted) {
+#' ezplot:::roc(runif(1), sample(c(TRUE, FALSE), 1, replace = TRUE))
+#' ezplot:::roc(runif(3), sample(c(TRUE, FALSE), 3, replace = TRUE))
+roc = function(fitted, actual) {
 
   ind = !is.na(actual) & !is.na(fitted)
   actual = actual[ind]
@@ -118,8 +118,8 @@ roc = function(actual, fitted) {
   if (sum(ind) == 0 | count == 0 | count == length(actual)) {
     return(
       data.frame(
-        true_positive = NA,
-        false_positive = NA,
+        x = NA,
+        y = NA,
         auc = NA
       )
     )
@@ -132,9 +132,8 @@ roc = function(actual, fitted) {
   x = perf@x.values[[1]]
   y = perf@y.values[[1]]
 
-
-  data.frame(false_positive = x,
-             true_positive = y,
+  data.frame(x = x,
+             y = y,
              auc = auc)
 
 }

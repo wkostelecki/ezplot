@@ -4,17 +4,17 @@
 \alias{roc}
 \title{roc}
 \usage{
-roc(actual, fitted)
+roc(fitted, actual)
 }
 \arguments{
-\item{actual}{Vector with two levels}
-
 \item{fitted}{Vector with values between 0 and 1}
+
+\item{actual}{Vector with two levels}
 }
 \description{
 Calculates ROC and AUC
 }
 \examples{
-ezplot:::roc(sample(c(TRUE, FALSE), 1, replace = TRUE), runif(1))
-ezplot:::roc(sample(c(TRUE, FALSE), 3, replace = TRUE), runif(3))
+ezplot:::roc(runif(1), sample(c(TRUE, FALSE), 1, replace = TRUE))
+ezplot:::roc(runif(3), sample(c(TRUE, FALSE), 3, replace = TRUE))
 }

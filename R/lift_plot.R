@@ -52,14 +52,12 @@ lift_plot = function(data,
     transmute(!!!lapply(cols,
                         function(x) rlang::parse_quo(x, env = env)))
 
-  total = data %>%
-    tibble::as_tibble() %>%
-    summarize(values = list(perf(actual, fitted, "lift", "rpp")))
-
   gdata = data %>%
     group_by(!!!syms(intersect(names(cols),
                                c("group", "facet_x", "facet_y")))) %>%
-    summarize(values = list(perf(actual, fitted, "lift", "rpp"))) %>%
+    summarize(values = list(perf(fitted, actual,
+                                 x_measure = "rpp",
+                                 y_measure = "lift"))) %>%
     ungroup %>%
     tidyr::unnest(values)
 
