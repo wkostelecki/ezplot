@@ -76,7 +76,7 @@ perf_df = function(fitted, actual) {
                   pp = pred@n.pos.pred[[1]],
                   np = pred@n.neg.pred[[1]])
 
-  for (metric in c("rpp", "acc", "fpr", "tpr", "fnr", "tnr", "prec", "lift")) {
+  for (metric in c("rpp", "acc", "fpr", "tpr", "fnr", "tnr", "prec", "lift", "auc", "aucpr")) {
 
     df[[metric]] = ROCR::performance(pred, metric)@y.values[[1]]
 
