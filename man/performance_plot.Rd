@@ -22,6 +22,10 @@ performance_plot(
 \arguments{
 \item{data}{A data.frame.}
 
+\item{fitted}{A character value. Evaluates to a numeric column.}
+
+\item{actual}{A character value. Evaluates to a logical or binary column.}
+
 \item{group}{A character value. Evaluates to a column.}
 
 \item{facet_x}{A character value. Evaluates to a column.}
@@ -31,6 +35,8 @@ performance_plot(
 \item{x}{ROCR::performance() measure}
 
 \item{y}{ROCR::performance() measure}
+
+\item{auc}{character vector indicating which AUC values should be displayed. Options are 'title' and 'group'}
 
 \item{size_line}{width of line for \code{geom_line()}. Default is 1.}
 

@@ -2,6 +2,8 @@
 #' @description plots binary classification performance metrics
 #' @inheritParams area_plot
 #' @inheritParams line_plot
+#' @inheritParams model_plot
+#' @param auc character vector indicating which AUC values should be displayed. Options are 'title' and 'group'
 #' @param x ROCR::performance() measure
 #' @param y ROCR::performance() measure
 #' @export
@@ -62,7 +64,7 @@ performance_plot = function(data,
                                                     y_measure = y_measure))) %>%
                        pull(values))[[1]] %>%
           pull(auc) %>%
-          head(1)
+          utils::head(1)
       } else {
         auc_title = gdata$auc[1]
       }

@@ -2,8 +2,8 @@
 
 #' model_plot
 #' @inheritParams area_plot
-#' @param actual A character value. Evaluates to a column.
-#' @param fitted A character value. Evaluates to a column.
+#' @param fitted A character value. Evaluates to a numeric column.
+#' @param actual A character value. Evaluates to a logical or binary column.
 #' @param res_bins Number of bins in the residual distribution. Default value
 #'   (NA) doesn't show the distribution.
 #' @param point_size Numeric. Default is 2.

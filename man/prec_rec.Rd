@@ -15,6 +15,6 @@ prec_rec(fitted, actual)
 Precision recall calculation
 }
 \examples{
-ezplot:::prec_rec(sample(c(TRUE, FALSE), 1, replace = TRUE), runif(1))
-ezplot:::prec_rec(sample(c(TRUE, FALSE), 5, replace = TRUE), runif(5))
+ezplot:::prec_rec(runif(1), sample(c(TRUE, FALSE), 1, replace = TRUE))
+ezplot:::prec_rec(runif(5), sample(c(TRUE, FALSE), 5, replace = TRUE))
 }

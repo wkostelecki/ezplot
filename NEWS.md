@@ -1,3 +1,9 @@
+# ezplot 0.6.0
+- added performance_plot
+
+# ezplot 0.5.1
+- minor fixes and clean up
+
 # ezplot 0.5.0
 - added density_plot
 - added histogram_plot

@@ -20,9 +20,9 @@ model_plot(
 
 \item{x}{A named character value. Evaluates to a column.}
 
-\item{actual}{A character value. Evaluates to a column.}
+\item{actual}{A character value. Evaluates to a logical or binary column.}
 
-\item{fitted}{A character value. Evaluates to a column.}
+\item{fitted}{A character value. Evaluates to a numeric column.}
 
 \item{facet_x}{A character value. Evaluates to a column.}
 

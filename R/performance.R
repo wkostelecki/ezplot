@@ -1,5 +1,4 @@
 
-
 #' perf
 #' @description Precision recall calculation
 #' @param actual Vector with two levels
@@ -58,9 +57,8 @@ pred = function(fitted, actual) {
   ROCR::prediction(as.numeric(fitted), actual)
 }
 
-
-
 #' perf_df
+#' @inheritParams performance_plot
 #' @export
 #' @examples
 #' perf_df(mtcars$mpg, mtcars$am)
@@ -82,6 +80,8 @@ perf_df = function(fitted, actual) {
 
   }
   df %>%
-    mutate(ks = abs(fpr - tpr)) %>%
-    arrange(desc(cutoffs))
+    dplyr::mutate(ks = abs(fpr - tpr)) %>%
+    dplyr::arrange(desc(cutoffs))
 }
+
+globalVariables(c("tpr", "fpr", "cutoffs"))

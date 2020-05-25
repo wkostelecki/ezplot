@@ -117,8 +117,8 @@ globalVariables(c("precision", "recall"))
 #' @param fitted Vector with values between 0 and 1
 #' @param actual Vector with two levels
 #' @examples
-#' ezplot:::prec_rec(sample(c(TRUE, FALSE), 1, replace = TRUE), runif(1))
-#' ezplot:::prec_rec(sample(c(TRUE, FALSE), 5, replace = TRUE), runif(5))
+#' ezplot:::prec_rec(runif(1), sample(c(TRUE, FALSE), 1, replace = TRUE))
+#' ezplot:::prec_rec(runif(5), sample(c(TRUE, FALSE), 5, replace = TRUE))
 prec_rec = function(fitted, actual) {
 
   ind = !is.na(actual) & !is.na(fitted)

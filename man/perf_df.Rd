@@ -6,6 +6,11 @@
 \usage{
 perf_df(fitted, actual)
 }
+\arguments{
+\item{fitted}{A character value. Evaluates to a numeric column.}
+
+\item{actual}{A character value. Evaluates to a logical or binary column.}
+}
 \description{
 perf_df
 }
