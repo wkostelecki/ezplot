@@ -68,13 +68,14 @@ roc_plot = function(data,
 
   if (exists("group", gdata)) {
     g = g +
-      geom_line(aes(x = x,
+      geom_path(aes(x = x,
                     y = y,
-                    colour = factor(group))) +
+                    colour = factor(group)),
+                size = size_line) +
       scale_colour_manual(NULL, values = palette(n_distinct(gdata[["group"]])))
   } else {
     g = g +
-      geom_line(aes(x = x,
+      geom_path(aes(x = x,
                     y = y),
                 size = size_line)
   }
@@ -82,7 +83,7 @@ roc_plot = function(data,
   g = quick_facet(g)
 
   g = g +
-    geom_line(data = data.frame(x = c(0, 1), y = c(0, 1)),
+    geom_path(data = data.frame(x = c(0, 1), y = c(0, 1)),
               aes(x, y),
               size = size_line,
               linetype = 2) +

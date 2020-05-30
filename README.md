@@ -51,11 +51,11 @@ devtools::install_github("wkostelecki/ezplot")
 
 ``` r
 library(ezplot)
-library(patchwork)
 library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(lubridate))
+suppressPackageStartupMessages(library(ggplot2))
+library(patchwork)
 suppressPackageStartupMessages(library(ROCR, warn.conflicts = FALSE))
 ```
 
@@ -274,6 +274,7 @@ set.seed(4)
 ### roc\_plot
 
 ``` r
+set.seed(4)
 roc_plot(df, "pred", "lab") + 
   roc_plot(df, "pred", "lab", group = "sample(c(0, 1), n(), replace = TRUE)")
 ```
@@ -285,17 +286,17 @@ roc_plot(df, "pred", "lab") +
 Precision-Recall plot
 
 ``` r
+set.seed(4)
 pr_plot(df, "pred", "lab") +
   pr_plot(df, "pred", "lab", group = "sample(c(0, 1), n(), replace = TRUE)")
 ```
 
 <img src="man/figures/README-pr_plot-1-1.png" style="display: block; margin: auto;" />
 
-### lift\_plot
-
 ``` r
-lift_plot(df, "pred", "lab") +
-  lift_plot(df, "pred", "lab", group = "sample(c(0, 1), n(), replace = TRUE)")
+set.seed(4)
+performance_plot(df, "pred", "lab", x = "rpp", y = "lift") +
+  performance_plot(df, "pred", "lab", group = "sample(c(0, 1), n(), replace = TRUE)", x = "rpp", y = "lift")
 ```
 
 <img src="man/figures/README-lift_plot-1-1.png" style="display: block; margin: auto;" />
