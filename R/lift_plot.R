@@ -3,8 +3,6 @@
 #' @inheritParams area_plot
 #' @inheritParams line_plot
 #' @inheritParams roc_plot
-#' @param actual Vector of actuals values
-#' @param fitted Vector of fitted values
 #' @export
 #' @examples
 #' library(ggplot2)

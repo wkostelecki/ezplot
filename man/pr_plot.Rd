@@ -23,7 +23,7 @@ pr_plot(
 
 \item{fitted}{Vector of fitted values}
 
-\item{actual}{Vector of actuals values}
+\item{actual}{Vector of actual values}
 
 \item{group}{A character value. Evaluates to a column.}
 

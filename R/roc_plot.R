@@ -2,7 +2,7 @@
 #' @inheritParams area_plot
 #' @inheritParams line_plot
 #' @param fitted Vector of fitted values
-#' @param actual Vector of actuals values
+#' @param actual Vector of actual values
 #' @export
 #' @examples
 #' library(ggplot2)
