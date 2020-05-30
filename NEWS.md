@@ -1,5 +1,6 @@
 # ezplot 0.6.0
 - added performance_plot
+- general clean up
 
 # ezplot 0.5.1
 - minor fixes and clean up
