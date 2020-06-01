@@ -7,6 +7,7 @@ devtools::check_win_devel()
 devtools::check_rhub()
 devtools::release()
 
-
-git2r::tag(name = "v0.5.0", message = "non-CRAN")
+git2r::add()
+git2r::commit()
+git2r::tag(name = "v0.6.0", message = "CRAN")
 git2r::push()

@@ -12,6 +12,7 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.3)
+RoxygenNote: 7.1.0
 Imports:
     dplyr,
     forcats,
@@ -19,7 +20,6 @@ Imports:
     lubridate,
     rlang,
     tsibble
-RoxygenNote: 7.1.0
 Suggests:
     covr,
     DT,
