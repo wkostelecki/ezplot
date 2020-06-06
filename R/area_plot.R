@@ -25,11 +25,12 @@
 #'
 #' @examples
 #' \donttest{
+#' library(tsibble)
 #' library(tsibbledata)
-#' area_plot(ansett, x = "Week", y = "Passengers")
+#' area_plot(ansett, x = "as.Date(Week)", y = "Passengers")
 #' area_plot(ansett,
-#'           x = "Week", y = c("Weekly Passengers" = "Passengers"), "Class")
-#' area_plot(ansett, "Week",
+#'           x = "as.Date(Week)", y = c("Weekly Passengers" = "Passengers"), "Class")
+#' area_plot(ansett, "as.Date(Week)",
 #'           y = c("Weekly Passengers" = "Passengers"),
 #'           group = "substr(Airports, 5, 7)",
 #'           facet_x = "substr(Airports, 1, 3)",

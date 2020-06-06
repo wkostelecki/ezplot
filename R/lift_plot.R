@@ -14,6 +14,7 @@
 #' density_plot(df, "fitted", "actual")
 #'
 #' lift_plot(df, "fitted", "actual")
+#' lift_plot(df, "fitted", "actual") + scale_y_log10()
 #' lift_plot(df, "runif", "actual", size_line = 0.5)
 #'
 #'\donttest{
@@ -78,9 +79,8 @@ lift_plot = function(data,
   g = quick_facet(g)
 
   g = g +
-    geom_path(data = data.frame(x = c(0, 1)),
-              y = 1,
-              aes(x,),
+    geom_path(data = data.frame(x = c(0, 1), y = 1),
+              aes(x, y),
               size = size_line,
               linetype = 2) +
     theme_minimal(size) +

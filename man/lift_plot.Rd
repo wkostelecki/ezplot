@@ -48,6 +48,7 @@ df[["fitted"]] = runif(n) ^ ifelse(df[["actual"]] == 1, 0.5, 2)
 density_plot(df, "fitted", "actual")
 
 lift_plot(df, "fitted", "actual")
+lift_plot(df, "fitted", "actual") + scale_y_log10()
 lift_plot(df, "runif", "actual", size_line = 0.5)
 
 \donttest{

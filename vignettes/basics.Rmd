@@ -27,6 +27,7 @@ values of y for repeated categories of x, group, facet_y and facet_x.
 
 ```{r, fig.show='hold'}
 library(ezplot)
+library(tsibble)
 library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(lubridate))
@@ -41,7 +42,6 @@ line_plot(ansett, x = "Week", y = "Passengers", group = "Class")
 
 ## bar_plot
 ```{r, echo=TRUE, results='asis', fig.width = 7.1}
-
 df = ansett %>% 
   filter(between(year(Week), 1988, 1991))
 bar_plot(df, x = "year(Week)", y = "Passengers")

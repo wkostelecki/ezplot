@@ -8,7 +8,7 @@ test_that("variable_plot line geom works", {
   expect_equal(2 * nrow(tsibbledata::pelt), nrow(g[["data"]]))
 
   g = variable_plot(tsibbledata::ansett,
-                    "Week", "Passengers", facet_x = "Class", yoy = TRUE)
+                    "as.Date(Week)", "Passengers", facet_x = "Class", yoy = TRUE)
   # expect_error(print(g), NA)
   expect_equal(dim(g$data), c(742, 6))
 

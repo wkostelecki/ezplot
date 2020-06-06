@@ -12,6 +12,7 @@
 #' @export
 #'
 #' @examples
+#' library(tsibble)
 #' library(tsibbledata)
 #' library(lubridate)
 #' bar_plot(ansett, "year(Week)", "Passengers", size = 20)

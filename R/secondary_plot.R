@@ -11,6 +11,7 @@
 #' @return A ggplot object.
 #' @export
 #' @examples
+#' library(tsibble)
 #' library(tsibbledata)
 #' secondary_plot(pelt, "Year", "Hare", "Lynx")
 #' secondary_plot(pelt, "Year", c("Hare Population" = "Hare"), c("Lynx Population" = "Lynx"))

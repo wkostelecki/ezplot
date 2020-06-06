@@ -22,6 +22,7 @@ values of y for repeated categories of x, group, facet_y and facet_x.
 
 ```{r setup}
 library(ezplot)
+library(tsibble)
 library(tsibbledata)
 suppressPackageStartupMessages(library(lubridate))
 library(ggplot2)
@@ -70,12 +71,12 @@ line_plot(hh_budget,
 ### area_plot
 Weekly aggregation:
 ```{r}
-area_plot(ansett, x = "Week", y = "Passengers")
+area_plot(ansett, x = "as.Date(Week)", y = "Passengers")
 ```
 
 Add grouping:
 ```{r}
-area_plot(ansett, x = "Week",
+area_plot(ansett, x = "as.Date(Week)",
           y = c("Weekly Passengers" = "Passengers"),
           "Class")
 ```
