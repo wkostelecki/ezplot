@@ -47,9 +47,9 @@ distribution_plot = function (data,
       "\nDW = ",
       ez_labels(signif(dw(x), 3)),
       "; Skew = ",
-      ez_labels(signif(psych::skew(x), 3)),
+      ez_labels(signif(e1071::skewness(x), 3)),
       "; Kurt = ",
-      ez_labels(signif(psych::kurtosi(x), 3))
+      ez_labels(signif(e1071::kurtosis(x), 3))
       # "; KS = ",
       # ez_labels(signif(ks.test(rnorm(100), "pnorm")[["statistic"]], 3))
     )) %>%

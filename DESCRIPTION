@@ -23,10 +23,10 @@ Imports:
 Suggests:
     covr,
     DT,
+    e1071,
     knitr,
     methods,
     miniUI,
-    psych,
     rmarkdown,
     ROCR,
     shiny,
