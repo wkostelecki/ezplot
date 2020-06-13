@@ -7,7 +7,7 @@ devtools::check_win_devel()
 devtools::check_rhub()
 devtools::release()
 
-git2r::add()
-git2r::commit()
-git2r::tag(name = "v0.6.0", message = "CRAN")
-git2r::push()
+git2r::commit(all = TRUE, message = "CRAN commit")
+git2r::tag(name = "v0.6.1", message = "CRAN")
+git2r::push(credentials = git2r::cred_ssh_key())
+
