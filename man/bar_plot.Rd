@@ -81,7 +81,7 @@ bar_plot
 library(tsibble)
 library(tsibbledata)
 library(lubridate)
-bar_plot(ansett, "year(Week)", "Passengers", size = 20)
+bar_plot(ansett, "year(Week)", "Passengers", size = 16)
 bar_plot(ansett, "year(Week)", "Passengers", "Class")
 bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
 bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")

@@ -15,7 +15,7 @@
 #' library(tsibble)
 #' library(tsibbledata)
 #' library(lubridate)
-#' bar_plot(ansett, "year(Week)", "Passengers", size = 20)
+#' bar_plot(ansett, "year(Week)", "Passengers", size = 16)
 #' bar_plot(ansett, "year(Week)", "Passengers", "Class")
 #' bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
 #' bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
@@ -198,9 +198,15 @@ bar_plot = function(data,
     use_theme(size)
 
   if (coord_flip) {
+
     g = g +
       coord_flip() +
-      theme(axis.text.y = element_text(angle = 0))
+      theme(axis.line.y = element_line(color = "grey85",
+                                       size = if (size > 16) 0.8 else 0.2),
+            axis.line.x = element_blank(),
+            panel.grid.major.y = element_blank(),
+            panel.grid.major.x = element_line(colour = "grey85",
+                                              size = if (size > 16) 0.8 else 0.2))
 
     if (is.numeric(gdata[["x"]])) {
       g = g + scale_x_reverse(labels = labels_x)
