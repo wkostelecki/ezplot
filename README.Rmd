@@ -107,12 +107,12 @@ line_plot(hh_budget,
 ### area_plot
 Weekly aggregation:
 ```{r area_plot-1}
-area_plot(ansett, x = "Week", y = "Passengers")
+area_plot(ansett, x = "as.Date(Week)", y = "Passengers")
 ```
 
 Add grouping:
 ```{r area_plot-2}
-area_plot(ansett, x = "Week",
+area_plot(ansett, x = "as.Date(Week)",
           y = c("Weekly Passengers" = "Passengers"),
           "Class")
 ```
