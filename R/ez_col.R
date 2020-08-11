@@ -57,15 +57,21 @@ text_contrast = function(x) {
 
 
 #' ez_jet
+#' @description color palette for
 #' @param n Number of colours to return.
 #' @param palette Vector of colours.
 #' @export
+#' @examples
+#' ez_jet(100)
+#' ez_jet(1)
 ez_jet = function(n = 100,
                   palette = c("dodgerblue4",
                               "steelblue2",
                               "olivedrab3",
                               "darkgoldenrod1",
                               "brown")) {
-  stopifnot(n >= 5)
+  if (n < 5) {
+    return(ez_jet(5)[seq_len(n)])
+  }
   colorRampPalette(colors = palette)(n)
 }

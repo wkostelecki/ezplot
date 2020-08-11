@@ -15,5 +15,9 @@ ez_jet(
 \item{palette}{Vector of colours.}
 }
 \description{
-ez_jet
+color palette for
+}
+\examples{
+ez_jet(100)
+ez_jet(1)
 }
