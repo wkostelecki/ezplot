@@ -52,4 +52,6 @@ performance_plot(mtcars, "-disp", "am")
 performance_plot(mtcars, "-disp", "am", "cyl")
 performance_plot(mtcars, "-disp", "am", "cyl", x = "rec", y = "prec")
 performance_plot(mtcars, "-disp", "am", x = "rpp", y = "gain")
+performance_plot(mtcars, "-disp", "am", x = "rpp", y = "lift")
+performance_plot(mtcars, "-disp", "am", x = "cutoff", y = "tpr")
 }

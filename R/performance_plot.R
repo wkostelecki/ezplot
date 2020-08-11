@@ -12,6 +12,8 @@
 #' performance_plot(mtcars, "-disp", "am", "cyl")
 #' performance_plot(mtcars, "-disp", "am", "cyl", x = "rec", y = "prec")
 #' performance_plot(mtcars, "-disp", "am", x = "rpp", y = "gain")
+#' performance_plot(mtcars, "-disp", "am", x = "rpp", y = "lift")
+#' performance_plot(mtcars, "-disp", "am", x = "cutoff", y = "tpr")
 performance_plot = function(data,
                             fitted,
                             actual,
@@ -129,7 +131,8 @@ performance_plot = function(data,
     xlab(measure_label(x)) +
     ylab(measure_label(y)) +
     scale_y_continuous(labels = ez_labels, limits = c(0, NA)) +
-    scale_x_continuous(labels = ez_labels, limits = c(0, 1)) +
+    # scale_x_continuous(labels = ez_labels,
+    #                    limits = c(0, 1)) +
     theme(plot.title = element_text(hjust = 0.5),
           aspect.ratio = 1)
 
@@ -150,6 +153,8 @@ measure_baseline = function(measure, actual) {
     return(c(1, 1))
   } else if (any(measure == c("prec", "ppv"))) {
     return(mean(actual))
+  } else if (any(measure == c("cutoff"))) {
+    return(c(Inf, -Inf))
   } else {
     stop("unknown measure range in measure_base()")
   }
@@ -175,7 +180,8 @@ measure_label = function(measure) {
          rpp = "Rate of positive predictions",
          rnp = "Rate of negative predictions",
          lift = "Lift",
-         gain  = "Gain")
+         gain  = "Gain",
+         cutoff = "Cutoff")
 
 }
 
