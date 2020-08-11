@@ -51,6 +51,7 @@ devtools::install_github("wkostelecki/ezplot")
 
 ``` r
 library(ezplot)
+library(tsibble)
 library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(lubridate))
@@ -292,6 +293,8 @@ pr_plot(df, "pred", "lab") +
 ```
 
 <img src="man/figures/README-pr_plot-1-1.png" style="display: block; margin: auto;" />
+
+### lift\_plot
 
 ``` r
 set.seed(4)

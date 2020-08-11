@@ -14,6 +14,7 @@ ez_app
 }
 \examples{
 \dontrun{
+library(tsibble)
 library(tsibbledata)
 ez_app(ansett)
 }

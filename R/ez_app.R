@@ -4,6 +4,7 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' library(tsibble)
 #' library(tsibbledata)
 #' ez_app(ansett)
 #' }

@@ -9,7 +9,9 @@
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
+#' library(tsibble)
 #' library(tsibbledata)
+#' line_plot(ansett, x = "Week", y = "Passengers")
 #' line_plot(pelt, "Year", "Hare")
 #' line_plot(pelt, "Year", c("Hare", "Lynx"))
 #' line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)

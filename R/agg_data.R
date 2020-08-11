@@ -10,6 +10,7 @@
 #' @importFrom rlang syms
 #' @export
 #' @examples
+#' library(tsibble)
 #' library(tsibbledata)
 #' agg_data(ansett, c("Passengers", count = "1"))
 #' agg_data(ansett["Class"])
