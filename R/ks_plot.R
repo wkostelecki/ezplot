@@ -1,6 +1,7 @@
 #' ks_plot
 #' @description ks plot
 #' @inheritParams roc_plot
+#' @export
 #' @examples
 #' ks_plot(mtcars, "-disp", "am")
 ks_plot = function(data,
@@ -45,3 +46,5 @@ ks_plot = function(data,
     g
 
   }
+
+globalVariables(c("fnr", "tnr"))

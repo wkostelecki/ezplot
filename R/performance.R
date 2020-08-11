@@ -39,7 +39,7 @@ perf = function(fitted, actual, x_measure, y_measure) {
   } else {
     if (x_measure == "cutoff") {
       cutoff = x
-    } else if (y_meaure == "cutoff") {
+    } else if (y_measure == "cutoff") {
       cutoff = y
     } else {
       stop("cutoff not provided by ROCR::performance()")
