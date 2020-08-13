@@ -68,9 +68,12 @@ variable_plot = function(data,
       attr(gdata[["x"]], "class") = "Date"
     }
     incr = get_incr(gdata[["x"]])
+    unique_vals = sort(unique(gdata[["x"]]))
     gdata = gdata %>%
       group_by(!!!syms(setdiff(names(gdata), c("x", "value")))) %>%
-      summarize(x = list(seq(min(x), max(x), by = incr))) %>%
+      summarize(x = list(unique_vals[between(unique_vals,
+                                             min(x, na.rm = TRUE),
+                                             max(x, na.rm = TRUE))])) %>%
       tidyr::unnest(x) %>%
       left_join(gdata, by = setdiff(names(gdata), c("value")))
   } else {
