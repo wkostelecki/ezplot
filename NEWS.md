@@ -1,3 +1,10 @@
+
+# ezplot 0.6.0
+- fixed variable_plot
+- updates to ez_jet for n < 5
+- fixed issues with tsibble/tsibbledata
+- added ks_plot
+
 # ezplot 0.6.0
 - added performance_plot
 - general clean up
