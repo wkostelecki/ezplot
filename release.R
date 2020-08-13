@@ -8,6 +8,6 @@ devtools::check_rhub()
 devtools::release()
 
 git2r::commit(all = TRUE, message = "CRAN commit")
-git2r::tag(name = "v0.6.1", message = "CRAN")
+git2r::tag(name = "v0.6.2", message = "CRAN")
 git2r::push(credentials = git2r::cred_ssh_key())
 
