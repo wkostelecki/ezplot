@@ -34,4 +34,8 @@ ks plot
 }
 \examples{
 ks_plot(mtcars, "-disp", "am")
+x = c(rnorm(100), rnorm(100) + 2)
+label = c(rep('low', 100), rep('high', 100))
+ks_plot(data.frame(x, label), "x", "label")
+ks_plot(data.frame(x, label = factor(label, c('low', 'high'))), "x", "label")
 }

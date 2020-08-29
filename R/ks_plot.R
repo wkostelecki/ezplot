@@ -4,6 +4,10 @@
 #' @export
 #' @examples
 #' ks_plot(mtcars, "-disp", "am")
+#' x = c(rnorm(100), rnorm(100) + 2)
+#' label = c(rep('low', 100), rep('high', 100))
+#' ks_plot(data.frame(x, label), "x", "label")
+#' ks_plot(data.frame(x, label = factor(label, c('low', 'high'))), "x", "label")
 ks_plot = function(data,
                    fitted,
                    actual,
@@ -20,15 +24,22 @@ ks_plot = function(data,
       transmute(!!!lapply(cols,
                           function(x) rlang::parse_quo(x, env = env)))
 
-    data = perf_df(data$fitted, data$actual)
+    actuals = as.character(sort(unique(data$actual)))
+    stopifnot(length(actuals) == 2)
+
+    colours = palette(2) %>% setNames(actuals)
+
+    data = perf_df(data$fitted, data$actual == actuals[2])
 
     ind = which.max(data$ks)
 
     g = ggplot(data) +
-      geom_line(aes(cutoffs, fnr), size = size_line,
-                colour = palette(2)[2]) +
-      geom_line(aes(cutoffs, tnr), size = size_line,
-                colour = palette(2)[1]) +
+      geom_line(aes(cutoffs, tnr, colour = actuals[1]),
+                # colour = palette(2)[1],
+                size = size_line) +
+      geom_line(aes(cutoffs, fnr, colour = actuals[2]),
+                # colour = palette(2)[2],
+                size = size_line) +
       geom_line(data = data.frame(x = data$cutoffs[ind],
                                   y = c(data$fnr[ind], data$tnr[ind])),
                 aes(x, y),
@@ -41,7 +52,8 @@ ks_plot = function(data,
       scale_x_continuous(labels = ez_labels) +
       theme(plot.title = element_text(hjust = 0.5),
             aspect.ratio = 1) +
-      ggtitle(paste("KS =", ez_labels(data$ks[ind], signif = 3)))
+      ggtitle(paste("KS =", ez_labels(data$ks[ind], signif = 3))) +
+      scale_colour_manual(NULL, values = colours, breaks = actuals)
 
     g
 
