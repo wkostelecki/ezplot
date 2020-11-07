@@ -24,6 +24,7 @@ bar_plot(
   use_theme = theme_ez,
   position = "stack",
   facet_scales = "fixed",
+  legend_ncol = NULL,
   coord_flip = FALSE
 )
 }
@@ -67,6 +68,8 @@ labels}
 
 \item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{"fixed"}.}
+
+\item{legend_ncol}{Number of columns in legend.}
 
 \item{coord_flip}{logical (default is FALSE). If TRUE, flips the x and y
 coordinate using ggplot2::coord_flip()}

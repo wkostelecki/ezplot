@@ -19,6 +19,7 @@ histogram_plot = function(data, x,
                           alpha = 0.5,
                           facet_scales = "fixed",
                           facet_ncol = NULL,
+                          legend_ncol = NULL,
                           env = parent.frame()) {
 
   cols = c(x = unname(x),
@@ -41,7 +42,8 @@ histogram_plot = function(data, x,
       scale_fill_manual(NULL,
                         values = rev(palette(n_distinct(gdata[["group"]]))),
                         breaks = rev,
-                        labels = function(x) paste0(x, "   "))
+                        labels = function(x) paste0(x, "   "),
+                        guide = guide_legend(ncol = legend_ncol))
   } else {
     g = ggplot(gdata) +
       geom_histogram(aes_string("x",

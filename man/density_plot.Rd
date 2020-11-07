@@ -15,6 +15,7 @@ density_plot(
   alpha = 0.5,
   facet_scales = "fixed",
   facet_ncol = NULL,
+  legend_ncol = NULL,
   env = parent.frame()
 )
 }
@@ -40,6 +41,8 @@ density_plot(
 
 \item{facet_ncol}{Option passed to ncol argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{NULL}.}
+
+\item{legend_ncol}{Number of columns in legend.}
 
 \item{env}{environment for evaluating expressions.}
 }

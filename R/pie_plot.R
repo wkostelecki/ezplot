@@ -32,7 +32,8 @@ pie_plot = function (data,
                      signif = 3,
                      palette = ez_col,
                      reorder = c("x", "facet_x", "facet_y"),
-                     label_x = 0.8) {
+                     label_x = 0.8,
+                     legend_ncol = NULL) {
 
   stopifnot(label_x >= 0 & label_x <=1)
 
@@ -71,7 +72,8 @@ pie_plot = function (data,
     scale_fill_manual(NULL,
                       values = fill_col,
                       breaks = rev(levels(gdata[["x"]])),
-                      labels = function(x) paste0(x, "   ")) +
+                      labels = function(x) paste0(x, "   "),
+                      guide = guide_legend(ncol = legend_ncol)) +
     geom_text(aes(label_x + 0.5,
                   share_pos,
                   label = share_label,

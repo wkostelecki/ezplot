@@ -45,6 +45,7 @@ bar_plot = function(data,
                     use_theme = theme_ez,
                     position = "stack",
                     facet_scales = "fixed",
+                    legend_ncol = NULL,
                     coord_flip = FALSE) {
 
   label_pos = match.arg(label_pos)
@@ -131,7 +132,8 @@ bar_plot = function(data,
       scale_fill_manual(NULL,
                         values = fill_pal,
                         labels = function(x) paste0(x, "   "),
-                        breaks = rev)
+                        breaks = rev,
+                        guide = guide_legend(ncol = legend_ncol))
 
   } else {
     fill_pal = palette(1)

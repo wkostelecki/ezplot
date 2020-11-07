@@ -18,6 +18,7 @@
 #'   \code{facet_grid}. Default is \code{"fixed"}.
 #' @param facet_ncol Option passed to ncol argument in \code{facet_wrap} or
 #'   \code{facet_grid}. Default is \code{NULL}.
+#' @param legend_ncol Number of columns in legend.
 #' @param env environment for evaluating expressions.
 #'
 #' @return A ggplot object.
@@ -56,6 +57,7 @@ area_plot = function(data,
                      position = c("stack", "fill"),
                      facet_scales = "fixed",
                      facet_ncol = NULL,
+                     legend_ncol = NULL,
                      env = parent.frame()) {
 
   y = nameifnot(y)
@@ -102,7 +104,8 @@ area_plot = function(data,
       scale_fill_manual(NULL,
                         values = rev(palette(length(unique(gdata[["group"]])))),
                         labels = function(x) paste0(x, "   "),
-                        breaks = rev)
+                        breaks = rev,
+                        guide = guide_legend(ncol = legend_ncol))
   } else {
     g = g +
       geom_col(aes(x, y),

@@ -16,6 +16,7 @@ density_plot = function(data, x, group = NULL, facet_x = NULL,
                         alpha = 0.5,
                         facet_scales = "fixed",
                         facet_ncol = NULL,
+                        legend_ncol = NULL,
                         env = parent.frame()) {
 
   cols = c(x = unname(x),
@@ -35,7 +36,8 @@ density_plot = function(data, x, group = NULL, facet_x = NULL,
                    adjust = adjust,
                    alpha = alpha) +
       scale_fill_manual(names(group), values = palette(n_distinct(gdata[["group"]])),
-                        labels = function(x) paste0(x, "   "))
+                        labels = function(x) paste0(x, "   "),
+                        guide = guide_legend(ncol = legend_ncol))
   } else {
     g = ggplot(gdata) +
       geom_density(aes(x), fill = palette(1))

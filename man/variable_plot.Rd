@@ -15,6 +15,7 @@ variable_plot(
   labels_y = ez_labels,
   geom = "line",
   size_line = 1,
+  legend_ncol = NULL,
   ylab = NULL,
   yoy = FALSE,
   switch = "y",
@@ -41,6 +42,8 @@ variable_plot(
 \item{geom}{Either "line", "col" or "bar". Default is "line"}
 
 \item{size_line}{width of line for \code{geom_line()}. Default is 1.}
+
+\item{legend_ncol}{Number of columns in legend.}
 
 \item{ylab}{y label text}
 

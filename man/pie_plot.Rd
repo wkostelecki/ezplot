@@ -18,7 +18,8 @@ pie_plot(
   signif = 3,
   palette = ez_col,
   reorder = c("x", "facet_x", "facet_y"),
-  label_x = 0.8
+  label_x = 0.8,
+  legend_ncol = NULL
 )
 }
 \arguments{
@@ -50,6 +51,8 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{label_x}{Position of label from centre of pie.  0 is the centre of the
 pie and 1 is the outer edge.}
+
+\item{legend_ncol}{Number of columns in legend.}
 }
 \value{
 ggplot object

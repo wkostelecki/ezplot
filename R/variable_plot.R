@@ -35,6 +35,7 @@ variable_plot = function(data,
                          labels_y = ez_labels,
                          geom = "line",
                          size_line = 1,
+                         legend_ncol = NULL,
                          ylab = NULL,
                          yoy = FALSE,
                          switch = "y",
@@ -127,7 +128,8 @@ variable_plot = function(data,
                  na.rm = TRUE) +
         scale_fill_manual(NULL,
                           values = palette(length(unique(gdata[["group"]]))),
-                          labels = function(x) paste0(x, "   "))
+                          labels = function(x) paste0(x, "   "),
+                          guide = guide_legend(ncol = legend_ncol))
 
       g = g +
         geom_text(aes(x, value,
