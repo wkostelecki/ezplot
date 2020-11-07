@@ -27,7 +27,7 @@ ks_plot = function(data,
     actuals = as.character(sort(unique(data$actual)))
     stopifnot(length(actuals) == 2)
 
-    colours = palette(2) %>% setNames(actuals)
+    colours = palette(2) %>% stats::setNames(actuals)
 
     data = perf_df(data$fitted, data$actual == actuals[2])
 
