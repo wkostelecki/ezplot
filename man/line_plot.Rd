@@ -14,6 +14,7 @@ line_plot(
   yoy = FALSE,
   size_line = 1,
   size = 11,
+  reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col,
   labels_y = ez_labels,
   use_theme = theme_ez,
@@ -40,6 +41,9 @@ Default is \code{FALSE}.}
 
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
 
+\item{reorder}{A character vector specifying the group variables to reorder.
+Default is \code{c("group", "facet_x", "facet_y")}.}
+
 \item{palette}{Colour function.}
 
 \item{labels_y}{label formatting function}
@@ -59,6 +63,7 @@ Creates line plots.
 library(tsibble)
 library(tsibbledata)
 line_plot(ansett, x = "Week", y = "Passengers")
+line_plot(ansett, x = "Week", y = "Passengers", "Class")
 line_plot(pelt, "Year", "Hare")
 line_plot(pelt, "Year", c("Hare", "Lynx"))
 line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)

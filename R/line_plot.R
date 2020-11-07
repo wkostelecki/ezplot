@@ -12,6 +12,7 @@
 #' library(tsibble)
 #' library(tsibbledata)
 #' line_plot(ansett, x = "Week", y = "Passengers")
+#' line_plot(ansett, x = "Week", y = "Passengers", "Class")
 #' line_plot(pelt, "Year", "Hare")
 #' line_plot(pelt, "Year", c("Hare", "Lynx"))
 #' line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
@@ -25,6 +26,7 @@ line_plot = function(data,
                      yoy = FALSE,
                      size_line = 1,
                      size = 11,
+                     reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
                      labels_y = ez_labels,
                      use_theme = theme_ez,
@@ -66,6 +68,8 @@ line_plot = function(data,
   for (i in intersect(names(gdata), c("group", "facet_x", "facet_y"))) {
     gdata[[i]] = factor(gdata[[i]])
   }
+
+  gdata = reorder_levels(gdata, cols = reorder)
 
   if (is.character(gdata[["x"]]) | is.factor(gdata[["x"]])) {
 
