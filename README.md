@@ -12,9 +12,9 @@ status](https://www.r-pkg.org/badges/version/ezplot)](https://cran.r-project.org
 [![Travis build
 status](https://travis-ci.org/wkostelecki/ezplot.svg?branch=master)](https://travis-ci.org/wkostelecki/ezplot)
 [![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/ezplot)](http://www.r-pkg.org/pkg/ezplot)
+downloads](http://cranlogs.r-pkg.org/badges/ezplot)](https://www.r-pkg.org:443/pkg/ezplot)
 [![Total CRAN
-downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](http://www.r-pkg.org/pkg/ezplot)
+downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](https://www.r-pkg.org:443/pkg/ezplot)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
@@ -99,7 +99,7 @@ line_plot(gafa_stock, "Date", c("Closing Stock Price" = "Close"),
           labels = function(x) ez_labels(x, prepend = "$"))
 ```
 
-<img src="man/figures/README-line_plot4-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-line_plot-4-1.png" style="display: block; margin: auto;" />
 
 Plot multiple numeric columns:
 
