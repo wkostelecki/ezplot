@@ -1,14 +1,11 @@
 
 fixed: https://cran.rstudio.com//web/checks/check_results_ezplot.html
 
-Tested on: 
-- Fedora Linux, R-devel, clang, gfortran
+Tested on:
+- winbuilder: R Under development (unstable) (2020-11-13 r79429)
 - Windows Server 2008 R2 SP1, R-devel, 32/64 bit
 - Ubuntu Linux 16.04 LTS, R-release, GCC
-- Windows: R Under development (unstable) (2020-08-10 r79000)
-
-
-
+- Fedora Linux, R-devel, clang, gfortran
 
 #### devtools::check_rhub()
 √  checking for file 'C:\Users\wkost\Documents\GitHub\ezplot/DESCRIPTION' ...

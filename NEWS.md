@@ -1,5 +1,11 @@
 
-# ezplot 0.6.0
+# ezplot 0.6.5
+- added legend to ks_plot
+- added legend_ncol argument where applicable
+- added reorder argument to line_plot to match other plot functions
+- added tests
+
+# ezplot 0.6.2
 - fixed variable_plot
 - updates to ez_jet for n < 5
 - fixed issues with tsibble/tsibbledata
