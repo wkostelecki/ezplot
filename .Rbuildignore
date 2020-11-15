@@ -10,3 +10,4 @@
 ^release.R$
 .vscode
 ^README\.Rmd$
+^\.github$

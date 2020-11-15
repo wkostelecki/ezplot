@@ -3,6 +3,7 @@ covr::report(covr)
 
 devtools::spell_check()
 devtools::check() # R CMD check
+rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
 devtools::check_win_devel()
 devtools::check_rhub()
 
