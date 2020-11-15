@@ -16,6 +16,8 @@ downloads](http://cranlogs.r-pkg.org/badges/ezplot)](https://www.r-pkg.org:443/p
 [![Total CRAN
 downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](https://www.r-pkg.org:443/pkg/ezplot)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![R build
+status](https://github.com/wkostelecki/ezplot/workflows/R-CMD-check/badge.svg)](https://github.com/wkostelecki/ezplot/actions)
 <!-- badges: end -->
 
 ## Overview
