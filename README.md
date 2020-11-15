@@ -9,8 +9,6 @@
 status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://codecov.io/github/wkostelecki/ezplot?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ezplot)](https://cran.r-project.org/package=ezplot)
-[![Travis build
-status](https://travis-ci.org/wkostelecki/ezplot.svg?branch=master)](https://travis-ci.org/wkostelecki/ezplot)
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/ezplot)](https://www.r-pkg.org:443/pkg/ezplot)
 [![Total CRAN
@@ -42,7 +40,8 @@ You can install the released version of ezplot from
 install.packages("ezplot")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
+And the development version from
+[GitHub](https://github.com/wkostelecki/ezplot) with:
 
 ``` r
 # install.packages("devtools")
