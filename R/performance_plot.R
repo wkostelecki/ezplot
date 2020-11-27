@@ -152,7 +152,7 @@ measure_baseline = function(measure, actual) {
   } else if (any(measure == c("lift"))) {
     return(c(1, 1))
   } else if (any(measure == c("prec", "ppv"))) {
-    return(mean(actual))
+    return(mean(as.numeric(factor(actual))-1))
   } else if (any(measure == c("cutoff"))) {
     return(c(Inf, -Inf))
   } else {
