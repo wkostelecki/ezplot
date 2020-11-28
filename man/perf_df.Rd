@@ -4,17 +4,22 @@
 \alias{perf_df}
 \title{perf_df}
 \usage{
-perf_df(fitted, actual)
+perf_df(fitted, actual, quantiles = NULL)
 }
 \arguments{
 \item{fitted}{A character value. Evaluates to a numeric column.}
 
 \item{actual}{A character value. Evaluates to a logical or binary column.}
+
+\item{quantiles}{Number of quantiles to show. If \code{NULL}, uses distinct
+values of \code{fitted} for the cutoffs rather than showing quantiles.}
 }
 \description{
 perf_df
 }
 \examples{
 perf_df(mtcars$mpg, mtcars$am)
+perf_df(mtcars$mpg, mtcars$am, quantiles = 4)
+perf_df(mtcars$mpg, mtcars$am, quantiles = 10)
 perf_df(mtcars$wt, mtcars$am==0)
 }

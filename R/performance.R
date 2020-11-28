@@ -71,6 +71,8 @@ pred = function(fitted, actual) {
 
 #' perf_df
 #' @inheritParams performance_plot
+#' @param quantiles Number of quantiles to show. If \code{NULL}, uses distinct
+#'   values of \code{fitted} for the cutoffs rather than showing quantiles.
 #' @export
 #' @examples
 #' perf_df(mtcars$mpg, mtcars$am)
@@ -79,31 +81,19 @@ pred = function(fitted, actual) {
 #' perf_df(mtcars$wt, mtcars$am==0)
 perf_df = function(fitted, actual, quantiles = NULL) {
   if (!is.null(quantiles)) {
-
-
-
     quantiles = min(quantiles, length(fitted))
-
     bins = pmax(ceiling(seq(0, quantiles, length.out = length(fitted))), 1)
-
     r = rank(fitted, ties.method = "first")
-    # o = order(fitted, decreasing = TRUE)
-
-    # q = quantile(r, probs = seq(0, 1, length.out = quantiles + 1))
-
     x = data.frame(r,
                    # o,
                    fitted,
-                   # c = cut(r, q, include.lowest = T),
-                   cc = bins[r]) %>%
-      # dplyr::group_by(c) %>%
-      # dplyr::mutate(qfitted = min(r)) %>%
+                   c = bins[r]) %>%
       dplyr::group_by(c) %>%
-      dplyr::mutate(qfitted = min(r))
+      dplyr::mutate(qrank = min(r))
 
-    fitted = x$qfitted
+    fitted = x$qrank
     ocutoffs = x %>%
-      dplyr::group_by(qfitted) %>%
+      dplyr::group_by(qrank) %>%
       dplyr::summarize(cutoff = min(fitted),
                        .groups = "drop")
   }
@@ -138,4 +128,4 @@ perf_df = function(fitted, actual, quantiles = NULL) {
   df
 }
 
-globalVariables(c("tpr", "fpr", "cutoffs"))
+globalVariables(c("tpr", "fpr", "cutoffs", "prec", "qrank"))

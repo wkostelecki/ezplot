@@ -34,13 +34,13 @@ ks_plot = function(data,
     ind = which.max(data$ks)
 
     g = ggplot(data) +
-      geom_line(aes(cutoffs, tnr, colour = actuals[1]),
+      geom_line(aes(cutoff, tnr, colour = actuals[1]),
                 # colour = palette(2)[1],
                 size = size_line) +
-      geom_line(aes(cutoffs, fnr, colour = actuals[2]),
+      geom_line(aes(cutoff, fnr, colour = actuals[2]),
                 # colour = palette(2)[2],
                 size = size_line) +
-      geom_line(data = data.frame(x = data$cutoffs[ind],
+      geom_line(data = data.frame(x = data$cutoff[ind],
                                   y = c(data$fnr[ind], data$tnr[ind])),
                 aes(x, y),
                 size = size_line,
@@ -59,4 +59,4 @@ ks_plot = function(data,
 
   }
 
-globalVariables(c("fnr", "tnr"))
+globalVariables(c("fnr", "tnr", "cutoff"))
