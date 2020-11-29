@@ -2,27 +2,27 @@
 fixed: https://cran.rstudio.com//web/checks/check_results_ezplot.html
 
 Tested on:
-- winbuilder: R Under development (unstable) (2020-11-13 r79429)
+- winbuilder: R Under development (unstable) (2020-11-24 r79490)
 - Windows Server 2008 R2 SP1, R-devel, 32/64 bit
 - Ubuntu Linux 16.04 LTS, R-release, GCC
 - Fedora Linux, R-devel, clang, gfortran
 
 #### devtools::check_rhub()
-√  checking for file 'C:\Users\wkost\Documents\GitHub\ezplot/DESCRIPTION' ...
--  preparing 'ezplot': (15.9s)
-√  checking DESCRIPTION meta-information ...
--  installing the package to build vignettes (670ms)
-√  creating vignettes (26.5s)
--  checking for LF line-endings in source and make files and shell scripts (1.2s)
+√  checking for file 'C:\Users\wkost\Documents\GitHub\ezplot/DESCRIPTION' (514ms)
+-  preparing 'ezplot': (18.2s)
+√  checking DESCRIPTION meta-information ... 
+-  installing the package to build vignettes (401ms)
+√  creating vignettes (17.8s)
+-  checking for LF line-endings in source and make files and shell scripts (1.4s)
 -  checking for empty or unneeded directories
    Removed empty directory 'ezplot/tests/testthat/_snaps'
--  building 'ezplot_0.6.3.tar.gz'
+-  building 'ezplot_0.6.6.tar.gz'
    
 -  Uploading package
 -  Preparing build, see status at
-   https://builder.r-hub.io/status/ezplot_0.6.3.tar.gz-cf27140ca30d4b9a86edc71fc62acfd4
-   https://builder.r-hub.io/status/ezplot_0.6.3.tar.gz-49460ba4a1ab495c9f23058f1054a890
-   https://builder.r-hub.io/status/ezplot_0.6.3.tar.gz-96857f4cea254a7ebbda35ab9b9cc44a
+   https://builder.r-hub.io/status/ezplot_0.6.6.tar.gz-832051993e7f4e08b8703d507ba73cff
+   https://builder.r-hub.io/status/ezplot_0.6.6.tar.gz-1ac35cb60ebc48338b877eacc79cd0f4
+   https://builder.r-hub.io/status/ezplot_0.6.6.tar.gz-3be53bf5a5f042c08180fcd6292944a4
 -  Build started
 -  Creating new user
 -  Downloading and unpacking package file
@@ -36,69 +36,69 @@ Tested on:
    setting R_REMOTES_NO_ERRORS_FROM_WARNINGS to true
    setting _R_CHECK_FORCE_SUGGESTS_ to true
    setting _R_CHECK_CRAN_INCOMING_USE_ASPELL_ to true
--  using log directory 'C:/Users/USERlxZMBwDHiX/ezplot.Rcheck'
--  using R Under development (unstable) (2020-10-09 r79317)
--  using platform: x86_64-w64-mingw32 (64-bit) (821ms)
+-  using log directory 'C:/Users/USERQcWpZEMiju/ezplot.Rcheck' (809ms)
+-  using R Under development (unstable) (2020-11-17 r79439)
+-  using platform: x86_64-w64-mingw32 (64-bit)
 -  using session charset: ISO8859-1
--  using option '--as-cran'
+-  using option '--as-cran' (815ms)
 √  checking for file 'ezplot/DESCRIPTION'
--  checking extension type ... Package (907ms)
--  this is package 'ezplot' version '0.6.3'
--  package encoding: UTF-8
+-  checking extension type ... Package
+-  this is package 'ezplot' version '0.6.6'
+-  package encoding: UTF-8 (1.6s)
 -  checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
    Maintainer: 'Wojtek Kostelecki <wojtek.kostelecki@gmail.com>'
 √  checking package namespace information
-√  checking package dependencies
+√  checking package dependencies (802ms)
 √  checking if this is a source package
-√  checking if there is a namespace (910ms)
+√  checking if there is a namespace
 √  checking for executable files
-√  checking for hidden files and directories
+√  checking for hidden files and directories (802ms)
 √  checking for portable file names
-√  checking serialization versions (904ms)
+√  checking serialization versions
 √  checking whether package 'ezplot' can be installed
-√  checking installed package size
+√  checking installed package size (799ms)
 √  checking package directory
-√  checking for future file timestamps (1.7s)
+√  checking for future file timestamps
 √  checking 'build' directory
-√  checking DESCRIPTION meta-information
+√  checking DESCRIPTION meta-information (1.6s)
 √  checking top-level files
-√  checking for left-over files (909ms)
+√  checking for left-over files
 √  checking index information
-√  checking package subdirectories
+√  checking package subdirectories (807ms)
 √  checking R files for non-ASCII characters
-√  checking R files for syntax errors (899ms)
+√  checking R files for syntax errors
 √  checking whether the package can be loaded
-√  checking whether the package can be loaded with stated dependencies
+√  checking whether the package can be loaded with stated dependencies (797ms)
 √  checking whether the package can be unloaded cleanly
-√  checking whether the namespace can be loaded with stated dependencies (905ms)
+√  checking whether the namespace can be loaded with stated dependencies
 √  checking whether the namespace can be unloaded cleanly
-√  checking loading without being on the library search path
+√  checking loading without being on the library search path (796ms)
 √  checking use of S3 registration
-√  checking dependencies in R code (911ms)
+√  checking dependencies in R code
 √  checking S3 generic/method consistency
-√  checking replacement functions
+√  checking replacement functions (1.6s)
 √  checking foreign function calls
-√  checking R code for possible problems (896ms)
+√  checking R code for possible problems
 √  checking Rd files
-√  checking Rd metadata
+√  checking Rd metadata (797ms)
 √  checking Rd line widths
-√  checking Rd cross-references (859ms)
+√  checking Rd cross-references
 √  checking for missing documentation entries
-√  checking for code/documentation mismatches
+√  checking for code/documentation mismatches (802ms)
 √  checking Rd \usage sections
-√  checking Rd contents (847ms)
+√  checking Rd contents
 √  checking for unstated dependencies in examples
-√  checking installed files from 'inst/doc'
+√  checking installed files from 'inst/doc' (801ms)
 √  checking files in 'vignettes'
-√  checking examples (851ms)
+√  checking examples
 √  checking examples with --run-donttest
-√  checking for unstated dependencies in 'tests'
--  checking tests
-√  Running 'testthat.R' (1.8s)
-√  checking for unstated dependencies in vignettes (1.8s)
+√  checking for unstated dependencies in 'tests' (802ms)
+-  checking tests (828ms)
+√  Running 'testthat.R'
+√  checking for unstated dependencies in vignettes (813ms)
 √  checking package vignettes in 'inst/doc'
-√  checking re-building of vignette outputs (903ms)
-√  checking PDF version of manual (2.8s)
+√  checking re-building of vignette outputs
+√  checking PDF version of manual (39s)
 √  checking for non-standard things in the check directory
 √  checking for detritus in the temp directory
    
@@ -106,11 +106,11 @@ Tested on:
 -  Cleaning up files and user
     
 
--- ezplot 0.6.3: OK
+-- ezplot 0.6.6: OK
 
-  Build ID:   ezplot_0.6.3.tar.gz-cf27140ca30d4b9a86edc71fc62acfd4
+  Build ID:   ezplot_0.6.6.tar.gz-832051993e7f4e08b8703d507ba73cff
   Platform:   Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-  Submitted:  6m 35.2s ago
-  Build time: 6m 24.6s
+  Submitted:  6m 37.1s ago
+  Build time: 6m 31s
 
 0 errors √ | 0 warnings √ | 0 notes √

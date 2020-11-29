@@ -1,3 +1,6 @@
+# ezplot 0.6.6
+- added quantiles option to perf-df
+- fixed precision-recall plots when categorical target is used
 
 # ezplot 0.6.5
 - added legend to ks_plot
