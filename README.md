@@ -96,6 +96,7 @@ Plot YOY comparisons:
 line_plot(gafa_stock, "Date", c("Closing Stock Price" = "Close"),
           facet_y = "Symbol",
           facet_scales = "free_y",
+          reorder = NULL,
           yoy = TRUE,
           labels = function(x) ez_labels(x, prepend = "$"))
 ```
