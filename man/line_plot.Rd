@@ -18,7 +18,8 @@ line_plot(
   palette = ez_col,
   labels_y = ez_labels,
   use_theme = theme_ez,
-  facet_scales = "fixed"
+  facet_scales = "fixed",
+  legend_ncol = NULL
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{"fixed"}.}
+
+\item{legend_ncol}{Number of columns in legend.}
 }
 \value{
 A ggplot object.

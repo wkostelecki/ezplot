@@ -30,7 +30,8 @@ line_plot = function(data,
                      palette = ez_col,
                      labels_y = ez_labels,
                      use_theme = theme_ez,
-                     facet_scales = "fixed") {
+                     facet_scales = "fixed",
+                     legend_ncol = NULL) {
 
   stopifnot(sum(c(length(y) > 1, !is.null(group), yoy)) <= 1)
 
@@ -90,7 +91,8 @@ line_plot = function(data,
                   size = size_line) +
         scale_color_manual(NULL,
                            values = palette(length(unique(gdata[["group"]]))),
-                           labels = function(x) paste0(x, "   ")) +
+                           labels = function(x) paste0(x, "   "),
+                           guide = guide_legend(ncol = legend_ncol)) +
         scale_x_continuous(breaks = c(1, 91, 182, 274, 366),
                            limits = c(1, 366),
                            labels = c("Jan", "Apr", "Jul", "Oct", "Jan")) +
@@ -101,7 +103,8 @@ line_plot = function(data,
                   size = size_line) +
         scale_colour_manual(NULL,
                             values = palette(length(unique(gdata[["group"]]))),
-                            labels = function(x) paste0(x, "   "))
+                            labels = function(x) paste0(x, "   "),
+                            guide = guide_legend(ncol = legend_ncol))
     }
   } else {
     g = g +
