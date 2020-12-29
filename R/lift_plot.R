@@ -84,7 +84,6 @@ lift_plot = function(data,
               size = size_line,
               linetype = 2) +
     theme_minimal(size) +
-    # coord_fixed() +
     xlab('Rate of positive predictions') +
     ylab('Lift') +
     scale_y_continuous(labels = ez_labels, limits = c(0, NA)) +
