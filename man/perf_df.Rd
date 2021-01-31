@@ -15,7 +15,7 @@ perf_df(fitted, actual, quantiles = NULL)
 values of \code{fitted} for the cutoffs rather than showing quantiles.}
 }
 \description{
-perf_df
+shows classification performance statistics as a table
 }
 \examples{
 perf_df(mtcars$mpg, mtcars$am)

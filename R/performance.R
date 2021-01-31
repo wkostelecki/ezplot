@@ -70,6 +70,7 @@ pred = function(fitted, actual) {
 }
 
 #' perf_df
+#' @description shows classification performance statistics as a table
 #' @inheritParams performance_plot
 #' @param quantiles Number of quantiles to show. If \code{NULL}, uses distinct
 #'   values of \code{fitted} for the cutoffs rather than showing quantiles.
@@ -107,24 +108,32 @@ perf_df = function(fitted, actual, quantiles = NULL) {
                   pp = pred@n.pos.pred[[1]],
                   np = pred@n.neg.pred[[1]])
 
-  extra_metrics = c("rpp", "acc", "fpr", "tpr", "fnr", "tnr", "prec", "lift", "auc", "aucpr")
-  if (!is.null(quantiles)) extra_metrics = setdiff(extra_metrics, c("auc", "aucpr"))
+  df[["rpp"]] = ROCR::performance(pred, "rpp")@y.values[[1]]
+  df[["acc"]] = ROCR::performance(pred, "acc")@y.values[[1]]
+  df[["fpr"]] = ROCR::performance(pred, "fpr")@y.values[[1]]
+  df[["tpr"]] = ROCR::performance(pred, "tpr")@y.values[[1]]
+  df[["fnr"]] = ROCR::performance(pred, "fnr")@y.values[[1]]
+  df[["tnr"]] = ROCR::performance(pred, "tnr")@y.values[[1]]
+  df[["prec"]] = ROCR::performance(pred, "prec")@y.values[[1]]
+  df[["clift"]] = ROCR::performance(pred, "lift")@y.values[[1]]
 
-  for (metric in extra_metrics) {
-
-    df[[metric]] = ROCR::performance(pred, metric)@y.values[[1]]
-
-  }
-  df = df %>%
-    dplyr::mutate(ks = abs(fpr - tpr),
-                  f1 = 2 * prec * tpr / (prec + tpr))
   if (!is.null(quantiles)) {
     df = df %>%
-      utils::tail(quantiles) %>%
-      dplyr::mutate(cutoff = rev(ocutoffs$cutoff)) %>%
-      cbind(quantile = seq_len(quantiles), .) %>%
-      identity()
+      utils::tail(quantiles) %>% # drop first row
+      dplyr::mutate(cutoff = rev(ocutoffs$cutoff)) %>% # convert to original scale
+      cbind(quantile = seq_len(quantiles), .)
   }
+
+  df = df %>%
+    dplyr::mutate(
+      ilift = (diff(c(0, tp)) / diff(c(0, pp))) / (tp[n()] / pp[n()]),
+      f1 = 2 * prec * tpr / (prec + tpr),
+      ks = abs(fpr - tpr)
+    )
+
+  df[["auc"]] = ROCR::performance(pred, "auc")@y.values[[1]]
+  df[["aucpr"]] = ROCR::performance(pred, "aucpr")@y.values[[1]]
+
   df
 }
 
