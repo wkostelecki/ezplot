@@ -17,6 +17,7 @@ line_plot(
   reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col,
   labels_y = ez_labels,
+  limits_y = c(NA, NA),
   use_theme = theme_ez,
   facet_scales = "fixed",
   legend_ncol = NULL
@@ -67,7 +68,7 @@ library(tsibble)
 library(tsibbledata)
 line_plot(ansett, x = "Week", y = "Passengers")
 line_plot(ansett, x = "Week", y = "Passengers", "Class")
-line_plot(pelt, "Year", "Hare")
+line_plot(pelt, "Year", "Hare", limits_y = c(0, NA))
 line_plot(pelt, "Year", c("Hare", "Lynx"))
 line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
 line_plot(pelt, "Year", c("Hare Population" = "Hare"))
