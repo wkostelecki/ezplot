@@ -50,14 +50,14 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 
 \item{labels_y}{label formatting function}
 
+\item{limits_y}{vector of c(min, max) y-axis limits}
+
 \item{use_theme}{ggplot theme function}
 
 \item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{"fixed"}.}
 
 \item{legend_ncol}{Number of columns in legend.}
-
-\item{lmiits_y}{vector of c(min, max) y-axis limits}
 }
 \value{
 A ggplot object.
