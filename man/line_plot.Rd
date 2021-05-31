@@ -56,6 +56,8 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 \code{facet_grid}. Default is \code{"fixed"}.}
 
 \item{legend_ncol}{Number of columns in legend.}
+
+\item{lmiits_y}{vector of c(min, max) y-axis limits}
 }
 \value{
 A ggplot object.
