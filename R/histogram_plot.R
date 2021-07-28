@@ -10,7 +10,7 @@
 #' histogram_plot(airquality, "Wind", group = "Month")
 #' histogram_plot(airquality, "Wind", "density", facet_x = "Month")
 histogram_plot = function(data, x,
-                          y = "count",
+                          y = "..count..",
                           group = NULL, facet_x = NULL,
                           facet_y = NULL,
                           palette = ez_col,
@@ -35,7 +35,7 @@ histogram_plot = function(data, x,
     g = ggplot(gdata) +
       geom_histogram(aes_string("x",
                                 fill = "forcats::fct_rev(factor(group))",
-                                y = paste0("..", y, "..")),
+                                y = y),
                      position = position,
                      bins = bins,
                      alpha = alpha) +
@@ -47,7 +47,7 @@ histogram_plot = function(data, x,
   } else {
     g = ggplot(gdata) +
       geom_histogram(aes_string("x",
-                                y = paste0("..", y, "..")),
+                                y = y),
                      fill = palette(1), bins = bins)
   }
 
