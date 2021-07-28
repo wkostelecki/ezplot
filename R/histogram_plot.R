@@ -8,7 +8,7 @@
 #' @export
 #' @examples
 #' histogram_plot(airquality, "Wind", group = "Month")
-#' histogram_plot(airquality, "Wind", "density", facet_x = "Month")
+#' histogram_plot(airquality, "Wind", "..density..", facet_x = "Month")
 histogram_plot = function(data, x,
                           y = "..count..",
                           group = NULL, facet_x = NULL,
