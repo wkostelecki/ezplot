@@ -1,3 +1,7 @@
+# ezplot 0.7.1
+- updated histogram_plot to pass bare y to geom_histogram
+- added limits_y argument to line_plot
+
 # ezplot 0.7.0
 - added instantaneous lift to perf_df
 
