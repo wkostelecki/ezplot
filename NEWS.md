@@ -1,4 +1,4 @@
-# ezplot 0.7.1
+# ezplot 0.7.2
 - updated histogram_plot to pass bare y to geom_histogram
 - added limits_y argument to line_plot
 
