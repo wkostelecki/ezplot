@@ -1,6 +1,6 @@
 
 context("variable_plot")
-
+library(tsibble)
 
 test_that("variable_plot line geom works", {
 
