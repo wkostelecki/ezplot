@@ -62,9 +62,9 @@ variable_plot = function(data,
                                c("group", "facet_x", "facet_y"))]
   )
 
-  gdata = tidyr::gather_(gdata, "variable", "value",
-                         setdiff(names(gdata), c("x", "facet_x", "group")),
-                         factor_key = TRUE)
+  gdata = tidyr::gather(gdata, "variable", "value",
+                        setdiff(names(gdata), c("x", "facet_x", "group")),
+                        factor_key = TRUE)
 
   if (inherits(gdata[["x"]], c("numeric", "integer", "Date", "POSIXt"))) {
     if (inherits(gdata[["x"]], "Date") && length(class(gdata[["x"]])) > 1) {
