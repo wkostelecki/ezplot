@@ -1,3 +1,8 @@
+# ezplot 0.7.3
+- updated to use tidyr::gather instead of gather_
+- fixe bar_plot labels edge case
+- message cleanup
+
 # ezplot 0.7.2
 - updated histogram_plot to pass bare y to geom_histogram
 - added limits_y argument to line_plot
