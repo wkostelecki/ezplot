@@ -56,7 +56,7 @@ devtools::install_github("wkostelecki/ezplot")
 
 ```{r load packages}
 library(ezplot)
-library(tsibble)
+suppressPackageStartupMessages(library(tsibble))
 library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(lubridate))

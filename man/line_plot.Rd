@@ -66,7 +66,7 @@ A ggplot object.
 Creates line plots.
 }
 \examples{
-library(tsibble)
+suppressPackageStartupMessages(library(tsibble))
 library(tsibbledata)
 line_plot(ansett, x = "Week", y = "Passengers")
 line_plot(ansett, x = "Week", y = "Passengers", "Class")

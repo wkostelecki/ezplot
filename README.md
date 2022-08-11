@@ -52,12 +52,7 @@ devtools::install_github("wkostelecki/ezplot")
 
 ``` r
 library(ezplot)
-library(tsibble)
-#> 
-#> Attaching package: 'tsibble'
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, union
+suppressPackageStartupMessages(library(tsibble))
 library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(lubridate))

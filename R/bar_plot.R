@@ -85,8 +85,8 @@ bar_plot = function(data,
   if (position == "fill") {
     gdata = gdata %>%
       group_by(!!!syms(setdiff(group_vars, "group"))) %>%
-      mutate(y = y / sum(abs(y))) %>%
-      ungroup
+      mutate(y = coalesce(y / sum(abs(y)), 0)) %>%
+      ungroup()
   }
 
   if (facet_scales == "fixed") {
@@ -100,7 +100,7 @@ bar_plot = function(data,
     group_by(!!!syms(c(setdiff(group_vars, "group"), "sign"))) %>%
     mutate(y_height = sum(y)) %>%
     group_by(!!!syms(setdiff(group_vars, c("group", "x", facet_groups)))) %>%
-    mutate(y_span = diff(range(y_height, 0)),
+    mutate(y_span = diff(range(y_height, 0, na.rm = TRUE)),
            y_range = y_span * (1 + (1 - rescale_y) * n_distinct(sign))) %>%
     ungroup
 

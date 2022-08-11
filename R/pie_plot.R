@@ -11,7 +11,7 @@
 #' @importFrom forcats fct_reorder
 #' @examples
 #' \donttest{
-#' library(tsibble)
+#' suppressPackageStartupMessages(library(tsibble))
 #' library(tsibbledata)
 #' pie_plot(ansett, "Class", "Passengers")
 #' pie_plot(ansett, "Class", "Passengers", reorder = NULL, label_x = 0.5)

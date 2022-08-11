@@ -60,7 +60,7 @@ Plots variables (multiple "y" values) broken out as vertical
   facets.
 }
 \examples{
-library(tsibble)
+suppressPackageStartupMessages(library(tsibble))
 library(tsibbledata)
 variable_plot(ansett, "Week", "Passengers", facet_x = "Class")
 variable_plot(ansett, "Week", "Passengers", facet_x = "Class", yoy = TRUE)

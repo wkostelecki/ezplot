@@ -9,7 +9,7 @@
 #' @param geom Either "line", "col" or "bar". Default is "line"
 #' @export
 #' @examples
-#' library(tsibble)
+#' suppressPackageStartupMessages(library(tsibble))
 #' library(tsibbledata)
 #' variable_plot(ansett, "Week", "Passengers", facet_x = "Class")
 #' variable_plot(ansett, "Week", "Passengers", facet_x = "Class", yoy = TRUE)

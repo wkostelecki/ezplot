@@ -1,6 +1,6 @@
 library(testthat)
 library(ezplot)
-library(tsibble)
+suppressPackageStartupMessages(library(tsibble))
 
 test_check("ezplot")
 

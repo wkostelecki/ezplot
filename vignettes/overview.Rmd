@@ -22,7 +22,7 @@ values of y for repeated categories of x, group, facet_y and facet_x.
 
 ```{r setup}
 library(ezplot)
-library(tsibble)
+suppressPackageStartupMessages(library(tsibble))
 library(tsibbledata)
 suppressPackageStartupMessages(library(lubridate))
 library(ggplot2)

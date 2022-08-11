@@ -34,7 +34,7 @@ An aggregated data.frame.
 Aggregates data
 }
 \examples{
-library(tsibble)
+suppressPackageStartupMessages(library(tsibble))
 library(tsibbledata)
 agg_data(ansett, c("Passengers", count = "1"))
 agg_data(ansett["Class"])

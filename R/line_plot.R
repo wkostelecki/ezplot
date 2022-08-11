@@ -10,7 +10,7 @@
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
-#' library(tsibble)
+#' suppressPackageStartupMessages(library(tsibble))
 #' library(tsibbledata)
 #' line_plot(ansett, x = "Week", y = "Passengers")
 #' line_plot(ansett, x = "Week", y = "Passengers", "Class")

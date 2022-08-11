@@ -27,7 +27,7 @@ values of y for repeated categories of x, group, facet_y and facet_x.
 
 ```{r, fig.show='hold'}
 library(ezplot)
-library(tsibble)
+suppressPackageStartupMessages(library(tsibble))
 library(tsibbledata)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(lubridate))
