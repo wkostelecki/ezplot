@@ -25,8 +25,10 @@ devtools::check_rhub()
 ## update cran-comments
 
 git2r::commit(all = TRUE, message = paste0("CRAN commit v", v))
-git2r::push(credentials = git2r::cred_ssh_key())
+system("git push")
 
 devtools::release()
 
-git2r::tag(name = paste0("v", v), message = "CRAN")
+tag = paste0("v", v)
+git2r::tag(name = tag, message = "CRAN")
+system(glue("git push origin {tag}"))
