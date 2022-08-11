@@ -1,6 +1,6 @@
 # ezplot 0.7.3
 - updated to use tidyr::gather instead of gather_
-- fixe bar_plot labels edge case
+- fixed bar_plot labels edge case
 - message cleanup
 
 # ezplot 0.7.2

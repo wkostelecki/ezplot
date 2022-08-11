@@ -15,8 +15,12 @@ bar_plot(
   width = NULL,
   reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col,
-  labels_y = if (position == "fill") {     function(x) ez_labels(100 * x, append =
-    "\%") } else {     ez_labels },
+  labels_y = if (position == "fill") {
+     function(x) ez_labels(100 * x, append =
+    "\%")
+ } else {
+     ez_labels
+ },
   labels_x = identity,
   label_pos = c("auto", "inside", "top", "both", "none"),
   rescale_y = 1.1,
