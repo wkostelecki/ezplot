@@ -11,3 +11,4 @@
 .vscode
 ^README\.Rmd$
 ^\.github$
+^CRAN-SUBMISSION$
