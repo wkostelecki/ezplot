@@ -1,7 +1,7 @@
 library(magrittr)
 
 packages = setdiff(c("tidyr", "testthat", "devtools", "DT", "git2r",
-                     "devtools", "spelling"),
+                     "devtools", "spelling", "rhub"),
                    installed.packages())
 install.packages(packages)
 
