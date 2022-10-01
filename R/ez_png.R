@@ -57,7 +57,7 @@ ez_png = function (g,
            ...,
            vp = vp)
 
-  if (check) open_file(file)
+  if (check & Sys.info()["sysname"] == "Windows") open_file(file)
 
   invisible(NULL)
 
