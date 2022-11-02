@@ -26,6 +26,7 @@ line_plot = function(data,
                      facet_y = NULL,
                      yoy = FALSE,
                      size_line = 1,
+                     points = FALSE,
                      size = 11,
                      reorder = c("group", "facet_x", "facet_y"),
                      palette = ez_col,
@@ -33,6 +34,7 @@ line_plot = function(data,
                      limits_y = c(NA, NA),
                      use_theme = theme_ez,
                      facet_scales = "fixed",
+                     na.rm = FALSE,
                      legend_ncol = NULL) {
 
   stopifnot(sum(c(length(y) > 1, !is.null(group), yoy)) <= 1)
@@ -90,7 +92,8 @@ line_plot = function(data,
     if (yoy) {
       g = g +
         geom_line(mapping = aes(x, y, colour = group),
-                  size = size_line) +
+                  size = size_line,
+                  na.rm = na.rm) +
         scale_color_manual(NULL,
                            values = palette(length(unique(gdata[["group"]]))),
                            labels = function(x) paste0(x, "   "),
@@ -102,17 +105,27 @@ line_plot = function(data,
     } else {
       g = g +
         geom_line(aes(x, y, colour = group),
-                  size = size_line) +
+                  size = size_line,
+                  na.rm = na.rm) +
         scale_colour_manual(NULL,
                             values = palette(length(unique(gdata[["group"]]))),
                             labels = function(x) paste0(x, "   "),
                             guide = guide_legend(ncol = legend_ncol))
     }
+    if (points)
+      g = g + geom_point(aes(x, y, colour = group),
+                         size = 2 * size_line,
+                         na.rm = na.rm)
   } else {
     g = g +
       geom_line(aes(x, y),
                 size = size_line,
-                colour = palette(1))
+                colour = palette(1),
+                na.rm = na.rm)
+    if (points)
+      g = g + geom_point(aes(x, y),
+                         size = 2 * size_line,
+                         na.rm = na.rm)
   }
 
   g = quick_facet(g, scales = facet_scales)

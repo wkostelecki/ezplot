@@ -13,6 +13,7 @@ line_plot(
   facet_y = NULL,
   yoy = FALSE,
   size_line = 1,
+  points = FALSE,
   size = 11,
   reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col,
@@ -20,6 +21,7 @@ line_plot(
   limits_y = c(NA, NA),
   use_theme = theme_ez,
   facet_scales = "fixed",
+  na.rm = FALSE,
   legend_ncol = NULL
 )
 }
