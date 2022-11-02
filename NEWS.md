@@ -1,3 +1,7 @@
+# ezplot 0.7.4
+- fixed side_plot labels when facets contain a NaN
+- added points option to line_plot
+
 # ezplot 0.7.3
 - updated to use tidyr::gather instead of gather_
 - fixed bar_plot labels edge case
