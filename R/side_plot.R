@@ -41,8 +41,8 @@ side_plot = function(data,
 
   gdata = gdata %>%
     group_by(facet_x) %>%
-    mutate(sides = any(y >= 0) + any(y < 0),
-           y_range = diff(range(c(y[is.finite(y)], 0))) * ifelse(y >= 0, 1, -1),
+    mutate(sides = any(y >= 0, na.rm = TRUE) + any(y < 0, na.rm = TRUE),
+           y_range = diff(range(c(y[is.finite(y)], 0))) * dplyr::coalesce(ifelse(y >= 0, 1, -1), 1),
            y_rescaled_range = y_range * ifelse(sides < 2, rescale_y, 2 * rescale_y - 1),
            y_text_nudge = y_rescaled_range / 60,
            y_axis_nudge = (y_rescaled_range - y_range) / sides) %>%
