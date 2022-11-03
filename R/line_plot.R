@@ -5,6 +5,8 @@
 #' @param yoy Logical used to indicate whether a YOY grouping should be created.
 #'   Default is \code{FALSE}.
 #' @param size_line width of line for \code{geom_line()}. Default is 1.
+#' @param points logical. Option to include points
+#' @param na.rm logical. Option to exclude NAs
 #' @param limits_y vector of c(min, max) y-axis limits
 #' @return A ggplot object.
 #' @export
