@@ -58,3 +58,5 @@ histogram_plot = function(data, x,
     ylab(y)
 
 }
+
+globalVariables("fill")
