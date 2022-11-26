@@ -1,3 +1,6 @@
+# ezplot 0.7.5
+- fixed warnings caused by ggplot changes
+
 # ezplot 0.7.4
 - fixed side_plot labels when facets contain a NaN
 - added points option to line_plot

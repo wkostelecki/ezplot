@@ -2,17 +2,18 @@ library(magrittr)
 library(glue)
 
 packages = setdiff(c("tidyr", "testthat", "devtools", "DT", "git2r",
-                     "devtools", "spelling", "rhub"),
+                     "devtools", "spelling", "rhub", "patchwork"),
                    installed.packages())
 install.packages(packages)
-install.packages(old.packages()[, "Package"])
+old.packages()
+update.packages(ask = FALSE)
 
 covr = covr::package_coverage()
 covr::report(covr)
 
 # check here: https://cran.rstudio.com//web/checks/check_results_ezplot.html
 # update version number:
-v = "0.7.4"
+v = "0.7.5"
 readLines("DESCRIPTION") %>%
   stringr::str_replace("^Version: [0-9\\.]*$", paste0("Version: ", v)) %>%
   writeLines("DESCRIPTION")
