@@ -8,9 +8,9 @@
 #' @export
 #' @examples
 #' histogram_plot(airquality, "Wind", group = "Month")
-#' histogram_plot(airquality, "Wind", "..density..", facet_x = "Month")
+#' histogram_plot(airquality, "Wind", "density", facet_x = "Month")
 histogram_plot = function(data, x,
-                          y = "..count..",
+                          y = "count",
                           group = NULL, facet_x = NULL,
                           facet_y = NULL,
                           palette = ez_col,
@@ -32,10 +32,10 @@ histogram_plot = function(data, x,
                         function(x) rlang::parse_quo(x, env = env)))
 
   if (exists("group", gdata)) {
+    gdata[["fill"]] = forcats::fct_rev(factor(gdata[["group"]]))
     g = ggplot(gdata) +
-      geom_histogram(aes_string("x",
-                                fill = "forcats::fct_rev(factor(group))",
-                                y = y),
+      geom_histogram(aes(x, fill = fill,
+                         y = if (y == "count") after_stat(count) else after_stat(density)),
                      position = position,
                      bins = bins,
                      alpha = alpha) +
@@ -46,14 +46,15 @@ histogram_plot = function(data, x,
                         guide = guide_legend(ncol = legend_ncol))
   } else {
     g = ggplot(gdata) +
-      geom_histogram(aes_string("x",
-                                y = y),
+      geom_histogram(aes(x,
+                         y = if (y == "count") after_stat(count) else after_stat(density)),
                      fill = palette(1), bins = bins)
   }
 
   quick_facet(g, scales = facet_scales, ncol = facet_ncol) +
     theme_ez() +
     scale_y_continuous(labels = ez_labels, expand = c(0, 0)) +
-    xlab(names(nameifnot(x)))
+    xlab(names(nameifnot(x))) +
+    ylab(y)
 
 }

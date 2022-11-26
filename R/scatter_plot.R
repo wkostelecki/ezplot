@@ -65,7 +65,7 @@ scatter_plot = function(data, x,  y, group = NULL,
   g +
     guides(color=guide_legend(override.aes = list(fill = NA))) +
     theme(axis.line.x = element_line(color = "grey85",
-                                     size = if (size > 16) 0.8 else 0.2))
+                                     linewidth = if (size > 16) 0.8 else 0.2))
 
 
 }

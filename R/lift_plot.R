@@ -67,13 +67,13 @@ lift_plot = function(data,
       geom_path(aes(x = x,
                     y = y,
                     colour = factor(group)),
-                size = size_line) +
+                linewidth = size_line) +
       scale_colour_manual(NULL, values = ez_col(n_distinct(gdata[["group"]])))
   } else {
     g = g +
       geom_path(aes(x = x,
                     y = y),
-                size = size_line)
+                linewidth = size_line)
   }
 
   g = quick_facet(g)
@@ -81,7 +81,7 @@ lift_plot = function(data,
   g = g +
     geom_path(data = data.frame(x = c(0, 1), y = 1),
               aes(x, y),
-              size = size_line,
+              linewidth = size_line,
               linetype = 2) +
     theme_minimal(size) +
     xlab('Rate of positive predictions') +

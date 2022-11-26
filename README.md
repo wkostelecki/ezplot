@@ -61,7 +61,7 @@ library(patchwork)
 suppressPackageStartupMessages(library(ROCR, warn.conflicts = FALSE))
 ```
 
-### line\_plot
+### line_plot
 
 Weekly aggregation:
 
@@ -116,7 +116,7 @@ line_plot(hh_budget,
 
 <img src="man/figures/README-line_plot-5-1.png" style="display: block; margin: auto;" />
 
-### area\_plot
+### area_plot
 
 Weekly aggregation:
 
@@ -150,7 +150,7 @@ area_plot(ansett,
 
 <img src="man/figures/README-area_plot-3-1.png" style="display: block; margin: auto;" />
 
-### bar\_plot
+### bar_plot
 
 Yearly aggregation:
 
@@ -184,7 +184,7 @@ bar_plot(subset(aus_retail, year(Month) >= 2010),
 
 <img src="man/figures/README-bar_plot-3-1.png" style="display: block; margin: auto;" />
 
-### tile\_plot
+### tile_plot
 
 ``` r
 nyc_bikes %>%
@@ -205,7 +205,7 @@ tile_plot(vic_elec,
 
 <img src="man/figures/README-tile_plot-2-1.png" style="display: block; margin: auto;" />
 
-### waterfall\_plot
+### waterfall_plot
 
 ``` r
 waterfall_plot(aus_retail,
@@ -217,7 +217,7 @@ waterfall_plot(aus_retail,
 
 <img src="man/figures/README-waterfall_plot-1-1.png" style="display: block; margin: auto;" />
 
-### side\_plot
+### side_plot
 
 ``` r
 side_plot(PBS, 
@@ -227,7 +227,7 @@ side_plot(PBS,
 
 <img src="man/figures/README-side_plot-1-1.png" style="display: block; margin: auto;" />
 
-### secondary\_plot
+### secondary_plot
 
 Plot with secondary y-axis.
 
@@ -240,7 +240,7 @@ secondary_plot(pelt, "Year",
 
 <img src="man/figures/README-secondary_plot-1-1.png" style="display: block; margin: auto;" />
 
-### density\_plot
+### density_plot
 
 ``` r
 nyc_bikes %>% 
@@ -251,13 +251,13 @@ nyc_bikes %>%
 
 <img src="man/figures/README-density_plot-1-1.png" style="display: block; margin: auto;" />
 
-### histogram\_plot
+### histogram_plot
 
 ``` r
 nyc_bikes %>% 
   mutate(duration = as.numeric(stop_time - start_time)) %>%
   histogram_plot(c("time of day" = "as.numeric(start_time) %% 86400 / 60 / 60"),
-                 "..density..",
+                 "density",
                  group = "ifelse(wday(start_time) %in% c(1, 7), 'week end', 'week day')",
                  position = "identity",
                  bins = 48)
@@ -274,7 +274,7 @@ df = data.frame(pred = ROCR.simple$predictions,
 set.seed(4)
 ```
 
-### roc\_plot
+### roc_plot
 
 ``` r
 set.seed(4)
@@ -284,7 +284,7 @@ roc_plot(df, "pred", "lab") +
 
 <img src="man/figures/README-roc_plot-1-1.png" style="display: block; margin: auto;" />
 
-### pr\_plot
+### pr_plot
 
 Precision-Recall plot
 
@@ -296,7 +296,7 @@ pr_plot(df, "pred", "lab") +
 
 <img src="man/figures/README-pr_plot-1-1.png" style="display: block; margin: auto;" />
 
-### lift\_plot
+### lift_plot
 
 ``` r
 set.seed(4)

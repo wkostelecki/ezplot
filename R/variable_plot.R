@@ -204,7 +204,7 @@ variable_plot = function(data,
                                                               t = size * 0.2)),
                   strip.background = element_rect(fill = NA,
                                                   colour = NA,
-                                                  size = NA),
+                                                  linewidth = NA),
                   strip.placement = "outside")
   }
 

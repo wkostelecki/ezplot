@@ -70,7 +70,7 @@ side_plot = function(data,
     ylab(NULL) +
     theme(panel.grid.major.y = element_blank(),
           panel.grid.major.x = element_line(colour = "grey85",
-                                            size = if (size > 16) 0.8 else 0.2),
+                                            linewidth = if (size > 16) 0.8 else 0.2),
           axis.line.x = element_blank(),
           strip.placement = "outside")
   quick_facet(g, strip.position = "bottom", scales = "free_x", nrow = 1) +

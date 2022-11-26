@@ -5,7 +5,7 @@ packages = setdiff(c("tidyr", "testthat", "devtools", "DT", "git2r",
                      "devtools", "spelling", "rhub"),
                    installed.packages())
 install.packages(packages)
-
+install.packages(old.packages()[, "Package"])
 
 covr = covr::package_coverage()
 covr::report(covr)

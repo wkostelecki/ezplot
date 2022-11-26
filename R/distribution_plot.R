@@ -56,7 +56,7 @@ distribution_plot = function (data,
     ungroup()
 
   ggplot(data) +
-    geom_histogram(aes(x, y = ..density..),
+    geom_histogram(aes(x, y = after_stat(density)),
                    stat = "bin",
                    binwidth = binwidth) +
     scale_x_continuous(labels = ez_labels) +
@@ -70,4 +70,4 @@ distribution_plot = function (data,
 }
 
 
-globalVariables(c("..density.."))
+globalVariables(c("density"))

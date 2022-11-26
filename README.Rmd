@@ -208,7 +208,7 @@ nyc_bikes %>%
 nyc_bikes %>% 
   mutate(duration = as.numeric(stop_time - start_time)) %>%
   histogram_plot(c("time of day" = "as.numeric(start_time) %% 86400 / 60 / 60"),
-                 "..density..",
+                 "density",
                  group = "ifelse(wday(start_time) %in% c(1, 7), 'week end', 'week day')",
                  position = "identity",
                  bins = 48)

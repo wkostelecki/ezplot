@@ -204,11 +204,11 @@ bar_plot = function(data,
     g = g +
       coord_flip() +
       theme(axis.line.y = element_line(color = "grey85",
-                                       size = if (size > 16) 0.8 else 0.2),
+                                       linewidth = if (size > 16) 0.8 else 0.2),
             axis.line.x = element_blank(),
             panel.grid.major.y = element_blank(),
             panel.grid.major.x = element_line(colour = "grey85",
-                                              size = if (size > 16) 0.8 else 0.2))
+                                              linewidth = if (size > 16) 0.8 else 0.2))
 
     if (is.numeric(gdata[["x"]])) {
       g = g + scale_x_reverse(labels = labels_x)

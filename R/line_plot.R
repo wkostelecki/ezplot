@@ -94,7 +94,7 @@ line_plot = function(data,
     if (yoy) {
       g = g +
         geom_line(mapping = aes(x, y, colour = group),
-                  size = size_line,
+                  linewidth = size_line,
                   na.rm = na.rm) +
         scale_color_manual(NULL,
                            values = palette(length(unique(gdata[["group"]]))),
@@ -107,7 +107,7 @@ line_plot = function(data,
     } else {
       g = g +
         geom_line(aes(x, y, colour = group),
-                  size = size_line,
+                  linewidth = size_line,
                   na.rm = na.rm) +
         scale_colour_manual(NULL,
                             values = palette(length(unique(gdata[["group"]]))),
@@ -121,7 +121,7 @@ line_plot = function(data,
   } else {
     g = g +
       geom_line(aes(x, y),
-                size = size_line,
+                linewidth = size_line,
                 colour = palette(1),
                 na.rm = na.rm)
     if (points)

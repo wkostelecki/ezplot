@@ -71,13 +71,13 @@ pr_plot = function(data,
       geom_path(aes(x = recall,
                     y = precision,
                     colour = factor(group)),
-                size = size_line) +
+                linewidth = size_line) +
       scale_colour_manual(NULL, values = palette(n_distinct(gdata[["group"]])))
   } else {
     g = g +
       geom_path(aes(x = recall,
                     y = precision),
-                size = size_line)
+                linewidth = size_line)
   }
 
   g = quick_facet(g)
@@ -94,7 +94,7 @@ pr_plot = function(data,
     geom_path(data = data.frame(x = c(0, 1)),
               y = mean(data$actual),
               aes(x, y),
-              size = size_line,
+              linewidth = size_line,
               linetype = 2) +
     coord_equal() +
     theme_minimal(size) +

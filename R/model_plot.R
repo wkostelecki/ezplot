@@ -98,7 +98,7 @@ model_plot = function(data,
     theme(
       legend.position = "top",
       panel.grid.major.x = element_line(colour = "grey85",
-                                        size = if (size > 16) 0.8 else 0.2)
+                                        linewidth = if (size > 16) 0.8 else 0.2)
     ) +
     guides(shape = guide_legend(override.aes=list(shape = c(NA, 16, NA)))) +
     ylab(NULL) +
