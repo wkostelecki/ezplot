@@ -127,6 +127,7 @@ line_plot = function(data,
     if (points)
       g = g + geom_point(aes(x, y),
                          size = 2 * size_line,
+                         colour = palette(1),
                          na.rm = na.rm)
   }
 
