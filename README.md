@@ -16,6 +16,7 @@ downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezplot)](https://www.r-p
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![R build
 status](https://github.com/wkostelecki/ezplot/workflows/R-CMD-check/badge.svg)](https://github.com/wkostelecki/ezplot/actions)
+[![R-CMD-check](https://github.com/wkostelecki/ezplot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/wkostelecki/ezplot/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
@@ -23,13 +24,13 @@ status](https://github.com/wkostelecki/ezplot/workflows/R-CMD-check/badge.svg)](
 ezplot provides high-level wrapper functions for common chart types with
 reduced typing and easy faceting. e.g.:
 
--   `line_plot()`
--   `area_plot()`
--   `bar_plot()`
--   `tile_plot()`
--   `waterfall_plot()`
--   `side_plot()`
--   `secondary_plot()`
+- `line_plot()`
+- `area_plot()`
+- `bar_plot()`
+- `tile_plot()`
+- `waterfall_plot()`
+- `side_plot()`
+- `secondary_plot()`
 
 ## Installation
 
