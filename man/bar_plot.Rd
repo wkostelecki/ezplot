@@ -68,7 +68,7 @@ labels}
 
 \item{use_theme}{ggplot theme function}
 
-\item{position}{Either \code{"stack"} (default) or \code{"fill"}}
+\item{position}{Either \code{"stack"} (default), \code{"fill"} or \code{"dodge"}}
 
 \item{facet_scales}{Option passed to scales argument in \code{facet_wrap} or
 \code{facet_grid}. Default is \code{"fixed"}.}

@@ -4,6 +4,7 @@
 #' @param rescale_y Rescaling factor for y-axis limits
 #' @param label_cutoff Cutoff size (proportion of y data range) for excluding
 #'   labels
+#' @param position Either \code{"stack"} (default), \code{"fill"} or \code{"dodge"}
 #' @param label_pos Position of labels. Can be "auto", "inside", "top", "both"
 #'   or "none".
 #' @param coord_flip logical (default is FALSE). If TRUE, flips the x and y
