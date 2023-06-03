@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Coverage
-status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://codecov.io/github/wkostelecki/ezplot?branch=master)
+status](https://codecov.io/gh/wkostelecki/ezplot/branch/master/graph/badge.svg)](https://app.codecov.io/github/wkostelecki/ezplot?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ezplot)](https://cran.r-project.org/package=ezplot)
 [![CRAN RStudio mirror
