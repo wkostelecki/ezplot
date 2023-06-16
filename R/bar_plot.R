@@ -191,17 +191,27 @@ bar_plot = function(data,
                 y = sum(y, na.rm = TRUE)) %>%
       ungroup %>%
       mutate(top_ylabel_text = labels_y(signif(y, 3)))
-
-    g = g +
-      geom_text(data = top_labels,
-                aes(x,
-                    top_y + y_range / 100,
-                    label = top_ylabel_text,
-                    group = group),
-                size = size / 4,
-                position = position_dodge(0.9),
-                vjust = if (coord_flip) 0.38 else -0.2,
-                hjust = if (coord_flip) 0 else 0.5)
+    if (exists("group", top_labels)) {
+      g = g +
+        geom_text(data = top_labels,
+                  aes(x,
+                      top_y + y_range / 100,
+                      label = top_ylabel_text,
+                      group = group),
+                  size = size / 4,
+                  position = position_dodge(0.9),
+                  vjust = if (coord_flip) 0.38 else -0.2,
+                  hjust = if (coord_flip) 0 else 0.5)
+    } else {
+      g = g +
+        geom_text(data = top_labels,
+                  aes(x,
+                      top_y + y_range / 100,
+                      label = top_ylabel_text),
+                  size = size / 4,
+                  vjust = if (coord_flip) 0.38 else -0.2,
+                  hjust = if (coord_flip) 0 else 0.5)
+    }
   }
 
   g = quick_facet(g, scales = facet_scales)
