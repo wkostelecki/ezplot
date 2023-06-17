@@ -1,3 +1,6 @@
+# ezplot 0.7.8
+- fixed dodge option to bar_plot
+
 # ezplot 0.7.7
 - added dodge option to bar_plot
 
