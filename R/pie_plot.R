@@ -62,7 +62,7 @@ pie_plot = function (data,
            share_pos = cumsum(share) - share / 2) %>%
     ungroup
 
-  fill_col = rev(palette(length(levels(gdata[["x"]]))))
+  fill_col = palette(length(levels(gdata[["x"]])))
 
   g = ggplot(gdata) +
     geom_col(aes(x = factor(1),
