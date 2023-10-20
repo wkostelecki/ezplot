@@ -18,6 +18,7 @@
 #' line_plot(ansett, x = "Week", y = "Passengers", "Class")
 #' line_plot(pelt, "Year", "Hare", limits_y = c(0, NA))
 #' line_plot(pelt, "Year", c("Hare", "Lynx"), points = TRUE)
+#' line_plot(pelt, "Year", c("Hare", "Lynx"), points = 0.5)
 #' line_plot(pelt, "Year", c("Hare", "Lynx"), points = TRUE, limits_y = c(0, NA))
 #' line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
 #' line_plot(pelt, "Year", c("Hare Population" = "Hare"))
@@ -113,9 +114,9 @@ line_plot = function(data,
                             labels = function(x) paste0(x, "   "),
                             guide = guide_legend(ncol = legend_ncol))
     }
-    if (points)
+    if (points > 0)
       g = g + geom_point(aes(x, y, colour = group),
-                         size = 3 * size_line,
+                         size = 3 * size_line * points,
                          na.rm = na.rm)
   } else {
     g = g +
