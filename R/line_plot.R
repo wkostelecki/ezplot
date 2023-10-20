@@ -17,9 +17,12 @@
 #' line_plot(ansett, x = "Week", y = "Passengers")
 #' line_plot(ansett, x = "Week", y = "Passengers", "Class")
 #' line_plot(pelt, "Year", "Hare", limits_y = c(0, NA))
-#' line_plot(pelt, "Year", c("Hare", "Lynx"))
+#' line_plot(pelt, "Year", c("Hare", "Lynx"), points = TRUE)
+#' line_plot(pelt, "Year", c("Hare", "Lynx"), points = TRUE, limits_y = c(0, NA))
 #' line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
 #' line_plot(pelt, "Year", c("Hare Population" = "Hare"))
+#' line_plot(pelt[pelt$Year > 1930,], "factor(Year)", c("Hare Population" = "Hare"), points = TRUE)
+#' line_plot(pelt[pelt$Year > 1930,], "factor(Year)", c("Hare", "Lynx"), points = TRUE)
 line_plot = function(data,
                      x,
                      y = "1",
@@ -81,11 +84,7 @@ line_plot = function(data,
   if (is.character(gdata[["x"]]) | is.factor(gdata[["x"]])) {
 
     gdata[["x"]] = factor(gdata[["x"]])
-    x_text = levels(gdata[["x"]])
-    gdata[["x"]] = as.numeric(gdata[["x"]])
 
-  } else {
-    x_text = NULL
   }
 
   g = ggplot(gdata)
@@ -93,7 +92,7 @@ line_plot = function(data,
   if ("group" %in% names(gdata)) {
     if (yoy) {
       g = g +
-        geom_line(mapping = aes(x, y, colour = group),
+        geom_line(mapping = aes(x, y, colour = group, group = group),
                   linewidth = size_line,
                   na.rm = na.rm) +
         scale_color_manual(NULL,
@@ -106,7 +105,7 @@ line_plot = function(data,
         theme(legend.position = "top")
     } else {
       g = g +
-        geom_line(aes(x, y, colour = group),
+        geom_line(aes(x, y, colour = group, group = group),
                   linewidth = size_line,
                   na.rm = na.rm) +
         scale_colour_manual(NULL,
@@ -116,17 +115,17 @@ line_plot = function(data,
     }
     if (points)
       g = g + geom_point(aes(x, y, colour = group),
-                         size = 2 * size_line,
+                         size = 3 * size_line,
                          na.rm = na.rm)
   } else {
     g = g +
-      geom_line(aes(x, y),
+      geom_line(aes(x, y, group = 1),
                 linewidth = size_line,
                 colour = palette(1),
                 na.rm = na.rm)
     if (points)
       g = g + geom_point(aes(x, y),
-                         size = 2 * size_line,
+                         size = 3 * size_line,
                          colour = palette(1),
                          na.rm = na.rm)
   }
@@ -136,22 +135,16 @@ line_plot = function(data,
   g = g +
     xlab(names(x)) +
     ylab(names(y)) +
-    scale_y_continuous(labels = labels_y, limits = limits_y) +
+    scale_y_continuous(labels = labels_y,
+                       limits = limits_y,
+                       expand = c(0.02 * is.na(limits_y[1]), 0,
+                                  0.02 * is.na(limits_y[2]), 0)) +
     ylab(names(y)) +
     use_theme(size) +
     theme(legend.key.height = grid::unit(0, "lines"))
 
-  if (!is.null(x_text)) {
-    g = g +
-      scale_x_continuous(breaks = seq_along(x_text),
-                         labels = x_text) +
-      theme(axis.text.x = element_text(angle = 90,
-                                       vjust = 0.38,
-                                       hjust = 1))
-  }
-
-  g + coord_cartesian(expand = FALSE)
-
+  g + coord_cartesian(clip = "off") +
+    theme(axis.line.x = element_blank())
 }
 
 globalVariables("y1")
