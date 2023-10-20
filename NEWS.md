@@ -1,3 +1,6 @@
+# ezplot 0.7.9
+- fixed fill order in pie_plot
+
 # ezplot 0.7.8
 - fixed dodge option to bar_plot
 
