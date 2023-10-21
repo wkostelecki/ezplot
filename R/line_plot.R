@@ -124,9 +124,9 @@ line_plot = function(data,
                 linewidth = size_line,
                 colour = palette(1),
                 na.rm = na.rm)
-    if (points)
+    if (points > 0)
       g = g + geom_point(aes(x, y),
-                         size = 3 * size_line,
+                         size = 3 * size_line * points,
                          colour = palette(1),
                          na.rm = na.rm)
   }
