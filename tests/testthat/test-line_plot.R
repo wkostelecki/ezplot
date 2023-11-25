@@ -26,6 +26,6 @@ test_that("special case x-axes work", {
   expect_true(all(g[["data"]][["x"]] >= 1))
 
   g = line_plot(tsibbledata::gafa_stock, "Symbol", "Open")
-  expect_equal(g[["data"]][["x"]], 1:4)
+  expect_equal(g[["data"]][["x"]], factor(c("AAPL", "AMZN", "FB", "GOOG")))
 
 })

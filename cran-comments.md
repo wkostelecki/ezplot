@@ -1,5 +1,5 @@
 Tested on:
-- R Under development (unstable) (2023-05-31 r84480 ucrt)
+- R Under development (unstable) (2023-10-18 r85349 ucrt)
 - Windows Server 2022, R-devel, 64 bit
 - Ubuntu Linux 20.04.1 LTS, R-release, GCC
 - Fedora Linux, R-devel, clang, gfortran
