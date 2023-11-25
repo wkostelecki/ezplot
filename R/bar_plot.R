@@ -16,7 +16,7 @@
 #' library(tsibble)
 #' library(tsibbledata)
 #' library(lubridate)
-#' bar_plot(ansett, "year(Week)", "Passengers", size = 16)
+#' bar_plot(ansett, "year(Week)", "Passengers", size = 16, rescale_y = 1.5)
 #' bar_plot(ansett, "year(Week)", "Passengers", "Class")
 #' bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
 #' bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
@@ -26,6 +26,7 @@
 #' bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", coord_flip = TRUE)
 #' bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge")
 #' bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE)
+#' bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, rescale_y = 2)
 bar_plot = function(data,
                     x,
                     y = "1",
@@ -106,7 +107,7 @@ bar_plot = function(data,
     mutate(y_height = sum(y)) %>%
     group_by(!!!syms(setdiff(group_vars, c("group", "x", facet_groups)))) %>%
     mutate(y_span = diff(range(y_height, 0, na.rm = TRUE)),
-           y_range = y_span * (1 + (1 - rescale_y) * n_distinct(sign))) %>%
+           y_range = y_span * (1 + (rescale_y - 1) * n_distinct(sign))) %>%
     ungroup
 
   gdata = gdata  %>%
@@ -195,7 +196,7 @@ bar_plot = function(data,
       g = g +
         geom_text(data = top_labels,
                   aes(x,
-                      top_y + y_range / 100,
+                      top_y + y_range / 200,
                       label = top_ylabel_text,
                       group = group),
                   size = size / 4,
@@ -206,7 +207,7 @@ bar_plot = function(data,
       g = g +
         geom_text(data = top_labels,
                   aes(x,
-                      top_y + y_range / 100,
+                      top_y + y_range / 200,
                       label = top_ylabel_text),
                   size = size / 4,
                   vjust = if (coord_flip) 0.38 else -0.2,

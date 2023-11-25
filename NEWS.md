@@ -1,3 +1,6 @@
+# ezplot 0.7.11
+- fixed top label position in bar_plot
+
 # ezplot 0.7.10
 - fixed clipping of line_plot points
 - fixed plotting of factors along x-axis in line_plot
