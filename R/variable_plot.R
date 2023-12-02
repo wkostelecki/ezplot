@@ -139,7 +139,7 @@ variable_plot = function(data,
                       group = group,
                       label = ylabel_text),
                   position = position_dodge(width = 0.9),
-                  size = size / 4 * label_rescale,
+                  size = size * 0.8 / ggplot2::.pt * label_rescale,
                   na.rm = TRUE) +
         geom_text(aes(x, value + y_space),
                   label = "",
@@ -156,7 +156,7 @@ variable_plot = function(data,
       g = g +
         geom_text(aes(x, value, vjust = ifelse(value >= 0, -0.2, 1.4),
                       label = ylabel_text),
-                  size = size / 4 * label_rescale,
+                  size = size * 0.8 / ggplot2::.pt * label_rescale,
                   na.rm = TRUE) +
         geom_text(aes(x, value + y_space),
                   label = "",

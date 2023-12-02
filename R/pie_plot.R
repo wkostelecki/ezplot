@@ -78,7 +78,7 @@ pie_plot = function (data,
                   share_pos,
                   label = share_label,
                   colour = x),
-              size = size / 4) +
+              size = size * 0.8 / ggplot2::.pt) +
     scale_colour_manual(values = text_contrast(fill_col),
                         guide = "none") +
     coord_polar(theta = "y") +

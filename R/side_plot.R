@@ -57,7 +57,7 @@ side_plot = function(data,
                   label = labels_y(signif(y, signif)),
                   hjust = ifelse(y >= 0, 0, 1)),
               vjust = 0.38,
-              size = size / 4,
+              size = size * 0.8 / ggplot2::.pt,
               colour = "grey30") +
     geom_text(aes(x,
                   y + y_axis_nudge,

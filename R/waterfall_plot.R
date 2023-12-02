@@ -188,12 +188,12 @@ waterfall_plot = function(data,
                   vjust = case_when(col == -1 ~ 1.2,
                                     is.na(value_label2) ~ -0.4,
                                     TRUE ~ -1.8)),
-              size = label_rescale * size / 4) +
+              size = label_rescale * size * 0.8 / ggplot2::.pt) +
     geom_text(aes(x_pos,
                   end,
                   label = value_label2,
                   vjust = ifelse(col == -1, 2.6, -0.4)),
-              size = label_rescale * size / 4,
+              size = label_rescale * size * 0.8 / ggplot2::.pt,
               na.rm = TRUE) +
     scale_colour_manual(values = cols,
                         guide = 'none') +
@@ -218,12 +218,12 @@ waterfall_plot = function(data,
       geom_text(aes(x_pos, y_min,
                     label = percent_label),
                 vjust = -0.4,
-                size = label_rescale * size / 4) +
+                size = label_rescale * size * 0.8 / ggplot2::.pt) +
       geom_text(aes(x_pos, y_min,
                     label = percent_label_0),
                 vjust = -0.4,
                 colour = 'white',
-                size = label_rescale * size / 4)
+                size = label_rescale * size * 0.8 / ggplot2::.pt)
 
   }
 

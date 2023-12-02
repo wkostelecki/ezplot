@@ -191,12 +191,12 @@ bar_plot = function(data,
                                                     ylim = c(-Inf, Inf),
                                                     xlim = c(-Inf, Inf),
                                                     angle = angle,
-                                                    size = size / 4,
+                                                    size = size * 0.8 / ggplot2::.pt,
                                                     position = if(position == "dodge") position_dodge(0.9) else "identity")
   } else {
     g_text = function(...) geom_text(...,
                                      angle = angle,
-                                     size = size / 4,
+                                     size = size * 0.8 / ggplot2::.pt,
                                      position = if(position == "dodge") position_dodge(0.9) else "identity")
   }
 
