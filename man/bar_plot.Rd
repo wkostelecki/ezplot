@@ -23,7 +23,6 @@ bar_plot(
  },
   labels_x = identity,
   label_pos = c("auto", "inside", "top", "both", "none"),
-  label_values = c("y", "both"),
   rescale_y = 1.1,
   label_cutoff = 0.12,
   use_theme = theme_ez,
@@ -111,10 +110,10 @@ bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = 
 bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = TRUE, angle = -90)
 
 bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge")
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = T)
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = T, rescale_y = 2)
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = T, angle = -90)
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = T, angle = 90)
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE)
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, rescale_y = 2)
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, angle = -90)
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, angle = 90)
 
 bar_plot(ansett, "Airports",
          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
