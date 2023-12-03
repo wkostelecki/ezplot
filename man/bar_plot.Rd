@@ -97,7 +97,6 @@ library(tsibbledata)
 library(lubridate)
 
 bar_plot(ansett, "year(Week)", "Passengers", size = 16)
-bar_plot(ansett, "year(Week)", "Passengers", size = 16, repel = TRUE)
 bar_plot(ansett, "year(Week)", "Passengers", size = 16, label_pos = "both")
 bar_plot(ansett, "year(Week)", "Passengers", size = 16, label_pos = "both", repel = TRUE)
 bar_plot(ansett, "year(Week)", "Passengers", size = 16, rescale_y = 1.5, label_pos = "both")
@@ -106,17 +105,16 @@ bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both")
 bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", coord_flip = TRUE)
 
 bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
-bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both")
-bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both", repel = TRUE)
-bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both", repel = TRUE, angle = 90)
-bar_plot(ansett, "Airports", "Passengers", "Class", reorder = NULL, label_pos = "both", repel = TRUE, angle = -90)
+bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both")
+bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = TRUE)
+bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = TRUE, angle = 90)
+bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = TRUE, angle = -90)
 
 bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge")
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE)
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, rescale_y = 2)
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, repel = TRUE)
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, repel = TRUE, angle = -90)
-bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, repel = TRUE, angle = 90)
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = T)
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = T, rescale_y = 2)
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = T, angle = -90)
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = T, angle = 90)
 
 bar_plot(ansett, "Airports",
          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
