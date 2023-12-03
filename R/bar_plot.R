@@ -197,53 +197,55 @@ bar_plot = function(data,
                                      position = if(position == "dodge") position_dodge(0.9) else "identity")
   }
 
-  if (label_pos %in% c("inside", "both") && position != "dodge") {
-    if (!exists("group", gdata)) {
-      g[["data"]][["group"]] = ""
-    }
-    g = g +
-      g_text(aes(x, ylabel_pos,
-                 label = ylabel_text,
-                 colour = group),
-             vjust = if (angle == 0) 0.38 else 0.33) +
-      scale_colour_manual(NULL,
-                          values = text_contrast(fill_pal),
-                          guide = "none")
-  }
+  if (label_pos != "none") {
 
-  if (label_pos %in% c("top", "both")) {
-    top_vjust = case_when(coord_flip & angle > 0 ~ 1,
-                          coord_flip & angle < 0 ~ -0.38,
-                          coord_flip ~ 0.38,
-                          !coord_flip & angle > 0 ~ 0.33,
-                          !coord_flip & angle < 0 ~ 0.33,
-                          TRUE ~ -0.2)
-    top_hjust = case_when(coord_flip  & angle != 0 ~ 0.5,
-                          coord_flip ~ 0,
-                          !coord_flip & angle > 0 ~ 0,
-                          !coord_flip & angle < 0 ~ 1,
-                          TRUE ~ 0.5)
+    if (label_pos %in% c("inside", "both") && position != "dodge") {
+      if (!exists("group", g[["data"]])) g[["data"]][["group"]] = factor("")
+      inside_text = g[["data"]] %>%
+        mutate(placement = "inside",
+               vjust = if (angle == 0) 0.38 else 0.33,
+               hjust = 0.5,
+               colour = text_contrast(fill_pal[as.numeric(group)])) %>%
+        select(-sign, -y_height, -y_span, -y_range, -group)
+    } else {inside_text = data.frame()}
 
-    top_labels = gdata %>%
-      group_by(!!!syms(intersect(names(gdata),
-                                 c("x", "facet_x", "facet_y",
-                                   if(position == "dodge") "group" else NULL)))) %>%
-      summarize(y_range = y_range[1],
-                top_y = sum(y[y > 0], na.rm = TRUE),
-                y = sum(y, na.rm = TRUE)) %>%
-      ungroup %>%
-      mutate(top_ylabel_text = labels_y(signif(y, 3)))
-    if (!exists("group", top_labels)) {
-      top_labels[["group"]] = ""
-    }
-    g = g +
-      g_text(data = top_labels,
-             aes(x,
-                 top_y + y_range / 200,
-                 label = top_ylabel_text,
-                 group = group),
-             vjust = top_vjust,
-             hjust = top_hjust)
+    if (label_pos %in% c("top", "both")) {
+      top_vjust = case_when(coord_flip & angle > 0 ~ 1,
+                            coord_flip & angle < 0 ~ -0.38,
+                            coord_flip ~ 0.38,
+                            !coord_flip & angle > 0 ~ 0.33,
+                            !coord_flip & angle < 0 ~ 0.33,
+                            TRUE ~ -0.2)
+      top_hjust = case_when(coord_flip  & angle != 0 ~ 0.5,
+                            coord_flip ~ 0,
+                            !coord_flip & angle > 0 ~ 0,
+                            !coord_flip & angle < 0 ~ 1,
+                            TRUE ~ 0.5)
+      top_text = gdata %>%
+        group_by(!!!syms(intersect(names(gdata),
+                                   c("x", "facet_x", "facet_y",
+                                     if(position == "dodge") "group" else NULL)))) %>%
+        summarize(y_range = y_range[1],
+                  ylabel_pos = sum(y[y > 0], na.rm = TRUE) + y_range / 200,
+                  y = sum(y, na.rm = TRUE)) %>%
+        ungroup %>%
+        mutate(ylabel_text = labels_y(signif(y, 3)),
+               colour = "black",
+               placement = "top",
+               vjust = top_vjust,
+               hjust = top_hjust) %>%
+        select(-y_range)
+    } else {top_text = data.frame()}
+
+    all_text = bind_rows(top_text, inside_text)
+    # print(all_text)
+
+    g = g + g_text(data = all_text,
+                   aes(x, ylabel_pos, label = ylabel_text, group = group),
+                   vjust = all_text[["vjust"]],
+                   hjust = all_text[["hjust"]],
+                   colour = all_text[["colour"]])
+
   }
 
   g = quick_facet(g, scales = facet_scales)
