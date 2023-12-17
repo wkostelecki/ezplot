@@ -23,6 +23,7 @@ bar_plot(
  },
   labels_x = identity,
   label_pos = c("auto", "inside", "top", "both", "none"),
+  label_inside = c("y", "absolute", "share", "percent", "both"),
   rescale_y = 1.1,
   label_cutoff = 0.12,
   use_theme = theme_ez,
@@ -63,6 +64,8 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 \item{label_pos}{Position of labels. Can be "auto", "inside", "top", "both"
 or "none".}
 
+\item{label_inside}{Value to display inside bar segments. Optiosn are "y", "absolute", "percent", "share" or "both".}
+
 \item{rescale_y}{Rescaling factor for y-axis limits}
 
 \item{label_cutoff}{Cutoff size (proportion of y data range) for excluding
@@ -100,8 +103,16 @@ bar_plot(ansett, "year(Week)", "Passengers", size = 16, label_pos = "both")
 bar_plot(ansett, "year(Week)", "Passengers", size = 16, label_pos = "both", repel = TRUE)
 bar_plot(ansett, "year(Week)", "Passengers", size = 16, rescale_y = 1.5, label_pos = "both")
 bar_plot(ansett, "year(Week)", "Passengers", "Class")
+bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports")
+bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports",
+         facet_scales = "free_y")
+bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports",
+         facet_scales = "free_y", repel = TRUE)
 bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both")
-bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", coord_flip = TRUE)
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "share")
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "both")
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "both",
+         coord_flip = TRUE)
 
 bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
 bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both")
@@ -118,4 +129,5 @@ bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE
 bar_plot(ansett, "Airports",
          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
          "Class", label_pos = "both")
+
 }

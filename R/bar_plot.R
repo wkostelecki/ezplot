@@ -7,6 +7,7 @@
 #' @param position Either \code{"stack"} (default), \code{"fill"} or \code{"dodge"}
 #' @param label_pos Position of labels. Can be "auto", "inside", "top", "both"
 #'   or "none".
+#' @param label_inside Value to display inside bar segments. Optiosn are "y", "absolute", "percent", "share" or "both".
 #' @param coord_flip logical (default is FALSE). If TRUE, flips the x and y
 #'   coordinate using ggplot2::coord_flip()
 #' @param angle angle for geom_text(_repel)
@@ -24,8 +25,16 @@
 #' bar_plot(ansett, "year(Week)", "Passengers", size = 16, label_pos = "both", repel = TRUE)
 #' bar_plot(ansett, "year(Week)", "Passengers", size = 16, rescale_y = 1.5, label_pos = "both")
 #' bar_plot(ansett, "year(Week)", "Passengers", "Class")
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports")
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports",
+#'          facet_scales = "free_y")
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports",
+#'          facet_scales = "free_y", repel = TRUE)
 #' bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both")
-#' bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", coord_flip = TRUE)
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "share")
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "both")
+#' bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "both",
+#'          coord_flip = TRUE)
 #'
 #' bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
 #' bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both")
@@ -42,6 +51,7 @@
 #' bar_plot(ansett, "Airports",
 #'          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
 #'          "Class", label_pos = "both")
+#'
 bar_plot = function(data,
                     x,
                     y = "1",
@@ -59,6 +69,7 @@ bar_plot = function(data,
                     },
                     labels_x = identity,
                     label_pos = c("auto", "inside", "top", "both", "none"),
+                    label_inside = c("y", "absolute", "share", "percent", "both"),
                     rescale_y = 1.1,
                     label_cutoff = 0.12,
                     use_theme = theme_ez,
@@ -70,7 +81,7 @@ bar_plot = function(data,
                     repel = FALSE) {
 
   label_pos = match.arg(label_pos)
-  # label_values = match.arg(label_values)
+  label_inside = match.arg(label_inside)
 
   y = nameifnot(y)
 
@@ -84,7 +95,11 @@ bar_plot = function(data,
 
   gdata = agg_data(data,
                    cols,
-                   group_by = cols[group_vars])
+                   group_by = cols[group_vars]) %>%
+    mutate(abs = y)%>%
+    group_by(!!!syms(setdiff(group_vars, "group"))) %>%
+    mutate(p = coalesce(y / sum(abs(y)), 0)) %>%
+    ungroup()
 
   if (any("group" == names(gdata))) gdata[["group"]] = factor(gdata[["group"]])
 
@@ -106,12 +121,7 @@ bar_plot = function(data,
     }
   }
 
-  if (position == "fill") {
-    gdata = gdata %>%
-      group_by(!!!syms(setdiff(group_vars, "group"))) %>%
-      mutate(y = coalesce(y / sum(abs(y)), 0)) %>%
-      ungroup()
-  }
+  if (position == "fill") gdata = gdata  %>% mutate(y = p)
 
   if (facet_scales == "fixed") {
     facet_groups = intersect(names(gdata), c("facet_x", "facet_y"))
@@ -132,10 +142,21 @@ bar_plot = function(data,
     arrange(!!!syms(c(group_vars, "sign"))) %>%
     group_by(!!!syms(setdiff(c(group_vars, "sign"), "group"))) %>%
     mutate(ylabel_pos = rev(cumsum(rev(y))) - y / 2,
-           ylabel_text = ifelse(abs(y) > label_cutoff * max(y_span),
-                                labels_y(signif(y, 3)),
-                                "")) %>%
-    ungroup
+           ylabel_cutoff = label_cutoff * max(y_span)) %>%
+    ungroup()
+
+  if (label_inside == "y") {
+    gdata[["ylabel_text"]] = labels_y(signif(gdata[["y"]], 3))
+  } else if (label_inside == "absolute") {
+    gdata[["ylabel_text"]] = ez_labels(gdata[["abs"]], signif = 3)
+  } else if (label_inside %in% c("p", "share")) {
+    gdata[["ylabel_text"]] = ez_labels(100 * gdata[["p"]], signif = 3, append = "%")
+  } else if (label_inside == "both") {
+    gdata[["ylabel_text"]] = paste0(ez_labels(gdata[["abs"]], signif = 3),
+                                    "\n",
+                                    ez_labels(100 * gdata[["p"]], signif = 3, append = "%"))
+  }
+  gdata[["ylabel_text"]] = ifelse(abs(gdata[["y"]]) > gdata[["ylabel_cutoff"]], gdata[["ylabel_text"]], "")
 
   if (coord_flip && (is.factor(gdata[["x"]]) | is.character(gdata[["x"]]))) {
     gdata[["x"]] = forcats::fct_rev(factor(gdata[["x"]]))
@@ -189,6 +210,7 @@ bar_plot = function(data,
                                                     xlim = c(-Inf, Inf),
                                                     angle = angle,
                                                     size = size * 0.8 / ggplot2::.pt,
+                                                    direction = if (coord_flip) "x" else "y",
                                                     position = if(position == "dodge") position_dodge(0.9) else "identity")
   } else {
     g_text = function(...) geom_text(...,
@@ -209,7 +231,7 @@ bar_plot = function(data,
         select(-sign, -y_height, -y_span, -y_range, -group)
     } else {inside_text = data.frame()}
 
-    if (label_pos %in% c("top", "both")) {
+    if (label_pos %in% c("top", "both") & position != "fill") {
       top_vjust = case_when(coord_flip & angle > 0 ~ 1,
                             coord_flip & angle < 0 ~ -0.38,
                             coord_flip ~ 0.38,
@@ -286,6 +308,5 @@ bar_plot = function(data,
 
 }
 
-globalVariables(c("y_height", "y_range", "y_span",
-                  "ylabel_pos", "ylabel_text",
-                  "top_y", "top_ylabel_text"))
+globalVariables(c("y_height", "y_range", "y_span", "p",
+                  "ylabel_pos", "ylabel_text", "ylabel_cutoff"))
