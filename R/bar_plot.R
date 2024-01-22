@@ -36,6 +36,7 @@
 #' bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "both",
 #'          coord_flip = TRUE)
 #'
+#'\dontrun{
 #' bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
 #' bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both")
 #' bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = TRUE)
@@ -51,7 +52,7 @@
 #' bar_plot(ansett, "Airports",
 #'          c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
 #'          "Class", label_pos = "both")
-#'
+#'}
 bar_plot = function(data,
                     x,
                     y = "1",
