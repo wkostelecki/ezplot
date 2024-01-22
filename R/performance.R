@@ -121,7 +121,7 @@ perf_df = function(fitted, actual, quantiles = NULL) {
     df = df %>%
       utils::tail(quantiles) %>% # drop first row
       dplyr::mutate(cutoff = rev(ocutoffs$cutoff)) %>% # convert to original scale
-      cbind(quantile = seq_len(quantiles), .)
+      dplyr::bind_cols(quantile = seq_len(quantiles), .)
   }
 
   df = df %>%

@@ -1,4 +1,4 @@
-context("pred_df")
+context("perf_df")
 
 test_that("perf_df works", {
 
