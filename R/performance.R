@@ -75,9 +75,37 @@ pred = function(fitted, actual) {
 #' @param quantiles Number of quantiles to show. If \code{NULL}, uses distinct
 #'   values of \code{fitted} for the cutoffs rather than showing quantiles.
 #' @export
+#' @returns A data.frame summarizing binary classification performance:
+#' \itemize{
+#'   \item{quantile:} {fitted value quantile (only if \code{!is.null(quantile)}})
+#'   \item{cutoff:} {fitted value cutoff}
+#'   \item{fp:} {false positives}
+#'   \item{tp:} {true postives}
+#'   \item{tn:} {true negatives}
+#'   \item{fn:} {false negatives}
+#'   \item{pp:} {positive predictions}
+#'   \item{np:} {negative predictions}
+#'   \item{ipp:} {group positive predictions}
+#'   \item{ifp:} {group false positives}
+#'   \item{itp:} {group true postives}
+#'   \item{rpp:} {rate of positive predictions}
+#'   \item{acc:} {accuracy}
+#'   \item{fpr:} {false positive rate}
+#'   \item{tpr:} {true positive rate}
+#'   \item{fnr:} {false negative rate}
+#'   \item{tnr:} {true negative rate}
+#'   \item{prec:} {precision}
+#'   \item{clift:} {lift}
+#'   \item{ilift:} {group lift}
+#'   \item{f1:} {f1 measure}
+#'   \item{ks:} {Kolmogorov-Smirnov statistic}
+#'   \item{auc:} {area under ROC curve}
+#'   \item{aucpr:} {area under PR curve}
+#' }
 #' @examples
 #' perf_df(mtcars$mpg, mtcars$am)
 #' perf_df(mtcars$mpg, mtcars$am, quantiles = 4)
+#' perf_df(mtcars$mpg, mtcars$am, quantiles = 8)
 #' perf_df(mtcars$mpg, mtcars$am, quantiles = 10)
 #' perf_df(mtcars$wt, mtcars$am==0)
 perf_df = function(fitted, actual, quantiles = NULL) {
@@ -106,7 +134,10 @@ perf_df = function(fitted, actual, quantiles = NULL) {
                   tn = pred@tn[[1]],
                   fn = pred@fn[[1]],
                   pp = pred@n.pos.pred[[1]],
-                  np = pred@n.neg.pred[[1]])
+                  np = pred@n.neg.pred[[1]],
+                  ipp = c(0, diff(pred@n.pos.pred[[1]])),
+                  ifp = c(0, diff(pred@fp[[1]])),
+                  itp = c(0, diff(pred@tp[[1]])))
 
   df[["rpp"]] = ROCR::performance(pred, "rpp")@y.values[[1]]
   df[["acc"]] = ROCR::performance(pred, "acc")@y.values[[1]]
@@ -126,7 +157,7 @@ perf_df = function(fitted, actual, quantiles = NULL) {
 
   df = df %>%
     dplyr::mutate(
-      ilift = (diff(c(0, tp)) / diff(c(0, pp))) / (tp[n()] / pp[n()]),
+      ilift = (itp / ipp) / (tp[n()] / pp[n()]),
       f1 = 2 * prec * tpr / (prec + tpr),
       ks = abs(fpr - tpr)
     )
