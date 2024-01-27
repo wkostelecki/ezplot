@@ -2,7 +2,7 @@
 title: "bar_plot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{overview}
+  %\VignetteIndexEntry{bar_plot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ezplot)
 suppressPackageStartupMessages(library(tsibble))
+library(lubridate)
 library(tsibbledata)
 library(ggplot2)
 ```

@@ -2,7 +2,7 @@
 title: "variable_plot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{overview}
+  %\VignetteIndexEntry{variable_plot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

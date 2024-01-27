@@ -168,4 +168,5 @@ perf_df = function(fitted, actual, quantiles = NULL) {
   df
 }
 
-globalVariables(c("pp", "tp", "tpr", "fpr", "cutoffs", "prec", "qrank"))
+globalVariables(c("pp", "tp", "tpr", "fpr", "cutoffs", "prec", "qrank",
+                  "ipp", "ifp", "itp"))

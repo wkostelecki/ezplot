@@ -2,7 +2,7 @@
 title: "line_plot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{overview}
+  %\VignetteIndexEntry{line_plot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
