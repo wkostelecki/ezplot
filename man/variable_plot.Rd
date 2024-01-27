@@ -62,21 +62,6 @@ Plots variables (multiple "y" values) broken out as vertical
 \examples{
 suppressPackageStartupMessages(library(tsibble))
 library(tsibbledata)
-variable_plot(ansett, "Week", "Passengers", facet_x = "Class")
 variable_plot(ansett, "Week", "Passengers", facet_x = "Class", yoy = TRUE)
 variable_plot(pelt, "Year", c("Lynx", "Hare"), "round(Year, -1)")
-variable_plot(hh_budget, "Year", c("Debt", "Expenditure"), "Country")
-variable_plot(PBS, "Type", "Scripts", "Concession", switch = "y", geom = "col")
-\dontrun{
-variable_plot(subset(hh_budget, Year > 2013), "Year",
-              c("Debt\n(\% of disposable income)" = "Debt",
-                "Expenditure\nGrowth (\%)" = "Expenditure",
-                "Unemployment (\%)" = "Unemployment"),
-               facet_x = "Country", geom = "bar")
-variable_plot(subset(hh_budget, Year > 2013), "Year",
-              c("Debt\n(\% of disposable income)" = "Debt",
-                "Expenditure\nGrowth (\%)" = "Expenditure",
-                "Unemployment (\%)" = "Unemployment"),
-               group = "Country", geom = "bar")
-}
 }

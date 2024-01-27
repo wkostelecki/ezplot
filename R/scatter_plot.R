@@ -3,6 +3,7 @@
 #' @description create a scatter plot
 #' @inheritParams area_plot
 #' @inheritParams model_plot
+#' @param smooth logical. If \code{TRUE}, adds \code{geom_smooth()}.
 #' @examples
 #' scatter_plot(mtcars, "wt", "hp")
 #' scatter_plot(mtcars, "wt", "hp", "factor(cyl)")
@@ -12,6 +13,7 @@ scatter_plot = function(data, x,  y, group = NULL,
                         palette = ez_col,
                         size = 11,
                         point_size = 2.5,
+                        smooth = FALSE,
                         env = parent.frame()) {
 
   cols = c(x = unname(x),
@@ -34,11 +36,11 @@ scatter_plot = function(data, x,  y, group = NULL,
   if (is.numeric(gdata[["x"]])) {
     g = ggplot(gdata) +
       geom_point(aes(x, y, color = group), size = point_size) +
-      geom_smooth(aes(x, y, color = group), method = "lm", formula = y ~ x) +
       scale_color_manual(NULL, values = palette(n_group),
                          labels = function(x) paste0(x, "   ")) +
       scale_x_continuous(labels = ez_labels) +
       scale_y_continuous(labels = ez_labels)
+    if (smooth) g =  g + geom_smooth(aes(x, y, color = group), method = "lm", formula = y ~ x)
   } else {
     g = ggplot(gdata) +
       geom_point(aes(x, y, colour = group),

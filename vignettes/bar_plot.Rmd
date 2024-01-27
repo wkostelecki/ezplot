@@ -1,0 +1,144 @@
+---
+title: "bar_plot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.align = "center"
+)
+```
+
+```{r setup}
+library(ezplot)
+suppressPackageStartupMessages(library(tsibble))
+library(tsibbledata)
+library(ggplot2)
+```
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", size = 16)
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", size = 16, label_pos = "both")
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", size = 16, label_pos = "both", repel = TRUE)
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", size = 16, rescale_y = 1.5, label_pos = "both")
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", "Class")
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports")
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports",
+         facet_scales = "free_y")
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", "Class", "Airports",
+         facet_scales = "free_y", repel = TRUE)
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both")
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "share")
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "both")
+```
+
+
+```{r}
+bar_plot(ansett, "year(Week)", "Passengers", "Class", label_pos = "both", label_inside = "both",
+         coord_flip = TRUE)
+```
+
+
+```{r}
+bar_plot(ansett, "Airports", c("Share of Passengers" = "Passengers"), "Class", position = "fill")
+```
+
+
+```{r}
+bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both")
+```
+
+
+```{r}
+bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = TRUE)
+```
+
+
+```{r}
+bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = TRUE, angle = 90)
+```
+
+
+```{r}
+bar_plot(ansett, "Airports", "Passengers", "Class", label_pos = "both", repel = TRUE, angle = -90)
+```
+
+
+```{r}
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge")
+```
+
+
+```{r}
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE)
+```
+
+
+```{r}
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, rescale_y = 2)
+```
+
+
+```{r}
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, angle = -90)
+```
+
+
+```{r}
+bar_plot(mtcars, "factor(cyl)", "1", "am", position = "dodge", coord_flip = TRUE, angle = 90)
+```
+
+
+```{r}
+bar_plot(ansett, "Airports",
+         c(Passengers = "ifelse(Class == 'Economy', Passengers, -Passengers)"),
+         "Class", label_pos = "both")
+```
+

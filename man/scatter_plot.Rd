@@ -12,6 +12,7 @@ scatter_plot(
   palette = ez_col,
   size = 11,
   point_size = 2.5,
+  smooth = FALSE,
   env = parent.frame()
 )
 }
@@ -29,6 +30,8 @@ scatter_plot(
 \item{size}{theme size for \code{use_theme()}. Default is 14.}
 
 \item{point_size}{Numeric. Default is 2.}
+
+\item{smooth}{logical. If \code{TRUE}, adds \code{geom_smooth()}.}
 
 \item{env}{environment for evaluating expressions.}
 }

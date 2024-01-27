@@ -1,0 +1,50 @@
+---
+title: "line_plot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.align = "center"
+)
+```
+
+```{r setup}
+library(ezplot)
+suppressPackageStartupMessages(library(tsibble))
+library(tsibbledata)
+library(ggplot2)
+```
+
+```{r}
+line_plot(ansett, x = "Week", y = "Passengers")
+line_plot(ansett, x = "Week", y = "Passengers", "Class")
+line_plot(pelt, "Year", "Hare", limits_y = c(0, NA))
+line_plot(pelt, "Year", c("Hare", "Lynx"), points = TRUE)
+```
+
+
+```{r}
+line_plot(pelt, "Year", c("Hare", "Lynx"), points = 0.5)
+```
+
+
+```{r}
+line_plot(pelt, "Year", c("Hare", "Lynx"), points = TRUE, limits_y = c(0, NA))
+```
+
+
+```{r}
+line_plot(pelt, "Year", "Hare", use_theme = ggplot2::theme_bw)
+line_plot(pelt, "Year", c("Hare Population" = "Hare"))
+line_plot(pelt[pelt$Year > 1930,], "factor(Year)", c("Hare Population" = "Hare"), points = TRUE)
+line_plot(pelt[pelt$Year > 1930,], "factor(Year)", c("Hare", "Lynx"), points = TRUE)
+```
+

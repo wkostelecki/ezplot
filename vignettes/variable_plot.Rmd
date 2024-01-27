@@ -1,0 +1,66 @@
+---
+title: "variable_plot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.align = "center"
+)
+```
+
+```{r setup}
+library(ezplot)
+suppressPackageStartupMessages(library(tsibble))
+library(tsibbledata)
+library(ggplot2)
+```
+
+```{r}
+variable_plot(ansett, "Week", "Passengers", facet_x = "Class")
+```
+
+
+```{r}
+variable_plot(ansett, "Week", "Passengers", facet_x = "Class", yoy = TRUE)
+```
+
+
+```{r}
+variable_plot(pelt, "Year", c("Lynx", "Hare"), "round(Year, -1)")
+```
+
+
+```{r}
+variable_plot(hh_budget, "Year", c("Debt", "Expenditure"), "Country")
+```
+
+
+```{r}
+variable_plot(PBS, "Type", "Scripts", "Concession", switch = "y", geom = "col")
+```
+
+
+```{r}
+variable_plot(subset(hh_budget, Year > 2013), "Year",
+              c("Debt\n(% of disposable income)" = "Debt",
+                "Expenditure\nGrowth (%)" = "Expenditure",
+                "Unemployment (%)" = "Unemployment"),
+              facet_x = "Country", geom = "bar")
+```
+
+
+```{r}
+variable_plot(subset(hh_budget, Year > 2013), "Year",
+              c("Debt\n(% of disposable income)" = "Debt",
+                "Expenditure\nGrowth (%)" = "Expenditure",
+                "Unemployment (%)" = "Unemployment"),
+              group = "Country", geom = "bar")
+```
