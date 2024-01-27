@@ -7,7 +7,7 @@
 #' @param position Either \code{"stack"} (default), \code{"fill"} or \code{"dodge"}
 #' @param label_pos Position of labels. Can be "auto", "inside", "top", "both"
 #'   or "none".
-#' @param label_inside Value to display inside bar segments. Optiosn are "y", "absolute", "percent", "share" or "both".
+#' @param label_inside Value to display inside bar segments. Options are "y", "absolute", "percent", "share" or "both".
 #' @param coord_flip logical (default is FALSE). If TRUE, flips the x and y
 #'   coordinate using ggplot2::coord_flip()
 #' @param angle angle for geom_text(_repel)

@@ -64,7 +64,7 @@ Default is \code{c("group", "facet_x", "facet_y")}.}
 \item{label_pos}{Position of labels. Can be "auto", "inside", "top", "both"
 or "none".}
 
-\item{label_inside}{Value to display inside bar segments. Optiosn are "y", "absolute", "percent", "share" or "both".}
+\item{label_inside}{Value to display inside bar segments. Options are "y", "absolute", "percent", "share" or "both".}
 
 \item{rescale_y}{Rescaling factor for y-axis limits}
 
