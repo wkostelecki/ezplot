@@ -25,7 +25,7 @@ devtools::check_win_devel()
 devtools::check_rhub()
 
 ## update cran-comments
-
+unlink("CRAN-SUBMISSION")
 git2r::commit(all = TRUE, message = paste0("CRAN commit v", v))
 system("git push")
 
