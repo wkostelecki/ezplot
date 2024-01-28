@@ -1,3 +1,6 @@
+# ezplot 0.7.13
+- fixed row names in perf_df()
+
 # ezplot 0.7.12
 - matched geom_text and axis text font size
 - bar_plot updates:
