@@ -6,6 +6,7 @@
 #' @param as_factor logical
 #' @param round numeric passed to \code{round()}
 #' @param signif numeric passed to \code{signif()}
+#' @param sign logical. Adds a plus sign to positive numbers
 #' @return y
 #' @export
 #' @import dplyr
@@ -14,12 +15,15 @@
 #' ez_labels(2000, append = " apples")
 #' ez_labels(0:10, append = " apples", as_factor = TRUE)
 #' ez_labels(c(0, 0.1, 0.01, 0.001, 0.0001))
+#' ez_labels(c(-1, -0.0001, 0, 0.0001, 1, NA), round = 2, sign = FALSE)
+#' ez_labels(c(-1, -0.0001, 0, 0.0001, 1, NA), round = 2, sign = TRUE)
 ez_labels = function(x,
                      prepend = "",
                      append = "",
                      as_factor = FALSE,
                      round = Inf,
-                     signif = Inf) {
+                     signif = Inf,
+                     sign = FALSE) {
   unit = data.frame(order = 0:8,
                     unit = c("", "k", "m", "b", "t", "qd", "qn", "sx", "sp"),
                     stringsAsFactors = FALSE)
@@ -36,8 +40,10 @@ ez_labels = function(x,
                                  paste0(absx / 10 ^ tens, "\u00D710\u207B",
                                        superscript(abs(tens))),
                                  as.character(absx)),
-                          paste0(absx / 10 ^ (3 * order), unit)),
-           label = ifelse(is.na(label), "", paste0(prepend, label, append)),
+                          paste0(absx / 10 ^ (3 * order), unit)))
+  if (sign) df[["label"]] = ifelse(x > 0, paste0("+", df[["label"]]), df[["label"]])
+  df = df %>%
+    mutate(label = ifelse(is.na(label), "", paste0(prepend, label, append)),
            label = ifelse(sign > -1 | is.na(sign), label, paste0("-", label)))
   if (as_factor) {
     df = mutate(df, label = factor(label, unique(label[order(x)])))

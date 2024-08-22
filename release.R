@@ -19,6 +19,7 @@ readLines("DESCRIPTION") %>%
   writeLines("DESCRIPTION")
 
 devtools::spell_check()
+getOption("browser")("https://cran.rstudio.com//web/checks/check_results_ezplot.html")
 devtools::check() # R CMD check
 rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
 devtools::check_win_devel()
@@ -34,3 +35,4 @@ devtools::release()
 tag = paste0("v", v)
 git2r::tag(name = tag, message = "CRAN")
 system(glue("git push origin {tag}"))
+getOption("browser")("https://github.com/wkostelecki/ezplot/tags")

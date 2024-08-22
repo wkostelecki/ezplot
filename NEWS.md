@@ -1,3 +1,6 @@
+# ezplot 0.8.1
+- added `sign` option to ezplot::ez_labels()
+
 # ezplot 0.7.13
 - fixed row names in perf_df()
 
