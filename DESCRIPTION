@@ -2,7 +2,12 @@ Package: ezplot
 Type: Package
 Title: Functions for Common Chart Types
 Version: 0.8.2
-Author: Wojtek Kostelecki
+Authors@R: c(
+    person("Wojtek",
+           "Kostelecki", 
+           "wojtek.kostelecki@gmail.com",
+           role = c("aut", "cre"))
+  )
 Maintainer: Wojtek Kostelecki <wojtek.kostelecki@gmail.com>
 Description: Wrapper for the 'ggplot2' package that creates a variety of common
   charts (e.g. bar, line, area, ROC, waterfall, pie) while aiming to reduce
