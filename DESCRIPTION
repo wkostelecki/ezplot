@@ -5,7 +5,7 @@ Version: 0.8.2
 Authors@R: c(
     person("Wojtek",
            "Kostelecki", 
-           "wojtek.kostelecki@gmail.com",
+           email = "wojtek.kostelecki@gmail.com",
            role = c("aut", "cre"))
   )
 Maintainer: Wojtek Kostelecki <wojtek.kostelecki@gmail.com>
