@@ -40,6 +40,6 @@ ez_labels(10^(0:10))
 ez_labels(2000, append = " apples")
 ez_labels(0:10, append = " apples", as_factor = TRUE)
 ez_labels(c(0, 0.1, 0.01, 0.001, 0.0001))
-ez_labels(c(-1, -0.0001, 0, 0.0001, 1), round = 2, sign = FALSE)
-ez_labels(c(-1, -0.0001, 0, 0.0001, 1), round = 2, sign = TRUE)
+ez_labels(c(-1, -0.0001, 0, 0.0001, 1, NA), round = 2, sign = FALSE)
+ez_labels(c(-1, -0.0001, 0, 0.0001, 1, NA), round = 2, sign = TRUE)
 }
