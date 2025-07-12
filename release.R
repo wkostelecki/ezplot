@@ -25,7 +25,8 @@ getOption("browser")("https://cran.rstudio.com//web/checks/check_results_ezplot.
 devtools::check() # R CMD check
 rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
 devtools::check_win_devel()
-devtools::check_rhub()
+# devtools::check_rhub()
+rhub::rhub_check()
 
 ## update cran-comments
 unlink("CRAN-SUBMISSION")

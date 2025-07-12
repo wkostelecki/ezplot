@@ -1,3 +1,8 @@
+# ezplot 0.8.2
+- fixed `linewidth` issue
+- docs updates
+- rhub update
+
 # ezplot 0.8.1
 - added `sign` option to ezplot::ez_labels()
 
