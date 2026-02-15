@@ -15,7 +15,7 @@ covr::report(covr)
 
 # check here: https://cran.rstudio.com//web/checks/check_results_ezplot.html
 # update version number:
-v = "0.8.2"
+v = "0.8.3"
 readLines("DESCRIPTION") %>%
   stringr::str_replace("^Version: [0-9\\.]*$", paste0("Version: ", v)) %>%
   writeLines("DESCRIPTION")
