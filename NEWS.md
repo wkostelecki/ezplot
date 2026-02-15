@@ -1,3 +1,6 @@
+# ezplot 0.8.3
+- set default width in `bar_plot()` to avoid warning
+
 # ezplot 0.8.2
 - fixed `linewidth` issue
 - docs updates

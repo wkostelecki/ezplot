@@ -12,7 +12,7 @@ bar_plot(
   facet_x = NULL,
   facet_y = NULL,
   size = 11,
-  width = NULL,
+  width = 0.9,
   reorder = c("group", "facet_x", "facet_y"),
   palette = ez_col,
   labels_y = if (position == "fill") {
